@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="gs_einv_pos_sa.point_of_sale_assets1" model="ir.asset">
+            <field name="name">point_of_sale_assets1</field>
+            <field name="bundle">point_of_sale.assets</field>
+            <field name="directive">replace</field>
+            <field name="target">/point_of_sale/static/src/js/models.js</field>
+            <field name="path">/gs_einv_pos_sa/static/src/js/models.js</field>
+            <field name="sequence">20</field>
+        </record>
+    </data>
+</odoo>

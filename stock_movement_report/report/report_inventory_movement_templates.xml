@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="filter_info_template">
+        <h2><t t-esc="report_name"></t></h2>
+        <div class="row print_only" style='margin-top: 20px; margin-bottom: 10px;'>
+            <div class="col-6">
+                <span t-esc="res_company.name"/>
+            </div>
+            <div class="col-6" t-if="options.get('date')">
+                <t t-if="options['date']['filter'] == 'today'">
+                    <span>As of <t t-esc="options['date']['date_from']" t-options="{'widget': 'date'}"/></span>
+                </t>
+                <t t-if="options['date']['filter'] in ('month', 'week', 'custom')">
+                    <span>As of <t t-esc="options['date']['date_from']" t-options="{'widget': 'date'}"/> to <t t-esc="options['date']['date_to']" t-options="{'widget': 'date'}"/></span>
+                </t>
+            </div>
+        </div>
+    </template>
+    <template id="report_inventory_movement">
+        <div class="o_inventory_movement_report">
+            <div class="container o_inventory_movement_page">
+                <div t-if="print_mode" class="o_stock_reports_header">
+                    <t t-call="stock_movement_report.filter_info_template"/>
+                </div>
+                <div t-if="not print_mode" class="row o_header">
+                    <div class="col-md-3 o_section o_grey" title="Opening Qty">
+                        <div class="o_highlight"><span t-esc="format_precision(header_vals['total_opening_qty'])"/></div>
+                        Opening Qty
+                    </div>
+                    <div class="col-md-3 o_section o_green" title="Qty In">
+                        <div class="o_highlight"><span t-esc="format_precision(header_vals['total_incoming_qty'])"/></div>
+                        Qty In
+                    </div>
+                    <div class="col-md-3 o_section o_blue" title="Qty Out">
+                        <div class="o_highlight"><span t-esc="format_precision(header_vals['total_outgoing_qty'])"/></div>
+                        Qty Out
+                    </div>
+                    <div class="col-md-3 o_section o_grey o_invisible_border" title="Closing Qty">
+                        <div class="o_highlight"><span t-esc="format_precision(header_vals['total_virtual_available'])"/></div>
+                        Closing Qty
+                    </div>
+                    <div class="col-md-3 o_section o_grey" title="Opening Value">
+                        <div class="o_highlight"><span t-esc="header_vals['total_stock_value']" t-options='{"widget": "monetary", "display_currency": currency_id}'/></div>
+                        Opening Value
+                    </div>
+                    <div class="col-md-3 o_section o_green" title="Value In">
+                        <div class="o_highlight"><span t-esc="header_vals['total_incoming_value']" t-options='{"widget": "monetary", "display_currency": currency_id}'/></div>
+                        Value In
+                    </div>
+                    <div class="col-md-3 o_section o_blue" title="Value Out">
+                        <div class="o_highlight"><span t-esc="header_vals['total_outgoing_value']" t-options='{"widget": "monetary", "display_currency": currency_id}'/></div>
+                        Value Out
+                    </div>
+                    <div class="col-md-3 o_section o_grey o_invisible_border" title="Closing Value">
+                        <div class="o_highlight"><span t-esc="header_vals['total_virtual_value']" t-options='{"widget": "monetary", "display_currency": currency_id}'/></div>
+                        Closing Value
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table width="100%" t-att-class="'%s table-striped o_stock_reports_table' % ('table table-sm' if print_mode else '')">
+                        <thead>
+                            <tr>
+                                <th style="text-align: left !important;">Reference</th>
+                                <th style="text-align: left !important;">Product</th>
+                                <th style="text-align: right !important;">Opening Qty</th>
+                                <th style="text-align: right !important;">Qty In</th>
+                                <th style="text-align: right !important;">Qty Out</th>
+                                <th style="text-align: right !important;">Closing Qty</th>
+                                <th style="text-align: right !important;">Opening Value</th>
+                                <th style="text-align: right !important;">Value In</th>
+                                <th style="text-align: right !important;">Value Out</th>
+                                <th style="text-align: right !important;">Closing Value</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr t-foreach="lines" t-as="line">
+                                <td style="text-align: left !important;"><span t-esc="line['product_reference']"/></td>
+                                <td style="text-align: left !important;"><span t-att-class="'%s o_product_link' % ('' if print_mode else 'btn btn-sm btn-link')" t-att-data-product="line['id']" t-esc="line['product_name']"/></td>
+                                <td style="text-align: right !important;" t-att-class="'text-right %s' % ('table-danger' if line['opening_qty'] &lt; 0 else '')"><span t-esc="format_precision(line['opening_qty'])"/></td>
+                                <td style="text-align: right !important;" t-att-class="'text-right %s' % ('table-danger' if line['incoming_qty'] &lt; 0 else '')"><span t-esc="format_precision(line['incoming_qty'])"/></td>
+                                <td style="text-align: right !important;" t-att-class="'text-right %s' % ('table-danger' if line['outgoing_qty'] &lt; 0 else '')"><span t-esc="format_precision(line['outgoing_qty'])"/></td>
+                                <td style="text-align: right !important;" t-att-class="'text-right %s' % ('table-danger' if line['virtual_available'] &lt; 0 else '')"><span t-esc="format_precision(line['virtual_available'])"/></td>
+                                <td style="text-align: right !important;" t-att-class="'text-right %s' % ('table-danger' if line['stock_value'] &lt; 0 else '')"><span t-esc="line['stock_value']" t-options='{"widget": "monetary", "display_currency": currency_id}'/></td>
+                                <td style="text-align: right !important;" t-att-class="'text-right %s' % ('table-danger' if line['incoming_value'] &lt; 0 else '')"><span t-esc="line['incoming_value']" t-options='{"widget": "monetary", "display_currency": currency_id}'/></td>
+                                <td style="text-align: right !important;" t-att-class="'text-right %s' % ('table-danger' if line['outgoing_value'] &lt; 0 else '')"><span t-esc="line['outgoing_value']" t-options='{"widget": "monetary", "display_currency": currency_id}'/></td>
+                                <td style="text-align: right !important;" t-att-class="'text-right %s' % ('table-danger' if line['virtual_value'] &lt; 0 else '')"><span t-esc="line['virtual_value']" t-options='{"widget": "monetary", "display_currency": currency_id}'/></td>
+                            </tr>
+                            <tr t-if="not lines and not print_mode">
+                                <td colspan="10" class="text-center table-danger">No inventory data found! Modify your search criteria.</td>
+                            </tr>
+                            <tr t-if="print_mode">
+                                <td colspan="2"/>
+                                <td style="text-align: right !important;" class="text-right font-weight-bold"><span t-esc="format_precision(header_vals['total_opening_qty'])"/></td>
+                                <td style="text-align: right !important;" class="text-right font-weight-bold"><span t-esc="format_precision(header_vals['total_incoming_qty'])"/></td>
+                                <td style="text-align: right !important;" class="text-right font-weight-bold"><span t-esc="format_precision(header_vals['total_outgoing_qty'])"/></td>
+                                <td style="text-align: right !important;" class="text-right font-weight-bold"><span t-esc="format_precision(header_vals['total_virtual_available'])"/></td>
+                                <td style="text-align: right !important;" class="text-right font-weight-bold"><span t-esc="header_vals['total_stock_value']" t-options='{"widget": "monetary", "display_currency": currency_id}'/></td>
+                                <td style="text-align: right !important;" class="text-right font-weight-bold"><span t-esc="header_vals['total_incoming_value']" t-options='{"widget": "monetary", "display_currency": currency_id}'/></td>
+                                <td style="text-align: right !important;" class="text-right font-weight-bold"><span t-esc="header_vals['total_outgoing_value']" t-options='{"widget": "monetary", "display_currency": currency_id}'/></td>
+                                <td style="text-align: right !important;" class="text-right font-weight-bold"><span t-esc="header_vals['total_virtual_value']" t-options='{"widget": "monetary", "display_currency": currency_id}'/></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </template>
+    <template id="print_template">
+        <t t-call="web.html_container">
+            <t t-set="head_start">
+                <base t-att-href="base_url"/>
+            </t>
+            <t t-set="head_end">
+                <t t-call-assets="stock_movement_report.assets_inventory_movement_report_backend" t-js="False"/>
+            </t>
+            <t t-call="stock_movement_report.report_inventory_movement"/>
+        </t>
+    </template>
+
+</odoo>

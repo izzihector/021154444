@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <t t-name="Addonspane" t-inherit="point_of_sale.ProductScreen" t-inherit-mode="extension" owl="1">
+        <xpath expr="//ProductsWidget" position="before">
+             <div class="addonpane">
+                    <table class="addons-table" t-on-click="_add_to_orderline">
+                        <tr>
+                            <th class="addons-head">
+                                <span class="head">Addons</span><br/>
+                                <span class="sub-head">Products</span>
+                            </th>
+                        </tr>
+                    </table>
+             </div>
+        </xpath>
+    </t>
+
+
+
+    <t t-name="OrdelineAddons" t-inherit="point_of_sale.Orderline" t-inherit-mode="extension" owl="1">
+        <xpath expr="//ul[hasclass('info-list')]" position="before">
+             <t t-if="'addon_items' in props.line">
+                <t t-foreach="props.line.addon_items" t-as="item" t-key="item">
+                    <div class="addon-orderline">
+                        <span class="addon-orderline-name">
+                            <span style="margin-left: 10px;">
+                                <t t-esc="item.addon_name"/>
+                            </span>
+
+
+                            <em style="margin-left: 10px;">
+                            <t t-esc="item.addon_count" />
+                            </em>
+
+                            <span style="margin-left: 10px;">
+                                <t t-esc="item.addon_uom" />
+                            </span>
+                            at
+                            <span t-if="item.addon_price_with" class="addon-orderline-price">
+                                <t t-esc="env.pos.format_currency(item.addon_price_with)"/>
+                            </span>
+                            /
+                            <t t-esc="item.addon_uom" />
+
+<!--                            <em class="addon-orderline-uom">-->
+<!--                                <t t-esc="props.line.get_addon_uom(item.addon_id)"/>-->
+<!--                            </em>-->
+                        </span>
+                        <span t-if="item.total_with" class="addon-orderline-price">
+                            <t t-esc="env.pos.format_currency(item.total_with)"/>
+                        </span>
+                    </div>
+                </t>
+            </t>
+        </xpath>
+    </t>
+
+
+    <t t-name="AddonsRecipt" t-inherit="point_of_sale.OrderReceipt" t-inherit-mode="extension" owl="1">
+        <xpath expr="//div[hasclass('orderlines')]" position="replace">
+            <div class="orderlines">
+                <t t-foreach="receipt.orderlines" t-as="line" t-key="line.id">
+                    <t t-if="isSimple(line)">
+                        <div>
+                            <t t-esc="line.product_name_wrapped[0]" />
+                            <span t-esc="env.pos.format_currency_no_symbol(line.price_display)" class="price_display pos-receipt-right-align"/>
+                        </div>
+                        <WrappedProductNameLines line="line" />
+                    </t>
+                    <t t-else="">
+                        <div t-esc="line.product_name_wrapped[0]" />
+                        <WrappedProductNameLines line="line" />
+                        <t t-if="line.display_discount_policy == 'without_discount' and line.price != line.price_lst">
+                            <div class="pos-receipt-left-padding">
+                                <t t-esc="env.pos.format_currency_no_symbol(line.price_lst)" />
+                                ->
+                                <t t-esc="env.pos.format_currency_no_symbol(line.price)" />
+                            </div>
+                        </t>
+                        <t t-elif="line.discount !== 0">
+                            <div class="pos-receipt-left-padding">
+                                <t t-if="env.pos.config.iface_tax_included === 'total'">
+                                    <t t-esc="env.pos.format_currency_no_symbol(line.price_with_tax_before_discount)"/>
+                                </t>
+                                <t t-else="">
+                                    <t t-esc="env.pos.format_currency_no_symbol(line.price)"/>
+                                </t>
+                            </div>
+                        </t>
+                        <t t-if="line.discount !== 0">
+                            <div class="pos-receipt-left-padding">
+                                Discount: <t t-esc="line.discount" />%
+                            </div>
+                        </t>
+                        <div class="pos-receipt-left-padding">
+                            <t t-esc="Math.round(line.quantity * Math.pow(10, env.pos.dp['Product Unit of Measure'])) / Math.pow(10, env.pos.dp['Product Unit of Measure'])"/>
+                            <t t-if="line.unit_name !== 'Units'" t-esc="line.unit_name" />
+                            x
+                            <t t-esc="env.pos.format_currency_no_symbol(line.price_display_one)" />
+                            <span class="price_display pos-receipt-right-align">
+                                <t t-esc="env.pos.format_currency_no_symbol(line.price_display)" />
+                            </span>
+                        </div>
+
+
+                    </t>
+                    <tr t-foreach="props.order.orderlines.models" t-as="orderline" t-key="orderline">
+                            <t t-if="line.orderline_id == orderline.id">
+                                <tr t-foreach="orderline.addon_items" t-as="addon_item" t-key="addon_item">
+                                        <div class="pos-receipt">
+<!--                                            <td t-esc="addon_item.addon_name" style="padding-left:30px; margin-left: 10px;"/>-->
+<!--                                            <td style="text-align: left;" t-esc="env.pos.format_currency_no_symbol(addon_item.addon_price)"/>-->
+
+                                            [<span t-esc="addon_item.addon_name" style="margin-left: 20px;"/>
+                                             <span class="pos-receipt-right-align">
+
+                                             <span t-esc="addon_item.addon_count"/>
+                                             x
+                                            <span t-esc="env.pos.format_currency_no_symbol(addon_item.addon_price_with)"/>]
+                                            </span>
+                                        </div>
+                                </tr>
+                            </t>
+                        </tr>
+                </t>
+            </div>
+        </xpath>
+    </t>
+
+</templates>

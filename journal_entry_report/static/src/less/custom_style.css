@@ -1,0 +1,21 @@
+
+.dir_rtl{
+direction: rtl;
+text-align:right;
+float:right;
+}
+
+.dir_ltr{
+direction: ltr;
+text-align:left;
+float: left;
+}
+
+.text-single-line{clear: both;display: inline-block;overflow: hidden;white-space: nowrap;
+}
+.table_custom, .table_custom td, .table_custom th {
+  border: 2px solid #333;
+}
+.table_custom {
+  border-collapse: collapse;
+}

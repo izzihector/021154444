@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <t t-name="ProductScreen" t-inherit="point_of_sale.ProductScreen" t-inherit-mode="extension" owl="1">
+        <xpath expr="//div[hasclass('leftpane') and hasclass('pane-border')]" position="attributes">
+            <attribute name="t-attf-style">max-width: {{ env.pos.config.leftpane_width }}px !important</attribute>
+        </xpath>
+    </t>
+
+    <t t-name="ProductItem" t-inherit="point_of_sale.ProductItem" t-inherit-mode="extension" owl="1">
+
+<!--        <xpath expr="//article[hasclass('product')]" position="attributes">-->
+<!--            <attribute name="t-attf-style">flex: 25%</attribute>-->
+<!--        </xpath>-->
+        <xpath expr="//div[hasclass('product-name')]" position="attributes">
+            <attribute name="t-attf-style">line-height: normal;font-size: {{ env.pos.config.product_name_font_size }}px !important</attribute>
+        </xpath>
+<!--        <xpath expr="//div[hasclass('product-img')]" position="attributes">-->
+<!--            <attribute name="t-attf-style">width: auto</attribute>-->
+<!--        </xpath>-->
+    </t>
+    <t t-name="CategoryButton" t-inherit="point_of_sale.CategoryButton" t-inherit-mode="extension" owl="1">
+        <xpath expr="//div[hasclass('category-name')]" position="attributes">
+            <attribute name="t-attf-style">line-height: normal;font-size: {{ env.pos.config.category_name_font_size }}px !important</attribute>
+
+        </xpath>
+    </t>
+
+</templates>

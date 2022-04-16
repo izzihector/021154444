@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_profit_center_mapping_tree" model="ir.ui.view">
+            <field name="name">profit.center.mapping.tree</field>
+            <field name="model">profit.center.mapping</field>
+            <field name="arch" type="xml">
+                <tree string="Values">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_profit_center_mapping_form" model="ir.ui.view">
+            <field name="name">profit.center.mapping.form</field>
+            <field name="model">profit.center.mapping</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                            </group>
+                        </group>
+                        <group>
+                            <notebook>
+                                <page string="Report names" name="profit_center_reports">
+                                    <field name="profit_center_reports" widget="section_and_note_one2many"
+                                           mode="tree,kanban" nolabel="0">
+                                        <tree editable="bottom">
+                                            <field name="name"/>
+                                            <field name="profit_center" context="{'active_test': False}"
+                                                   autocomplete="off"
+                                                   domain="['|', ('code', '=like', '6%'), ('code', '=like', '7%')]"/>
+                                            <field name="overhead"/>
+                                            <field name="break_report"/>
+                                        </tree>
+                                    </field>
+                                </page>
+                                <page string="Mapping lines" name="profit_center_mapping_lines">
+                                    <field name="line_ids" widget="section_and_note_one2many"
+                                           mode="tree" nolabel="1">
+                                        <form>
+                                            <group>
+                                                <field name="id"/>
+                                                <field name="is_analytical_account"/>
+                                            </group>
+                                            <group>
+                                                <field name="account_id" autocomplete="off"
+                                                       attrs="{'invisible':[('is_analytical_account','!=', False)]}"/>
+                                                <field name="analytical_account_id" autocomplete="off"
+                                                       attrs="{'invisible':[('is_analytical_account','!=', True)]}"/>
+                                                <field name="tag" autocomplete="off"/>
+                                                <field name="group" autocomplete="off"/>
+                                                <field name="excluded_account_tag" autocomplete="off"/>
+                                            </group>
+                                            <group>
+                                                <field name="partial_values" widget="section_and_note_one2many"
+                                                       mode="tree">
+                                                    <tree editable="bottom">
+                                                        <field name="report"/>
+                                                        <field name="value"/>
+                                                    </tree>
+                                                </field>
+                                            </group>
+                                        </form>
+                                        <tree>
+                                            <field name="id"/>
+                                            <field name="is_analytical_account"/>
+                                            <field name="account_id" autocomplete="off"
+                                                   attrs="{'invisible':[('is_analytical_account','!=', False)]}"/>
+                                            <field name="analytical_account_id" autocomplete="off"
+                                                   attrs="{'invisible':[('is_analytical_account','!=', True)]}"/>
+                                            <field name="tag" autocomplete="off"/>
+                                            <field name="group" autocomplete="off"/>
+                                            <field name="excluded_account_tag" autocomplete="off"/>
+                                        </tree>
+                                    </field>
+                                </page>
+                                <page string="Layout lines" name="profit_center_report_layout">
+                                    <field name="layout_lines" widget="section_and_note_one2many" mode="tree, kanban">
+                                        <tree decoration-bf="type == 'total'" editable="bottom">
+                                            <field name="sequence" widget="handle"/>
+                                            <field name="id"/>
+                                            <field name="type"/>
+                                            <field name="name"
+                                                   attrs="{'invisible':[('type','in', ['group','tag'])]}"/>
+                                            <field name="group"
+                                                   attrs="{'invisible':[('type','!=', 'group')]}"/>
+                                            <field name="tag" attrs="{'invisible':[('type','!=', 'tag')]}"/>
+                                            <field name="formula" attrs="{'invisible':[('type','!=', 'total')]}"/>
+                                            <field name="sign" attrs="{'invisible':[('type','=', 'title')]}"/>
+                                        </tree>
+                                    </field>
+                                </page>
+                                <page string="Break Layout lines" name="profit_center_report_break_layout">
+                                    <div class="row">
+                                        <strong>BHPC</strong>: Block hours per profit_center |
+                                        <strong>BHS</strong>: Block hours per stretch |
+                                        <strong>KGPC</strong>: Kilograms per profit_center |
+                                        <strong>KGS</strong>: Kilograms per stretch |
+                                        <strong>PPC</strong>: Passage per profit_center |
+                                        <strong>PS</strong>: Passage per stretch |
+                                        <strong>VS</strong>: Vracht stretch |
+                                        <strong>VPC</strong>: Vracht per profit center |
+                                        <strong>CPC</strong>: Commissies per profit center |
+                                        <strong>FPC</strong>: Fuel surcharge &amp; security per profit center |
+                                        <strong>RPC</strong>: Reserververingkosten per profit center |
+                                        <strong>TOS</strong>: Total opbrengsten per stretch
+                                        <strong>TOPC</strong>: Total opbrengsten per profit center
+                                    </div>
+                                    <field name="break_layout_lines" widget="section_and_note_one2many" mode="tree, kanban">
+                                        <tree decoration-bf="type == 'total'" editable="bottom">
+                                            <field name="sequence" widget="handle"/>
+                                            <field name="id"/>
+                                            <field name="type"/>
+                                            <field name="name"
+                                                   attrs="{'invisible':[('type','in', ['group','tag'])]}"/>
+                                            <field name="group"
+                                                   attrs="{'invisible':[('type','!=', 'group')]}"/>
+                                            <field name="tag" attrs="{'invisible':[('type','!=', 'tag')]}"/>
+                                            <field name="formula" attrs="{'readonly':[('type','=', 'title')]}"/>
+                                            <field name="sign" attrs="{'invisible':[('type','=', 'title')]}"/>
+                                        </tree>
+                                    </field>
+                                </page>
+                            </notebook>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_profit_center_mapping" model="ir.actions.act_window">
+            <field name="name">Profit Center Mapping</field>
+            <field name="res_model">profit.center.mapping</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_profit_center_mapping_tree"/>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Add a new profit center mapping record
+                </p>
+            </field>
+        </record>
+        <menuitem
+                name="Profit Center Mapping"
+                action="action_profit_center_mapping"
+                id="menu_action_profit_center_mapping"
+                parent="slm_report_lpl.account_account_menu_xetechs"
+                groups="slm_encryption_reports.group_advanced_reports"
+                sequence="7"/>
+    </data>
+</odoo>

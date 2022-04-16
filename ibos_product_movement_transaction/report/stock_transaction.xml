@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="stock.stock_move_menu" model="ir.ui.menu">
+        <field name="name">Inventory Transaction</field>
+    </record>
+    <record id="stock.stock_move_line_menu" model="ir.ui.menu">
+        <field name="name">Product Movement</field>
+    </record>
+
+
+    <record id="stock.stock_move_action" model="ir.actions.act_window">
+        <field name="context">{'search_default_incoming':1, 'search_default_outgoing':1}</field>
+    </record>
+    <record id="stock.stock_move_line_action" model="ir.actions.act_window">
+        <field name="context">{'search_default_internal':1}</field>
+    </record>
+
+</odoo>
+
+

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="pos_customer_order_details" model="ir.actions.report">
+        <field name="name">Customer order details</field>
+        <field name="model">pos.customer.details.wizard</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">ibos_customer_order_history.customer_order_details</field>
+        <field name="report_file">ibos_customer_order_history.customer_order_details</field>
+    </record>
+</odoo>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--    create paper format for Journal Entry-->
+    <record id="paperformat_journal_report1" model="report.paperformat">
+        <field name="name">A4 Journal Entry report</field>
+        <field name="format">A4</field>
+        <field name="page_height">0</field>
+        <field name="page_width">0</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">30</field>
+        <field name="margin_bottom">32</field>
+        <field name="margin_left">3</field>
+        <field name="margin_right">3</field>
+        <field name="header_line" eval="False"/>
+        <field name="header_spacing">25</field>
+        <field name="dpi">90</field>
+    </record>
+    <!--    override Journal entry report record to  binding by paperformat  -->
+    <record id="action_report_journal_entries" model="ir.actions.report">
+        <field name="name">Journal Entries</field>
+        <field name="model">account.move</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">journal_entry_report.report_journal_entries</field>
+        <field name="report_file">journal_entry_report.report_journal_entries</field>
+        <field name="paperformat_id" ref="journal_entry_report.paperformat_journal_report1"/>
+        <field name="binding_model_id" ref="account.model_account_move"/>
+        <field name="binding_type">report</field>
+    </record>
+</odoo>

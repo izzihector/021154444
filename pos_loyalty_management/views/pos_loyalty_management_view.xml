@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (c) 2016-Present Webkul Software Pvt. Ltd. (<https://webkul.com/>) -->
+<!-- See LICENSE file for full copyright and licensing details. -->
+<!-- License URL : <https://store.webkul.com/license.html/> -->
+<odoo>
+
+    <record model="ir.ui.view" id="wk_product_template_form_loyalty_added_form_id">
+        <field name="name">wk_product_template_form_loyalty_added.form</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="point_of_sale.product_template_form_view" />
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='pos']" position="after">
+                <group name="loyalty" string="Loyalty">
+                    <field name="wk_point_for_loyalty" />
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="wk_partner_form_loyalty_added_form_id" model="ir.ui.view">
+        <field name="name">res.partner.loyalty.added.form</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form" />
+        <field name="arch" type="xml">
+            <field name="website" position="after">
+                <field name="wk_loyalty_points" readonly="1" />
+            </field>
+        </field>
+    </record>
+
+    <record id="view_loyalty_not_readonly_to_manager" model="ir.ui.view">
+        <field name="name">Readonly Loyalty</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="pos_loyalty_management.wk_partner_form_loyalty_added_form_id" />
+        <field name="groups_id" eval="[(6, 0, [ref('point_of_sale.group_pos_manager') ])]" />
+        <field name="arch" type="xml">
+            <field name='wk_loyalty_points' position="attributes">
+                <attribute name="readonly">0</attribute>
+            </field>
+        </field>
+    </record>
+
+    <record id="wk_pos_category_form_loyalty_added_form_id" model="ir.ui.view">
+        <field name="name">pos.category.loyalty.added.form</field>
+        <field name="model">pos.category</field>
+        <field name="inherit_id" ref="point_of_sale.product_pos_category_form_view" />
+        <field name="arch" type="xml">
+            <field name="sequence" position="after">
+                <field name="wk_point_for_loyalty" />
+                <p class="oe_grey">(Point(s) given as a loyalty points to the customer if he/she purchased product under this category on your POS)</p>
+            </field>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="wk_pos_order_loyalty_added_form_id">
+        <field name="name">wk_pos_order_loyalty_added.form</field>
+        <field name="model">pos.order</field>
+        <field name="inherit_id" ref="point_of_sale.view_pos_pos_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='extra']" position="inside">
+                <group name="wk_loyalty" string="Loyalty Programs">
+                    <field name="wk_loyalty_points" />
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="wk_loyalty_management_tree_id">
+        <field name="name">wk_loyalty_management_tree</field>
+        <field name="model">loyalty.management</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree string="Loyalty Management Tree">
+                <field name="name"/>
+                <field name="config_active" />
+                <field name="start_date" />
+                <field name="end_date" />
+                <field name="minimum_purchase" />
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="wk_loyalty_management_form_id">
+        <field name="name">wk_loyalty_management_form</field>
+        <field name="model">loyalty.management</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form string="Loyalty Management Form" version="7.0">
+                <sheet>
+                    <group>
+                        <field name="name" invisible="1" />
+                        <field name="currency_id" invisible="1" />
+                        <group>
+                            <field name="config_active" />
+                            <field name="loyality_product_id" required="1" />
+                            <field name="redeem_type" widget='radio'/>
+                            <field name="message" attrs="{'invisible':[('redeem_type','=','partial')]}"/>
+                        </group>
+                        <group>
+                            <field name="start_date" />
+                            <field name="end_date" />
+                            <field name="minimum_points" />
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Points Calculation">
+                            <group>
+                                <field name="loyalty_base" />
+                                <field name="minimum_purchase" string="Minimum Purchase" attrs="{'invisible':[('loyalty_base', '!=','amount')]}" />
+                            </group>
+                            <group name="loyalty_on_amount" attrs="{'invisible':[('loyalty_base', '!=','amount')]}">
+                                <span>
+                                <b>
+                                    <label for="points" string="Customer will be awarded  "/>
+                                </b>
+                                <b style="color:green">
+                                    <field name="points" nolabel="1" class="oe_inline" attrs="{'required':[('loyalty_base', '=','amount')]}"/><span>Point(s)</span>
+                                </b>
+                                <b><label for="purchase" string="For a Purchase of every "/></b>
+                                <b style="color:green"><field name="purchase" nolabel="1"  class="oe_inline" widget='monetary' options="{'currency_field': 'currency_id'}" attrs="{'required':[('loyalty_base', '=','amount')]}"/></b>
+                                </span>
+                            </group>
+                            <group attrs="{'invisible':[('loyalty_base', '!=','category')]}">
+                                <field name="categories_ids" nolabel="1">
+                                    <tree editable="bottom"  widget="one2many_list">
+                                        <field name="category_id"/>
+                                        <field name="wk_point_for_loyalty"/>
+                                    </tree>
+                                </field>
+                            </group>
+                        </page>
+                        <page string="Redemption Calculation">
+                            <group col="2">
+                                <field name="redeem_rule_list" nolabel="1" />
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="wk_loyalty_managment_action_id" model="ir.actions.act_window">
+        <field name="name">Loyalty Rule Management</field>
+        <field name="res_model">loyalty.management</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="wk_loyalty_management_tree_id" />
+    </record>
+
+    <record model="ir.ui.view" id="wk_redeem_rule_list_tree_id">
+        <field name="name">wk_redeem_rule_list_tree</field>
+        <field name="model">redeem.rule.list</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree string="Rule List Tree">
+                <field name="rule_name" />
+                <field name="config_active" />
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="wk_redeem_rule_list_form_id">
+        <field name="name">wk_redeem_rule_list_form</field>
+        <field name="model">redeem.rule.list</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form string="Rule List Form" version="7.0">
+                <sheet>
+                    <group>
+                        <field name="rule_name" />
+                        <field name="currency_id" invisible="1" />
+                        <field name="config_active" />
+                    </group>
+                    <seperator col="4" string="Redemption Computation" />
+                    <b>Rule :  Points Between</b>
+                    <b style="color:green"><field name="points_from" nolabel="1" class="oe_inline"/></b>
+                    <b>and/></b>
+                    <b style="color:green"><field name="points_to" nolabel="1"  class="oe_inline" /></b>
+                    <b>: 1 reward point =</b>
+                    <b style="color:green"><field name="discount" nolabel="1" class="oe_inline" widget='monetary' options="{'currency_field': 'currency_id'}" /></b>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="wk_redeem_rule_list_action_id" model="ir.actions.act_window">
+        <field name="name">Redemption Rule Version</field>
+        <field name="res_model">redeem.rule.list</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="wk_redeem_rule_list_tree_id" />
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Click to create a Redemption Rule.
+            </p>
+            <p>
+                Create New Point Rules Redemption version and assign it inside Loyalty Rule. After that point discount calcualtion will work according to it.
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="wk_loyalty_parent_menu_id" name="Loyalty Management" parent="point_of_sale.menu_point_config_product" sequence="20" />
+
+    <menuitem id="id_parent_pos_coupons" name="Gift Coupons" parent="point_of_sale.menu_point_root" sequence="20" groups="point_of_sale.group_pos_manager,point_of_sale.group_pos_user" />
+
+    <menuitem id="wk_loyalty_rules_menu_id" name="Loyalty Rules" parent="wk_loyalty_parent_menu_id" action="wk_loyalty_managment_action_id" />
+
+</odoo>

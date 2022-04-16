@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="direct_order_table">
+            <t t-call="website.layout">
+                <div class="container">
+                    <div id="table" class="table-editable do_table_div">
+                        <table class="table do_table">
+                            <tr style='text-align:center;'>
+                                <th class="do_th">Product</th>
+                                <th class="do_th">Qty</th>
+                                <th class="do_th do_th_unit_price">Unit price</th>
+                                <th colspan="2" class="do_th do_th_subtotal">Subtotal</th>
+                            </tr>
+                            <tr class="d-none table-line" style='background-color:#dedbdb;text-align:center;'>
+                                <td class="do_select_td">
+
+                                    <input name="selProduct" type="hidden" style="width: 200px;" id="selProduct"></input>
+
+                                    <select id='selProduct_Template' style="width: 200px;">
+                                    </select>   
+                                    
+                                </td>
+                                <td><input  type="number" name="Qty" id="do_qty" value="1"/></td>
+                                <td><input contenteditable="true" type="number" name="Unit Price" id="do_unit_price" readonly="readonly"/></td>
+                                <td><input type="number" name="Unit Price" id="do_subtotal" readonly="readonly"/></td>
+                                <td class="text-center"><span class="do_table-remove fa fa-trash"></span></td>
+                            </tr>
+
+                            <tr class="d-none do_note_tr">
+                                <td colspan="4" class="td_my_note"><textarea class="my_do_comment"></textarea></td>
+                                <td class="text-center"><span class="do_table-remove fa fa-trash"></span></td>
+                            </tr>
+                      
+                        </table>
+                    </div>
+
+                    <div style = 'text-align:center;'>
+                        <br/>
+                        <div style='background-color:#dedbdb;color:red;' class="temp_lable_product">
+                            <h3>No product(s) found, Start with your new direct order</h3>
+                        </div> 
+                        <br/>
+                        <button id="do_add_clone_tr " class="btn btn-primary do_add_clone_tr">Add Item</button>
+                        <button class="btn btn-primary do_add_note_tr">Add Note</button>
+                        <button id="do_create " class="btn btn-primary do_create">Save</button>
+                        <br></br>
+                        <br></br>
+                        <span class="d-none" id="s_template_name"><b>Template :  </b></span>
+                        <input class="d-none" type="text" name="set_template_name" id="set_template_name" placeholder="Name"/>
+                        <button id="do_create_so_template" class="btn btn-primary d-none">Save As Template</button>
+                        <br/>
+                        <br/>
+                        <select class="form-control" id="so_template_select" name="so_template">
+                            <option value=""></option>
+                            <t t-foreach="order_template" t-as="o_template">
+                                <option t-att-value="o_template.id" >
+                                    <t t-esc="o_template.name"/>
+                                </option>
+                            </t>
+                        </select>
+                        <br/>
+                    </div>
+                </div>
+            </t>
+        </template>
+    </data>
+</odoo>

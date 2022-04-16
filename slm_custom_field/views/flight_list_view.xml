@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record model="ir.ui.view" id="view_flight_list_tree">
+            <field name="name">flight.list.tree</field>
+            <field name="model">flight.list</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="stop1"/>
+                    <field name="stop2"/>
+                    <field name="stop3"/>
+                    <field name="stop4"/>
+                    <field name="opercde1"/>
+                    <field name="retvlnr"/>
+                    <field name="description"/>
+                </tree>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="view_flight_list_form">
+            <field name="name">flight.list.form</field>
+            <field name="model">flight.list</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name='name'/>
+                                <field name="opercde1"/>
+                                <field name="retvlnr"/>
+                                <field name="charter" attrs="{'readonly': ['|', ('cargo', '=', True), ('ferry', '=', True)]}"/>
+                                <field name="cargo" attrs="{'readonly': ['|', ('charter', '=', True), ('ferry', '=', True)]}"/>
+                                <field name="ferry" attrs="{'readonly': ['|', ('cargo', '=', True), ('charter', '=', True)]}"/>
+                                <field name="description"/>
+                            </group>
+                            <group>
+                                <field name="stop1" attrs="{'readonly': [('ferry', '=', True)]}"/>
+                                <field name="stop2" attrs="{'readonly': [('ferry', '=', True)]}"/>
+                                <field name="stop3" attrs="{'readonly': ['|', '|', ('cargo', '=', True), ('charter', '=', True), ('ferry', '=', True)]}"/>
+                                <field name="stop4" attrs="{'readonly': ['|','|', ('cargo', '=', True), ('charter', '=', True), ('ferry', '=', True)]}"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="action_flight_list" model="ir.actions.act_window">
+            <field name="name">Flight Number</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">flight.list</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_flight_list_tree"/>
+        </record>
+        <menuitem id="menu_flight_list"
+                  action="action_flight_list"
+                  parent="menu_flight_detail"
+                  sequence="4"
+                  name="Flight numbers"
+                  groups="base.group_system"
+        />
+    </data>
+</odoo>

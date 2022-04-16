@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+	<record id="eq_inherit_stock_inventory_form_view" model="ir.ui.view">
+		<field name="name">stock.inventory.form</field>
+		<field name="model">stock.inventory</field>
+		<field name="inherit_id" ref="stock.view_inventory_form" />
+		<field name="arch" type="xml">
+			<field name="exhausted" position="after">
+				<field name="is_backdated_inv"/>
+				<field name="inv_backdated" attrs="{'invisible':[('is_backdated_inv','=',False)],'required':[('is_backdated_inv','=',True)],'readonly':[('state','=','done')]}"/>
+				<field name="backdated_remark" attrs="{'invisible':[('is_backdated_inv','=',False)],'readonly':[('state','=','done')],'required':[('is_backdated_inv','=',True)]}"/>
+			</field>
+		</field>
+	</record>
+
+</odoo>

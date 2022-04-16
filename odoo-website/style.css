@@ -1,0 +1,539 @@
+@import url('./assets/css/partials/global.css');
+
+/* 01. Header */
+header .navbar {
+  padding: 1.3rem;
+}
+header .navbar-brand.logo {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+header .navbar-brand.logo img {
+  width: auto;
+  height: 2.65rem;
+  max-width: none;
+}
+header .navbar .nav-item {
+  margin-right: 4px;
+  position: relative;
+  /* letter-spacing: 0.2px; */
+  transition: 0.5s ease all;
+}
+header .navbar .nav-item:hover a {
+  color: var(--primary-color) !important;
+}
+.dropdown-toggle::after {
+  transition: 0.5s;
+}
+
+.navbar-light .navbar-nav .active > .nav-link,
+.navbar-light .navbar-nav .nav-link.active,
+.navbar-light .navbar-nav .nav-link.show,
+.navbar-light .navbar-nav .show > .nav-link {
+  color: var(--primary-color);
+  font-weight: 700;
+}
+/* Last Problem Of Megamenu */
+.dr-megamenu .container .row {
+  width: 100%;
+}
+/* Header Hiring */
+.dr-menu-hiring-label {
+  color: #ffffff;
+  background: #0080ff;
+}
+.dr-menu-label {
+  position: absolute;
+  top: -8px;
+  left: auto;
+  bottom: auto;
+  right: auto;
+  z-index: 1;
+  display: inline-block;
+  margin-left: -20px;
+  padding: 2px 5px;
+  line-height: 13px;
+  letter-spacing: 0.3px;
+  font-weight: 500;
+  font-size: 8px;
+  text-transform: uppercase;
+  color: #ffffff;
+  background: var(--primary-color);
+  border-radius: 10px;
+}
+.dr-menu-label:before {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 10px;
+  bottom: auto;
+  right: auto;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-top-width: 4px;
+  border-bottom-width: 0;
+  border-right-width: 7px;
+  border-left-width: 0;
+  border-top-color: transparent;
+  border-left-color: transparent !important;
+  border-right-color: transparent !important;
+  border-bottom-color: transparent !important;
+  border-color: var(--primary-color);
+}
+/* Hero Section */
+.hero-section {
+  padding: 60px 0;
+}
+.hero-content .hero-alert {
+  border-radius: 30px;
+  background: var(--secondary-color);
+}
+.hero-content .hero-alert .badge {
+  background: var(--primary-color);
+}
+.hero-content > h1 {
+  font-size: 38px;
+}
+.hero-content > h1 span {
+  color: var(--primary-color);
+}
+.hero-content > p {
+  font-size: 20px;
+}
+/* Service Section */
+.service-section {
+  background: url('./assets/img/service/service-bg.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  padding: 40px 0;
+  background-color: #1c28800a;
+}
+.service-heading .badge {
+  padding: 10px 15px;
+  /* font-size: 12px; */
+  border-radius: 30px;
+}
+.heading {
+  padding: 10px 0;
+}
+.sub-heading {
+  font-size: 20px;
+}
+.single-service {
+  margin-bottom: 30px;
+}
+.single-service .service-btn {
+  font-size: 12px;
+}
+
+/* Customer-review */
+.customer-review {
+  padding: 50px 0;
+  line-height: 34px;
+}
+.customer-review .carousel {
+  padding-top: 20px;
+}
+.carousel-item .slider-image {
+  height: 80px;
+  width: 80px;
+  border-radius: 50%;
+}
+.text-alpha {
+  color: var(--primary-color) !important;
+}
+.carousel-control-prev,
+.carousel-control-next {
+  color: #fff;
+  font-weight: 700;
+  font-size: 16px;
+  background: var(--primary-color);
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  opacity: 1;
+  top: 40%;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+ol.carousel-indicators > li {
+  background: grey;
+}
+
+ol.carousel-indicators > .active {
+  background: var(--primary-color);
+}
+/* Home: Contact section */
+.contact-section {
+  background: var(--primary-bg);
+  padding: 56px 0;
+}
+.contact-section .home-contact {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Footer Area */
+.footer-area {
+  padding-top: 65px;
+  padding-bottom: 50px;
+}
+footer .social-icon {
+  display: flex;
+  padding-top: 10px;
+}
+footer .social-icon li {
+  margin-right: 15px;
+}
+.f-heading h6 {
+  font-size: 18px;
+  color: #fff;
+  font-weight: 700;
+}
+.f-col li {
+  padding-bottom: 5px;
+}
+li.f-contact {
+  display: flex;
+}
+li.f-contact i {
+  margin-right: 10px;
+  margin-top: 5px;
+  font-size: 22px;
+}
+.lift:hover,
+.lift:focus {
+  transform: translate3d(0, -5px, 0);
+  box-shadow: 0.15s ease-in-out;
+}
+.bottom-footer {
+  background-color: #232f3e;
+}
+
+/* --------------------------------------- */
+/* Page: About Us - Hero Section */
+.about-us {
+  background: #eff2f7 !important;
+  padding: 80px 0;
+}
+
+/* Page: About Us - Team Member  */
+.team-member {
+  padding-top: 56px;
+  padding-bottom: 48px;
+}
+.h .heading h2 {
+  position: relative;
+}
+.h .heading h2::before {
+  content: '';
+  width: 50px;
+  height: 2px;
+  background: #0080ff;
+  display: inline-block;
+  margin: 0 15px 10px 0;
+}
+.h .heading h2::after {
+  content: '';
+  width: 50px;
+  height: 2px;
+  background: #0080ff;
+  display: inline-block;
+  margin: 0 0 10px 15px;
+}
+.single-team-card {
+  border-radius: 10px;
+  margin-bottom: 30px;
+}
+.single-team-card .card {
+  background: #fff;
+  cursor: pointer;
+}
+.single-team-card .card .card-body > img {
+  height: 120px;
+  width: 120px;
+  box-shadow: 0 8px 10px #ccc;
+  border-radius: 100%;
+}
+.single-team-card .card .card-body > .card-text {
+  padding-top: 10px;
+}
+.single-team-card .card .card-body .social-link > a i {
+  height: 35px;
+  width: 35px;
+  line-height: 35px;
+  text-align: center;
+  border-radius: 50%;
+  color: #fff;
+  background: var(--primary-color);
+  transition: 0.3s ease-in-out all;
+}
+.single-team-card .card .card-body .social-link > a i:hover {
+  background: #631d50;
+}
+.single-team-card .card .card-body .card-title {
+  color: #a3498b;
+}
+/* Page: About Us - Our Vision  */
+.our-vision {
+  padding: 60px 0;
+}
+
+/* --------------------------------------- */
+/* Page: Single Service Page - Service Section */
+.small-service .single-service .card-body {
+  display: flex;
+  padding-top: 0;
+  padding-bottom: 0;
+  cursor: pointer;
+}
+.small-service .single-service .card-body .sm-card-content {
+  padding-left: 20px;
+}
+.small-service .single-service .card-body h6 {
+  font-size: 1rem;
+  margin-bottom: 0;
+}
+/* --------------------------------------- */
+/* Page: Single Service Page - Why choose us */
+.why-choose-us {
+  padding: 50px 0;
+}
+
+/* --------------------------------------- */
+/* Page: All Service Page - Odo Development Service */
+.development-service {
+  padding: 40px 0;
+  background: #eff2f7;
+}
+.implementation-service {
+  background: #fafbfe;
+}
+.theme-service {
+  background: #eff2f7;
+}
+.odoo-support {
+  background: #fafbfe;
+}
+.odoo-pos-iot-dev {
+  background: #eff2f7;
+}
+.odoo-deployment {
+  background: #fafbfe;
+}
+.odoo-trainings {
+  background: #eff2f7;
+}
+.hire-odoo-developers {
+  background: #fafbfe;
+}
+
+/* Add Icon On button hover */
+.b-icon {
+  font-size: 12px;
+  margin-left: 0px;
+  opacity: 0;
+  visibility: hidden;
+  color: #fff;
+  transition: 0.3s ease-in-out all;
+}
+.btn:hover > .b-icon {
+  opacity: 1;
+  visibility: visible;
+  margin-left: 5px;
+}
+
+/* --------------------------------------- */
+/* Page: Contact - Contact Details */
+.contact-details {
+  padding: 50px 0;
+}
+.contact-details .row .col-lg-4 h6 {
+  font-size: 18px;
+  /* color: var(--primary-color); */
+}
+.contact-details .row .col-lg-4 a {
+  font-size: 16px;
+  /* color: var(--primary-color); */
+  font-weight: 600;
+}
+
+/* --------------------------------------- */
+/* Page: 404 - Full Page */
+/* .main {
+  margin-top: 15%;
+} */
+
+.st0 {
+  fill: #fff;
+}
+.st2 {
+  fill: #5d89af;
+}
+.st3 {
+  fill: #709abf;
+}
+.st4,
+.st6 {
+  fill: #fff;
+  stroke: #b3dcdf;
+  stroke-miterlimit: 10;
+}
+.st6 {
+  stroke: #5d89af;
+  stroke-width: 2;
+}
+.st7,
+.st8,
+.st9 {
+  stroke: #709abf;
+  stroke-miterlimit: 10;
+}
+
+.st7 {
+  stroke-width: 5;
+  stroke-linecap: round;
+  fill: none;
+}
+.st8,
+.st9 {
+  fill: #fff;
+}
+.st9 {
+  fill: none;
+}
+
+#cloud1 {
+  animation: cloud003 15s linear infinite;
+}
+
+#cloud2 {
+  animation: cloud002 25s linear infinite;
+}
+
+#cloud3 {
+  animation: cloud003 20s linear infinite;
+}
+
+#cloud4 {
+  animation: float 4s linear infinite;
+}
+
+#cloud5 {
+  animation: float 8s linear infinite;
+}
+
+#cloud7 {
+  animation: float 5s linear infinite;
+}
+
+#tracks {
+  animation: slide 650ms linear infinite;
+}
+
+#bumps {
+  animation: land 10000ms linear infinite;
+}
+
+@keyframes jig {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(1px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+#car-layers {
+  animation: jig 0.35s linear infinite;
+}
+
+@keyframes land {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(1000px);
+  }
+}
+
+@keyframes slide {
+  from {
+    transform: translateX(0px);
+  }
+  to {
+    transform: translateX(100px);
+  }
+}
+
+/* @keyframes cloudFloat {
+  0% { transform: translateX(0) translateY(3px); }
+  100% { transform: translateX(1000px) translateY(0); }
+} */
+
+@keyframes cloud001 {
+  0% {
+    transform: translateX(-1000px) translateY(3px);
+  }
+  100% {
+    transform: translateX(1000px) translateY(0);
+  }
+}
+
+@keyframes cloud002 {
+  0% {
+    transform: translateX(-1000px) translateY(3px);
+  }
+  100% {
+    transform: translateX(1000px) translateY(0);
+  }
+}
+
+@keyframes cloud003 {
+  0% {
+    transform: translateX(-1000px) translateY(3px);
+  }
+  100% {
+    transform: translateX(1000px) translateY(0);
+  }
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0px) translateX(0);
+  }
+  50% {
+    transform: translateY(8px) translateX(5px);
+  }
+  100% {
+    transform: translateY(0px) translateX(0);
+  }
+}
+
+#bracefront,
+#braceback {
+  animation: braces 1s linear infinite;
+}
+
+@keyframes braces {
+  0% {
+    transform: translateX(-2px);
+  }
+  25% {
+    transform: translateX(3px);
+  }
+  50% {
+    transform: translateX(-2px);
+  }
+  75% {
+    transform: translateX(3px);
+  }
+  100% {
+    transform: translateX(-2px);
+  }
+}

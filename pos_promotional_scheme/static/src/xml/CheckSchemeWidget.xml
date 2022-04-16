@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+	<t t-extend="Chrome">
+		<t t-jquery=".pos-branding" t-operation="append">
+			<span class="placeholder-CheckSchemeWidget"/>
+        </t>
+	</t>
+	<t t-name="CheckSchemeWidget" owl="1">
+		<span class="control-button">
+			<div id="scheme" class="username check-scheme">
+				<span id="check-scheme-button">Check Scheme</span>
+			</div>
+		</span>
+	</t>
+
+</templates>

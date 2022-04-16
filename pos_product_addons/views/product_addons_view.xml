@@ -1,0 +1,26 @@
+<odoo>
+    <data>
+        <record id="addons_in_products_form_view" model="ir.ui.view">
+            <field name="name">product.template.for.view.inherited</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@name='options']/span[2]" position="inside">
+<!--                <xpath expr="//div[2]/div[1]" position="after">-->
+<!--                    <div>-->
+                        <span class="d-inline-block">
+                            <field name="is_addons"/>
+                            <label for="is_addons"/>
+                        </span>
+
+<!--                    </div>-->
+                </xpath>
+                <field name="available_in_pos" position="after">
+                    <field name="has_addons"/>
+                    <field name="addon_ids" widget="many2many_tags" attrs="{'invisible':[('has_addons','=',False)]}"/>
+                </field>
+            </field>
+        </record>
+
+    </data>
+</odoo>

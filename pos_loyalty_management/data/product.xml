@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (c) 2016-Present Webkul Software Pvt. Ltd. (<https://webkul.com/>) -->
+<!-- See LICENSE file for full copyright and licensing details. -->
+<!-- License URL : <https://store.webkul.com/license.html/> -->
+<odoo>
+    <data noupdate="1">
+
+        <record id="wk_loyalty_product_category_id" model="product.category">
+            <field name="name">Loyalty</field>
+        </record>
+
+        <record id="wk_loyalty_product_id" model="product.product">
+            <field name="name">Loyalty Benefit</field>
+            <field name="categ_id" ref="wk_loyalty_product_category_id" />
+            <field name="list_price">0</field>
+            <field name="standard_price">0</field>
+            <field name="type">service</field>
+            <field name="available_in_pos">True</field>
+            <field name="taxes_id" eval="[(6, 0, [])] "/>
+            <field name="supplier_taxes_id" eval="[(6, 0, [])] "/>
+        </record>
+
+         <record id="redeem_rule_list_1" model="redeem.rule.list">
+            <field name="name">Rule1</field>
+            <field name="rule_name">Rule1</field>
+            <field name="points_from">0</field>
+            <field name="points_to">10000</field>
+            <field name="discount">1</field>
+        </record>
+
+        <record id="pos_loyalty_management_data" model="loyalty.management">
+            <field name="loyality_product_id" ref="wk_loyalty_product_id" />
+            <field name="points">1</field>
+            <field name="purchase">10</field>
+            <field name="loyalty_base">amount</field>
+            <field name="redeem_type">partial</field>
+            <field eval="[(6,0,[ref('redeem_rule_list_1')])]"  name="redeem_rule_list"/>
+        </record>
+
+    </data>
+</odoo>

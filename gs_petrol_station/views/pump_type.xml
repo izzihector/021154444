@@ -1,0 +1,41 @@
+<odoo>
+    <data>
+        <record id="gs_pump_type_tree" model="ir.ui.view">
+            <field name="name">gs.pump.type.tree</field>
+            <field name="model">gs.pump.type</field>
+            <field name="arch" type="xml">
+                <tree create="false" delete="false" edit="false">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+        <record id="gs_pump_type_form" model="ir.ui.view">
+            <field name="name">gs.pump.type.form</field>
+            <field name="model">gs.pump.type</field>
+            <field name="arch" type="xml">
+                <form create="false" delete="false" edit="false">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                            </group>
+                            <group>
+                                <field name="product_id"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_gs_pump_type" model="ir.actions.act_window">
+            <field name="name">Pump Type</field>
+            <field name="res_model">gs.pump.type</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="sub_gs_pump_type" name="Pump Type" action="action_gs_pump_type"
+                  parent="menu_gs_petrol_station_config" sequence="2"/>
+    </data>
+</odoo>

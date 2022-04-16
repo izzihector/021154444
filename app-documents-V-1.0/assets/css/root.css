@@ -1,0 +1,84 @@
+/* Root Css */
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Open+Sans:wght@400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+:root {
+  --primary-color: #a24689;
+  --secondary--color: #444444;
+}
+.shadow {
+  box-shadow: -40px 40px 160px 0 rgba(0, 0, 0, 0.08),
+    -8px 8px 15px 0 rgba(120, 120, 120, 0.04),
+    3px 3px 30px 0 rgba(0, 0, 0, 0.04) !important;
+}
+body {
+  color: #646464;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+  font-family: "Open Sans", sans-serif;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: #000;
+  font-weight: 600;
+  font-family: "Montserrat", sans-serif;
+}
+p {
+  font-family: Roboto !important;
+  font-weight: normal !important;
+  margin: 0;
+}
+img {
+  max-width: 100%;
+}
+a:hover {
+  text-decoration: none;
+}
+
+/* Css Classes */
+.c-ponter{
+  cursor: pointer;
+}
+.uppercase {
+  text-transform: uppercase;
+}
+/* Buttons */
+.primary-btn {
+  background: var(--primary-color);
+  color: #fff;
+  font-size: 100%;
+  font-weight: 500;
+  padding: 8px 18px;
+  border: 1px solid transparent;
+  transition: 0.5s ease all;
+}
+.primary-btn:hover {
+  background: #fff;
+  color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+.secondary-btn {
+  background: var(--secondary--color);
+  color: #fff;
+  font-size: 100%;
+  font-weight: 500;
+  padding: 8px 18px;
+  border: 1px solid transparent;
+  transition: 0.5s ease all;
+}
+.secondary-btn:hover {
+  background: #fff;
+  color: var(--secondary--color);
+  border-color: var(--secondary--color);
+}
+.devider {
+  padding: 15px 0;
+}

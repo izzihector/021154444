@@ -1,0 +1,42 @@
+
+
+Hello Friends, 
+
+This Video Tutorials describe you Credit Payment from POS in Odoo V10...!!!
+
+Purpose :- 
+We have add a Advance Credit Payment for your Customer in POS Odoo V10. Purpose of this feature is, We have define credit to selected customer, so customer's can purchases any items according to their credit availability.
+
+
+Features:-
+
+- We have created Credit Details menu in Sales. From that we can add credit for customer.
+- We have created smart button on customer form view which shows how much credit available for that customer.
+- We made a credit journal in accounting for payment. Which is also show in POS configuration payment options.
+
+
+So Now In POS..
+
+ Validations:-
+- Can not use credit payment option if there is no customer selected. It will be raise Error popup.
+- if product is not selected then It will be raise Error popup in POS.
+- Customer can pay exact amount of order amount so there is no any option to change amount.
+- Customer should not pay more than its credit availablity and not more than order amount.
+- Customer can use lesser amount from his credit for total order amount. And for remaining amount he/she can use another journal(payment option).
+- When customer has used its credit for purchasing item than it will be automatically deducted from his credit and it will be also affected at backend of Odoo.
+
+
+- also noticed that Customer's Credit \ Credit Details value doesn't change, though POS seems to estimate the remaining credit correctly..
+- It also should not allow to pay more credit than total.
+- Customer can use lesser amount from his credit for total order amount. And for remaining amount he/she can use another journal(payment option)
+- I think the main issue is there was no special credit journal created so it treats any payment as credit...
+
+For this issue, we've made one boolean field in account journal, type is cash but is boolean field is not true, then it will not consider as a credit journal.
+
+so if it is true, then it will consider as a credit journal..
+Using credit payment, he/she will not pay more than credit amount but in cash they can pay..
+
+
+
+
+Thank You for Watching...!!!

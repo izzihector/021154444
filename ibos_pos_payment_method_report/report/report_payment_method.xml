@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="report_payment_type">
+        <t t-call="web.html_container">
+            <t t-call="web.internal_layout">
+                <div class="page">
+                    <h2 align="center">Payment Type Report</h2>
+                    <table class="table table-condensed">
+                        <tbody>
+                            <tr>
+                                <th>Payment Type</th>
+                                <th>Amount</th>
+                            </tr>
+                            <tr t-foreach="payment_value" t-as="t">
+                                <td>
+                                    <span t-esc="t['name']"/>
+                                </td>
+                                <td>
+                                    <span t-esc="t['value']"/>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </t>
+        </t>
+    </template>
+
+</odoo>
+
+
+
+

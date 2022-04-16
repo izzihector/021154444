@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="search_template_accounts">
+            <a class="dropdown-toggle" data-toggle="dropdown" type="button">
+                <span class="fa fa-filter"/>Accounts:
+                
+                <t t-set="selected_accounts" t-value="', '.join(option.get('name') for option in options['accounts'] if option.get('selected'))"/>
+                <t t-if="selected_accounts">
+                    <t t-esc="selected_accounts"/></t>
+                <t t-else="">All
+                </t>
+            </a>
+            <div class="dropdown-menu o_filters_menu" role="menu">
+                <t t-as="o" t-foreach="options['accounts']">
+                    <a class="dropdown-item js_account_report_choice_filter" data-filter="accounts" role="menuitem" t-att-data-id="o.get('id')" t-att-title="o.get('name')">
+                        <t t-esc="o.get('name')"/>
+                    </a>
+                </t>
+            </div>
+        </template>
+        <template id="aged_reports_search_template" inherit_id="account_reports.search_template">
+            <!-- <xpath expr="//div[@class='btn-group dropdown o_account_reports_filter_analytic']" position="after">-->
+            <xpath expr="//div[hasclass('o_account_reports_filter_analytic')]" position="after">
+                <div class="btn-group dropdown o_account_reports_filter_analytic" t-if="options.get('accounts')">
+                    <t t-call="slm_aged_reports.search_template_accounts"/>
+                </div>
+            </xpath>
+        </template>
+    </data>
+</odoo>

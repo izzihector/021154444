@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>        
+    <record id="view_order_form_inherit" model="ir.ui.view">
+        <field name="name">sale.order.form</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//header/button[@name='action_cancel']" position="after">
+                <button name="action_create_emi" type="object" string="Create EMI" attrs="{'invisible': ['|', ('state', 'not in', ['done', 'sale']), ('is_emi_created', '=', True)]}"/>
+            </xpath>
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <div class="oe_raw">
+                    <button name="action_invoice_emi" attrs="{'invisible': [('emi_unpaid', '=', 0)]}"
+                        type="object"
+                        class="oe_stat_button"
+                        icon="fa-pencil-square-o">
+                        <field name="emi_paid" widget="statinfo"/>/<field name="emi_unpaid"  widget="statinfo"/>
+                    </button>
+                </div>
+            </xpath>
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="is_emi_created" invisible="1" readonly="1"/>
+            </xpath>
+            <xpath expr="//group[@name='sale_info']//field[@name='invoice_status']" position="attributes">
+                <attribute name="invisible" eval="False"/>
+            </xpath>
+            <xpath expr="//button[@name='action_quotation_send']" position="before">
+                <button name="%(sale.action_view_sale_advance_payment_inv)d" string="Create Invoice"
+                    type="action" class="btn-primary"
+                    attrs="{'invisible': ['|', ('invoice_status', '!=', 'to invoice'), ('is_emi_created', '=', True)]}"/>
+                <button name="%(sale.action_view_sale_advance_payment_inv)d" string="Create Invoice"
+                    type="action" context="{'default_advance_payment_method': 'percentage'}"
+                    attrs="{'invisible': ['|', '|', ('invoice_status', '!=', 'no'), ('state', '!=', 'sale'), ('is_emi_created', '=', True), ]}"/>
+            </xpath>
+
+        </field>
+    </record>
+
+
+  <!--   <record id="sale_management.sale_order_view_form" model="ir.ui.view">
+        <field name="name">sale.order.form</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='other_information']/field[@name='invoice_status']" position="attributes">
+                <attribute name="invisible" eval="False"/>
+            </xpath>
+
+            <xpath expr="//button[@name='action_quotation_send']" position="before">
+                <button name="%(sale.action_view_sale_advance_payment_inv)d" string="Create Invoice"
+                    type="action" class="btn-primary"
+                    attrs="{'invisible': ['|', ('invoice_status', '!=', 'to invoice'), ('is_emi_created', '=', True)]}"/>
+                <button name="%(sale.action_view_sale_advance_payment_inv)d" string="Create Invoice"
+                    type="action" context="{'default_advance_payment_method': 'percentage'}"
+                    attrs="{'invisible': ['|', '|', ('invoice_status', '!=', 'no'), ('state', '!=', 'sale'), ('is_emi_created', '=', True), ]}"/>
+            </xpath>
+        </field>
+    </record> -->
+</odoo>

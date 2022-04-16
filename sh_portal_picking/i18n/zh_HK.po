@@ -1,0 +1,280 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* sh_portal_picking
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.1alpha1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-09-28 09:56+0000\n"
+"PO-Revision-Date: 2020-09-28 09:56+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: sh_portal_picking
+#: model_terms:ir.ui.view,arch_db:sh_portal_picking.picking_my_picking
+msgid "<em class=\"font-weight-normal text-muted\">Picking Type:</em>"
+msgstr <em class=\"font-weight-normal text-muted\">拣选类型：</ em>"
+
+#. module: sh_portal_picking
+#: model_terms:ir.ui.view,arch_db:sh_portal_picking.picking_my_picking
+msgid "<em class=\"font-weight-normal text-muted\">Responsible:</em>"
+msgstr "<em class=\"font-weight-normal text-muted\">负责：</ EM>"
+
+#. module: sh_portal_picking
+#: model_terms:ir.ui.view,arch_db:sh_portal_picking.picking_my_picking
+msgid "<em class=\"font-weight-normal text-muted\">Source Document:</em>"
+msgstr "<em class=\"font-weight-normal text-muted\">源文档：</ EM>"
+
+#. module: sh_portal_picking
+#: model_terms:ir.ui.view,arch_db:sh_portal_picking.picking_my_picking
+msgid "<em class=\"font-weight-normal text-muted\">Status:</em>"
+msgstr "<em class=\"font-weight-normal text-muted\">状态：</ Em>"
+
+#. module: sh_portal_picking
+#: model_terms:ir.ui.view,arch_db:sh_portal_picking.portal_picking_form_template
+msgid "<i class=\"fa fa-comment\"/> Send message"
+msgstr "<i class =“fa fa-comment \”/>发送消息"
+
+#. module: sh_portal_picking
+#: model_terms:ir.ui.view,arch_db:sh_portal_picking.portal_picking_form_template
+msgid "<i class=\"fa fa-download\"/> Download"
+msgstr "<i class = \“fa fa-download \”/>下载"
+
+#. module: sh_portal_picking
+#: model_terms:ir.ui.view,arch_db:sh_portal_picking.portal_picking_form_template
+msgid "<strong class=\"text-muted\">Responsible</strong>"
+msgstr "<strong class=\"text-muted\">">负责任</ strong>"
+
+#. module: sh_portal_picking
+#: model_terms:ir.ui.view,arch_db:sh_portal_picking.picking_portal_content
+msgid "<strong>Delivery Address:</strong>"
+msgstr "<strong>送货地址：</ strong>"
+
+#. module: sh_portal_picking
+#: model_terms:ir.ui.view,arch_db:sh_portal_picking.picking_portal_content
+msgid "<strong>Note:</strong>"
+msgstr "<strong>注意：</ strong>"
+
+#. module: sh_portal_picking
+#: model_terms:ir.ui.view,arch_db:sh_portal_picking.picking_portal_content
+msgid "<strong>Picking Type:</strong>"
+msgstr "<strong>采摘类型：</ strong>"
+
+#. module: sh_portal_picking
+#: model_terms:ir.ui.view,arch_db:sh_portal_picking.picking_portal_content
+msgid "<strong>Responsible:</strong>"
+msgstr "<strong>负责：</ strong>"
+
+#. module: sh_portal_picking
+#: model_terms:ir.ui.view,arch_db:sh_portal_picking.picking_portal_content
+msgid "<strong>Scheduled Date:</strong>"
+msgstr "<strong>计划日期：</ strong>"
+
+#. module: sh_portal_picking
+#: model_terms:ir.ui.view,arch_db:sh_portal_picking.picking_portal_content
+msgid "<strong>Source Document:</strong>"
+msgstr "<strong>源文档：</ strong>"
+
+#. module: sh_portal_picking
+#: model:ir.model.fields,field_description:sh_portal_picking.field_stock_picking__access_warning
+msgid "Access warning"
+msgstr "访问警告"
+
+#. module: sh_portal_picking
+#: code:addons/sh_portal_picking/controllers/portal.py:0
+#, python-format
+msgid "All"
+msgstr "全部"
+
+#. module: sh_portal_picking
+#: model_terms:ir.ui.view,arch_db:sh_portal_picking.portal_picking_form_template
+msgid "Contact"
+msgstr "接触"
+
+#. module: sh_portal_picking
+#: model:ir.model.fields,help:sh_portal_picking.field_stock_picking__access_url
+msgid "Customer Portal URL"
+msgstr "客户门户网站网址"
+
+#. module: sh_portal_picking
+#: model_terms:ir.ui.view,arch_db:sh_portal_picking.picking_portal_content
+msgid "Demand"
+msgstr "要求"
+
+#. module: sh_portal_picking
+#: model:ir.model.fields,field_description:sh_portal_picking.field_stock_picking__display_name
+msgid "Display Name"
+msgstr "显示名称"
+
+#. module: sh_portal_picking
+#: model_terms:ir.ui.view,arch_db:sh_portal_picking.picking_portal_content
+msgid "Done"
+msgstr "完毕"
+
+#. module: sh_portal_picking
+#: model_terms:ir.ui.view,arch_db:sh_portal_picking.portal_picking_form_template
+msgid "Download"
+msgstr "下载"
+
+#. module: sh_portal_picking
+#: model_terms:ir.ui.view,arch_db:sh_portal_picking.portal_picking_form_template
+msgid "History"
+msgstr "历史"
+
+#. module: sh_portal_picking
+#: model:ir.model.fields,field_description:sh_portal_picking.field_stock_picking__id
+msgid "ID"
+msgstr "ID"
+
+#. module: sh_portal_picking
+#: model:ir.model.fields,field_description:sh_portal_picking.field_stock_picking____last_update
+msgid "Last Modified on"
+msgstr "最后修改了"
+
+#. module: sh_portal_picking
+#: code:addons/sh_portal_picking/controllers/portal.py:0
+#, python-format
+msgid "Last month"
+msgstr "上个月"
+
+#. module: sh_portal_picking
+#: code:addons/sh_portal_picking/controllers/portal.py:0
+#, python-format
+msgid "Last week"
+msgstr "上个星期"
+
+#. module: sh_portal_picking
+#: code:addons/sh_portal_picking/controllers/portal.py:0
+#, python-format
+msgid "Last year"
+msgstr "去年"
+
+#. module: sh_portal_picking
+#: code:addons/sh_portal_picking/controllers/portal.py:0
+#: model_terms:ir.ui.view,arch_db:sh_portal_picking.picking_my_picking
+#, python-format
+msgid "Name"
+msgstr "姓名"
+
+#. module: sh_portal_picking
+#: code:addons/sh_portal_picking/controllers/portal.py:0
+#, python-format
+msgid "Newest"
+msgstr "最新"
+
+#. module: sh_portal_picking
+#: code:addons/sh_portal_picking/controllers/portal.py:0
+#, python-format
+msgid "None"
+msgstr "没有任何"
+
+#. module: sh_portal_picking
+#: model_terms:ir.ui.view,arch_db:sh_portal_picking.picking_portal_content
+msgid "Operations"
+msgstr "运营"
+
+#. module: sh_portal_picking
+#: model_terms:ir.ui.view,arch_db:sh_portal_picking.picking_my_picking
+#: model_terms:ir.ui.view,arch_db:sh_portal_picking.picking_portal_my_home
+#: model_terms:ir.ui.view,arch_db:sh_portal_picking.picking_portal_my_home_menu
+msgid "Picking Orders"
+msgstr "选择订单"
+
+#. module: sh_portal_picking
+#: code:addons/sh_portal_picking/controllers/portal.py:0
+#: model_terms:ir.ui.view,arch_db:sh_portal_picking.picking_my_picking
+#, python-format
+msgid "Picking Type"
+msgstr "挑选类型"
+
+#. module: sh_portal_picking
+#: model:ir.model.fields,field_description:sh_portal_picking.field_stock_picking__access_url
+msgid "Portal Access URL"
+msgstr "门户访问URL."
+
+#. module: sh_portal_picking
+#: model_terms:ir.ui.view,arch_db:sh_portal_picking.picking_portal_content
+msgid "Products"
+msgstr "产品"
+
+#. module: sh_portal_picking
+#: code:addons/sh_portal_picking/controllers/portal.py:0
+#: model_terms:ir.ui.view,arch_db:sh_portal_picking.picking_my_picking
+#, python-format
+msgid "Responsible"
+msgstr "负责任的"
+
+#. module: sh_portal_picking
+#: model_terms:ir.ui.view,arch_db:sh_portal_picking.picking_my_picking
+msgid "Scheduled Date"
+msgstr "约定的日期"
+
+#. module: sh_portal_picking
+#: code:addons/sh_portal_picking/controllers/portal.py:0
+#, python-format
+msgid "Search in All"
+msgstr "在所有人中搜索"
+
+#. module: sh_portal_picking
+#: model:ir.model.fields,field_description:sh_portal_picking.field_stock_picking__access_token
+msgid "Security Token"
+msgstr "安全令牌"
+
+#. module: sh_portal_picking
+#: code:addons/sh_portal_picking/controllers/portal.py:0
+#: model_terms:ir.ui.view,arch_db:sh_portal_picking.picking_my_picking
+#, python-format
+msgid "Source Document"
+msgstr "源文件"
+
+#. module: sh_portal_picking
+#: code:addons/sh_portal_picking/controllers/portal.py:0
+#: model_terms:ir.ui.view,arch_db:sh_portal_picking.picking_my_picking
+#, python-format
+msgid "Status"
+msgstr "地位"
+
+#. module: sh_portal_picking
+#: model_terms:ir.ui.view,arch_db:sh_portal_picking.picking_my_picking
+msgid "There are no Picking Orders."
+msgstr "没有挑选订单。"
+
+#. module: sh_portal_picking
+#: code:addons/sh_portal_picking/controllers/portal.py:0
+#, python-format
+msgid "This Quarter"
+msgstr "本季度"
+
+#. module: sh_portal_picking
+#: code:addons/sh_portal_picking/controllers/portal.py:0
+#, python-format
+msgid "This month"
+msgstr "这个月"
+
+#. module: sh_portal_picking
+#: code:addons/sh_portal_picking/controllers/portal.py:0
+#, python-format
+msgid "This week"
+msgstr "本星期"
+
+#. module: sh_portal_picking
+#: code:addons/sh_portal_picking/controllers/portal.py:0
+#, python-format
+msgid "This year"
+msgstr "今年"
+
+#. module: sh_portal_picking
+#: code:addons/sh_portal_picking/controllers/portal.py:0
+#, python-format
+msgid "Today"
+msgstr "今天"
+
+#. module: sh_portal_picking
+#: model:ir.model,name:sh_portal_picking.model_stock_picking
+msgid "Transfer"
+msgstr "转移"

@@ -1,0 +1,88 @@
+<odoo>
+    <template id="custom_journal_header">
+        <div class="header" style="border-bottom: 2px solid black;font-family: Cairo-Regular;">
+            <div class="row" style="direction:ltr;text-align:left">
+
+            <div class="col-3">
+                <img t-if="res_company.logo" t-att-src="image_data_uri(res_company.logo)" style="max-height: 100px;" alt="Logo"/>
+            </div>
+<!--                <div class="col-9 text-right" style="margin-top:22px;" t-field="res_company.report_header" name="moto"/>-->
+            <div class="col-5"></div>
+            <div class="col-4" name="company_address">
+                <div t-field="res_company.partner_id" t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;, &quot;name&quot;], &quot;no_marker&quot;: true}"/>
+            </div>
+            </div>
+            </div>
+    </template>
+
+    <template id="custom_journal_footer">
+        <!--        <t t-set="company" t-value="user.company_id"/>-->
+        <div class="footer" style="font-family: 'Trebuchet MS', sans-serif;">
+            <div class="text-center" style="border-top: 4px solid black;direction:ltr;">
+<!--                <div class="row mt-4">-->
+<!--                    <div class="col-4">-->
+<!--                        <strong></strong>-->
+<!--                    </div>-->
+<!--                    <div class="col-4">-->
+<!--                        <strong></strong>-->
+<!--                    </div>-->
+<!--                    <div class="col-4">-->
+<!--                        <strong>ACCOUNTANT</strong>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="row mt-2">-->
+<!--                    <div class="col-4">-->
+<!--                        <strong></strong>-->
+<!--                    </div>-->
+<!--                    <div class="col-4">-->
+<!--                        <strong></strong>-->
+<!--                    </div>-->
+<!--                    <div class="col-4">-->
+<!--                        <strong>:المحاسب</strong>-->
+<!--                    </div>-->
+<!--                </div>-->
+
+                <div class="row" style="position:relative;">
+
+                    <strong style="position:absolute;top:15px;left:30px" t-if="user.lang == 'en_US'" class="text-left">Created By: <span t-field="o.create_uid.name"/></strong>
+                    <strong style="position:absolute;top:15px;right:50px" t-if="user.lang == 'ar_001'">أنشئ بواسطة: <span t-field="o.create_uid.name"/></strong>
+                    <strong style="position:absolute;top:30px;left:30px" t-if="user.lang == 'en_US'" class="text-left">Posted By: <span t-field="o.posted_user.name"/></strong>
+                    <strong style="position:absolute;top:30px;right:50px" t-if="user.lang == 'ar_001'">أُكد بواسطة: <span t-field="o.posted_user.name"/></strong>
+
+                    <strong style="position:absolute;top:55px;left:30px" t-if="user.lang == 'en_US'" class="text-left">ACCOUNTANT MANAGER</strong>
+                    <strong style="position:absolute;top:55px;right:50px" t-if="user.lang == 'ar_001'">مسؤول الحسابات</strong>
+
+                    <div t-if="report_type == 'pdf'" class="col-2 text-left" style="position:absolute;top:90px;left:3px">
+                        <strong t-if="user.lang == 'en_US'">Page:</strong>
+                        <span><span class="page"/> / <span class="topage"/></span>
+                        <strong t-if="user.lang == 'ar_001'">:صفحة </strong>
+                    </div>
+                    <div class="col-6"/>
+                    <div class="col-4 text-right" style="position:absolute;top:90px;right:3px">
+                        <strong t-if="user.lang == 'en_US'">Print Date: </strong>
+                        <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%Y-%m-%d %H:%M')"/>
+                        <strong t-if="user.lang == 'ar_001'">:تاريخ الطباعة</strong>
+                    </div>
+                </div>
+<!--                <div class="row" style="position:relative">-->
+<!--                    <div class="row" style="font-size:20px">-->
+<!--                        <strong style="top:20px;left:30px" t-if="user.lang == 'en_US'" class="col-6 text-left">ACCOUNTANT</strong>-->
+<!--                        <strong style="top:20px;right:30px"  t-if="user.lang == 'ar_001'" class="col-6 text-right">المحاسب</strong>-->
+<!--                    </div>-->
+
+<!--                    <div t-if="report_type == 'pdf'" class="col-6 text-left" style="position:absolute;top:90px;left:3px">-->
+<!--                        <strong t-if="user.lang == 'en_US'">Page:</strong>-->
+<!--                        <span><span class="page"/> / <span class="topage"/></span>-->
+<!--                        <strong t-if="user.lang == 'ar_001'">:صفحة </strong>-->
+<!--                    </div>-->
+<!--                    <div class="col-6 text-right" style="position:absolute;top:90px;right:3px">-->
+<!--                        <strong t-if="user.lang == 'en_US'">Print Date: </strong>-->
+<!--                        <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%Y-%m-%d %H:%M')"/>-->
+<!--                        <strong t-if="user.lang == 'ar_001'">:تاريخ الطباعة</strong>-->
+<!--                    </div>-->
+<!--                </div>-->
+
+            </div>
+        </div>
+    </template>
+</odoo>

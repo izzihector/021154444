@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+  <data>
+
+    <record model="ir.ui.view" id="network_printer_form">
+      <field name="name">network.printer.form</field>
+      <field name="model">network.printer</field>
+      <field name="arch" type="xml">
+        <form string="Network printers">
+          <header>
+          </header>
+          <sheet>
+            <group name="configuration">
+              <group name="printer-configuration">
+                <field name="printer_name"/>
+                <field name="printer_ip"/>
+                <field name="printer_port"/>
+                <field name="connector_id"/>
+              </group>
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <record model='ir.ui.view' id='network_printer_tree'>
+      <field name='name'>network.printer.tree</field>
+      <field name='model'>network.printer</field>
+      <field name='arch' type='xml'>
+        <tree string='Network printers'>
+          <field name="printer_name"/>
+          <field name="printer_ip"/>
+          <field name="printer_port"/>
+        </tree>
+      </field>
+    </record>
+
+    <record id="network_printer_action" model="ir.actions.act_window">
+      <field name="name">Network printers</field>
+      <field name="res_model">network.printer</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+
+    <menuitem
+            parent="point_of_sale.menu_point_config_product"
+            action="network_printer_action"
+            id="menu_network_printer"
+            sequence="35"
+            groups="point_of_sale.group_pos_manager"
+            name="Network printers"/>
+  </data>
+</odoo>

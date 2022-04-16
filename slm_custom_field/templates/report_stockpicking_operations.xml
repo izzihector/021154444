@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="slm_report_picking" inherit_id="stock.report_picking">
+            <xpath expr="//h1[@t-field='o.name']" position="after">
+                <div class="clearfix"/>
+                <span t-field="o.analytic_account_id"/>
+            </xpath>
+        </template>
+    </data>
+</odoo>

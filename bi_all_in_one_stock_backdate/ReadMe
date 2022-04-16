@@ -1,0 +1,5 @@
+14.0.0.1 ==> (6/11/2020) : Fixed issue while backdate is not set if backorder is created.
+14.0.0.2 ==>fixed issue of traceback when inventory valuation is automated.
+
+14.0.0.3 ==>1.fixed issue of traceback in transfer.
+         ==>2.added query for update valuation date according backdate.

@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+
+		<record model="ir.ui.view" id="loyalty_promotional_schemes_tree_view">
+			<field name="name">loyalty.promotional.schemes.tree</field>
+			<field name="model">loyalty.promotional.schemes</field>
+			<field name="type">tree</field>
+			<field name="arch" type="xml">
+				<tree string="tree_string">
+					<field name="name" />
+					<field name="from_date"></field>
+					<field name="to_date"></field>
+					<field name="available_on"></field>
+					<field name="scheme_product"></field>
+				</tree>
+			</field>
+		</record>
+
+		<record model="ir.ui.view" id="loyalty_promotional_schemes_form_view">
+			<field name="name">loyalty.promotional.schemes.form</field>
+			<field name="model">loyalty.promotional.schemes</field>
+			<field name="type">form</field>
+			<field name="arch" type="xml">
+				<form string="Buy X Get Y Free">
+					<header>
+						<button name="approve" string="Approve" state="draft" type="object"
+							attrs="{'invisible': [('state','=','approve')] }" groups="point_of_sale.group_pos_manager" />
+						<button name="cancel" string="Cancel" state="approve" type="object"
+							attrs="{'invisible': [('state','not in',('approve'))] }" />
+						<field name="state" widget="statusbar" statusbar_visible="approve,cancel" />
+					</header>
+					<sheet>
+						<div class="oe_title">
+							<label for="name" />
+							<h1>
+								<field name="name" default_focus="1" placeholder="Scheme Name"
+									attrs="{'readonly': [('state','=','approve')] }"></field>
+							</h1>
+
+						</div>
+
+						<group colspan="4">
+							<group>
+								<field name="scheme_type" required="1"
+									attrs="{'readonly': [('state','=','approve')] }"></field>
+							</group>
+
+							<group>
+								<field name="scheme_basis"
+									attrs="{'invisible':[('scheme_type','!=','buy_x_get_y')],'readonly': [('state','=','approve')],'required':[('scheme_type','=','buy_x_get_y'),]}"></field>
+							</group>
+
+						</group>
+						
+						<group colspan="4">
+							<group>
+								<field name="from_date" 
+									attrs="{'readonly': [('state','=','approve')] }"></field>
+							</group>
+							<group>
+								<field name="to_date" 
+									attrs="{'readonly': [('state','=','approve')] }"></field>
+							</group>
+						</group>
+						
+
+
+						<group col="4" colspan="4">
+							<field name="buy_a_qty"
+								attrs="{'readonly': [('state','=','approve')],'invisible':[('scheme_type','!=','buy_x_get_y'),] }"></field>
+							<field name="get_a_qty"
+								attrs="{'readonly': [('state','=','approve')],'invisible':[('scheme_type','!=','buy_x_get_y'),]}"></field>
+							<field name="discount"
+								attrs="{'readonly': [('state','=','approve')],'invisible':[('scheme_type','!=','buy_x_get_y'),]}"></field>
+							<newline></newline>
+
+							<field name="buy_a_qty_in_volume"
+								attrs="{'readonly': [('state','=','approve')],'invisible':[('scheme_type','!=','volume_discount'),] }"></field>
+							<field name="offer_price"
+								attrs="{'readonly': [('state','=','approve')],'invisible':[('scheme_type','!=','volume_discount'),]}"></field>
+
+
+						</group>
+
+
+						<group string="Select Slab" colspan="4"
+							attrs="{'invisible':[('scheme_type','not in',('unit_price_disc_amt','unit_price_disc_percent'))]}">
+							<field name="qty_disc" nolabel="1"></field>
+						</group>
+						<group col="4" colspan="4">
+							<group string="Available On" colspan="2">
+								<field name="available_on" colspan="2" required="1"
+									attrs="{'readonly': [('state','=','approve')] }" nolabel="1">
+									<tree>
+										<field name="template_id"></field>
+									</tree>
+								</field>
+							</group>
+
+							<group string="Scheme Product" colspan="2"
+								attrs="{'invisible':['|',('scheme_type','!=','buy_x_get_y'),('scheme_basis','=','on_same_prod')]}">
+								<field name="scheme_product" colspan="2"
+									attrs="{'readonly': [('state','=','approve')], 'required' : [('scheme_type','=','buy_x_get_y'),('scheme_basis','=','on_diff_prod')]}"
+									nolabel="1">
+									<tree>
+										<field name="template_id"></field>
+									</tree>
+								</field>
+							</group>
+						</group>
+					<!-- </group>scheme type,from_date to_date -->
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<record model="ir.actions.act_window" id="action_buyx_gety_scheme">
+			<field name="name">Buy X Get Y Free</field>
+			<field name="res_model">loyalty.promotional.schemes</field>
+			<field name="binding_view_types">form</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+
+		<!-- Menuitem for point of sale -->
+
+		<menuitem id="menu_action_loyalty_form" name="Loyalty Management"
+			parent="point_of_sale.menu_point_root" groups="point_of_sale.group_pos_manager,point_of_sale.group_pos_user"></menuitem>
+		<menuitem id="buyx_gety_scheme_menu" name="Promotional Schemes"
+			parent="menu_action_loyalty_form" action="action_buyx_gety_scheme"
+			sequence="0" />
+
+
+
+		<!-- Set Quantity and Discount View -->
+
+		<record model="ir.ui.view" id="loyalty_qty_disc_tree_view">
+			<field name="name">loyalty.qty.disc.tree</field>
+			<field name="model">loyalty.qty.disc</field>
+			<field name="type">tree</field>
+			<field name="arch" type="xml">
+				<tree string="Select Quantity and Disc." editable="top">
+					<field name="qty" />
+					<field name="discount" />
+				</tree>
+			</field>
+		</record>
+
+		<record model="ir.ui.view" id="loyalty_qty_disc_form_view">
+			<field name="name">loyalty.qty.disc.form</field>
+			<field name="model">loyalty.qty.disc</field>
+			<field name="type">form</field>
+			<field name="arch" type="xml">
+				<form string="Select Quantity and Disc.">
+					<sheet>
+						<group>
+							<field name="qty" />
+							<field name="discount" />
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+
+		<record model="ir.ui.view" id="loyalty_available_on_tree_view">
+			<field name="name">loyalty.available_on.tree</field>
+			<field name="model">loyalty.available_on</field>
+			<field name="type">tree</field>
+			<field name="arch" type="xml">
+				<tree string="Select Product." editable="top">
+					<field name="template_id" />
+					<field name="product_list" />
+				</tree>
+			</field>
+		</record>
+
+		<record model="ir.ui.view" id="loyalty_available_on_form_view">
+			<field name="name">loyalty.available_on.form</field>
+			<field name="model">loyalty.available_on</field>
+			<field name="type">form</field>
+			<field name="arch" type="xml">
+				<form string="Select Product">
+					<sheet>
+						<group>
+							<field name="template_id" />
+							<field name="product_list" />
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+	</data>
+</odoo>

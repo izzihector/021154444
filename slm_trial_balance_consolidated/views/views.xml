@@ -1,0 +1,60 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+    <!--
+    <record model="ir.ui.view" id="slm_trial_balance_consolidated.list">
+      <field name="name">slm_trial_balance_consolidated list</field>
+      <field name="model">slm_trial_balance_consolidated.slm_trial_balance_consolidated</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="value"/>
+          <field name="value2"/>
+        </tree>
+      </field>
+    </record>
+    -->
+
+    <!-- actions opening views on models -->
+    <!--
+    <record model="ir.actions.act_window" id="slm_trial_balance_consolidated.action_window">
+      <field name="name">slm_trial_balance_consolidated window</field>
+      <field name="res_model">slm_trial_balance_consolidated.slm_trial_balance_consolidated</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+    -->
+
+    <!-- server action to the one above -->
+    <!--
+    <record model="ir.actions.server" id="slm_trial_balance_consolidated.action_server">
+      <field name="name">slm_trial_balance_consolidated server</field>
+      <field name="model_id" ref="model_slm_trial_balance_consolidated_slm_trial_balance_consolidated"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": self._name,
+        }
+      </field>
+    </record>
+    -->
+
+    <!-- Top menu item -->
+    <!--
+    <menuitem name="slm_trial_balance_consolidated" id="slm_trial_balance_consolidated.menu_root"/>
+    -->
+    <!-- menu categories -->
+    <!--
+    <menuitem name="Menu 1" id="slm_trial_balance_consolidated.menu_1" parent="slm_trial_balance_consolidated.menu_root"/>
+    <menuitem name="Menu 2" id="slm_trial_balance_consolidated.menu_2" parent="slm_trial_balance_consolidated.menu_root"/>
+    -->
+    <!-- actions -->
+    <!--
+    <menuitem name="List" id="slm_trial_balance_consolidated.menu_1_list" parent="slm_trial_balance_consolidated.menu_1"
+              action="slm_trial_balance_consolidated.action_window"/>
+    <menuitem name="Server to list" id="slm_trial_balance_consolidated" parent="slm_trial_balance_consolidated.menu_2"
+              action="slm_trial_balance_consolidated.action_server"/>
+    -->
+  </data>
+</odoo>

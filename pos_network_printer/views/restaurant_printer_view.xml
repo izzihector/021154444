@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+    <record id="restaurant_printer_form_inherit" model="ir.ui.view">
+      <field name="name">restaurant.printer.form.inherit</field>
+      <field name="model">restaurant.printer</field>
+      <field name="inherit_id" ref="pos_restaurant_iot.view_restaurant_printer_iot_form"/>
+      <field name="arch" type="xml">
+        <field name="product_categories_ids" position="after">
+          <field name="printer_ip" attrs="{'invisible':[('printer_type','!=','nt_printer')], 'required': [('printer_type','=','nt_printer')]}"/>
+          <field name="printer_port" attrs="{'invisible':[('printer_type','!=','nt_printer')], 'required': [('printer_type','=','nt_printer')]}"/>
+          <field name="connector_id" attrs="{'invisible':[('printer_type','!=','nt_printer')],'required': [('printer_type','=','nt_printer')]}"/>
+        </field>
+      </field>
+    </record>
+
+    <record id="restaurant_printer_tree_inherit" model="ir.ui.view">
+      <field name="name">restaurant.printer.tree.inherit</field>
+      <field name="model">restaurant.printer</field>
+      <field name="inherit_id" ref="pos_restaurant_iot.view_restaurant_printer_iot_tree"/>
+      <field name="arch" type="xml">
+        <field name="product_categories_ids" position="after">
+          <field name="proxy_ip" string="IP Address"/>
+          <field name="printer_port"/>
+          <field name="connector_id"/>
+        </field>
+      </field>
+    </record>
+  </data>
+</odoo>

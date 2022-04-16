@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>        
+    <record model="ir.ui.view" id="partner_view_emi_buttons">
+            <field name="name">partner.view.emi.buttons</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form" />
+            <field name="priority" eval="11"/>
+            <field name="groups_id" eval="[(4, ref('account.group_account_invoice'))]"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@class='oe_button_box']" position="replace">
+                    <div class="oe_button_box" name="button_box">
+                        <button class="oe_stat_button" type="action" name="%(account_invoice_emi.action_account_invoice_emi2)d" icon="fa-pencil-square-o">
+                            <field string="EMI" name="total_account_invoice_emi" widget="statinfo"/>
+                        </button>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+</odoo>

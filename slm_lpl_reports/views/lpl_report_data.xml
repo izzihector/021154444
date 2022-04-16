@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <menuitem id="account_reports_lpl_reports_menu" name="Layout Reports"
+                  parent="account.menu_finance_reports" sequence="7"
+                  groups="slm_encryption_reports.group_advanced_reports"
+        />
+
+        <record id="action_account_report_lpl" model="ir.actions.client">
+            <field name="name">Layout Profit &amp; Loss</field>
+            <field name="tag">account_report</field>
+            <field name="context" eval="{'model': 'account.lpl.report'}"/>
+        </record>
+
+        <record id="action_account_report_lbsa" model="ir.actions.client">
+            <field name="name">Layout Balance Sheet (ACTIVA)</field>
+            <field name="tag">account_report</field>
+            <field name="context" eval="{'model': 'account.lbsa.report'}"/>
+        </record>
+        <record id="action_account_report_lbsp" model="ir.actions.client">
+            <field name="name">Layout Balance Sheet (PASSIVA)</field>
+            <field name="tag">account_report</field>
+            <field name="context" eval="{'model': 'account.lbsp.report'}"/>
+        </record>
+
+        <menuitem id="menu_action_account_report_lpl" name="Layout Profit &amp; Loss"
+                  action="action_account_report_lpl"
+                  parent="account_reports_lpl_reports_menu" groups="slm_encryption_reports.group_advanced_reports"/>
+
+        <menuitem id="menu_action_account_report_lbsa" name="Layout Balance Sheet (BS ACTI)"
+                  action="action_account_report_lbsa"
+                  parent="account_reports_lpl_reports_menu" groups="slm_encryption_reports.group_advanced_reports"/>
+
+        <menuitem id="menu_action_account_report_lbsp" name="Layout Balance Sheet (BS PASS)"
+                  action="action_account_report_lbsp"
+                  parent="account_reports_lpl_reports_menu" groups="slm_encryption_reports.group_advanced_reports"/>
+    </data>
+</odoo>

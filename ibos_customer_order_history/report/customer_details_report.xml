@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <template id="customer_order_details">
+            <t t-call="web.html_container">
+                <t t-call="web.basic_layout">
+                    <link rel="stylesheet" type="text/css"
+                          href="/ibos_customer_order_history/static/src/css/style.css"/>
+                    <t t-foreach="customer_history" t-as="cs_h">
+                        <t t-if="len(cs_h['data']) > 0">
+                            <div class="page">
+                                <section class="container">
+                                    <div class="header">
+                                        <h2 class="logo">
+                                            <img t-att-src="image_data_uri(address['logo'])" alt=""/>
+                                        </h2>
+                                        <div class="company-address text-center">
+                                            <p>
+                                                <b>
+                                                    <t t-esc="address['company_name']"/>
+                                                </b>
+                                            </p>
+                                            <p>
+                                                <t t-esc="address['company_street1']"/>
+                                                <t t-esc="address['company_street2']"/>
+                                                <t t-esc="address['company_city']"/>,
+                                                <t t-esc="address['company_zip']"/>.
+                                                <t t-esc="address['company_country']"/>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <!-- Order Details section -->
+                                    <h3 class="text-center">Customer Order Details
+                                    </h3>
+                                    <!-- Main content -->
+                                    <div class="content">
+                                        <div class="order-details">
+                                            <div class="purchase-control details">
+                                                <p>Name:
+                                                    <t t-esc="cs_h['name']"/>
+                                                </p>
+                                                <p>
+                                                    <t t-if="cs_h['street']">
+                                                        Address:
+                                                        <t t-esc="cs_h['street']"/>
+                                                    </t>
+                                                    <t t-if="cs_h['street2']">
+                                                        <t t-esc="cs_h['street2']"/>
+                                                    </t>
+                                                </p>
+                                                <p>
+                                                    <t t-if="cs_h['city']">
+                                                        City:
+                                                        <t t-esc="cs_h['city']"/>
+                                                    </t>
+                                                </p>
+                                                <p>
+                                                    <t t-if="cs_h['zip']">
+                                                        Zip:
+                                                        <t t-if="cs_h['zip']" t-esc="cs_h['zip']"/>
+                                                    </t>
+                                                </p>
+                                                <p>
+                                                    <t t-if="cs_h['email']">
+                                                        Email:
+                                                        <t t-if="cs_h['email']" t-esc="cs_h['email']"/>
+                                                    </t>
+                                                </p>
+                                                <p>
+                                                    <t t-if="cs_h['mobile']">
+                                                        Mobile:
+                                                        <t t-if="cs_h['mobile']" t-esc="cs_h['mobile']"/>
+                                                    </t>
+                                                </p>
+                                                <p>
+                                                    <t t-if="cs_h['phone']">
+                                                        Phone:
+                                                        <t t-if="cs_h['phone']" t-esc="cs_h['phone']"/>
+                                                    </t>
+                                                </p>
+                                            </div>
+                                            <div class="purchase-order details" style="padding-left:50px">
+                                                <p>Date From:
+                                                    <t t-esc="cs_h['date_from']"/>
+                                                </p>
+                                                <p>Date to:
+                                                    <t t-esc="cs_h['date_to']"/>
+                                                </p>
+                                            </div>
+                                        </div>
+
+                                        <!-- product Details section -->
+                                        <div class="product-details" style="min-height: 396px;">
+                                            <table>
+                                                <tr>
+                                                    <t t-if="cs_h['type'] == 'all'">
+                                                        <th>date</th>
+                                                        <th>recip no</th>
+                                                        <th>order ref.</th>
+                                                        <th>paid</th>
+                                                        <th>due</th>
+                                                        <th>total</th>
+                                                    </t>
+                                                    <t t-if="cs_h['type'] == 'summary'">
+                                                        <th>date</th>
+                                                        <th>paid</th>
+                                                        <th>due</th>
+                                                        <th>total</th>
+                                                    </t>
+                                                </tr>
+                                                <t t-foreach="cs_h['data']" t-as='d'>
+                                                    <t t-if="cs_h['type'] == 'all'">
+                                                        <tr>
+                                                            <td>
+                                                                <t t-esc="d['date']"/>
+                                                            </td>
+                                                            <td>
+                                                                <t t-esc="d['receipt_no']"/>
+                                                            </td>
+                                                            <td>
+                                                                <t t-esc="d['order_ref']"/>
+                                                            </td>
+                                                            <td>
+                                                                <t t-esc="d['paid']"/>
+                                                            </td>
+                                                            <td>
+                                                                <t t-esc="d['due']"/>
+                                                            </td>
+                                                            <td>
+                                                                <t t-esc="d['total']"/>
+                                                            </td>
+                                                        </tr>
+                                                    </t>
+                                                    <t t-if="cs_h['type'] == 'summary'">
+                                                        <tr>
+                                                            <td>
+                                                                <t t-esc="d['date']"/>
+                                                            </td>
+                                                            <td>
+                                                                <t t-esc="d['paid']"/>
+                                                            </td>
+                                                            <td>
+                                                                <t t-esc="d['due']"/>
+                                                            </td>
+                                                            <td>
+                                                                <t t-esc="d['total']"/>
+                                                            </td>
+                                                        </tr>
+                                                    </t>
+                                                </t>
+                                                <t>
+                                                    <t t-if="cs_h['type'] == 'all'">
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td>
+                                                            <b>Total</b>
+                                                        </td>
+                                                        <td>
+                                                            <b>
+                                                                <t t-esc="cs_h['total_paid']"/>
+                                                            </b>
+                                                        </td>
+                                                        <td>
+                                                            <b>
+                                                                <t t-esc="cs_h['total_due']"/>
+                                                            </b>
+                                                        </td>
+                                                        <td>
+                                                            <b>
+                                                                <t t-esc="cs_h['total_total']"/>
+                                                            </b>
+                                                        </td>
+                                                    </t>
+                                                    <t t-if="cs_h['type'] == 'summary'">
+                                                        <td>
+                                                            <b>Total</b>
+                                                        </td>
+                                                        <td>
+                                                            <b>
+                                                                <t t-esc="cs_h['total_paid']"/>
+                                                            </b>
+                                                        </td>
+                                                        <td>
+                                                            <b>
+                                                                <t t-esc="cs_h['total_due']"/>
+                                                            </b>
+                                                        </td>
+                                                        <td>
+                                                            <b>
+                                                                <t t-esc="cs_h['total_total']"/>
+                                                            </b>
+                                                        </td>
+                                                    </t>
+
+                                                </t>
+                                            </table>
+                                        </div>
+
+                                        <footer>
+                                            <div class="footer-signature">
+                                                <div class="customer signature">
+                                                    <div class="line"></div>
+                                                    <p>Customer Signature</p>
+                                                </div>
+                                                <div class="authorized signature">
+                                                    <div class="line"></div>
+                                                    <p>Authorized by</p>
+                                                </div>
+                                            </div>
+                                        </footer>
+                                    </div>
+                                </section>
+
+                            </div>
+                            <p style="page-break-after:always;"/>
+                        </t><!-- if condition -->
+                    </t><!-- for condition -->
+                </t>
+            </t>
+        </template>
+    </data>
+</openerp>

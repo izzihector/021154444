@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="pos_category_company" model="ir.ui.view">
+        <field name="name">pos.category.company</field>
+        <field name="model">pos.category</field>
+        <field name="inherit_id" ref="point_of_sale.product_pos_category_form_view"/>
+        <field  name="arch" type="xml">
+            <xpath expr="//field[@name='parent_id']" position="after">
+                <field name="company_id"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

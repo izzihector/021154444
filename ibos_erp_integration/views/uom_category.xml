@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="uom_category_api_origin_view" model="ir.ui.view">
+        <field name="name">uom.category.api.origin</field>
+        <field name="model">uom.category</field>
+        <field name="inherit_id" ref="uom.product_uom_categ_tree_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="api_origin" readonly="1" optional="hide"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

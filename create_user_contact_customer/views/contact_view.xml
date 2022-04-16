@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_partner_form_inherit_add_user" model="ir.ui.view">
+            <field name="name">res.partner.form.inherit.add.user</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="groups_id" eval="[(4, ref('base.group_partner_manager'))]"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='website']" position="after">
+                        <label for="custom_is_add_user" attrs="{'invisible': [('user_ids', '!=', [])]}"/>
+                        <div class="o_row" attrs="{'invisible': [('user_ids', '!=', [])]}">
+                            <field name="custom_is_add_user" attrs="{'invisible': [('user_ids', '!=', [])]}"/>
+                            <button type="object" 
+                                    class="btn btn-primary fa fa-user"
+                                    name="custom_action_grant_access"
+                                    string=" Grant Access"
+                                    attrs="{'invisible': ['|', ('custom_is_add_user', '=', False), ('user_ids', '!=', [])]}"/>
+                        </div>
+                        <field name="custom_is_add_child_user" attrs="{'invisible': [('user_ids', '!=', [])]}"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

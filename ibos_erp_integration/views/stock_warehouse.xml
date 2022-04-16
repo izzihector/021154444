@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="res_partner_bank_api_origin_view" model="ir.ui.view">
+        <field name="name">stock.warehouse.api.origin</field>
+        <field name="model">stock.warehouse</field>
+        <field name="inherit_id" ref="stock.view_warehouse"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="api_origin" readonly="1"/>
+                <field name="sales_vat_required" readonly="1"/>
+            </xpath>
+
+            <xpath expr="//field[@name='code']" position="after">
+                <field name="warehouse_address"/>
+            </xpath>
+
+        </field>
+    </record>
+</odoo>

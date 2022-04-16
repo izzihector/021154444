@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_stock_scrap_form" model="ir.ui.view">
+        <field name="name">stock.scrap.inherited</field>
+        <field name="model">stock.scrap</field>
+        <field name="inherit_id" ref="stock.stock_scrap_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='state']" position="replace">
+                <button id="button_submit_manager" name="action_submit_manager" string="Submit To Manager"
+                        class="btn-primary" type="object"
+                        attrs="{'invisible': [('state', 'in', ['submitted', 'approve', 'refuse', 'done'])]}"/>
+                <button id="button_approve" name="action_approve" string="Approved" class="btn-primary" type="object"
+                        groups="ibos_scrap_approval.scrap_stock_approval_group"
+                        attrs="{'invisible': [('state', 'in', ['to_submit', 'approve', 'refuse', 'done', 'store'])]}"/>
+                <button id="button_refuse" name="action_refuse" string="Refused" class="btn-primary" type="object"
+                        groups="ibos_scrap_approval.scrap_stock_approval_group"
+                        attrs="{'invisible': [('state', 'in', ['to_submit', 'approve', 'refuse', 'done', 'store'])]}"/>
+                <button id="button_draft" name="action_draft" string="Send To Draft" type="object" class="btn-primary"
+                        groups="ibos_scrap_approval.scrap_stock_approval_group"
+                        attrs="{'invisible': [('state', 'in', ['to_submit', 'submitted', 'done', 'store'])]}"/>
+
+                <field name="state" widget="statusbar" statusbar_visible="to_submit,submitted,approve,refuse,done"/>
+            </xpath>
+            <xpath expr="//button[@name='action_validate']" position="replace">
+                <button name="action_validate" string="Validate" type="object" class="btn-primary"
+                        groups="ibos_scrap_approval.scrap_stock_approval_group"
+                        attrs="{'invisible': [('state', 'in', ['to_submit', 'submitted', 'done', 'store'])]}"/>
+            </xpath>
+            <xpath expr="//field[@name='product_id']" position="attributes">
+                <attribute name="attrs">{'readonly':[('state','not in',['to_submit', 'store'])]}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='origin']" position="attributes">
+                <attribute name="attrs">{'readonly':[('state','not in',['to_submit', 'store'])]}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='name']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <group>
+                <group groups="ibos_scrap_approval.scrap_stock_approval_group">
+                    <label for="approved_by" string="Approved Information" style="font-weight: bold"/>
+                    <group>
+                        <field name="approved_by" style="width: 350px" readonly="1"
+                               groups="ibos_scrap_approval.scrap_stock_approval_group"/>
+                    </group>
+                </group>
+                <group groups="ibos_scrap_approval.scrap_stock_approval_group">
+                    <label for="refuse_reason" string="Refuse Information" style="font-weight: bold"/>
+                    <group>
+                        <field name="refuse_by" style="width: 350px" readonly="1"
+                               groups="ibos_scrap_approval.scrap_stock_approval_group"/>
+                        <field name="refuse_reason" style="width: 350px"
+                               attrs="{'readonly': [('state','not in','submitted')], 'required': [('state','in','refused')]}"
+                               groups="ibos_scrap_approval.scrap_stock_approval_group"/>
+                    </group>
+                </group>
+            </group>
+            <div class="oe_chatter">
+                <field name="message_follower_ids"/>
+                <field name="message_ids"/>
+            </div>
+        </field>
+    </record>
+
+    <record id="stock_scrap_search" model="ir.ui.view">
+        <field name="name">stock.scrap.search</field>
+        <field name="model">stock.scrap</field>
+        <field name="inherit_id" ref="stock.stock_scrap_search_view"/>
+        <field name="arch" type="xml">
+            <search>
+                <field name="product_id"/>
+                <field name="state"/>
+                <field name="name"/>
+                <separator/>
+                <filter string="Submitted" name="state" domain="[('state', '=', 'submitted')]"/>
+                <filter string="Approved" name="female" domain="[('state', '=', 'approve')]"/>
+                <filter string="Refused" name="female" domain="[('state', '=', 'refuse')]"/>
+                <filter string="Draft" name="female" domain="[('state', '=', 'store')]"/>
+                <filter string="Done" name="female" domain="[('state', '=', 'done')]"/>
+                <separator/>
+                <group expand="1" string="Group By">
+                    <filter string="Status" name="state" context="{'group_by':'state'}"/>
+                    <filter string="Product" name="product_id" context="{'group_by':'product_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+</odoo>

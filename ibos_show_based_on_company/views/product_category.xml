@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="product_category_company" model="ir.ui.view">
+        <field name="name">product.category.company</field>
+        <field name="model">product.category</field>
+        <field name="inherit_id" ref="product.product_category_form_view"/>
+        <field  name="arch" type="xml">
+            <xpath expr="//field[@name='removal_strategy_id']" position="after">
+                <field name="company_id"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

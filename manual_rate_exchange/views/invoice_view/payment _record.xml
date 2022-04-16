@@ -1,0 +1,19 @@
+<odoo>
+  <!-- views -->
+  <!-- form -->
+  <!-- <record id="manual_rate_exchange_registro_pago_form_view" model="ir.ui.view">
+    <field name="name">registro.pago.form</field>
+    <field name="model">account.payment</field>
+    <field name="inherit_id" ref="account.view_account_payment_invoice_form"/>
+    <field name="arch" type="xml">
+      <xpath expr="//field[@name='journal_id']" position="after">
+        <field name="check_rate"/>
+        <field attrs="{'invisible': [('check_rate', '=', False)]}" name="rate_exchange"/>
+        <field attrs="{'invisible': [('check_rate', '=', False)]}" name="local_currency_price"/>
+      </xpath>
+      <xpath expr="//button[@name='action_validate_invoice_payment']" position="attributes">
+        <attribute name="context">{'value_check_rate':check_rate, 'value_rate_exchange': rate_exchange}</attribute>
+      </xpath>
+    </field>
+  </record> -->
+</odoo>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="pos_config_warehouse" model="ir.ui.view">
+        <field name="name">pos.config.warehouse</field>
+        <field name="model">pos.config</field>
+        <field name="inherit_id" ref="point_of_sale.pos_config_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='picking_type_id']" position="after">
+                <div class="row mt16">
+                    <label string="Warehouse" for="warehouse_id" class="col-lg-3 o_light_label"/>
+                    <field name="warehouse_id"/>
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,618 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* cash_session
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-03-08 09:33+0000\n"
+"PO-Revision-Date: 2019-03-08 09:33+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: cash_session
+#: model_terms:ir.ui.view,arch_db:cash_session.view_cash_session_form
+msgid "+ Transactions"
+msgstr ""
+
+#. module: cash_session
+#: model_terms:ir.ui.view,arch_db:cash_session.view_cash_session_form
+msgid "<span class=\"o_stat_text\">Put</span>\n"
+"                                <span class=\"o_stat_text\">Money In</span>"
+msgstr ""
+
+#. module: cash_session
+#: model_terms:ir.ui.view,arch_db:cash_session.view_cash_session_form
+msgid "<span class=\"o_stat_text\">Set Closing Balance</span>"
+msgstr ""
+
+#. module: cash_session
+#: model_terms:ir.ui.view,arch_db:cash_session.view_cash_session_form
+msgid "<span class=\"o_stat_text\">Set Opening Balance</span>"
+msgstr ""
+
+#. module: cash_session
+#: model_terms:ir.ui.view,arch_db:cash_session.view_cash_session_form
+msgid "<span class=\"o_stat_text\">Take</span>\n"
+"                                <span class=\"o_stat_text\">Money Out</span>"
+msgstr ""
+
+#. module: cash_session
+#: model_terms:ir.ui.view,arch_db:cash_session.view_cash_session_form
+msgid "= Theoretical Closing Balance"
+msgstr ""
+
+#. module: cash_session
+#: model:ir.model.fields,help:cash_session.field_cash_session__login_number
+msgid "A sequence number that is incremented each time a user resumes the cash session"
+msgstr ""
+
+#. module: cash_session
+#: model:ir.model.fields,help:cash_session.field_cash_session__sequence_number
+msgid "A sequence number that is incremented with each order"
+msgstr ""
+
+#. module: cash_session
+#: model_terms:ir.actions.act_window,help:cash_session.action_cash_session
+msgid "A session is a period of time, usually one day, during which you sell through the Session."
+msgstr ""
+
+#. module: cash_session
+#: model:res.groups,name:cash_session.group_cash_user
+msgid "Accountant Basic Cash Box"
+msgstr ""
+
+#. module: cash_session
+#: model:ir.model.fields,help:cash_session.field_cash_config__journal_id
+msgid "Accounting journal used to post sales entries."
+msgstr ""
+
+#. module: cash_session
+#: model:ir.model.fields,field_description:cash_session.field_account_journal__amount_authorized_diff
+msgid "Amount Authorized Difference"
+msgstr ""
+
+#. module: cash_session
+#: code:addons/cash_session/models/cash_session.py:172
+#, python-format
+msgid "Another session is already opened for this cash session."
+msgstr ""
+
+#. module: cash_session
+#: model:ir.model.fields,help:cash_session.field_cash_session__rescue
+msgid "Auto-generated session for orphan orders, ignored in constraints"
+msgstr ""
+
+#. module: cash_session
+#: model:ir.model.fields,field_description:cash_session.field_account_payment__journal_ids
+#: model:ir.model.fields,field_description:cash_session.field_cash_config__journal_ids
+#: model:ir.model.fields,field_description:cash_session.field_cash_session__journal_ids
+msgid "Available Payment Methods"
+msgstr ""
+
+#. module: cash_session
+#: model:ir.model,name:cash_session.model_account_bank_statement
+#: model:ir.model.fields,field_description:cash_session.field_cash_session__statement_ids
+msgid "Bank Statement"
+msgstr "Extrato Bancário"
+
+#. module: cash_session
+#: model:ir.model,name:cash_session.model_account_bank_statement_line
+msgid "Bank Statement Line"
+msgstr "Linha de Extrato Bancário"
+
+#. module: cash_session
+#: model:ir.actions.act_window,name:cash_session.action_cash_session
+#: model:ir.ui.menu,name:cash_session.menu_cash_session_all
+msgid "Cash Book"
+msgstr ""
+
+#. module: cash_session
+#: model:ir.actions.act_window,name:cash_session.act_cash_session_orders
+msgid "Cash Box"
+msgstr ""
+
+#. module: cash_session
+#: model:ir.model,name:cash_session.model_cash_config
+#: model:ir.model.fields,field_description:cash_session.field_cash_session__config_id
+msgid "Cash Config"
+msgstr ""
+
+#. module: cash_session
+#: model:ir.actions.act_window,name:cash_session.action_cash_config
+#: model:ir.ui.menu,name:cash_session.cash_config_menu
+#: model_terms:ir.ui.view,arch_db:cash_session.cash_config_tree_view
+msgid "Cash Configuration"
+msgstr ""
+
+#. module: cash_session
+#: code:addons/cash_session/models/cash_session.py:322
+#: model:ir.model.fields,field_description:cash_session.field_cash_config__cash_control
+#, python-format
+msgid "Cash Control"
+msgstr ""
+
+#. module: cash_session
+#: model:ir.model.fields,field_description:cash_session.field_cash_session__cash_journal_id
+msgid "Cash Journal"
+msgstr ""
+
+#. module: cash_session
+#: model:ir.model.fields,field_description:cash_session.field_cash_session__cash_register_id
+msgid "Cash Register"
+msgstr ""
+
+#. module: cash_session
+#: model:ir.model,name:cash_session.model_cash_session
+#: model_terms:ir.ui.view,arch_db:cash_session.view_account_bank_journal_form_inherited_cash
+#: model_terms:ir.ui.view,arch_db:cash_session.view_account_journal_cash_user_form
+#: model_terms:ir.ui.view,arch_db:cash_session.view_cash_session_search
+#: model_terms:ir.ui.view,arch_db:cash_session.view_cash_session_tree
+msgid "Cash Session"
+msgstr ""
+
+#. module: cash_session
+#: code:addons/cash_session/models/cash_session.py:152
+#, python-format
+msgid "Cash control can only be applied to cash journals."
+msgstr ""
+
+#. module: cash_session
+#: model:ir.model.fields,field_description:cash_session.field_account_bank_statement_line__cash_statement_id
+msgid "Cash statement"
+msgstr ""
+
+#. module: cash_session
+#: model:ir.model.fields,help:cash_session.field_cash_config__cash_control
+msgid "Check the amount of the cashbox at opening and closing."
+msgstr ""
+
+#. module: cash_session
+#: model:ir.model.fields,help:cash_session.field_account_journal__journal_user
+msgid "Check this box if this journal define a payment method that can be used in a cash."
+msgstr ""
+
+#. module: cash_session
+#: model_terms:ir.actions.act_window,help:cash_session.action_cash_config
+msgid "Click to create."
+msgstr ""
+
+#. module: cash_session
+#: selection:cash.session,state:0
+msgid "Closed & Posted"
+msgstr ""
+
+#. module: cash_session
+#: selection:cash.session,state:0
+msgid "Closing Control"
+msgstr ""
+
+#. module: cash_session
+#: model:ir.model.fields,field_description:cash_session.field_cash_session__stop_at
+msgid "Closing Date"
+msgstr ""
+
+#. module: cash_session
+#: model:ir.model.fields,field_description:cash_session.field_cash_config__company_id
+msgid "Company"
+msgstr "Empresa"
+
+#. module: cash_session
+#: model_terms:ir.ui.view,arch_db:cash_session.view_cash_session_search
+msgid "Config Cash"
+msgstr ""
+
+#. module: cash_session
+#: model:ir.model.fields,field_description:cash_session.field_cash_config__name
+msgid "Config Name"
+msgstr ""
+
+#. module: cash_session
+#: model:ir.model.fields,field_description:cash_session.field_cash_config__create_uid
+#: model:ir.model.fields,field_description:cash_session.field_cash_session__create_uid
+msgid "Created by"
+msgstr "Criado por"
+
+#. module: cash_session
+#: model:ir.model.fields,field_description:cash_session.field_cash_config__create_date
+#: model:ir.model.fields,field_description:cash_session.field_cash_session__create_date
+msgid "Created on"
+msgstr "Criada em"
+
+#. module: cash_session
+#: model:ir.model.fields,field_description:cash_session.field_cash_config__currency_id
+#: model:ir.model.fields,field_description:cash_session.field_cash_session__currency_id
+msgid "Currency"
+msgstr "Moeda"
+
+#. module: cash_session
+#: model:ir.model.fields,field_description:cash_session.field_account_bank_statement__account_id
+msgid "Default Debit Account"
+msgstr "Conta Débito Predefinida"
+
+#. module: cash_session
+#: model:ir.model.fields,field_description:cash_session.field_cash_session__cash_register_difference
+msgid "Difference"
+msgstr "Diferença"
+
+#. module: cash_session
+#: model:ir.model.fields,help:cash_session.field_cash_session__cash_register_difference
+msgid "Difference between the theoretical closing balance and the real closing balance."
+msgstr ""
+
+#. module: cash_session
+#: model:ir.model.fields,field_description:cash_session.field_cash_config__display_name
+#: model:ir.model.fields,field_description:cash_session.field_cash_session__display_name
+msgid "Display Name"
+msgstr "Nome a Exibir"
+
+#. module: cash_session
+#: model_terms:ir.ui.view,arch_db:cash_session.view_cash_session_form
+msgid "End of Session"
+msgstr ""
+
+#. module: cash_session
+#: model:ir.model.fields,field_description:cash_session.field_cash_session__cash_register_balance_end_real
+msgid "Ending Balance"
+msgstr "Saldo Final"
+
+#. module: cash_session
+#: model_terms:ir.ui.view,arch_db:cash_session.view_cash_session_search
+msgid "Group By"
+msgstr "Agrupar Por"
+
+#. module: cash_session
+#: model:ir.model.fields,field_description:cash_session.field_cash_session__cash_control
+msgid "Has Cash Control"
+msgstr ""
+
+#. module: cash_session
+#: model:ir.model.fields,field_description:cash_session.field_cash_config__id
+#: model:ir.model.fields,field_description:cash_session.field_cash_session__id
+msgid "ID"
+msgstr "Id."
+
+#. module: cash_session
+#: selection:cash.session,state:0
+msgid "In Progress"
+msgstr ""
+
+#. module: cash_session
+#: model:ir.model.fields,field_description:cash_session.field_account_payment__invoice_number
+msgid "Invoice Number"
+msgstr ""
+
+#. module: cash_session
+#: model:ir.model.fields,help:cash_session.field_account_bank_statement__account_id
+msgid "It acts as a default account for debit amount"
+msgstr "Age como uma conta de débito por defeito"
+
+#. module: cash_session
+#: model:ir.model,name:cash_session.model_account_journal
+msgid "Journal"
+msgstr "Diário"
+
+#. module: cash_session
+#: model:ir.model.fields,field_description:cash_session.field_cash_config____last_update
+#: model:ir.model.fields,field_description:cash_session.field_cash_session____last_update
+msgid "Last Modified on"
+msgstr "Última Modificação em"
+
+#. module: cash_session
+#: model:ir.model.fields,field_description:cash_session.field_cash_config__write_uid
+#: model:ir.model.fields,field_description:cash_session.field_cash_session__write_uid
+msgid "Last Updated by"
+msgstr "Última Atualização por"
+
+#. module: cash_session
+#: model:ir.model.fields,field_description:cash_session.field_cash_config__write_date
+#: model:ir.model.fields,field_description:cash_session.field_cash_session__write_date
+msgid "Last Updated on"
+msgstr "Última Atualização em"
+
+#. module: cash_session
+#: model:ir.model.fields,field_description:cash_session.field_cash_session__login_number
+msgid "Login Sequence Number"
+msgstr ""
+
+#. module: cash_session
+#: model_terms:ir.actions.act_window,help:cash_session.action_cash_session
+msgid "No sessions found"
+msgstr ""
+
+#. module: cash_session
+#: code:addons/cash_session/models/account_payment.py:118
+#, python-format
+msgid "Only a draft payment can be posted."
+msgstr ""
+
+#. module: cash_session
+#: model_terms:ir.ui.view,arch_db:cash_session.view_cash_session_search
+msgid "Open"
+msgstr "Aberto"
+
+#. module: cash_session
+#: model_terms:ir.ui.view,arch_db:cash_session.view_cash_session_form
+msgid "Open Session"
+msgstr ""
+
+#. module: cash_session
+#: model_terms:ir.ui.view,arch_db:cash_session.view_cash_session_form
+msgid "Opening Balance"
+msgstr ""
+
+#. module: cash_session
+#: selection:cash.session,state:0
+msgid "Opening Control"
+msgstr ""
+
+#. module: cash_session
+#: model:ir.model.fields,field_description:cash_session.field_cash_session__start_at
+msgid "Opening Date"
+msgstr "Data de Abertura"
+
+#. module: cash_session
+#: model:ir.model.fields,field_description:cash_session.field_cash_session__sequence_number
+msgid "Order Sequence Number"
+msgstr ""
+
+#. module: cash_session
+#: model:ir.model.fields,field_description:cash_session.field_cash_session__order_ids
+msgid "Orders"
+msgstr ""
+
+#. module: cash_session
+#: model:ir.model,name:cash_session.model_account_payment
+#: model:ir.model.fields,field_description:cash_session.field_account_payment__statement_ids
+msgid "Payments"
+msgstr "Pagamentos"
+
+#. module: cash_session
+#: model:ir.model.fields,field_description:cash_session.field_account_payment__picking_id
+msgid "Picking"
+msgstr ""
+
+#. module: cash_session
+#: model:ir.model.fields,field_description:cash_session.field_cash_session__picking_count
+msgid "Picking Count"
+msgstr ""
+
+#. module: cash_session
+#: model_terms:ir.ui.view,arch_db:cash_session.view_cash_session_form
+msgid "Picking Errors"
+msgstr ""
+
+#. module: cash_session
+#: model_terms:ir.ui.view,arch_db:cash_session.view_cash_session_form
+msgid "Point of Sale Session"
+msgstr ""
+
+
+
+#. module: cash_session
+#: model_terms:ir.ui.view,arch_db:cash_session.view_cash_session_form
+msgid "Real Closing Balance"
+msgstr ""
+
+#. module: cash_session
+#: model:ir.model.fields,field_description:cash_session.field_cash_session__rescue
+msgid "Recovery Session"
+msgstr ""
+
+#. module: cash_session
+#: model:ir.model.fields,field_description:cash_session.field_cash_session__user_id
+msgid "Responsible"
+msgstr "Responsável"
+
+#. module: cash_session
+#: model:ir.model.fields,field_description:cash_session.field_cash_config__journal_id
+msgid "Sales Journal"
+msgstr ""
+
+#. module: cash_session
+#: model:ir.model.fields,field_description:cash_session.field_account_bank_statement__cash_session_id
+#: model:ir.model.fields,field_description:cash_session.field_account_payment__session_id
+msgid "Session"
+msgstr ""
+
+#. module: cash_session
+#: model:ir.model.fields,field_description:cash_session.field_cash_session__name
+msgid "Session ID"
+msgstr ""
+
+#. module: cash_session
+#: model_terms:ir.ui.view,arch_db:cash_session.view_cash_session_form
+msgid "Session:"
+msgstr ""
+
+#. module: cash_session
+#: model:ir.model.fields,field_description:cash_session.field_cash_config__session_ids
+msgid "Sessions"
+msgstr ""
+
+#. module: cash_session
+#: model_terms:ir.ui.view,arch_db:cash_session.view_cash_session_search
+msgid "Start Date"
+msgstr ""
+
+#. module: cash_session
+#: model:ir.model.fields,field_description:cash_session.field_cash_session__cash_register_balance_start
+msgid "Starting Balance"
+msgstr "Saldo Inicial"
+
+#. module: cash_session
+#: model_terms:ir.ui.view,arch_db:cash_session.view_cash_session_form
+msgid "Statements"
+msgstr "Extratos"
+
+#. module: cash_session
+#: model:ir.model.fields,field_description:cash_session.field_cash_session__state
+msgid "Status"
+msgstr "Estado"
+
+#. module: cash_session
+#: model:ir.model.fields,help:cash_session.field_cash_session__cash_register_balance_end
+msgid "Sum of opening balance and transactions."
+msgstr ""
+
+#. module: cash_session
+#: model_terms:ir.ui.view,arch_db:cash_session.view_cash_session_form
+msgid "Summary by Payment Methods"
+msgstr ""
+
+#. module: cash_session
+#: model:ir.actions.act_window,name:cash_session.action_cash_box_out
+msgid "Take Money Out"
+msgstr "Retirar Dinheiro"
+
+#. module: cash_session
+#: code:addons/cash_session/models/cash_session.py:301
+#, python-format
+msgid "The journal type for your payment method should be bank or cash."
+msgstr ""
+
+#. module: cash_session
+#: sql_constraint:cash.config:0
+#: sql_constraint:cash.session:0
+msgid "The name of this Cash Session must be unique !"
+msgstr ""
+
+#. module: cash_session
+#: code:addons/cash_session/models/account_payment.py:122
+#, python-format
+msgid "The payment cannot be processed because the invoice is not open!"
+msgstr ""
+
+#. module: cash_session
+#: model:ir.model.fields,help:cash_session.field_cash_session__config_id
+msgid "The physical Cash Config you will use."
+msgstr ""
+
+#. module: cash_session
+#: model:ir.model.fields,field_description:cash_session.field_cash_session__cash_register_balance_end
+msgid "Theoretical Closing Balance"
+msgstr ""
+
+#. module: cash_session
+#: code:addons/cash_session/models/account_payment.py:77
+#, python-format
+msgid "There is no receivable account defined to make payment for the partner: \"%s\" (id:%d)."
+msgstr ""
+
+#. module: cash_session
+#: code:addons/cash_session/models/account_payment.py:75
+#, python-format
+msgid "There is no receivable account defined to make payment."
+msgstr ""
+
+#. module: cash_session
+#: model:ir.model.fields,help:cash_session.field_account_journal__amount_authorized_diff
+msgid "This field depicts the maximum difference allowed between the ending balance and the theoretical cash when closing a session, for non-CASH managers. If this maximum is reached, the user will have an error message at the closing of his session saying that he needs to contact his manager."
+msgstr ""
+
+#. module: cash_session
+#: model:ir.model.fields,field_description:cash_session.field_cash_session__cash_register_total_entry_encoding
+msgid "Total Cash Transaction"
+msgstr ""
+
+#. module: cash_session
+#: model:ir.model.fields,help:cash_session.field_cash_session__cash_register_total_entry_encoding
+msgid "Total of all paid sales orders"
+msgstr ""
+
+#. module: cash_session
+#: model:ir.model.fields,help:cash_session.field_cash_session__cash_register_balance_end_real
+msgid "Total of closing cash control lines."
+msgstr ""
+
+#. module: cash_session
+#: model:ir.model.fields,help:cash_session.field_cash_session__cash_register_balance_start
+msgid "Total of opening cash control lines."
+msgstr ""
+
+#. module: cash_session
+#: code:addons/cash_session/models/cash_session.py:193
+#, python-format
+msgid "Unable to open the session. You have to assign a sales journal to your cash config."
+msgstr ""
+
+#. module: cash_session
+#: model:ir.model.fields,field_description:cash_session.field_account_journal__journal_user
+msgid "Use in Cash Session"
+msgstr ""
+
+#. module: cash_session
+#: model:ir.model.fields,field_description:cash_session.field_cash_config__user_id
+#: model_terms:ir.ui.view,arch_db:cash_session.view_cash_session_search
+msgid "User"
+msgstr "Utilizador"
+
+#. module: cash_session
+#: model_terms:ir.ui.view,arch_db:cash_session.view_cash_session_form
+msgid "Validate Closing & Cash Entries"
+msgstr ""
+
+#. module: cash_session
+#: model_terms:ir.ui.view,arch_db:cash_session.view_cash_session_form
+msgid "Validate Closing & Post Entries"
+msgstr ""
+
+#. module: cash_session
+#: model_terms:ir.ui.view,arch_db:cash_session.view_cash_session_form
+msgid "You can define another list of available currencies on the\n"
+"                                    <i>Cash Registers</i> tab of the"
+msgstr ""
+
+#. module: cash_session
+#: code:addons/cash_session/models/cash_session.py:36
+#, python-format
+msgid "You cannot confirm all orders of this session, because they have not the 'draft' status.\n"
+"{reference} is in state {state}, total amount: {total}, paid: {paid}"
+msgstr ""
+
+#. module: cash_session
+#: code:addons/cash_session/models/cash_session.py:163
+#, python-format
+msgid "You cannot create two active sessions with the same responsible."
+msgstr ""
+
+#. module: cash_session
+#: code:addons/cash_session/models/account_payment.py:144
+#, python-format
+msgid "You have to define a sequence for %s in your company."
+msgstr ""
+
+#. module: cash_session
+#: code:addons/cash_session/models/account_payment.py:91
+#, python-format
+msgid "You have to open at least one cashbox."
+msgstr ""
+
+#. module: cash_session
+#: code:addons/cash_session/models/cash_session.py:27
+#, python-format
+msgid "You have to set a Sale Journal for the CASH:%s"
+msgstr ""
+
+#. module: cash_session
+#: code:addons/cash_session/models/cash_session.py:179
+#, python-format
+msgid "You should assign a Cash to your session."
+msgstr ""
+
+#. module: cash_session
+#: code:addons/cash_session/models/cash_session.py:297
+#, python-format
+msgid "Your ending balance is too different from the theoretical cash closing (%.2f), the maximum allowed is: %.2f. You can contact your manager to force it."
+msgstr ""
+
+#. module: cash_session
+#: model_terms:ir.ui.view,arch_db:cash_session.view_cash_session_form
+msgid "payment method."
+msgstr ""
+

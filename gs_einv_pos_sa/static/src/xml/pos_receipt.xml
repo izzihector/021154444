@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+ <t t-name="OrderReceipt" t-inherit="point_of_sale.OrderReceipt" t-inherit-mode="extension" owl="1">
+      <!--Override-->
+     <xpath expr="//div[hasclass('pos-receipt-contact')]" position="replace">
+         <div class="pos-receipt-contact">
+                <t t-if="receipt.company.contact_address">
+                    <div><span t-esc="receipt.company.contact_address" /></div>
+                </t>
+             <t t-if="receipt.company.phone">
+                    <div>Tel:<span t-esc="receipt.company.phone"/></div>
+                </t>
+
+             <t t-if="receipt.company.email">
+                    <div><span t-esc="receipt.company.email" /></div>
+                </t>
+             <t t-if="receipt.company.website">
+                    <div><span t-esc="receipt.company.website" /></div>
+                </t>
+             <t t-if="receipt.header_html">
+                    <t t-raw="receipt.header_html"/>
+                </t>
+             <t t-if="!receipt.header_html and receipt.header">
+                    <div style="white-space:pre-line"><span t-esc="receipt.header" /></div>
+                </t>
+             <t t-if="receipt.cashier">
+                    <div class="cashier">
+                        <div>--------------------------------</div>
+                        <div>Served by <t t-esc="receipt.cashier"/></div>
+                    </div>
+             </t>
+             <t t-if="receipt.company.vat">
+                 <div class="cashier">
+                        <div>VAT No : <t t-esc="receipt.company.vat"/></div>
+                 </div>
+             </t>
+            </div>
+     </xpath>
+     <xpath expr="//div[hasclass('pos-receipt-order-data')]" position="replace">
+          <div class="pos-receipt-order-data">
+
+          </div>
+     </xpath>
+
+     <xpath expr="//div[hasclass('orderlines')]" position="before">
+             <div style='text-align:center;border-bottom: 1px solid black;margin-bottom:3px'>
+                <div><strong> فاتورة ضريبية مبسطة </strong></div>
+                 <div> <strong> SIMPLIFIED TAX INVOICE </strong></div>
+            </div>
+         <table class='receipt-orderlines' style="width:100%; border-collapse: collapse;">
+            <colgroup>
+                <col width='35%'/>
+                <col width='35%'/>
+                <col width='30%'/>
+            </colgroup>
+             <tr style="border-bottom: 1px solid #e6e6e6">
+                 <td style='text-align:left'>Invoice No:</td>
+                 <th style='font-size: 10px;'>
+                     <span t-esc="receipt.name"/>
+                 </th>
+                 <td style='text-align:right;direction:rtl;'> رقم الفاتورة :</td>
+             </tr>
+             <tr style="border-bottom: 1px solid #e6e6e6">
+                 <td>Invoice Date: </td>
+                 <th style='font-size: 10px;'>
+                     <span t-esc="receipt.date.localestring"/>
+                 </th>
+                 <td style='text-align:right;direction:rtl;'> تاريخ الفاتورة :</td>
+             </tr>
+         </table>
+         <br/>
+     </xpath>
+     <xpath expr="//div[hasclass('orderlines')]" position="replace">
+            <div class="orderlines">
+                <table class="table table-sm table-bordered table_height o_main_table radius-table" style="width:100%;border-collapse: collapse;">
+                    <colgroup>
+                        <col width='40%'/>
+                        <col width='10%'/>
+                        <col width='23%'/>
+                        <col width='22%'/>
+                    </colgroup>
+                    <tr style="border-bottom: 1px solid black;border-top: 1px solid black;">
+                        <th style='text-align:left'>الصنف <br/> Item </th>
+                        <th style='text-align:center'>الكمية <br/> Qty</th>
+                        <th style='text-align:center'> سعر الوحدة <br/> U.Price</th>
+                        <th style='text-align:right'>الاجمالي<br/> Subtotal</th>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #e6e6e6;border-collapse: collapse;" t-foreach="orderlines" t-as="orderline" t-key="orderline.id">
+                        <td>
+                            <span t-esc="orderline.get_product().display_name"/>
+                            <t t-if="orderline.get_discount() > 0">
+                                <div class="pos-disc-font">
+                                    With a <span t-esc="orderline.get_discount()"/>% discount
+                                </div>
+                            </t>
+                        </td>
+                        <td style='text-align:center'>
+                            <span t-esc="orderline.get_quantity()"/>
+                            <!--                            <span t-esc="orderline.get_quantity_str_with_unit()"/>-->
+                        </td>
+                        <td style='text-align:center'>
+                            <span t-esc="env.pos.format_currency_no_symbol(orderline.get_unit_display_price())"></span>
+                        </td>
+                        <td style='text-align:right'>
+                            <span t-esc="env.pos.format_currency_no_symbol(orderline.get_price_with_tax())"/>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </xpath>
+     <xpath expr="//t[@t-if='!isTaxIncluded']" position="replace">
+         <br></br>
+         <br></br>
+         <table class='receipt-orderlines' style="width:100%; border-collapse: collapse;">
+            <colgroup>
+                <col width='30%'/>
+                <col width='30%'/>
+                <col width='40%'/>
+            </colgroup>
+            <tr>
+                <td style='text-align:left'>Total Be VAT</td>
+                <td style='text-align:center'>
+                    <!-- <span t-esc="env.pos.format_currency(receipt.subtotal)"/> -->
+                    <span t-esc="env.pos.format_currency(receipt.subtotal)"/>
+                </td>
+                <td style='text-align:right'> الإجمالي بدون الضريبة</td>
+            </tr>
+             <tr t-foreach="receipt.tax_details" t-as="tax" t-key="tax.name">
+                 <td style='text-align:left'> VAT</td>
+                 <td style='text-align:center'>
+                     <span t-esc='env.pos.format_currency(tax.amount)'/>
+                 </td>
+                 <td style='text-align:right'> ضريبة القيمة المضافة </td>
+             </tr>
+             <tr>
+                 <td style='text-align:left'>Total Inc VAT</td>
+                 <td style='text-align:center'>
+                     <span t-esc="env.pos.format_currency(receipt.total_with_tax)"/>
+                 </td>
+                 <td style='text-align:right'> الإجمالي شامل الضريبة</td>
+             </tr>
+             <tr t-foreach="receipt.paymentlines" t-as="line" t-key="line.cid">
+                 <td style='text-align:left'>Payment </td>
+                 <td style='text-align:center'>
+                     <span t-esc="env.pos.format_currency_no_symbol(line.amount)"/>
+                 </td>
+                 <td style='text-align:right'>   الدفع </td>
+             </tr>
+             <tr>
+                 <td style='text-align:left'>Change </td>
+                 <td style='text-align:center'>
+                     <span t-esc="env.pos.format_currency(receipt.change)"/>
+                 </td>
+                 <td style='text-align:right'>  الباقي </td>
+             </tr>
+
+        </table>
+         <!-- QR Code-->
+         <div t-attf-id="qrcode_container">
+                <div id="qrcode"></div>
+                <!--<script type="text/javascript"> new QRCode(document.getElementById("qrcode_id"), qr_data);</script>-->
+                <script type="text/javascript">
+                    function compute_sa_qr_code(name, vat, date_isostring, amount_total, amount_tax) {
+                    /* Generate the qr code for Saudi e-invoicing. Specs are available at the following link at page 23
+                    https://zatca.gov.sa/ar/E-Invoicing/SystemsDevelopers/Documents/20210528_ZATCA_Electronic_Invoice_Security_Features_Implementation_Standards_vShared.pdf
+                    */
+                    const seller_name_enc = _compute_qr_code_field(1, name);
+                    const company_vat_enc = _compute_qr_code_field(2, vat);
+                    const timestamp_enc = _compute_qr_code_field(3, date_isostring);
+                    const invoice_total_enc = _compute_qr_code_field(4, amount_total.toString());
+                    const total_vat_enc = _compute_qr_code_field(5, amount_tax.toString());
+
+                    const str_to_encode = seller_name_enc.concat(company_vat_enc, timestamp_enc, invoice_total_enc, total_vat_enc);
+
+                    let binary = '';
+                    for (let i = 0; i &lt; str_to_encode.length; i++) {
+                        binary += String.fromCharCode(str_to_encode[i]);
+                    }
+                    return btoa(binary);
+                }
+
+                function _compute_qr_code_field(tag, field) {
+                    const textEncoder = new TextEncoder();
+                    const name_byte_array = Array.from(textEncoder.encode(field));
+                    const name_tag_encoding = [tag];
+                    const name_length_encoding = [name_byte_array.length];
+                    return name_tag_encoding.concat(name_length_encoding, name_byte_array);
+                }
+
+
+                    var seller = "<span t-esc='receipt.company.name'/>";
+                    var invoice_no = "<span t-esc='receipt.name'/>";
+                    var order_date ="<span t-esc='receipt.date.isostring'/>";
+                    var total_vat= "<span t-esc='env.pos.format_currency(receipt.total_tax)'/>";
+                    var total_amount = "<span t-esc='env.pos.format_currency(receipt.total_with_tax)'/>";
+                    var vat_no ="<span t-esc='receipt.company.vat'/>";
+
+                     var qr_data =compute_sa_qr_code(seller, vat_no,order_date,total_amount,total_vat);
+
+
+                    var qrcode = new QRCode('qrcode' , {
+                    text: qr_data,
+                    width: 160,
+                    height: 160,
+                    colorDark : "#000000",
+                    colorLight : "#ffffff",
+                    correctLevel : QRCode.CorrectLevel.H
+                    });
+                    qrcode.makeCode(qr_data);
+
+                    $("#qrcode > img").css({"margin":"20px auto"});
+                </script>
+            </div>
+         <t t-foreach="receipt.tax_details" t-as="tax" t-key="tax.name">
+            <div style="margin-top: 20px;margin-bottom: 20px;">
+                <div class="pos-receipt-right-align" style="margin-top:5px">
+                </div>
+            </div>
+         </t>
+     </xpath>
+    <xpath expr="//div[hasclass('pos-receipt-order-data')]" position="before">
+    </xpath>
+     <xpath expr="//div[hasclass('pos-receipt-amount')]" position="replace">
+     </xpath>
+     <xpath expr="//t[@t-foreach='receipt.paymentlines']" position="replace">
+     </xpath>
+     <xpath expr="//div[hasclass('pos-receipt-amount') and hasclass('receipt-change')]" position="replace">
+<!--        <div class="pos-receipt-amount receipt-change" style="padding:0px;">
+             <div class="pos-receipt-left-align" style="float:left;margin-bottom: 10px;">
+                    <div>CHANGE</div>
+                 <div>المتبقي</div>
+              </div>
+            <span t-esc="env.pos.format_currency(receipt.change)" class="pos-receipt-right-align"
+                  style="margin-top:10px"/>
+
+
+         </div>-->
+     </xpath>
+     <xpath expr="//div[contains(text(), 'Total Taxes')]" position="replace">
+     </xpath>
+     <xpath expr="//div[hasclass('pos-receipt-right-align')]" position="replace">
+     </xpath>
+     <xpath expr="//div[hasclass('pos-receipt-right-align')]" position="replace">
+     </xpath>
+     <xpath expr="//t[@t-foreach='receipt.paymentlines']" position="replace">
+     </xpath>
+    </t>
+
+</templates>

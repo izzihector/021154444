@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="action_report_customer_sales" model="ir.actions.act_window">
+            <field name="name">payment type</field>
+            <field name="res_model">pos.sales.report.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+        <menuitem id="customer_sales_report" name="Payment Type" action="action_report_customer_sales"
+                  parent="point_of_sale.menu_point_rep"/>
+    </data>
+</odoo>

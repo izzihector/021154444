@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <record id="view_account_journal_cash_user_form" model="ir.ui.view">
+            <field name="name">account.journal.cash.user.form.inherit</field>
+            <field name="model">account.journal</field>
+            <field name="inherit_id" ref="account.view_account_journal_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='type']" position="after">
+                    <field name="journal_user" attrs="{'invisible': [('type', 'not in', ['bank', 'cash'])]}"/>
+                </xpath>
+                <xpath expr="//notebook[last()]" position="inside">
+                    <page string="Cash Session" attrs="{'invisible': [('journal_user', '=', False)]}">
+                        <group>
+                            <group name="amount_authorized" attrs="{'invisible': [('type', '!=', 'cash')]}">
+                                <field name="amount_authorized_diff"/>
+                            </group>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+        <!--<record id="view_account_bank_journal_form_inherited_cash" model="ir.ui.view">
+            <field name="name">account.bank.journal.form.inherit.cash</field>
+            <field name="model">account.journal</field>
+            <field name="inherit_id" ref="account.view_account_bank_journal_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@name='advanced_info']" position="inside">
+                    <group string="Cash Session">
+                        <field name="journal_user"/>
+                    </group>
+                </xpath>
+            </field>
+        </record>-->
+    
+        <record id="view_bank_statement_form_inherit" model="ir.ui.view">
+            <field name="name">account.view.bank.statement.form.inherit</field>
+            <field name="model">account.bank.statement</field>
+            <field name="inherit_id" ref="account.view_bank_statement_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="/form/sheet/notebook/page/field[@name='line_ids']/tree/field[@name='ref']" position="after">
+                    <field name="is_internal"/>
+                    <field name="is_reconcile"/>
+                </xpath>
+            </field>
+        </record>
+</odoo>

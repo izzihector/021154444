@@ -1,0 +1,877 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright (c) 2016-Present Webkul Software Pvt. Ltd. (<https://webkul.com/>) -->
+<!-- See LICENSE file for full copyright and licensing details. -->
+<!-- License URL : <https://store.webkul.com/license.html/> -->
+<templates id="template" xml:space="preserve">
+    <t t-name="KitchenDataTemplate">
+        <t t-set="count" t-value="0"/>
+        <t t-foreach="order_data" t-as="order">
+            <div t-att-class="order.grid_class" style="justify-content:center;">
+                <div class="order-content order-cont" t-att-id="order.id" t-att-order-type="order.order_type">
+                    <div class="row order-header">
+                        <div style="display:inline-block;width:100%;padding:0 5%;">
+                            <div style="display:block;float:left" class="grid-token">
+                                <div style="display:inline-block">
+                                    <div class="grid-order-name" style="float:left">
+                                        <t t-esc="order.kitchen_order_name"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="order-progress">
+                                <t t-if="pending_state || order.order_progress == 'pending'">
+                                    <span class="grid-progress-background-queue">
+                                        <span>
+                                            <span class="grid-progress-font-queue">
+                                                    Pending
+                                                </span>
+                                        </span>
+                                    </span>
+                                </t>
+                                <t t-else="">
+                                    <span class="grid-progress-background-process">
+                                        <span>
+                                            <span class="grid-progress-font-process">
+                                                    Partially Done
+                                                </span>
+                                        </span>
+                                    </span>
+                                </t>
+                            </div>
+                        </div>
+                        <div style="display:inline-block;width:100%;">
+                            <div style="display:block;float:left">
+                                <div class="grid-time-font">
+                                    <div class="datetime">
+                                        <div>
+                                            <canvas class="timeChart"></canvas>
+                                        </div>
+                                        <span style="display:none" class="order_time">
+                                            <t t-esc="order.order_date"/>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <t t-if="order.order_type == 'restaurant' and order.floor_id and order.table_id">
+                                <div style="padding-right:4%;display:block;float:right;font-family: Montserrat;font-style: normal;font-weight: normal;font-size: 12px;margin-top: 8px;text-transform: uppercase;color: #777777;">
+                                    <t t-esc="order.floor_id"/>,
+                                    <t t-esc="order.table_id"/>
+                                </div>
+                            </t>
+                            <div class="grid-default-time-font">
+                                <span class="grid-default-time-adjust time-elapsed">0 Mins</span>
+                            </div>
+
+
+
+                        </div>
+                    </div>
+                    <div style="height:1px;opacity: 0.15;border: 1px solid #000000;"></div>
+                    <div class="row inner-element" >
+                        <div class="grid-template-auto" style="padding:0 3%;max-height:100%;overflow-y:auto;width:100%">
+                            <t t-set="categories" t-value="order.product_category_wise"/>
+                            <t t-foreach="categories" t-as="product">
+                                <div class="col-md-12 categ" t-att-categ-id="product.split('-')[1]" style="width:100%;margin-bottom:2%;padding:0px;">
+                                    <div class="row" style="margin:0px;padding-left:1%;padding-right:7%;">
+                                        <div class="grid-categ-head">
+                                            <div style="display:block;float:left;">
+                                                <t t-esc="product.split('-')[0]"/>
+                                            </div>
+                                            <div style="display:block;float:right;text-align:right;">
+                                                    Qty
+                                                </div>
+                                        </div>
+                                    </div>
+                                    <div class="row grid-categ-data">
+                                        <t t-set="categ_product" t-value="categories[product]"/>
+                                        <t t-foreach="categ_product" t-as="line">
+                                            <div class="row grid-product" t-att-line_id="categ_product[line].id" t-att-product_id="categ_product[line].product_id[0]">
+                                                <span class="col-md-5" style="display:block;float:left;">
+                                                    <t t-esc="categ_product[line].product_id[1]"/>
+                                                </span>
+                                                <span class="col-md-5">
+                                                    <t t-if="categ_product[line].qty_added">
+                                                        <span class="qty-added" style="color:green;">
+                                                            +<t t-esc="categ_product[line].qty_added"/> Qtys
+                                                        </span>
+                                                    </t>
+                                                    <t t-if="categ_product[line].qty_removed">
+                                                        <t t-if="categ_product[line].qty_added">
+                                                            <span class="qty-removed" style="color:red;margin-left:8px;">
+                                                                -<t t-esc="categ_product[line].qty_removed"/> Qtys
+                                                            </span>
+                                                        </t>
+                                                        <t t-else="">
+                                                            <span class="qty-removed" style="color:red;">
+                                                                -<t t-esc="categ_product[line].qty_removed"/> Qtys
+                                                            </span>
+                                                        </t>
+                                                    </t>
+                                                </span>
+                                                <span class="col-md-4" style="color:grey;display:block;float:left;width:25%">
+                                                    <t t-esc="categ_product[line].note"/>
+                                                </span>
+                                                <span class="col-md-2 grid-product-qty">
+                                                    <t t-esc="categ_product[line].qty"/>
+                                                </span>
+                                            </div>
+                                        </t>
+                                    </div>
+                                </div>
+                            </t>
+                        </div>
+                    </div>
+                    <div style="height:1px;opacity: 0.15;border: 1px solid #000000;"></div>
+                    <div class="row order-footer">
+                        <div style="display:inline-block;width:100%;padding:0 5%;">
+                            <div style="display:block;float:left">
+                                <button class="btn wk-details" type="submit">View Details</button>
+                            </div>
+                            <div style="display:block;float:left">
+                                <button class="btn btn-danger wk-remove-grid">Remove Order</button>
+                            </div>
+                            <div style="display:block;float:right">
+                                <form class="action_done" t-att-action="order.done_order" method="post">
+                                    <input type="hidden"  name="order_type" t-att-value="order.order_type"/>
+                                     <input type="hidden" name='screen_config' t-att-value="order.lines[0].screen_config"/>
+                                    <button class="btn wk-done-grid btn-success" type="button">Done</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </t>
+
+    <t t-name="UpdateLinesTemplate">
+        <t t-set="categories" t-value="order.product_category_wise"/>
+        <t t-foreach="categories" t-as="product">
+            <div class="col-md-12 categ" t-att-categ-id="product.split('-')[1]" style="width:100%;margin-bottom:2%;padding:0px;">
+                <div class="row" style="margin:0px">
+                    <div class="grid-categ-head">
+                        <div style="display:block;float:left;">
+                            <t t-esc="product.split('-')[0]"/>
+                        </div>
+                        <div style="display:block;float:right;text-align:right;">
+                                Qty
+                            </div>
+                    </div>
+                </div>
+                <div class="row grid-categ-data">
+                    <t t-set="categ_product" t-value="categories[product]"/>
+                    <t t-foreach="categ_product" t-as="line">
+                        <div class="row grid-product" t-att-line_id="categ_product[line].id" t-att-product_id="categ_product[line].product_id[0]">
+                            <span class="col-md-5" style="display:block;float:left;">
+                                <t t-esc="categ_product[line].product_id[1]"/>
+                            </span>
+                            <span class="col-md-5">
+                                <t t-if="categ_product[line].qty_added">
+                                    <span class="qty-added" style="color:green;">
+                                        +<t t-esc="categ_product[line].qty_added"/> Qtys
+                                    </span>
+                                </t>
+                                <t t-if="categ_product[line].qty_removed">
+                                    <t t-if="categ_product[line].qty_added">
+                                        <span class="qty-removed" style="color:red;margin-left:8px;">
+                                            -<t t-esc="categ_product[line].qty_removed"/> Qtys
+                                        </span>
+                                    </t>
+                                    <t t-else="">
+                                        <span class="qty-removed" style="color:red;">
+                                            -<t t-esc="categ_product[line].qty_removed"/> Qtys
+                                        </span>
+                                    </t>
+                                </t>
+                            </span>
+                            <span class="col-md-4" style="color:grey;display:block;float:left;width:25%">
+                                <t t-esc="categ_product[line].note"/>
+                            </span>
+                            <span class="col-md-2 grid-product-qty">
+                                <t t-esc="categ_product[line].qty"/>
+                            </span>
+                        </div>
+                    </t>
+                </div>
+            </div>
+        </t>
+    </t>
+
+
+
+
+    <t t-name="KitchenUpdateTemplate">
+        <t t-set="count" t-value="0"/>
+        <t t-foreach="order_data" t-as="order">
+            <div t-att-class="order.grid_class" style="justify-content:center;">
+                <div class="order-content order-cont" t-att-id="order.id" t-att-order-type="order.order_type">
+                    <div class="row order-header">
+                        <div style="display:inline-block;width:100%;padding:0 5%;">
+                            <div style="display:block;float:left">
+                                <div class="grid-order-name" >
+                                    <t t-esc="order.kitchen_order_name"/>
+                                </div>
+                            </div>
+                            <div class="order-progress">
+                                <t t-if="pending_state || order.order_progress == 'pending'">
+                                    <span class="grid-progress-background-queue">
+                                        <span>
+                                            <span class="grid-progress-font-queue">
+                                                    Pending
+                                                </span>
+                                        </span>
+                                    </span>
+                                </t>
+                                <t t-else="">
+                                    <span class="grid-progress-background-process">
+                                        <span>
+                                            <span class="grid-progress-font-process">
+                                                    Partially Done
+                                                </span>
+                                        </span>
+                                    </span>
+                                </t>
+                            </div>
+                        </div>
+                        <div style="display:inline-block;width:100%;">
+                            <div style="display:block;float:left">
+                                <div class="grid-time-font">
+                                    <div class="datetime">
+                                        <div>
+                                            <canvas class="timeChart"></canvas>
+                                        </div>
+                                        <span style="display:none" class="order_time">
+                                            <t t-esc="order.order_date"/>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="grid-default-time-font">
+                                <span class="grid-default-time-adjust time-elapsed">0 Mins</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="height:1px;opacity: 0.15;border: 1px solid #000000;"></div>
+                    <div class="row inner-element" >
+                        <div class="grid-template-auto" style="padding:0 3%;max-height:100%;overflow-y:auto;width:100%">
+                            <t t-set="categories" t-value="order.product_category_wise"/>
+                            <t t-foreach="categories" t-as="product">
+                                <div class="col-md-12" t-att-categ-id="product.split('-')[1]" style="width:100%;margin-bottom:2%;padding:0px;">
+                                    <div class="row" style="margin:0px">
+                                        <div class="grid-categ-head">
+                                            <div style="display:block;float:left;">
+                                                <t t-esc="product.split('-')[0]"/>
+                                            </div>
+                                            <div style="display:block;float:right;text-align:right;">
+                                                    Qty
+                                                </div>
+                                        </div>
+                                    </div>
+                                    <div class="row grid-categ-data">
+                                        <t t-foreach="categories[product]" t-as="line">
+                                            <div class="grid-product" t-att-line_id="line.id" t-att-product_id="line.product_id[0]">
+                                                <div  style="display:block;float:left;">
+                                                    <t t-esc="line.product_id[1]"/>
+                                                </div>
+                                                <div class="grid-product-qty">
+                                                    <t t-esc="line.qty"/>
+                                                </div>
+                                            </div>
+                                        </t>
+                                    </div>
+                                </div>
+                            </t>
+                        </div>
+                    </div>
+                    <div style="height:1px;opacity: 0.15;border: 1px solid #000000;"></div>
+                    <div class="row order-footer">
+                        <div style="display:inline-block;width:100%;padding:0 5%;">
+                            <div style="display:block;float:left">
+                                <button class="btn wk-details" type="submit">View Details</button>
+                            </div>
+                            <div style="display:block;float:right">
+                                <form class="action_done" t-att-action="order.done_order" method="post">
+                                    <input type="hidden" names='order_type' t-att-value="order.order_type"/>
+                                    <input type="hidden" name='screen_config' t-att-value="order.lines[0].screen_config"/>
+                                    <button class="btn wk-done-grid btn-success" type="button">Done</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </t>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <t t-name="ModalBodyData">
+        <div class="modal-confirm">
+            <div class="modal-body" style="padding:0px;">
+                <div class="container modal-order" t-att-id="order.id" t-att-order-type="order.order_type">
+                    <div class="row" style="min-height:70%;padding:2% 5%;">
+                        <t t-set="categories" t-value="order.product_category_wise"/>
+                        <t t-foreach="categories" t-as="product">
+                            <div class="col-md-12" style="width:100%;margin-bottom:2%;">
+                                <div class="row" style="width:438px;">
+                                    <div class="modal-categ">
+                                        <div style="display:block;float:left;">
+                                            <t t-esc="product.split('-')[0]"/>
+                                        </div>
+                                        <div style="display:block;float:right;text-align:right;">
+                                        Qty
+                                    </div>
+                                    </div>
+                                </div>
+                                <div class="row modal-categ-data">
+                                <t t-set="categ_product" t-value="categories[product]"/>
+                                    <t t-foreach="categ_product" t-as="line">
+                                        <div style="display:inline-block;padding:1%;width:100%;font-family: Montserrat;font-style: normal;font-weight: normal;font-size: 14px;line-height: 17px;color: #333333;">
+                                            <div  style="display:block;float:left;">
+                                                <t t-esc="categ_product[line].product_id[1]"/>
+                                            </div>
+                                            <div  style="display:block;float:right ;text-align:right;">
+                                                <t t-esc="categ_product[line].qty"/>
+                                            </div>
+                                        </div>
+                                    </t>
+                                </div>
+                            </div>
+                        </t>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer " style="padding: 2% 5%;">
+                <div  style="display:block;float:right;width:100%;">
+                    <div style="display:inline-block;width:100%;">
+                        <div style="display:block;float:right">
+                            <button class="btn wk-cancel-order" type="submit">Cancel</button>
+                        </div>
+                        <div style="display:block;float:left">
+                            <form class="action_confirm" t-att-action="order.confirm_order" method="post" >
+                                <input name="order_type" type="hidden" t-att-value="order.order_type"/>
+                                <input name="config_id" type="hidden" t-att-value="config"/>
+
+                                <button class="btn btn-success wk-confirm" type="button">Accept</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-cancel" style="display:none">
+            <form class="action_cancel" t-att-action="order.cancel_order" method="post" >
+                <div class="modal-body" style="padding:0px;">
+                    <div class="container modal-order" t-att-id="order.id">
+                        <div class="row" style="min-height:70%;padding:2% 5%;">
+                            <div class="col-md-12" style="width:100%;margin-bottom:2%;">
+                                <div class="row" style="width:438px;">
+                                    <div style="display:inline-block;width:100%;">
+                                        <div class="cancel-modal-select">
+                                                SELECT OPTION TO CANCEL ORDER
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <input type="radio" id="ofs" name="cancellation_type" onChange="$(this).val(this.checked? '1': '0');$(this).is(':checked')?$('.cancel-option').val('out_of_stock'):$('.cancel-option').val('reason');$(`input[type='radio']:last`).val('0');$('#cancel-reason').css('display','none');$('.out-of-stock').css('display','block');"  value="ofs"/>
+                                <label t-att-for="ofs" style="font-family: Montserrat;font-style: normal;font-weight: normal;font-size: 14px;line-height: 17px;color: #333333;">Out Of Stock Product</label>
+                                <br/>
+                                <div style="width:100%;display:flex;justify-content:center">
+                                    <div class="row out-of-stock">
+                                        <t t-foreach="order.lines" t-as="line">
+                                            <div class="cancel-modal-product">
+                                                <input type="checkbox" class="out-of-stock-product" t-att-name="line.product_id[0]"  onChange="$(this).val(this.checked? '1': '0');" value="0"/>
+                                                <label class="cancel-modal-product-font" t-att-for="line.product_id[0]">
+                                                    <t t-esc="line.product_id[1]"/>
+                                                </label>
+                                                <br/>
+                                            </div>
+                                        </t>
+                                    </div>
+                                </div>
+                                <input t-att-value="order.order_type" class="order-type" type="hidden"/>
+                                <div class="row" style="margin-top:2%;width:100%;display:flex;justify-content:center">
+                                    <span>_____</span>
+                                    <span style="position:relative;top:2px;font-family: Montserrat-Regular;font-size: 14px;color: #333333;letter-spacing: 0;">  Or  </span>
+                                    <span>_____</span>
+                                </div>
+                                <input type="radio" style="margin-top:2%;" id="reason" name="cancellation_type" onChange="$(this).val(this.checked? '1': '0');$(this).is(':checked')?$('.cancel-option').val('reason'):$('.cancel-option').val('out_of_stock');$(`input[type='radio']:first`).val('0');$('.out-of-stock').css('display','none');$('#cancel-reason').css('display','block');" value="reason"/>
+                                <input type="hidden" name="cancel-option" class="cancel-option" value="out_of_stock"/>
+                                <label class="other-reason" t-att-for="reason">Other Reason</label>
+                                <br/>
+                                <div style="display:flex;justify-content:center;">
+                                    <textarea id="cancel-reason" name="cancel_reason" style="display:none;width:90%;"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer" style="padding: 2% 5%;">
+                    <div  style="display:block;float:right;width:100%;">
+                        <div style="display:inline-block;width:100%;">
+                            <div style="display:block;float:right">
+                                <button data-dismiss="modal" style="font-family: Montserrat-SemiBold;font-size: 14px;color: #333333;letter-spacing: 0;border:none;background:white;" >
+                                    <u>Cancel</u>
+                                </button>
+                            </div>
+                            <div style="display:block;float:left">
+                                <input name="order_type" type="hidden" t-att-value="order.order_type"/>
+                                <button class="btn btn-danger wk-cancel" style="font-family: Montserrat-SemiBold;font-size: 14px;border-radius:3px;letter-spacing: 0;" type="submit">Confirm</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </t>
+    <t t-name="GridViewTemplate">
+        <div class="col-md-12">
+            <div class="row" id="kitchen-order-data" style="flex-wrap:wrap;"></div>
+        </div>
+    </t>
+    <t t-name="ListViewTemplate">
+        <div class="row" style="padding:2% 10%;width:100%;max-height:100%;">
+            <div class="col-md-12 list-order" t-att-id="order.id" t-att-order-type="order.order_type" style="max-height:100%;opacity: 0.95;background: #FFFFFF;box-shadow: 0 0 8px 0 rgba(0,0,0,0.21);border-radius: 10px;">
+                <div class="row" style="min-height:20%;padding:6px 2%;">
+                    <div class="col-md-6">
+                        <div style="display:inline-block;width:100%;">
+                            <div style="display:block;float:left;width:100%;">
+                                <div style="width:100%;display:inline-block">
+                                    <span style="display:block;float:left;font-family: Montserrat;font-style: normal;font-weight: normal;font-size: 28px;line-height: 34px;color: #333333;">
+                                        <t t-esc="order.kitchen_order_name"/>
+                                    </span>
+                                    <span class="list-datetime" style="display:block;left:right;margin-left:5%;font-family: Montserrat;font-style: normal;font-weight: normal;font-size: 12px;line-height: 15px;text-transform: uppercase;color: #777777;">
+                                        <div style="display:inline-block">
+                                            <div style="display:block;float:left;">
+                                                <canvas style="width:50px;" class="timeListChart"></canvas>
+                                            </div>
+                                            <span class="list-order-time" style="display:none;margin-left:2px;">
+                                                <t  t-esc="order.order_date"/>
+                                            </span>
+                                            <span style="right:10px;display:block;float:right;position: relative;top: 10px;" class="list-elapsed-time">0 Minutes</span>
+                                        </div>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="width:100%;float:left" class="list-order-progress">
+                            <t t-if="order.order_progress == 'pending'">
+                                <span class="insert-update list-queue-state"  style="background: rgba(239,145,41,0.2);mix-blend-mode: normal;border-radius: 2px;height:fit-content;width:fit-content;padding:6px;">
+                                    <span>
+                                        <span class="list-progress" style="font-family: Montserrat;font-style: normal;font-weight: bold;font-size: 14px;line-height: 17px;color: #EF9129;">
+                                            Pending
+                                        </span>
+                                    </span>
+                                </span>
+                                <span class="insert-update list-process-state" style="background: rgba(42,212,86,0.2);mix-blend-mode: normal;border-radius: 2px;height:fit-content;width:fit-content;padding:6px;">
+                                    <span>
+                                        <span class="list-progress" style="font-family: Montserrat;font-style: normal;font-weight: bold;font-size: 14px;line-height: 17px;color: #2CB62C;">
+                                            Partially Done
+                                        </span>
+                                    </span>
+                                </span>
+                                <span class="insert-update list-done-state" style="background: rgba(42,212,86,0.2);mix-blend-mode: normal;border-radius: 2px;height:fit-content;width:fit-content;padding:6px;">
+                                    <span>
+                                        <span class="list-progress" style="font-family: Montserrat;font-style: normal;font-weight: bold;font-size: 14px;line-height: 17px;color: #2CB62C;">
+                                            Done
+                                        </span>
+                                    </span>
+                                </span>
+                            </t>
+                            <t t-if="order.order_progress == 'cancel'">
+                                <span class="insert-update list-cancel-state"  style="background: rgba(255,0,0,0.2);mix-blend-mode: normal;border-radius: 2px;height:fit-content;width:fit-content;padding:6px;">
+                                    <span>
+                                        <span class="list-progress" style="font-family: Montserrat;font-style: normal;font-weight: bold;font-size: 14px;line-height: 17px;color: red;">
+                                            Cancel
+                                        </span>
+                                    </span>
+                                </span>
+                            </t>
+                            <t t-if="order.order_progress == 'partially_done'">
+                                <span class="insert-update" style="background: rgba(42,212,86,0.2);mix-blend-mode: normal;border-radius: 2px;height:fit-content;width:fit-content;padding:6px;">
+                                    <span>
+                                        <span class="list-progress" style="font-family: Montserrat;font-style: normal;font-weight: bold;font-size: 14px;line-height: 17px;color: #2CB62C;">
+                                            Partially Done
+                                        </span>
+                                    </span>
+                                </span>
+                            </t>
+                            <t t-if="order.order_progress == 'done'">
+                                <span class="insert-update" style="background: rgba(42,212,86,0.2);mix-blend-mode: normal;border-radius: 2px;height:fit-content;width:fit-content;padding:6px;">
+                                    <span>
+                                        <span class="list-progress" style="font-family: Montserrat;font-style: normal;font-weight: bold;font-size: 14px;line-height: 17px;color: #2CB62C;">
+                                            Done
+                                        </span>
+                                    </span>
+                                </span>
+                            </t>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div style="display:inline-block;width:100%;margin-top:7%;">
+                            <t t-if="order.order_progress != 'cancel'">
+                                <div style="display:block;float:right;">
+                                    <button class="btn btn-success wk-next" style="font-family: Montserrat;font-style: normal;font-weight: 600;font-size: 14px;color: #FFFFFF;background: #5C3EEC;border-radius: 2px;" type="submit">Next</button>
+                                </div>
+                                <div style="display:block;float:right;">
+                                    <button class="btn btn-danger wk-remove-next-list" >Remove &amp; Next</button>
+                                </div>
+                                <!-- <t t-if="order.order_progress == 'partially_done'">
+                                    <div style="display:block;float:right;padding-right:5%;">
+                                        <form class="action_done" t-att-action="order.done_order" method="post">
+                                            <input type="hidden"  name="order_type" t-att-value="order.order_type"/>
+                                            <button class="btn wk-done-list btn-success"  type="submit">Done</button>
+                                        </form>
+                                    </div>
+                                </t>
+                                <t t-if="order.order_progress == 'pending'">
+                                    <div style="display:none;float:right;padding-right:5%;">
+                                        <form class="action_done" t-att-action="order.done_order" method="post">
+                                            <input type="hidden"  name="order_type" t-att-value="order.order_type"/>
+                                            <button class="btn wk-done-list btn-success"  type="submit">Done</button>
+                                        </form>
+                                    </div>
+                                    <div style="display:block;float:right;padding-right:5%;">
+                                        <form class="action_cook" t-att-action="order.cook_order" method="post">
+                                            <input type="hidden" name="order_type" t-att-value="order.order_type"/>
+                                            <button class="btn wk-cook btn-warning"  type="submit">Partially Done</button>
+                                        </form>
+                                    </div>
+                                </t> -->
+                            </t>
+                            <t t-else="">
+                                <div style="display:block;float:right;">
+                                    <button class="btn btn-danger wk-remove-list"  >Remove &amp; Next</button>
+                                </div>
+                            </t>
+                        </div>
+                        
+                  </div>
+                </div>
+                <div style="width:100%;opacity: 0.2;border: 1px solid #000000;height:1px"></div>
+                <div class="row list-auto" style="height:70%;overflow-y:auto;padding:2% 5%;">
+                    <t t-set="categories" t-value="order.product_category_wise"/>
+                    <t t-foreach="categories" t-as="product">
+                        <div class="col-md-12" style="width:100%;margin-bottom:2%;padding:0px;">
+                            <div class="row" style="padding-left:12px;padding-right:21px;">
+                                <div style="display:inline-block;width:100%;font-family: Montserrat;font-style: normal;font-weight: 600;font-size: 26px;line-height: 32px;text-transform: uppercase;color: #7F4167;">
+                                    <div class="col-md-4" style="display:block;float:left;">
+                                        <t t-esc="product.split('-')[0]"/>
+                                    </div>
+                                    <!--<div class="col-md-4" style="margin-left:15%;display:block;float:left;">
+                                        Note
+                                    </div>-->
+                                    <div class="col-md-2 " style="display:block;float:right;text-align:right;">
+                                    Qty
+                                </div>
+                                </div>
+                            </div>
+                            <div class="row" style="background: #EDF4FF;border: 1px solid #C8DBF8;">
+                                <t t-set="categ_product" t-value="categories[product]"/>
+                                <t t-foreach="categ_product" t-as="line">
+                                    <!-- <div style="display:inline-block;padding:1%;width:100%;font-family: Montserrat;font-style: normal;font-weight: normal;font-size: 24px;line-height: 29px;color: #333333;" t-att-product_id="categ_product[line].product_id[0]">
+                                        <div  style="display:block;float:left;">
+                                            <t t-esc="categ_product[line].product_id[1]"/>
+                                        </div>
+                                        <div  style="display:block;float:right ;text-align:right;">
+                                            <t t-esc="categ_product[line].qty"/>
+                                        </div>
+                                    </div> -->
+                                    <div class="row list-order-line" style="display:inline-block;padding:1%;width:100%;font-family: Montserrat;font-style: normal;font-weight: normal;font-size: 24px;line-height: 29px;color: #333333;" t-att-line_id="categ_product[line].id" t-att-product_id="categ_product[line].product_id[0]">
+                                        <span class="col-md-4" style="display:block;float:left;">
+                                            <t t-esc="categ_product[line].product_id[1]"/>
+                                        </span>
+
+                                        <span class="col-md-5">
+                                            <t t-if="categ_product[line].qty_added">
+                                                <span class="qty-added" style="color:green;">
+                                                    +<t t-esc="categ_product[line].qty_added"/> Qtys
+                                                </span>
+                                            </t>
+                                            <t t-if="categ_product[line].qty_removed">
+                                                <t t-if="categ_product[line].qty_added">
+                                                    <span class="qty-removed" style="color:red;margin-left:8%;">
+                                                        -<t t-esc="categ_product[line].qty_removed"/> Qtys
+                                                    </span>
+                                                </t>
+                                                <t t-else="">
+                                                    <span class="qty-removed" style="color:red;">
+                                                        -<t t-esc="categ_product[line].qty_removed"/> Qtys
+                                                    </span>
+                                                </t>
+                                            </t>
+                                        </span>
+
+                                        <span class="col-md-1" style="display:block;float:right ;text-align:right;">
+                                            <t t-esc="categ_product[line].qty"/>
+                                        </span>
+                                        <span class="col-md-4" style="color:grey;display:block;float:left;width:25%">
+                                            <t t-esc="categ_product[line].note"/>
+                                        </span>
+                                        <span class="col-md-2" style="display:block;float:right ;text-align:right;">
+                                            <t t-if="categ_product[line].state == 'done'">
+                                                <i class="fa fa-check" style="color:green;font-size:24px;"/>
+                                            </t>
+                                            <t t-else="">
+                                                <form class="action_done_orderline" t-att-action="categ_product[line].done_line" method="post">
+                                                    <input type="hidden" name="order_type" t-att-value="order.order_type"/>
+                                                    <input type="hidden" name="screen_config" t-att-value="categ_product[line].screen_config"/>
+                                                    <button class="btn wk-done-orderline btn-success"   type="button">Done</button>
+                                                </form>
+                                            </t>
+                                        </span>
+                                    </div>
+                                </t>
+                            </div>
+                        </div>
+                    </t>
+                </div>
+            </div>
+        </div>
+
+    </t>
+    <t t-name="UpdateListData">
+        <t t-set="categories" t-value="order.product_category_wise"/>
+        <t t-foreach="categories" t-as="product">
+            <div class="col-md-12" style="width:100%;margin-bottom:2%;padding:0px;">
+                <div class="row">
+                    <div style="display:inline-block;width:100%;font-family: Montserrat;font-style: normal;font-weight: 600;font-size: 26px;line-height: 32px;text-transform: uppercase;color: #7F4167;">
+                        <div style="display:block;float:left;">
+                            <t t-esc="product.split('-')[0]"/>
+                        </div>
+                        <div style="display:block;float:right;text-align:right;">
+                        Qty
+                    </div>
+                    </div>
+                </div>
+                <div class="row update-list-data" style="background: #EDF4FF;border: 1px solid #C8DBF8;">
+                    <t t-set="categ_product" t-value="categories[product]"/>
+                    <t t-foreach="categ_product" t-as="line">
+                        <div class="row" style="display:inline-block;padding:1%;width:100%;font-family: Montserrat;font-style: normal;font-weight: normal;font-size: 24px;line-height: 29px;color: #333333;" t-att-line_id="categ_product[line].id" t-att-product_id="categ_product[line].product_id[0]">
+                            <span class="col-md-5" style="display:block;float:left;">
+                                <t t-esc="categ_product[line].product_id[1]"/>
+                            </span>
+                            <span class="col-md-5">
+                                <t t-if="categ_product[line].qty_added">
+                                    <span class="qty-added" style="color:green;">
+                                        +<t t-esc="categ_product[line].qty_added"/> Qtys
+                                    </span>
+                                </t>
+                                <t t-if="categ_product[line].qty_removed">
+                                    <t t-if="categ_product[line].qty_added">
+                                        <span class="qty-removed" style="color:red;margin-left:8%;">
+                                            -<t t-esc="categ_product[line].qty_removed"/> Qtys
+                                        </span>
+                                    </t>
+                                    <t t-else="">
+                                        <span class="qty-removed" style="color:red;">
+                                            -<t t-esc="categ_product[line].qty_removed"/> Qtys
+                                        </span>
+                                    </t>
+                                </t>
+                            </span>
+                            <span class="col-md-4" style="color:grey;display:block;float:left;width:25%">
+                                <t t-esc="categ_product[line].note"/>
+                            </span>
+                            <span class="col-md-2" style="display:block;float:right ;text-align:right;">
+                                <t t-esc="categ_product[line].qty"/>
+                            </span>
+                        </div>
+                    </t>
+                </div>
+            </div>
+        </t>
+    </t>
+
+
+    <t t-name="FilterViewTemplate">
+        <div class="row filter-body" style="padding:2% 10%;width:100%;max-height:93%;overflow-y:auto;">
+            <div class="accordion" style="width:100%;">
+                <t t-foreach="product_name_by_id" t-as="iter">
+                    <div class="card" style="margin-top:2%;">
+                        <div class="card-header" t-att-id="iter" style="background: rgba(255, 255, 255, 0.95);opacity: 0.95;border-radius: 2px;">
+                            <h2 class="mb-0">
+                                <div style="width:100%;height:100%;font-family: Montserrat;font-style: normal;font-weight: 600;font-size: 16px;line-height: 20px;color: #333333;" >
+                                    <t t-esc="product_name_by_id[iter]"/>
+                                    <img style="float:right;margin-top:5px;" src="/pos_kitchen_screen/static/src/img/filter-drop.png"/>
+                                    <span style="padding-right:10px;float:right">
+                                        <t t-esc="product_data[iter].total"/>
+                                    </span>
+                                </div>
+                            </h2>
+                        </div>
+                        <div class="data-content" style="padding:0 1.25em 1.25em 1.25em;display:none;background: #EDF4FF;border: 1px solid #C8DBF8;border-radius: 2px;" t-att-content="iter">
+                            <div>
+                                <div style="display:flex;justify-content:center">
+                                    <div class="row" style="width:95%;padding:1%;font-family: Montserrat;font-style: normal;font-weight: 600;font-size: 14px;line-height: 17px;color: #333333;">
+                                        <div class="col-md-8">
+                                            <span style="float:left">Queue No.</span>
+                                        </div>
+                                        <div class="col-md-4" style="float:right;">
+                                            <span style="float:right">Qty.</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="inner-content">
+                                    <t t-foreach="product_data[iter].lines" t-as="product">
+                                        <div class="filter-order-queue" style="display:flex;justify-content:center" t-att-order-id="product.order_id" t-att-order-type="product.order_type">
+                                            <div class="row" style="width:95%;background:white;padding:1%;margin-top:5px;font-family: Montserrat;font-style: normal;font-weight: normal;font-size: 14px;line-height: 17px;color: #777777;">
+                                                <div class="col-md-8" >
+                                                    <span class="filter-order" style="float:left;cursor:pointer">
+                                                        <t t-esc="product.token_no"/>
+                                                    </span>
+                                                </div>
+                                                <div class="col-md-4" style="float:right;">
+                                                    <span style="float:right">
+                                                        <t t-esc="product.quantity"/>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </t>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </div>
+        </div>
+    </t>
+    <t t-name="NewOrderTemplate">
+        <t t-foreach="order_data" t-as="order">
+            <div class="dropdown-item" t-att-id="order.id" style="padding:5px;cursor:pointer;">
+                <div>
+                    <div style="display:inline-block;width:100%;">
+                        <div class="token_no" style="display:block;float:left;font-family: Montserrat;font-style: normal;font-weight: normal;font-size: 16px;line-height: 20px;text-transform: uppercase;color: #333333;">
+                            <t t-esc="order.kitchen_order_name"/>
+                        </div>
+                        <div  style="display:block;float:right;font-family: Montserrat;font-style: normal;font-weight: normal;font-size: 12px;line-height: 15px;text-transform: uppercase;color: #777777;">
+                            <img src="/pos_kitchen_screen/static/src/img/Rectangle 9.png"/>
+                            <t style="margin-left:2px;" t-esc="order.order_date"/>
+                        </div>
+                    </div>
+                </div>
+                <div style="inline-block;width:100%">
+                    <div style="display:block;float:left;font-family: Montserrat;font-style: normal;font-weight: normal;font-size: 14px;line-height: 17px;color: #7F4167;">
+                        Total
+
+
+                        <t t-esc="order.total_items"/> in this Order.
+
+
+                    </div>
+                    <div class="order-type" style="display:none"><t t-esc="order.order_type"/></div>
+                    <div style="display:block;float:right">
+                        <t t-if="type_of_order == 'process'">
+                            <t t-if="order.order_progress == 'pending' || order.order_progress == 'new'">
+                                <span  class="process-order-queue"  style="background: rgba(239,145,41,0.2);mix-blend-mode: normal;border-radius: 2px;height:fit-content;width:fit-content;padding:6px;">
+                                    <span>
+                                        <span style="font-family: Montserrat;font-style: normal;font-weight: bold;font-size: 14px;line-height: 17px;color: #EF9129;">
+                                                Pending
+                                            </span>
+                                    </span>
+                                </span>
+                                <span class="process-order-process" style="background: rgba(42,212,86,0.2);mix-blend-mode: normal;border-radius: 2px;height:fit-content;width:fit-content;padding:6px;">
+                                    <span>
+                                        <span style="font-family: Montserrat;font-style: normal;font-weight: bold;font-size: 14px;line-height: 17px;color: #2CB62C;">
+                                                Partially Done
+                                            </span>
+                                    </span>
+                                </span>
+                                <span class="process-order-cancel" style="background: rgba(255,0,0,0.2);mix-blend-mode: normal;border-radius: 2px;height:fit-content;width:fit-content;padding:6px;">
+                                    <span>
+                                        <span style="font-family: Montserrat;font-style: normal;font-weight: bold;font-size: 14px;line-height: 17px;color: red;">
+                                                Cancel
+                                            </span>
+                                    </span>
+                                </span>
+                            </t>
+                            <t t-else="">
+                                <span style="background: rgba(42,212,86,0.2);mix-blend-mode: normal;border-radius: 2px;height:fit-content;width:fit-content;padding:6px;">
+                                    <span>
+                                        <span style="font-family: Montserrat;font-style: normal;font-weight: bold;font-size: 14px;line-height: 17px;color: #2CB62C;">
+                                                In Process
+                                            </span>
+                                    </span>
+                                </span>
+                            </t>
+                        </t>
+                        <t t-else="">
+                            <span style="background: rgba(42,101,212,0.2);mix-blend-mode: normal;border-radius: 2px;height:fit-content;width:fit-content;padding:6px;">
+                                <span>
+                                    <span style="font-family: Montserrat;font-style: normal;font-weight: bold;font-size: 14px;line-height: 17px;color: #2A65D4;">
+                                            New
+                                        </span>
+                                </span>
+                            </span>
+                        </t>
+                    </div>
+                </div>
+                <div class="product-data">
+                    <t t-set="lines" t-value="order.lines"/>
+                    <t t-foreach="lines" t-as="line">
+                        <div class="product_id" style="display:inline-block;padding:1%;width:100%;font-family: Montserrat-Regular;font-size: 14px;color: #333333;letter-spacing: 0;" t-att-line_id="line.id" t-att-product_id="line.product_id[0]">
+                            <div  class="product_name" style="display:block;float:left;font-family: Montserrat-Regular;font-size: 14px;color: #333333;letter-spacing: 0;">
+                                <t t-esc="line.product_id[1]"/>
+                            </div>
+                            <div class="product_qty" style="display:block;float:right ;text-align:right;font-family: Montserrat-Regular;font-size: 14px;color: #333333;letter-spacing: 0;">
+                                <t t-esc="line.qty"/>
+                            </div>
+                        </div>
+                    </t>
+                </div>
+            </div>
+        </t>
+    </t>
+    <t t-name="ProcessOrderTemplate">
+        <t t-foreach="order_data" t-as="order">
+            <div class="dropdown-item" t-att-id="order.id" style="padding:5px;">
+                <div>
+                    <div style="display:inline-block;width:100%;">
+                        <div class="token_no" style="display:block;float:left;font-family: Montserrat;font-style: normal;font-weight: normal;font-size: 16px;line-height: 20px;text-transform: uppercase;color: #333333;">
+                            <t t-esc="order.kitchen_order_name"/>
+                        </div>
+                        <div  style="display:block;float:right;font-family: Montserrat;font-style: normal;font-weight: normal;font-size: 12px;line-height: 15px;text-transform: uppercase;color: #777777;">
+                            <img src="/pos_kitchen_screen/static/src/img/Rectangle 9.png"/>
+                            <t style="margin-left:2px;" t-esc="order.order_date"/>
+                        </div>
+                    </div>
+                </div>
+                <div style="font-family: Montserrat;font-style: normal;font-weight: normal;font-size: 14px;line-height: 17px;color: #7F4167;">
+                    <t t-esc="order.total_items"/> items in this Order.
+
+
+
+
+                </div>
+                <div class="product-data">
+                    <t t-set="lines" t-value="order.lines"/>
+                    <t t-foreach="lines" t-as="line">
+                        <div class="product_id" style="display:inline-block;padding:1%;width:100%;font-family: Montserrat-Regular;font-size: 14px;color: #333333;letter-spacing: 0;" t-att-line_id="line.id" t-att-product_id="line.product_id[0]">
+                            <div  class="product_name" style="display:block;float:left;font-family: Montserrat-Regular;font-size: 14px;color: #333333;letter-spacing: 0;">
+                                <t t-esc="line.product_id[1]"/>
+                            </div>
+                            <div class="product_qty" style="display:block;float:right ;text-align:right;font-family: Montserrat-Regular;font-size: 14px;color: #333333;letter-spacing: 0;">
+                                <t t-esc="line.qty"/>
+                            </div>
+                        </div>
+                    </t>
+                </div>
+            </div>
+        </t>
+    </t>
+</templates>

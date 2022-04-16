@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="action_report_customer_history" model="ir.actions.act_window">
+        <field name="name">Customer Order</field>
+        <field name="res_model">pos.customer.details.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem id="Customer_Order_details" name="Customer Order" action="action_report_customer_history" parent="point_of_sale.menu_point_rep" sequence="6" groups="base.group_user"/>
+</odoo>

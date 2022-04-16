@@ -1,0 +1,67 @@
+<odoo>
+    <record id="gs_inventory_permission_view_tree" model="ir.ui.view">
+        <field name="name">gs.inventory.permission.view.tree</field>
+        <field name="model">gs.inventory.permission</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="permission_type"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="gs_inventory_permission_view_form" model="ir.ui.view">
+        <field name="name">gs.inventory.permission.view.form</field>
+        <field name="model">gs.inventory.permission</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                         <label for="permission_type"/>
+                         <field name="permission_type"/>
+                        <separator/>
+                        <group attrs="{'invisible': [('permission_type', '!=', 'inv_stock_internal_trans')]}">
+                                <field name="inv_submit_id" widget="many2many_tags" attrs="{'invisible': [('permission_type', '!=', 'inv_stock_internal_trans')], 'required': [('permission_type', '=', 'inv_stock_internal_trans')]}"/>
+                                <field name="inv_approved_id" widget="many2many_tags" attrs="{'invisible': [('permission_type', '!=', 'inv_stock_internal_trans')], 'required': [('permission_type', '=', 'inv_stock_internal_trans')]}"/>
+                                <field name="inv_do_enter_id" widget="many2many_tags" attrs="{'invisible': [('permission_type', '!=', 'inv_stock_internal_trans')], 'required': [('permission_type', '=', 'inv_stock_internal_trans')]}"/>
+                                <field name="inv_cancel_id"  widget="many2many_tags"  attrs="{'invisible': [('permission_type', '!=', 'inv_stock_internal_trans')], 'required': [('permission_type', '=', 'inv_stock_internal_trans')]}"/>
+                                <field name="inv_draft_id"  widget="many2many_tags" attrs="{'invisible': [('permission_type', '!=', 'inv_stock_internal_trans')], 'required': [('permission_type', '=', 'inv_stock_internal_trans')]}"/>
+                                <field name="inv_print_id"  widget="many2many_tags" attrs="{'invisible': [('permission_type', '!=', 'inv_stock_internal_trans')], 'required': [('permission_type', '=', 'inv_stock_internal_trans')]}"/>
+                        </group>
+
+                        <group attrs="{'invisible': [('permission_type', '!=', 'inv_transfers')]}">
+                                <field name="tr_confirm_id"  widget="many2many_tags"  attrs="{'invisible': [('permission_type', '!=', 'inv_transfers')], 'required': [('permission_type', '=', 'inv_transfers')]}"/>
+                                <field name="tr_assign_id"  widget="many2many_tags" attrs="{'invisible': [('permission_type', '!=', 'inv_transfers')], 'required': [('permission_type', '=', 'inv_transfers')]}"/>
+                                <field name="tr_cancel_id" widget="many2many_tags" attrs="{'invisible': [('permission_type', '!=', 'inv_transfers')], 'required': [('permission_type', '=', 'inv_transfers')]}"/>
+                                <field name="tr_validate_id" widget="many2many_tags" attrs="{'invisible': [('permission_type', '!=', 'inv_transfers')], 'required': [('permission_type', '=', 'inv_transfers')]}"/>
+                                <field name="tr_set_quantities_id" widget="many2many_tags" attrs="{'invisible': [('permission_type', '!=', 'inv_transfers')], 'required': [('permission_type', '=', 'inv_transfers')]}"/>
+                                <field name="tr_print_id" widget="many2many_tags" attrs="{'invisible': [('permission_type', '!=', 'inv_transfers')], 'required': [('permission_type', '=', 'inv_transfers')]}"/>
+                        </group>
+                        <group attrs="{'invisible': [('permission_type', '!=', 'inv_transfers')]}">
+                                <field name="tr_label_layout_id" widget="many2many_tags" attrs="{'invisible': [('permission_type', '!=', 'inv_transfers')], 'required': [('permission_type', '=', 'inv_transfers')]}"/>
+                                <field name="tr_do_unreserve_id" widget="many2many_tags" attrs="{'invisible': [('permission_type', '!=', 'inv_transfers')], 'required': [('permission_type', '=', 'inv_transfers')]}"/>
+                                <field name="tr_scrap_id" widget="many2many_tags" attrs="{'invisible': [('permission_type', '!=', 'inv_transfers')], 'required': [('permission_type', '=', 'inv_transfers')]}"/>
+                                <field name="tr_toggle_is_locked_id" widget="many2many_tags" attrs="{'invisible': [('permission_type', '!=', 'inv_transfers')], 'required': [('permission_type', '=', 'inv_transfers')]}"/>
+                                <field name="tr_signature_id" widget="many2many_tags" attrs="{'invisible': [('permission_type', '!=', 'inv_transfers')], 'required': [('permission_type', '=', 'inv_transfers')]}"/>
+                                <field name="tr_return_picking_id" widget="many2many_tags" attrs="{'invisible': [('permission_type', '!=', 'inv_transfers')], 'required': [('permission_type', '=', 'inv_transfers')]}"/>
+                        </group>
+
+                        <group attrs="{'invisible': [('permission_type', '!=', 'inv_scrap')]}">
+                                <field name="so_confirm_id" widget="many2many_tags" attrs="{'invisible': [('permission_type', '!=', 'inv_scrap')], 'required': [('permission_type', '=', 'inv_scrap')]}"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="gs_inventory_permission_action" model="ir.actions.act_window">
+        <field name="name">Inventory Permission</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">gs.inventory.permission</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="menu_gs_inventory_permission" name="Permission"  parent="stock.menu_stock_config_settings" sequence="200" groups="base.group_system"/>
+    <menuitem id="sub_gs_inventory_permission" name="Inventory Permission"  parent="menu_gs_inventory_permission" action="gs_inventory_permission_action" sequence="1" groups="base.group_system"/>
+
+</odoo>

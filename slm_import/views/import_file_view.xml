@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="view_import_file_tree">
+            <field name="name">import.file.tree</field>
+            <field name="model">slm.import.file</field>
+            <field name="arch" type="xml">
+                <tree  default_order="id desc">
+                    <field name="filename"/>
+                    <field name="category_id"/>
+                    <field name="year"/>
+                    <field name="month"/>
+                    <field name="company"/>
+                    <field name="sheet_ids" string="Sheets" widget="many2many_tags"/>
+                </tree>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="view_import_file_form">
+            <field name="name">slm.import.file.form</field>
+            <field name="model">slm.import.file</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <!-- read_file -->
+                        <button name="read_file" string="Read File" states="uploaded" type="object" class="oe_highlight"/>
+                        <button name="action_create" states="verified" string="Create Entry" type="object" class="oe_highlight"
+                                groups="base.group_system"/>
+                        <button name="action_create_post" states="verified" string="Create Entry and Post" type="object" class="oe_highlight"
+                                groups="base.group_system"/>
+                        <button name="action_unpost" states="posted" string="Unpost" type="object"
+                                groups="base.group_system"/>
+                        <button name="action_post" states="entry" string="Post" type="object" groups="base.group_system"/>
+                        <button name="action_remove" states="entry,posted" string="Remove Journal Entry" type="object" groups="base.group_system"/>
+                        <button name="action_balance" states="unbalanced" string="Balance" type="object" groups="base.group_system"/>
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="filename" invisible="1"/>
+                                <field name="sheet_count" invisible="1"/>
+                                <field name="file" filename="filename"/>
+                                <field name="category_id"/>
+                                <field name="year"/>
+                                <field name="month"/>
+                                <field name="company"/>
+                                <field name="move_id" attrs="{'invisible':[('state','!=', 'entry'), ('state','!=', 'posted')]}"/>
+                            </group>
+                            <group>
+                                <h5 colspan="2" attrs="{'invisible':[('state','=','uploaded')]}">Sheets</h5>
+                                <link rel="stylesheet" href="/slm_import/static/css/style.css?version=1"/>
+                                <field name="sheet_ids" string="" attrs="{'invisible':[('state','=', 'uploaded')]}"
+                                       widget="one2many_list" mode="tree,kanban" nolabel="1" colspan="8">
+                                    <tree string="Test" class="sheets">
+                                        <field name="name"/>
+                                        <field name="rows"/>
+                                        <field name="credit"/>
+                                        <field name="debit"/>
+                                        <field name="balance"/>
+                                    </tree>
+                                </field>
+                            </group>
+                        </group>
+                        <notebook attrs="{'invisible':[('state','=', 'uploaded')]}">
+                            <page string="Rows">
+                                <field name="row_ids" widget="one2many_list"
+                                       mode="tree,kanban" nolabel="1"
+                                >
+                                    <tree editable="bottom" limit="10">
+                                        <field name="sheet_id"/>
+                                        <field name="number"/>
+                                        <field name="amount"/>
+                                        <field name="vestcd"/>
+                                        <field name="dagb"/>
+                                        <field name="stuknr"/>
+                                        <field name="regnr"/>
+                                        <field name="boekjr"/>
+                                        <field name="per"/>
+                                        <field name="dag"/>
+                                        <field name="mnd"/>
+                                        <field name="jaar"/>
+                                        <field name="grootb"/>
+                                        <field name="kstnpl"/>
+                                        <field name="faktnr"/>
+                                        <field name="pnr"/>
+                                        <field name="omschr"/>
+                                        <field name="controle"/>
+                                        <field name="curcd"/>
+                                        <field name="bedrag"/>
+                                        <field name="bedrsrd"/>
+                                        <field name="bedrusd"/>
+                                        <field name="opercde"/>
+                                        <field name="vlnr"/>
+                                        <field name="gallon"/>
+                                        <field name="plcde"/>
+                                        <field name="handl"/>
+                                        <field name="maalt"/>
+                                        <field name="pax"/>
+                                        <field name="mandgn"/>
+                                        <field name="sdatum"/>
+                                        <field name="kstnpl6"/>
+                                        <field name="kstnpl7"/>
+                                        <field name="persnr"/>
+                                        <field name="galprijs"/>
+                                        <field name="betrekdg"/>
+                                        <field name="betrekmd"/>
+                                        <field name="betrekjr"/>
+                                        <field name="factdg"/>
+                                        <field name="factmd"/>
+                                        <field name="factjr"/>
+                                        <field name="vltype"/>
+                                        <field name="vltreg"/>
+                                        <field name="cred"/>
+                                        <field name="deb"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="Errors">
+                                <field name="error_ids" widget="one2many_list"
+                                       mode="tree,kanban" nolabel="1" readonly="1"
+                                >
+                                    <tree editable="bottom" limit="10">
+                                        <field name="sheet_id"/>
+                                        <field name="row_id"/>
+                                        <field name="row_number"/>
+                                        <field name="account"/>
+                                        <field name="vlnr_required"/>
+                                        <field name="analytic_account_required"/>
+                                        <field name="curcd_missing"/>
+                                        <field name="missing_creditor"/>
+                                        <field name="missing_debtor"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="action_import_file" model="ir.actions.act_window">
+            <field name="name">Import File Data</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">slm.import.file</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_import_file_tree"/>
+        </record>
+        <menuitem id="menu_import_file"
+                  action="action_import_file"
+                  parent="account.menu_finance_entries"
+                  sequence="102"
+                  name="Import file data"
+                  groups="account.group_account_user"
+
+        />
+    </data>
+</odoo>

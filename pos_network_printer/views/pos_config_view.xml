@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="pos_config_inherit_form">
+            <field name="name">pos.config.inherit.form</field>
+            <field name="model">pos.config</field>
+            <field name="inherit_id" ref="point_of_sale.pos_config_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@id='receipt']" position="inside">
+                    <div class="col-xs-12 col-md-6 o_setting_box" id="printing_mode">
+                        <div class="o_setting_right_pane">
+                            <label for="printing_mode"/>
+                            <div class="text-muted">
+                                Choose your printing mode according to your server
+                            </div>
+                            <div class="content-group">
+                                <div class="mt16">
+                                    <field name="printing_mode" class="o_light_label" widget="radio"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-md-6 o_setting_box" id="connector" attrs="{'invisible': [('printing_mode', '=', 'offline')]}">
+                        <div class="o_setting_right_pane">
+                            <label for="connector"/>
+                            <div class="text-muted">
+                                Choose your connector type for printing
+                            </div>
+                            <div class="content-group">
+                                <div class="mt16">
+                                    <field name="connector" class="o_light_label" widget="radio"
+                                           attrs="{'required': [('printing_mode', '=', 'online')]}"/> <br />
+                                    <label for="client_app_ip" /> :
+                                    <field name="client_app_ip" attrs="{'required': [('printing_mode', '=', 'online')]}" /> <br />
+                                    <label for="client_app_port" /> :
+                                    <field name="client_app_port" attrs="{'required': [('printing_mode', '=', 'online')]}" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-md-6 o_setting_box" id="ticket_print_mode">
+                        <div class="o_setting_right_pane">
+                            <label for="ticket_print_mode"/>
+                            <div class="text-muted">
+                                Choose your prefered ticket print mode
+                            </div>
+                            <div class="content-group">
+                                <div class="mt16">
+                                    <field name="ticket_print_mode" class="o_light_label" widget="radio"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-md-6 o_setting_box" id="bill_print_mode"
+                         attrs="{'invisible':[('module_pos_restaurant','=', False)]}">
+                        <div class="o_setting_right_pane">
+                            <label for="bill_print_mode"/>
+                            <div class="text-muted">
+                                Choose your prefered bill print mode
+                            </div>
+                            <div class="content-group">
+                                <div class="mt16">
+                                    <field name="bill_print_mode" class="o_light_label" widget="radio"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </xpath>
+                <sheet position="inside">
+                    <h2 name="order">Network printers</h2>
+                    <div class="">
+                        <group name="network_printer_ids">
+                            <field name="network_printer_ids" nolabel="1"
+                                   options="{'no_create':True, 'no_create_edit':True, 'no_quick_create':True}">
+                                <tree>
+                                    <field name="printer_name"/>
+                                    <field name="printer_ip"/>
+                                    <field name="printer_port"/>
+                                </tree>
+                            </field>
+                        </group>
+                    </div>
+                </sheet>
+
+            </field>
+        </record>
+    </data>
+</odoo>

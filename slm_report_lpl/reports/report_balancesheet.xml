@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_balancesheet">
+        <t t-call="web.html_container">
+            <t t-call="web.internal_layout">
+                <div class="page">
+                	<h3 t-esc="tittle"/>
+		            <div class="row mt32">
+		              <div class="col-xs-4">
+		                <p>
+		                  <t t-if="data['date_from']"><strong>Date from :</strong> <span t-esc="data['date_from']"/><br/></t>
+		                  <t t-if="data['date_to']"><strong>Date to :</strong> <span t-esc="data['date_to']"/></t>
+		                </p>
+		              </div>
+		            </div>
+		            <div class="row mb32">
+		                <div class="col-xs-3">
+		                  <strong>Target Moves:</strong>
+		                  <p>
+		                    <span t-if="data['target_move'] == 'all'">All Entries</span>
+		                    <span t-if="data['target_move'] == 'posted'">All Posted Entries</span>
+		                  </p>
+		                </div>
+		            </div>
+		            <table class="table table-condensed" style="font-size: 9px;">
+		            	<thead>
+		                  <tr>
+		                      <th>Cuemta</th>
+		                      <th class="text-center">
+		                      	<span t-esc="data['col_text_1']"/>
+		                      	<span>Realisatie</span>                      
+		                      	<div class="row col-xs-2">
+		                     		<span class="text-right">USD</span>
+		                     		<span class="text-right">%</span>                      		
+		                      	</div>
+		                      </th>
+		                      <th class="text-center">
+		                      	<span t-esc="data['col_text_1']"/>
+		                      	<span>Begroting</span>                      
+		                      	<div class="row col-xs-2">
+		                     		<span class="text-right">USD</span>
+		                     		<span class="text-right">%</span>                      		
+		                      	</div>
+		                      </th>    
+		                      <th class="text-center">
+		                      	<span t-esc="data['col_text_2']"/>
+		                      	<span>Realisatie</span>                      
+		                      	<div class="row col-xs-2">
+		                     		<span class="text-right">USD</span>
+		                     		<span class="text-right">%</span>                      		
+		                      	</div>
+		                      </th>                      
+		                      <th class="text-center">
+		                      	<span t-esc="data['col_text_3']"/>
+		                      	<span>Realisatie</span>                      
+		                      	<div class="row col-xs-2">
+		                     		<span class="text-right">USD</span>
+		                     		<span class="text-right">%</span>                      		
+		                      	</div>
+		                      </th>                      
+		                      <th class="text-center">
+		                      	<span>Afwijking</span>
+		                      	<span>Tov Begroting</span>                      
+		                      	<div class="row col-xs-2">
+		                     		<span class="text-right">USD</span>
+		                     		<span class="text-right">%</span>                      		
+		                      	</div>
+		                      </th>                    
+		                      <th class="text-center">
+		                      	<span>Afwijking Tov</span>
+		                      	<span>Realisatie Vorig Jaar</span>                      
+		                      	<div class="row col-xs-2">
+		                     		<span class="text-right">USD</span>
+		                     		<span class="text-right">%</span>                      		
+		                      	</div>
+		                      </th>                        
+		                      <th class="text-center">
+		                      	<span>Afwijking Tov</span>
+		                      	<span>Realisatie Vorig Maand</span>                      
+		                      	<div class="row col-xs-2">
+		                     		<span class="text-right">USD</span>
+		                     		<span class="text-right">%</span>                      		
+		                      	</div>
+		                      </th>                                           
+		                  </tr>
+		              	</thead>
+		              	<tbody>
+                    		<t t-set="tbalance" t-value="0"/>
+                    		<t t-set="tbudget" t-value="0"/>
+                    		<t t-set="tyear_prior" t-value="0"/>
+                    		<t t-set="tmonth_prior" t-value="0"/>		              	
+			                <t t-foreach="get_account_lines" t-as="account">
+			                	<tr>
+				                	<t t-if="account['type']=='detail'">
+				                  		<t t-set="style" t-value="'font-weight:normal;'"/>
+		                    			<t t-set="tbalance" t-value="tbalance+account['balance']"/>
+		                    			<t t-set="tbudget" t-value="tbudget+account['budget']"/>
+		                    			<t t-set="tyear_prior" t-value="tyear_prior+account['year_prior_bal']"/>
+		                    			<t t-set="tmonth_prior" t-value="tmonth_prior+account['month_prior_bal']"/>				                  	
+				                  	</t>
+				                  	<t t-if="account['type']!='detail'">
+					                  	<t t-set="style" t-value="'font-weight:bold;'"/>
+				                  	</t>			                  
+				                  	<t t-if="account['type']=='tag'">
+					                	<td>
+					                    	<span t-att-style="style" t-esc="account['name']"/>
+					                  	</td>	
+					              	</t>			                  
+				                  	<t t-if="account['type']!='tag'">
+					                	<td>
+					                    	<span t-att-style="style" t-esc="account['name']"/>
+					                  	</td>			                  
+					                  	<td class="text-right">
+						                  	<div class="row col-xs-2">
+						                    	<span t-att-style="style" t-esc="account['balance']" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
+					                    		<span t-att-style="style" t-esc="account['percent_balance']"/>
+					                    	</div>                    
+					                  	</td>
+					                  	<td class="text-right">
+						                  	<div class="row col-xs-2">
+					                    		<span t-att-style="style" t-esc="account['budget']" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
+					                    		<span t-att-style="style" t-esc="account['percent_budget']"/>
+					                    	</div>
+					                  	</td>
+					                  	<td class="text-right">
+						                  	<div class="row col-xs-2">
+					                    		<span t-att-style="style" t-esc="account['year_prior_bal']" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
+					                    		<span t-att-style="style" t-esc="account['percent_year_prior_bal']"/>
+					                    	</div>                    
+					                  	</td>
+					                  	<td class="text-right">
+						                    <div class="row col-xs-2">
+					                    		<span t-att-style="style" t-esc="account['month_prior_bal']" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
+					                    		<span t-att-style="style" t-esc="account['percent_month_prior_bal']"/>
+					                    	</div>
+					                  	</td>
+					                  	<td class="text-right">
+						                    <div class="row col-xs-2">
+					                    		<span t-att-style="style" t-esc="account['diff_budget']" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
+					                    		<span t-att-style="style" t-esc="account['percent_diff_budget']"/>
+					                    	</div>                    
+					                  	</td>
+					                  	<td class="text-right">
+						                    <div class="row col-xs-2">
+					                    		<span t-att-style="style" t-esc="account['diff_year']" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
+					                    		<span t-att-style="style" t-esc="account['percent_diff_year']"/>
+					                    	</div>
+					                  	</td>
+					                  	<td class="text-right">
+						                    <div class="row col-xs-2">
+					                    		<span t-att-style="style" t-esc="account['diff_month']" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
+					                    		<span t-att-style="style" t-esc="account['percent_diff_month']"/>
+					                    	</div>
+					                  	</td>
+					               	</t>                                                                        
+				            	</tr>
+				         	</t>
+		                	<tr>
+			                	<t t-set="style" t-value="'font-weight:bold;'"/>
+				                <td>
+				                	<span t-att-style="style">TOTAL</span>
+				                </td>				                  	                  
+				                <td class="text-right">
+				                 	<div class="row col-xs-2">
+				                	   	<span t-att-style="style" t-esc="tbalance" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
+				                    	<span/>
+				                    </div>                    
+				                 </td>
+				                 <td class="text-right">
+				                  	<div class="row col-xs-2">
+				                    	<span t-att-style="style" t-esc="tbudget" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
+				                    	<span/>
+				                    </div>
+				                 </td>
+				                 <td class="text-right">
+				                 	<div class="row col-xs-2">
+				                    	<span t-att-style="style" t-esc="tyear_prior" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
+				                    	<span/>
+				                    </div>                    
+				                 </td>
+				                 <td class="text-right">
+				                    <div class="row col-xs-2">
+				                    	<span t-att-style="style" t-esc="tmonth_prior" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
+				                    	<span/>
+				                    </div>
+				                 </td>
+				                 <td class="text-right">
+				                    <div class="row col-xs-2">
+				                    	<span/>
+				                    	<span/>
+				                    </div>                    
+				                 </td>
+				                 <td class="text-right">
+				                    <div class="row col-xs-2">
+				                    	<span/>
+				                    	<span/>
+				                    </div>
+				                 </td>
+				                 <td class="text-right">
+				                    <div class="row col-xs-2">
+				                    	<span/>
+				                    	<span/>
+				                    </div>
+				                 </td>                                                                        
+			                </tr>				             
+		            	</tbody>
+		          	</table>
+        		</div>
+        	</t>
+        </t>
+    </template>
+</odoo>

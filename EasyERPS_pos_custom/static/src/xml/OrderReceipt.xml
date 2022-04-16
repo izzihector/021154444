@@ -1,0 +1,385 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+        <t t-name="OrderReceipt" t-inherit="point_of_sale.OrderReceipt" t-inherit-mode="extension" owl="1">
+
+            <xpath expr="//div[hasclass('pos-receipt-contact')]" position="replace">
+                <div class="pos-receipt-contact">
+                        <t t-if="receipt.company.contact_address and env.pos.config.show_company_contact_address">
+                            <div><t t-esc="receipt.company.contact_address" /></div>
+                        </t>
+                        <t t-if="receipt.company.phone and env.pos.config.show_company_phone">
+                            <div>Tel:<t t-esc="receipt.company.phone" /></div>
+                        </t>
+                        <t t-if="receipt.company.vat">
+                            <div><t t-esc="receipt.company.vat_label"/></div>
+                                 <div><t t-esc="receipt.company.vat" /></div>
+                        </t>
+                        <t t-if="receipt.company.email and env.pos.config.show_company_email">
+                            <div><t t-esc="receipt.company.email" /></div>
+                        </t>
+                        <t t-if="receipt.company.website and env.pos.config.show_company_website">
+                            <div><t t-esc="receipt.company.website" /></div>
+                        </t>
+                        <t t-if="receipt.header_html">
+                            <t t-raw="receipt.header_html" />
+                        </t>
+                        <t t-if="!receipt.header_html and receipt.header">
+                            <div><t t-esc="receipt.header" /></div>
+                        </t>
+
+                    <div class="pos-receipt-header">
+                         <span id="title_arabic" t-translation="off">فاتورة ضريبية مبسطة</span>
+                    </div>
+                    <div class="order-num">
+                        <span id="title_arabic"># <t t-esc="receipt.sequence_number"/></span>
+                    </div>
+                    <br/>
+                </div>
+            </xpath>
+
+            <xpath expr="//div[hasclass('orderlines')]" position="before">
+                <div> <br/></div>
+                <div class="order-date"><t t-esc="receipt.date.LocaleStringdateStyle"/><span t-esc="receipt.date.LocaleStringtimeStyle" class="pos-receipt-right-align"/></div>
+
+                <div class="table-info">
+                    <t t-if="env.pos.get_client()">
+                        <div> <span>العميل  </span><span><t t-esc="receipt.client.name"/></span></div>
+                        <div> <span>جوال العميل  </span><span><t t-esc="receipt.client.phone"/></span></div>
+                    </t>
+                    <t t-if="receipt.cashier">
+                        <div>Served by  <t t-esc="receipt.cashier"/></div>
+                    </t>
+                </div>
+            </xpath>
+<!--             Orderlines -->
+
+            <xpath expr="//div[hasclass('orderlines')]" position="replace">
+                    <div class="orderlines">
+                        <t t-call="OrderLinesReceiptTable"/>
+                    </div>
+                    <br/>
+            </xpath>
+            <!-- Subtotal -->
+            <xpath expr="//t[@t-if='!isTaxIncluded']" position="replace">
+                <table class="Subtotal" style="border-top: solid">
+                    <thead>
+                        <tr>
+                            <th style="padding-top: 15px">
+                            <span style="font-weight: normal">
+                                <div t-translation="off">المجموع Subtotal</div>
+<!--                               <div style="padding-top: 8px" t-translation="off"> Subtotal</div>-->
+                            </span>
+                            </th>
+                            <th>
+                                <span class="pos-receipt-right-align" style="font-weight: normal">
+
+                                   <t t-esc="env.pos.format_currency(receipt.subtotal)"/>
+                                </span>
+                            </th>
+                        </tr>
+                    </thead>
+                </table>
+                <t t-foreach="receipt.tax_details" t-as="tax" t-key="tax.name">
+                    <table class="Subtotal">
+                        <thead>
+                            <tr>
+                                <th style="padding-top: 15px">
+                                <span style="font-weight: normal">
+                                   <div t-translation="off">الضريبة Taxes (15%)</div>
+<!--                                   <div style="padding-top: 8px" t-translation="off"> Taxes (15%)</div>-->
+                                </span>
+                                </th>
+                                <th>
+                                    <span class="pos-receipt-right-align" style="font-weight: normal">
+
+                                       <t t-esc="env.pos.format_currency(receipt.total_tax)"/>
+                                    </span>
+                                </th>
+                            </tr>
+                        </thead>
+                    </table>
+                </t>
+
+            </xpath>
+            <xpath expr="//div[hasclass('pos-receipt-right-align')]" position="replace">
+
+            </xpath>
+
+                     Total
+
+            <xpath expr="//div[hasclass('pos-receipt-amount')]" position="replace">
+                    <table class="Subtotal">
+                        <thead>
+                            <tr>
+                                <th style="padding-top: 15px">
+                                <span style="font-weight: normal">
+                                   <div t-translation="off">الإجمالي TOTAL</div>
+<!--                                   <div style="padding-top: 8px" t-translation="off"> TOTAL</div>-->
+                                </span>
+                                </th>
+                                <th>
+                                    <span class="pos-receipt-right-align" style="font-weight: normal">
+
+                                       <t t-esc="env.pos.format_currency(receipt.total_with_tax)"/>
+                                    </span>
+                                </th>
+                            </tr>
+                        </thead>
+                    </table>
+                    <t t-if="receipt.total_rounded != receipt.total_with_tax">
+                        <table class="Subtotal">
+                            <thead>
+                                <tr>
+                                    <th style="padding-top: 15px">
+                                    <span style="font-weight: normal">
+                                       <div t-translation="off">للتقريب Rounding</div>
+<!--                                       <div style="padding-top: 8px" t-translation="off"> Rounding</div>-->
+                                    </span>
+                                    </th>
+                                    <th>
+                                        <span class="pos-receipt-right-align" style="font-weight: normal">
+
+                                           <t t-esc='env.pos.format_currency(receipt.rounding_applied)'/>
+                                        </span>
+                                    </th>
+                                </tr>
+                            </thead>
+                        </table>
+                        <table class="Subtotal">
+                            <thead>
+                                <tr>
+                                    <th style="padding-top: 15px">
+                                    <span style="font-weight: normal">
+                                       <div t-translation="off">للسداد To Pay</div>
+<!--                                       <div style="padding-top: 8px" t-translation="off"> To Pay</div>-->
+                                    </span>
+                                    </th>
+                                    <th>
+                                        <span class="pos-receipt-right-align" style="font-weight: normal">
+
+                                           <t t-esc='env.pos.format_currency(receipt.total_rounded)'/>
+                                        </span>
+                                    </th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </t>
+            </xpath>
+
+                     Payment Lines
+
+            <xpath expr="//t[@t-foreach='receipt.paymentlines']" position="replace">
+                    <table class="Subtotal">
+                        <thead>
+                            <tr>
+                                <th style="padding-top: 15px">
+                                <span style="font-weight: normal">
+                                   <div t-translation="off">طريقة الدفع Payment Method</div>
+<!--                                   <div style="padding-top: 8px" t-translation="off"> Payment Method</div>-->
+                                </span>
+                                </th>
+                                <th>
+                                    <t t-foreach="receipt.paymentlines" t-as="line" t-key="line.cid">
+                                        <div>
+                                    <span class="pos-receipt-right-align" style="font-weight: normal">
+                                        <div><t t-esc="line.name" /> </div>
+                                      <div><t t-esc="env.pos.format_currency_no_symbol(line.amount)"/> </div>
+                                    </span>
+                                        </div>
+                                    </t>
+                                </th>
+                            </tr>
+                        </thead>
+                    </table>
+
+            </xpath>
+
+            <xpath expr="//div[hasclass('pos-receipt-amount') and hasclass('receipt-change')]" position="replace">
+                <table class="Subtotal">
+                    <thead>
+                        <tr>
+                            <th style="padding-top: 15px">
+                            <span style="font-weight: normal">
+                               <div t-translation="off">الباقي CHANGE</div>
+<!--                               <div style="padding-top: 8px" t-translation="off"> CHANGE</div>-->
+                            </span>
+                            </th>
+                            <th>
+                                <span class="pos-receipt-right-align" style="font-weight: normal">
+
+                                   <t t-esc="env.pos.format_currency(receipt.change)"/>
+                                </span>
+                            </th>
+                        </tr>
+                    </thead>
+                </table>
+            </xpath>
+
+            <xpath expr="//t[@t-if='receipt.total_discount']" position="replace">
+                <t t-if="receipt.total_discount">
+                        <table class="Subtotal">
+                            <thead>
+                                <tr>
+                                    <th style="padding-top: 15px">
+                                    <span style="font-weight: normal">
+                                       <div t-translation="off">الخصومات Discounts</div>
+<!--                                       <div style="padding-top: 8px" t-translation="off"> Discounts</div>-->
+                                    </span>
+                                    </th>
+                                    <th>
+                                        <span class="pos-receipt-right-align" style="font-weight: normal">
+
+                                           <t t-esc="env.pos.format_currency(receipt.total_discount)"/>
+                                        </span>
+                                    </th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </t>
+
+            </xpath>
+
+            <xpath expr="//t[@t-if='isTaxIncluded']" position="replace">
+
+<!--                <t t-if="isTaxIncluded">-->
+<!--                        <t t-foreach="receipt.tax_details" t-as="tax" t-key="tax.name">-->
+<!--                            <table class="Subtotal">-->
+<!--                            <thead>-->
+<!--                                <tr>-->
+<!--                                    <th style="padding-top: 15px">-->
+<!--                                    <span style="font-weight: normal">-->
+<!--                                       <div t-translation="off">الضريبة Taxes (15%)</div>-->
+<!--&lt;!&ndash;                                       <div style="padding-top: 8px" t-translation="off"> Taxes (15%)</div>&ndash;&gt;-->
+<!--                                    </span>-->
+<!--                                    </th>-->
+<!--                                    <th>-->
+<!--                                        <span class="pos-receipt-right-align" style="font-weight: normal">-->
+
+<!--                                           <t t-esc="env.pos.format_currency(receipt.total_tax)"/>-->
+<!--                                        </span>-->
+<!--                                    </th>-->
+<!--                                </tr>-->
+<!--                            </thead>-->
+<!--                        </table>-->
+
+<!--                    </t>-->
+
+<!--                    <table class="Subtotal">-->
+<!--                        <thead>-->
+<!--                            <tr>-->
+<!--                                <th style="padding-top: 15px">-->
+<!--                                <span style="font-weight: normal">-->
+<!--                                   <div t-translation="off">مجموع الضريبة Total Taxes</div>-->
+<!--&lt;!&ndash;                                   <div style="padding-top: 8px" t-translation="off"> Total Taxes</div>&ndash;&gt;-->
+<!--                                </span>-->
+<!--                                </th>-->
+<!--                                <th>-->
+<!--                                    <span class="pos-receipt-right-align" style="font-weight: normal">-->
+
+<!--                                       <t t-esc="env.pos.format_currency(receipt.total_tax)"/>-->
+<!--                                    </span>-->
+<!--                                </th>-->
+<!--                            </tr>-->
+<!--                        </thead>-->
+<!--                    </table>-->
+
+            </xpath>
+
+            <xpath expr="//div[hasclass('pos-receipt-order-data')]" position="replace">
+
+                    <div class="pos-receipt-order-data">
+                        <div>Ref No: <t t-esc="receipt.name" /></div>
+                        <t t-if="receipt.date.localestring">
+                            <div><t t-esc="receipt.date.localestring" /></div>
+                        </t>
+                        <t t-else="">
+                            <div><t t-esc="receipt.date.validation_date" /></div>
+                        </t>
+                    </div>
+
+            </xpath>
+
+
+            <xpath expr="//div[hasclass('pos-receipt-order-data')]" position="before">
+
+                    <t t-if="env.pos.config.show_qr_code">
+                        <div t-attf-id="qrcode_container">
+                            <img id="qrcode" t-att-src="receipt.qr_code" class="pos-receipt-logo"/>
+                        </div>
+                    </t>
+
+            </xpath>
+
+        </t>
+    <t t-name="OrderLinesReceiptTable" owl="1">
+        <t t-foreach="receipt.orderlines" t-as="line" t-key="line.id">
+            <table class="mine-table" >
+                <thead>
+                    <tr>
+                        <th>
+                            <span class="start">
+
+                                    <div t-esc="line.product_name_wrapped[0]" />
+                                    <WrappedProductNameLines line="line" />
+                                    <t t-if="line.display_discount_policy == 'without_discount' and line.price != line.price_lst">
+                                        <div class="pos-receipt-left-padding">
+                                            <t t-esc="env.pos.format_currency_no_symbol(line.price_lst)" />
+                                            ->
+                                            <t t-esc="env.pos.format_currency_no_symbol(line.price)" />
+                                        </div>
+                                    </t>
+                                    <t t-elif="line.discount !== 0">
+                                        <div class="pos-receipt-left-padding">
+                                            <t t-if="env.pos.config.iface_tax_included === 'total'">
+                                                <t t-esc="env.pos.format_currency_no_symbol(line.price_with_tax_before_discount)"/>
+                                            </t>
+                                            <t t-else="">
+                                                <t t-esc="env.pos.format_currency_no_symbol(line.price)"/>
+                                            </t>
+                                        </div>
+                                    </t>
+                                    <t t-if="line.discount !== 0">
+                                        <div class="pos-receipt-left-padding">
+                                            Discount: <t t-esc="line.discount" />%
+                                        </div>
+                                    </t>
+                                    <div style="padding-top: 8px">
+                                        <t t-esc="Math.round(line.quantity * Math.pow(10, env.pos.dp['Product Unit of Measure'])) / Math.pow(10, env.pos.dp['Product Unit of Measure'])"/>
+                                        <span class="safi"> </span>
+                                        <t t-if="!line.is_in_unit" t-esc="line.unit_name" />
+                                        &#215;
+                                        <span> </span>
+                                        <t t-esc="env.pos.format_currency_no_symbol(line.price_display_one)" />
+
+                                    </div>
+
+                                <t t-if="line.customer_note">
+                                    <div class="pos-receipt-left-padding pos-receipt-customer-note">
+                                        <t t-esc="line.customer_note"/>
+                                    </div>
+                                </t>
+                                <t t-if="line.pack_lot_lines">
+                                    <div class="pos-receipt-left-padding">
+                                        <ul>
+                                            <t t-foreach="line.pack_lot_lines" t-as="lot" t-key="lot.cid">
+                                                <li>
+                                                    SN <t t-esc="lot.attributes['lot_name']"/>
+                                                </li>
+                                            </t>
+                                        </ul>
+                                    </div>
+                                </t>
+                            </span>
+                        </th>
+                        <th>
+                            <span class="price_display pos-receipt-right-align">
+                                <t t-esc="env.pos.format_currency_no_symbol(line.price_display)" />
+                            </span>
+                        </th>
+                    </tr>
+                </thead>
+            </table>
+        </t>
+    </t>
+
+</templates>

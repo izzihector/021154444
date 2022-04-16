@@ -1,0 +1,158 @@
+<odoo>
+    <data>
+        <record id="view_gs_daily_sales_filter" model="ir.ui.view">
+            <field name="name">gs.daily.sales.search</field>
+            <field name="model">gs.daily.sales</field>
+            <field name="type">search</field>
+            <field name="arch" type="xml">
+                <search string="Search Daily Sales">
+                    <filter string="Today" name="today_date"
+                            domain="[('date','&gt;=',context_today().strftime('%%Y-%%m-%%d')),('date','&lt;',(context_today()+relativedelta(days=1)).strftime('%%Y-%%m-%%d'))]"/>
+                    <filter string="This Week" name="this_week"
+                            domain="[('date','&gt;=',context_today().strftime('%%Y-%%m-%%d')),('date','&lt;',(context_today()+relativedelta(days=1,weekday=0)).strftime('%%Y-%%m-%d'))]"/>
+                    <filter string="This Month" name="last_month"
+                            domain="[('date','&gt;=',context_today().strftime('%%Y-%%m-01')),('date','&lt;',(context_today()+relativedelta(months=1)).strftime('%%Y-%%m-01'))]"/>
+                    <group expand="0" string="Group By">
+                        <filter string="Status" name="state" context="{'group_by':'state'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="gs_daily_sales_tree" model="ir.ui.view">
+            <field name="name">gs.daily.sales.tree</field>
+            <field name="model">gs.daily.sales</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="station_id"/>
+                    <field name="date"/>
+                    <field name="order_id"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+        
+        <record id="gs_daily_sales_kanban" model="ir.ui.view">
+            <field name="name">gs.daily.sales.kanban</field>
+            <field name="model">gs.daily.sales</field>
+            <field name="arch" type="xml">
+                <kanban class="o_broker_profile_kanban">
+                    <field name="id"/>
+                    <field name="station_id"/>
+                    <field name="date"/>
+                    <field name="order_id"/>
+                    <field name="state"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban_global_click o_res_partner_kanban">
+                                <div class="oe_kanban_details">
+                                    <h2>
+                                        <field name="station_id"/>
+                                    </h2>
+                                    <ul>
+                                        <li>
+                                            <b>Date:</b>
+                                            <field name="date"/>
+                                        </li>
+                                        <li>
+                                            <b>Sales Order:</b>
+                                            <field name="order_id"/>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="o_kanban_record_bottom h5 mt-2 mb-0">
+                                    <div id="utm_statistics" class="d-flex flex-grow-1 text-600 mt-1"/>
+                                    <div class="oe_kanban_bottom_right">
+                                        <span class="badge badge-pill float-right mt4 mr16"
+                                              style="border-color:#5e75c8;background: #5e75c8;color: whitesmoke;">
+                                            <field name="state"/>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+        
+        <record id="gs_daily_sales_form" model="ir.ui.view">
+            <field name="name">gs.daily.sales.form</field>
+            <field name="model">gs.daily.sales</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button name="action_submit" states="draft" string="Submit" type="object" class="oe_highlight"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,submit,approve" />
+
+                        <button name="action_create_quotations" states="submit" type="object" class="oe_highlight" string="Create quotations"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <group style="width:30%">
+                                <div>
+                                    <h1>
+                                        <b><label for="station_id" string="Station"/></b>
+                                        <br/>
+                                        <field name="station_id"  required="1"/>
+                                    </h1>
+                                </div>
+                            </group>
+                            <group style="width:30%">
+                                <div>
+                                    <h1>
+                                        <b><label for="date" string="Date"/></b>
+                                        <br/>
+                                        <field name="date" required="1"/>
+                                    </h1>
+                                </div>
+                            </group>
+                            <group style="width:30%">
+                                <div>
+                                    <h1>
+                                        <b><label for="order_id" string="Sale Order"/></b>
+                                        <br/>
+                                        <field name="order_id" readonly="1"/>
+                                    </h1>
+                                </div>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="History">
+                                <field name="daily_sales_ids" nolabel="1" readonly="1">
+                                    <tree editable="bottom" readonly="1">
+                                        <field name="link_id" invisible="1"/>
+                                        <field name="date"/>
+                                        <field name="type_pump_id"/>
+                                        <field name="nozzle_petrol_id"/>
+                                        <field name="product_id"/>
+                                        <field name="opening_pump" force_save="1"/>
+                                        <field name="ending_pump" force_save="1"/>
+                                        <field name="sales" force_save="1" sum="Sum of Total Sales"/>
+                                        <field name="user_id"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_gs_daily_sales" model="ir.actions.act_window">
+            <field name="name">Daily Sales</field>
+            <field name="res_model">gs.daily.sales</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_mode">kanban,tree,form</field>
+            <field name="context">{'search_default_today_date':1}</field>
+        </record>
+
+        <menuitem id="sub_gs_daily_sales" name="Daily Sales" action="action_gs_daily_sales"
+                  parent="sub_menu_gs_petrol_station" sequence="3"/>
+    </data>
+</odoo>

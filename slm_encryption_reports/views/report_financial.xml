@@ -1,0 +1,10 @@
+<odoo>
+    <data>
+         <template id="main_template_js" inherit_id="account_reports.main_template">
+             <xpath expr="//div[@class='o_account_reports_body']" position="inside">
+                 <link rel="stylesheet" href="/slm_encryption_reports/static/css/reports.css?version=1"/>
+                <script type="text/javascript" src="/slm_encryption_reports/static/js/scrollbar.js"/>
+             </xpath>
+         </template>
+    </data>
+</odoo>

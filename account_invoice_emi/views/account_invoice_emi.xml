@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem 
+        id="menu_account_invoice_emi_root" 
+        name="Account Invoice EMI"
+        sequence="5"
+    />
+
+    <record id="view_account_invoice_emi_tree" model="ir.ui.view">
+        <field name="name">account.invoice.emi.tree</field>
+        <field name="model">account.invoice.emi</field>
+        <field name="arch" type="xml">
+            <tree string="Account Invoice EMI">
+                <field name="name"/>
+                <field name="so_id"/>
+                <field name="partner_id"/>
+                <!--<field name="project_id"/>-->
+                <field name="type"/>
+                <field name="emi_type"/>
+                <field name="paid_total"/>
+                <field name="total_emi"/>
+                <field name="total_invoice"/>
+                <field name="interest"/>
+                <field name="emi_amount"/>
+                <field name="interest_amount"/>
+                <field name="currency_id" options="{'no_create': True, 'no_open': True}" groups="base.group_multi_currency"/>
+                <field name="total_amount"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_account_invoice_emi_form" model="ir.ui.view">
+        <field name="name">account.invoice.emi.form</field>
+        <field name="model">account.invoice.emi</field>
+        <field name="arch" type="xml">
+            <form string="Account Invoice EMI">
+                <header>
+                        <button name="action_confirm" string="Confirm" type="object" states="draft" class="btn-primary"/>
+                        <button name="action_to_be_approved" type="object" string="Submit for Approval"  class="btn-primary" states="confirm" groups="account_invoice_emi.group_account_invoice_emi_to_be_approved"/>
+                        <button name="action_approved" type="object" string="Approved"  class="btn-primary" states="to_approved" groups="account_invoice_emi.group_account_invoice_emi_approved"/>
+                        <button name="action_done" type="object" string="Done"  class="btn-primary" states="approved"/>
+                        <button name="action_reject" type="object" string="Reject"  class="btn-primary" states="to_approved"/>
+                        <button name="action_draft" type="object" string="To Draft"  class="btn-primary" states="reject"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,confirm,to_approved,approved,done"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_view_invoice"
+                            type="object"
+                            class="oe_stat_button"
+                            icon="fa-pencil-square-o"
+                            attrs="{'invisible': [('total_invoice', '=', 0)]}">
+                            <field name="total_invoice" widget="statinfo" string="Total Invoices"/>
+                        </button>
+                        <button name="action_view_invoice" 
+                            type="object"
+                            class="oe_stat_button"
+                            icon="fa-pencil-square-o"
+                            string="EMI Status"
+                            attrs="{'invisible': [('total_emi', '=', 0)]}"
+                            >
+                        <field name="paid_total" widget="statinfo"/> /
+                        <field name="total_emi" widget="statinfo"/>
+                    </button>
+                    </div>
+                    <group>
+                        <field name="name"/>
+                        <field name="paid_total" invisible='1'/>
+                        <field name="total_emi" invisible='1'/>
+                        <group>
+                            <field name="so_id" attrs="{'readonly': [('state', 'not in', ['draft', 'confirm'])], 'required': [('emi_type', '=', 'income')], 'invisible': [('emi_type', '=', 'expense')]}" domain="[('is_emi_created', '=', False), ('state', 'in', ['done', 'sale'])]" options="{'no_create_edit': True}"/>
+                            <field name="journal_id" attrs="{'readonly': [('state', 'not in', ['draft', 'confirm'])]}" options="{'no_create_edit': True, 'no_open': True, 'no_create': True}"/>
+                            <!--<label for="partner_id" string="Customer" attrs="{'invisible': [('emi_type', '=', 'expense')]}"/>
+                            <label for="partner_id" string="Supplier" attrs="{'invisible': [('emi_type', '=', 'income')]}"/>-->
+                            <field name="partner_id" force_save="1" string="Customer" attrs="{'invisible': [('emi_type', '=', 'expense')]}"/>
+                            <field name="partner_id" force_save="1" string="Supplier" attrs="{'invisible': [('emi_type', '=', 'income')]}"/>
+                            <!--<field name="project_id" attrs="{'readonly': [('state', 'not in', ['draft', 'confirm'])]}" options="{'no_create_edit': True}" domain="[('partner_id', '=', partner_id)]"/>-->
+                            <field name="type" attrs="{'readonly': [('state', 'not in', ['draft', 'confirm'])]}"/>
+                            <field name="currency_id" force_save="1"/>
+                            <field name="emi_type" invisible="1"/>
+                        </group>
+                        <group>
+                            <field name="total" attrs="{'invisible': [('type', '=', 'manual')], 'required': [('type', '=', 'fixed')], 'readonly': [('state', 'not in', ['draft', 'confirm'])]}"/>
+                            <field name="interest" attrs="{'readonly': [('state', 'not in', ['draft', 'confirm'])]}"/>
+                            <field name="so_amount" attrs="{'invisible': [('emi_type', '=', 'expense')]}"/>
+                            <field name="emi_expense_amount" attrs="{'invisible': [('emi_type', '=', 'income')]}"/>
+                            <field name="start_date" attrs="{'invisible': [('type', '=', 'manual')], 'required': [('type', '=', 'fixed')], 'readonly': [('state', '!=', 'draft')]}"/>
+                            <field name="emi_tax_ids" attrs="{'readonly': [('state', 'not in', ['draft', 'confirm'])]}" widget="many2many_tags" options="{'no_create_edit': True, 'no_open': True, 'no_create': True}"/>
+                            <!--<field name="emi_expense_amount" attrs="{'invisible': [('emi_type', '!=', 'expense')]}"/>-->
+                        </group>
+                    </group>
+                    <notebook>
+                        <page name="emi_detail">
+                            <field name="inv_emi_lines" mode="tree" attrs="{'readonly': [('state', 'not in', ['draft', 'confirm'])]}">
+                                <tree editable="bottom">
+                                    <field name="sequence"/>
+                                    <field name="invoice_id" options="{'no_create': True, 'no_edit': True}"/>
+                                    <field name="inv_description"/>
+                                    <field name="account_id" options="{'no_create': True, 'no_edit': True}"/>
+                                    <field name="analytic_account_id" options="{'no_create': True, 'no_edit': True}"/>
+                                    <field name="date"/>
+                                    <field name="inv_amount"/>
+                                    <field name="interest_amount"/>
+                                    <field name="total"/>
+                                    <button name="create_invoice" type="object" icon="fa-plus-square" attrs="{'invisible': [('state', '!=', 'to_invoice')]}"/>
+                                    <button name="action_view_invoice" type="object" icon="fa-eye " attrs="{'invisible': [('state', '=', 'to_invoice')]}"/>
+                                    <field name="inv_status"/>
+                                    <field name="state" invisible='1'/>
+                                </tree>
+                            </field>
+                            <group class="oe_subtotal_footer oe_right" colspan="2" name="sale_total">
+                                <field name="so_untax_amount" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                                <field name="so_tax_amount" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                                <field name="interest_amount" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                                <div class="oe_subtotal_footer_separator oe_inline o_td_label">
+                                    <label for="total_amount" />
+                                </div>
+                                <field name="total_amount" nolabel="1" class="oe_subtotal_footer_separator" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_account_invoice_emi_filter" model="ir.ui.view">
+            <field name="name">account.invoice.emi.list.select</field>
+            <field name="model">account.invoice.emi</field>
+            <field name="priority" eval="15"/>
+            <field name="arch" type="xml">
+                <search string="Account Invoice EMI">
+                    <field name="partner_id" operator="child_of"/>
+                    <!--<field name="project_id"/>-->
+                    <field name="currency_id"/>
+                    <group expand="0" string="Group By">
+                        <filter name="customer" string="Customer" domain="[]" context="{'group_by':'partner_id'}"/>
+                         <!--<filter name="group_by_project_id" string="Project" context="{'group_by':'project_id'}"/>-->
+                         <filter name="group_by_currency_id" string="Currency" context="{'group_by':'currency_id'}"/>
+                    </group>
+                </search>
+            </field>
+      </record>
+
+    <record id="action_account_invoice_emi" model="ir.actions.act_window">
+        <field name="name">Account Invoice EMI</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">account.invoice.emi</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{'default_emi_type': 'income'}</field>
+        <field name="domain">[('emi_type', '=', 'income')]</field>
+        <field name="search_view_id" ref="view_account_invoice_emi_filter"/>
+    </record>
+
+    <record id="action_account_invoice_bill_emi" model="ir.actions.act_window">
+        <field name="name">Account Invoice EMI</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">account.invoice.emi</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{'default_emi_type': 'expense'}</field>
+        <field name="domain">[('emi_type', '=', 'expense')]</field>
+        <field name="search_view_id" ref="view_account_invoice_emi_filter"/>
+    </record>
+ 
+    <record id="action_account_invoice_emi2" model="ir.actions.act_window">
+        <field name="name">Account Invoice EMI</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">account.invoice.emi</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{'search_default_partner_id': active_id}</field>
+        <field name="view_id" ref="view_account_invoice_emi_tree"/>
+        <field name="search_view_id" ref="view_account_invoice_emi_filter"/>
+    </record>
+
+    <record id="action_account_invoice_emi_tree" model="ir.actions.act_window.view">
+            <field name="sequence" eval="1"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="view_account_invoice_emi_tree"/>
+            <field name="act_window_id" ref="action_account_invoice_emi"/>
+    </record>
+
+    <record id="view_account_invoice_emi_line_tree" model="ir.ui.view">
+        <field name="name">account.invoice.emi.line.tree</field>
+        <field name="model">account.invoice.emi.line</field>
+        <field name="arch" type="xml">
+            <tree string="Account Invoice EMI Line" create="false" delete="false">
+                <field name="sequence"/>
+                <field name="partner_id"/>
+                <field name="sale_order_id"/>
+                <field name="emi_type"/>
+                <!--<field name="project_id"/>-->
+                <field name="invoice_id" options="{'no_create': True, 'no_edit': True}"/>
+                <field name="date"/>
+                <field name="inv_amount" sum="Total"/>
+                <field name="interest_amount" sum="Total"/>
+                <field name="total" sum="Total"/>
+                <field name="currency_id" options="{'no_create': True, 'no_open': True}" groups="base.group_multi_currency"/>
+                <field name="state"/>
+                <field name="inv_status"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_account_invoice_emi_line_filter" model="ir.ui.view">
+        <field name="name">account.invoice.emi.line.search</field>
+        <field name="model">account.invoice.emi.line</field>
+        <field name="arch" type="xml">
+            <search string="Search EMI">
+                <field name="sequence" string="Number" filter_domain="['|','|','|', ('number','ilike',self)]"/>
+                <field name="sale_order_id"/>
+                <field name="partner_id" operator="child_of"/>
+                <!--<field name="project_id"/>-->
+                <field name="invoice_id"/>
+                <field name="total"/>
+                <separator/>
+                <filter name="draft" string="Draft" domain="[('state','=','draft')]"/>
+                <filter name="to_invoice" string="To Invoice" domain="[('state','=','to_invoice')]"/>
+                <filter name="invoiced" string="Invoiced" domain="[('state','=','invoiced')]"/>
+                <separator/>
+                <group expand="0" string="Group By">
+                    <filter name="group_by_sale_order_id" string="Sale Order" context="{'group_by':'sale_order_id'}"/>
+                    <!--<filter name="group_by_project_id" string="Project" context="{'group_by':'project_id'}"/>-->
+                    <filter name="group_by_invoice_id" string="Invoice" context="{'group_by':'invoice_id'}"/>
+                    <filter name="group_by_partner_id" string="Customer" context="{'group_by':'partner_id'}"/>
+                    <filter name="group_by_currency_id" string="Currency" context="{'group_by':'currency_id'}"/>
+                </group>
+
+
+            </search>
+        </field>
+    </record>
+
+    <record id="action_emi_line" model="ir.actions.act_window">
+        <field name="name">EMI Line</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">account.invoice.emi.line</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="view_account_invoice_emi_line_tree"/>
+    </record>
+
+    <menuitem id="menu_account_invoice_emi"
+            name="Account Invoice EMI"
+            parent="sale.sale_order_menu"
+            sequence="2"/>
+    
+    <menuitem id="menu_emi"
+            name="EMI"
+            parent="menu_account_invoice_emi"
+            action="action_account_invoice_emi"
+            sequence="2"/>
+
+     <menuitem id="menu_emi_line"
+            name="EMI Line"
+            parent="menu_account_invoice_emi"
+            action="action_emi_line"
+            sequence="2"/>
+    <!--EMI Bill-->
+
+    <menuitem id="menu_account_invoice_emi_bill"
+            name="Contracts Bill Management"
+            parent="account.menu_finance_payables"
+            sequence="5"/>
+    
+    <menuitem id="menu_emi_bill"
+            name="Generate CBM"
+            parent="menu_account_invoice_emi_bill"
+            action="action_account_invoice_bill_emi"
+            sequence="1"/>
+
+</odoo>

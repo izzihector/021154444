@@ -1,0 +1,83 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* manual_rate_exchange
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-06-18 21:19+0000\n"
+"PO-Revision-Date: 2019-06-18 21:19+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: manual_rate_exchange
+#: model:ir.model.fields,help:manual_rate_exchange.field_account_invoice__check_rate
+#: model:ir.model.fields,help:manual_rate_exchange.field_account_invoice__rate_exchange
+#: model:ir.model.fields,help:manual_rate_exchange.field_account_invoice_line__rate_exchange
+#: model:ir.model.fields,help:manual_rate_exchange.field_account_payment__check_rate
+#: model:ir.model.fields,help:manual_rate_exchange.field_account_payment__rate_exchange
+msgid "Amount of units of the base currency with respect to the foreign currency"
+msgstr "Cantidad de unidades de la moneda base con respecto a la moneda extranjera"
+
+#. module: manual_rate_exchange
+#: model:ir.model.fields,field_description:manual_rate_exchange.field_account_invoice__check_rate
+#: model:ir.model.fields,field_description:manual_rate_exchange.field_account_payment__check_rate
+#: model:ir.model.fields,field_description:manual_rate_exchange.field_stock_landed_cost__check_rate
+msgid "Check Rate"
+msgstr "Tasa manual de cambio"
+
+#. module: manual_rate_exchange
+#: model:ir.model,name:manual_rate_exchange.model_res_currency
+#: model:ir.model.fields,field_description:manual_rate_exchange.field_account_invoice_line__currency_id
+#: model:ir.model.fields,field_description:manual_rate_exchange.field_stock_landed_cost__currency
+msgid "Currency"
+msgstr "Moneda"
+
+#. module: manual_rate_exchange
+#: model:ir.model.fields,field_description:manual_rate_exchange.field_stock_landed_cost_lines__currency_value
+msgid "Currency Value"
+msgstr "Valor de la moneda"
+
+#. module: manual_rate_exchange
+#: model:ir.model,name:manual_rate_exchange.model_account_invoice
+msgid "Invoice"
+msgstr "Factura"
+
+#. module: manual_rate_exchange
+#: model:ir.model,name:manual_rate_exchange.model_account_invoice_line
+msgid "Invoice Line"
+msgstr "Línea de Factura"
+
+#. module: manual_rate_exchange
+#: model:ir.model.fields,field_description:manual_rate_exchange.field_account_invoice_line__local_currency_price
+#: model:ir.model.fields,field_description:manual_rate_exchange.field_account_payment__local_currency_price
+msgid "Local Currency Price"
+msgstr "Precio en moneda local"
+
+#. module: manual_rate_exchange
+#: model:ir.model,name:manual_rate_exchange.model_account_payment
+msgid "Payments"
+msgstr "Pagos"
+
+#. module: manual_rate_exchange
+#: model:ir.model.fields,field_description:manual_rate_exchange.field_account_invoice__rate_exchange
+#: model:ir.model.fields,field_description:manual_rate_exchange.field_account_invoice_line__rate_exchange
+#: model:ir.model.fields,field_description:manual_rate_exchange.field_account_payment__rate_exchange
+#: model:ir.model.fields,field_description:manual_rate_exchange.field_stock_landed_cost__rate_exchange
+msgid "Rate Exchange"
+msgstr "Tasa de cambio"
+
+#. module: manual_rate_exchange
+#: model:ir.model,name:manual_rate_exchange.model_stock_landed_cost
+msgid "Stock Landed Cost"
+msgstr "Costo en Destino"
+
+#. module: manual_rate_exchange
+#: model:ir.model,name:manual_rate_exchange.model_stock_landed_cost_lines
+msgid "Stock Landed Cost Line"
+msgstr ""

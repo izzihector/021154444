@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <template id="search_template_tag">
+            <a type="button" class="dropdown-toggle" data-toggle="dropdown">
+                <span class="fa fa-filter"/>
+                Tags:
+                <t t-set="selected_tags"
+                   t-value="', '.join(tag.get('name') for tag in options['tags'] if tag.get('selected'))"/>
+                <t t-if="selected_tags">
+                    <t t-esc="selected_tags"/>
+                </t>
+                <t t-else="">
+                    None selected
+                </t>
+            </a>
+            <div class="dropdown-menu o_filters_menu" role="menu">
+                <t t-foreach="options['tags']" t-as="tag">
+                    <a role="menuitem" class="dropdown-item js_account_report_choice_filter" t-att-title="tag.get('name')"
+                       data-filter="tags" t-att-data-id="tag.get('id')">
+                        <t t-esc="tag.get('name')"/>
+                    </a>
+                </t>
+            </div>
+        </template>
+
+        <template id="search_template_subgroups">
+            <a type="button" class="dropdown-toggle" data-toggle="dropdown">
+                <span class="fa fa-filter"/>
+                Show subgroups:
+                <t t-set="show_subgroups"
+                   t-value="', '.join(option.get('name') for option in options['subgroups'] if option.get('selected'))"/>
+                <t t-if="show_subgroups">
+                    Yes
+                </t>
+                <t t-else="">
+                    No
+                </t>
+            </a>
+            <div class="dropdown-menu o_filters_menu" role="menu">
+                <t t-foreach="options['subgroups']" t-as="option">
+                    <a role="menuitem" class="dropdown-item js_account_report_choice_filter" t-att-title="option.get('name')"
+                       data-filter="subgroups" t-att-data-id="option.get('id')">
+                        <t t-esc="option.get('name')"/>
+                    </a>
+                </t>
+            </div>
+        </template>
+
+     <!--    <template id="lpl_search_template" inherit_id="account_reports.search_template">
+            <xpath expr="//div[@class='o_account_reports_filter_analytic']" position="after">
+            <xpath expr="//div[hasclass('o_account_reports_filter_analytic')]" position="after">
+                <div class="btn-group dropdown o_account_reports_filter_encryption"
+                     t-if="options.get('tags') != None">
+                    <t t-call="slm_lpl_reports.search_template_tag"/>
+                </div>
+                <div class="btn-group dropdown o_account_reports_filter_encryption"
+                     t-if="options.get('subgroups') != None">
+                    <t t-call="slm_lpl_reports.search_template_subgroups"/>
+                </div>
+            </xpath>
+        </template> -->
+
+         <template id="search_template">
+            <div class="btn-group dropdown o_account_reports_filter_date" t-if="options.get('date') != None">
+                <t t-call="account_reports.search_template_date_filter"/>
+            </div>
+            <div class="btn-group dropdown o_account_reports_filter_date_cmp" t-if="options.get('comparison') != None">
+                <t t-call="account_reports.search_template_comparison"/>
+            </div>
+            <div class="btn-group dropdown o_account_reports_filter_journals" t-if="options.get('journals') != None">
+                <t t-call="account_reports.search_template_journals"/>
+            </div>
+            <div class="btn-group dropdown o_account_reports_filter_account_type" t-if="options.get('account_type') != None">
+                <t t-call="account_reports.search_template_account_type"/>
+            </div>
+            <div class="btn-group dropdown o_account_reports_filter_analytic" t-if="options.get('analytic') != None or options.get('analytic_tags') != None">
+                <t t-call="account_reports.search_template_analytic"/>
+            </div>
+            <div class="btn-group dropdown o_account_reports_filter_ir_filters" t-if="options.get('ir_filters') != None">
+                <t t-call="account_reports.search_template_ir_filters"/>
+            </div>
+            <div class="btn-group dropdown o_account_reports_filter_groupby_fields" t-if="options.get('groupby_fields')">
+                <t t-call="account_reports.search_template_groupby_fields"/>
+            </div>
+            <div class="btn-group dropdown o_account_reports_filter_partner" t-if="options.get('partner')">
+                <t t-call="account_reports.search_template_partner"/>
+            </div>
+            <div class="btn-group dropdown o_account_reports_filter_currency" t-if="options.get('currency_rates')">
+                <t t-call="account_reports.search_template_currency"/>
+            </div>
+            <div class="btn-group dropdown o_account_reports_filter_bool" id="extra_options_dropdown" t-if="options.get('cash_basis') != None or options.get('all_entries') != None or options.get('unfold_all') != None">
+                <t t-call="account_reports.search_template_extra_options"/>
+            </div>
+            <div class="btn-group dropdown o_account_reports_filter_ec_sale_code" t-if="options.get('ec_sale_code') != None">
+                <t t-call="account_reports.search_template_ec_sale_code"/>
+            </div>
+            <div class="btn-group dropdown o_account_reports_filter_fiscal_position" id="fiscal_position_choice_option" t-if="len(options['available_vat_fiscal_positions']) &gt;(0 if options['allow_domestic'] else 1)">
+                <t t-call="account_reports.search_template_fiscal_position_choser"/>
+            </div>
+            <div class="btn-group dropdown o_account_reports_filter_encryption" t-if="options.get('encryption') != None">
+                <t t-call="slm_encryption_reports.search_template_encryptions"/>
+            </div>
+            <div class="btn-group dropdown o_account_reports_filter_profit_center" t-if="options.get('profit_center') != None">
+                <t t-call="slm_encryption_reports.search_template_profit_center"/>
+            </div>
+            <div class="btn-group dropdown o_account_reports_filter_profit_center_accounts" t-if="options.get('profit_center_accounts') != None">
+                <t t-call="slm_encryption_reports.search_template_profit_center_accounts"/>
+            </div>
+            <div class="btn-group dropdown o_account_reports_filter_business_unit" t-if="options.get('business_unit') != None">
+                <t t-call="slm_encryption_reports.search_template_business_unit"/>
+            </div>
+            <div class="btn-group dropdown o_account_reports_filter_encryption"
+                     t-if="options.get('tags') != None">
+                    <t t-call="slm_lpl_reports.search_template_tag"/>
+                </div>
+                <div class="btn-group dropdown o_account_reports_filter_encryption"
+                     t-if="options.get('subgroups') != None">
+                    <t t-call="slm_lpl_reports.search_template_subgroups"/>
+                </div>
+        </template>
+    </data>
+</odoo>

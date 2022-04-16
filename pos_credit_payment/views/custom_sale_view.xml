@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+		<!--Custom Sale Order View-->        
+
+	<record model="ir.ui.view" id="invoice_credit_payment">
+			<field name="name">inherit.pos.config.invoice.credit.payment</field>
+			<field name="model">pos.config</field>
+			<field name="inherit_id" ref="point_of_sale.pos_config_view_form"/>
+			<field name="arch" type="xml">
+				<xpath expr="//div[@id='receipt']" position="after">
+					<h2>Credit Payment</h2>
+					<div class="row mt16 o_settings_container" id="credit_payment">
+						<div id="creadit_payment_view" class="col-xs-12 col-md-6 o_setting_box">
+							<div class="o_setting_right_pane">
+								<span>Allow credit in invoice</span>
+								<div class="content-group mt16">
+									<field name="invoice_credit_payment" widget="radio"/>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+				</xpath>
+			</field>
+		</record>
+	
+	<record model="ir.ui.view" id="credit_detail_button_res_partner">
+			<field name="name">credit.detail.button.res.partner</field>
+			<field name="model">res.partner</field>
+			<field name="inherit_id" ref="base.view_partner_form"/>
+			<field name="arch" type="xml">
+				<div name="button_box" position="inside">
+					<button class="oe_stat_button" name="action_view_credit_detail"
+						type="object" icon="fa-usd">
+						<field string="Credit" name="custom_credit" widget="statinfo" />
+					</button>
+				</div>
+				<xpath expr="//form/sheet/notebook/page[2]" position='after'>
+					<page string='POS Customer Credit Details'>
+						
+						<separator string="POS Orders Credit Payment History" colspan="4"/>
+						<field name='credit_ids' readonly='1'>
+								<tree>
+									<field name='date'/>
+									<field name='pos_order_id'/>
+									<field name='pos_order_amount'/>
+									<field name='used_credit_amount'/>
+									<field name='balance_credit_amount'/>
+									<field name='bill_id'/>
+									<field name='partner_id' invisible='1'/>
+								</tree>
+						</field>
+						
+						<separator string="Update Customer Credit History" colspan="4"/>
+						<field name='update_credit_ids' readonly='1'>
+								<tree>
+									<field name='date_update'/>
+									<field name='update_credit_amount'/>
+									<field name='old_credit_bal'/>
+									<field name='balance'/>
+									<field name='is_payment_received'/>
+									<field name='partner_id' invisible='1'/>
+								</tree>
+						</field>
+						
+						<separator string="Update Customer Credit with Payment History" colspan="4"/>
+						<field name='update_credit_payment_ids' readonly='1'>
+								<tree>
+									<field name='date_update'/>
+									<field name='payment_refer'/>
+									<field name='update_credit_amount'/>
+									<field name='old_credit_bal'/>
+									<field name='balance'/>
+									<field name='partner_id' invisible='1'/>
+								</tree>
+						</field>
+					
+					</page>
+				</xpath>
+				<xpath expr="//field[@name='phone']/../.." position='after'>
+					<group><field name="credit_limit" widget="credit_limit"/></group>
+				</xpath>
+
+			</field>
+		</record>
+
+<record id="action_view_credit_account" model="ir.actions.act_window">
+	<field name="name">Credit Payment</field>
+	<field name="type">ir.actions.act_window</field>
+	<field name="res_model">credit.account</field>
+	<field name="view_mode">form</field>
+	<field name="target">new</field>
+</record>
+
+<record id="view_credit_tree" model="ir.ui.view">
+	<field name="name">view.credit.tree</field>
+	<field name="model">partner.credit</field>
+	<field name="arch" type="xml">
+		<tree string="Credit Details"  editable="bottom">
+			<field name="partner_id"/>
+			<field name="credit_jr"/>
+			<field name="update"/>
+			<button name="do_update" string="Update" type="object"/>
+			<button name="%(action_view_credit_account)d" string="Update With Accounting Entry" type="action"/>
+		</tree>
+	</field>
+</record>
+
+<record model="ir.actions.act_window" id="action_pos_credit">
+	<field name="name">Credit Details</field>
+	<field name="res_model">partner.credit</field>
+	<field name="view_mode">tree</field>
+	<field name="view_id" ref="view_credit_tree"/>
+</record>
+
+<record id="view_credit_account" model="ir.ui.view">
+	<field name="name">Credit Payment</field>
+	<field name="model">credit.account</field>
+	<field name="arch" type="xml">
+		<form string="Credit Payment">
+			<group>
+				<group>
+					<field name="journal_id"/>
+					<field name="credit_amount"/>
+					<field name="credit_id" invisible='1'/>
+					
+				</group>
+			</group>
+			<footer>
+				<button name="post" string="Submit" type="object" class="btn-primary"/>
+				<button string="Cancel" class="btn-default" special="cancel"/>
+			</footer>
+		</form>
+	</field>
+</record>
+
+<!-- ACCOUNT JOURNAL -->
+<record id="inherit_view_account_journal_pos_user_form1" model="ir.ui.view">
+	<field name="name">inherit_bi_account_journal_form</field>
+	<field name="model">account.journal</field>
+	<field name="inherit_id" ref="account.view_account_journal_form"/>
+	<field name="arch" type="xml">
+		<field name="type" position="after">
+			<field name="credit_jr" attrs="{'invisible': [('type','!=','cash')]}"/>
+		</field>
+	</field>
+</record>
+
+<record id="inherit_view_pos_payment_method_form1" model="ir.ui.view">
+	<field name="name">pos.payment.method.inherit</field>
+	<field name="model">pos.payment.method</field>
+	<field name="inherit_id" ref="point_of_sale.pos_payment_method_view_form"/>
+	<field name="arch" type="xml">
+		<field name="journal_id" position="after">
+			<field name="credit_jr" attrs="{'invisible': [('journal_id','=', False)]}"/>
+		</field>
+	</field>
+</record>
+
+<record model="ir.ui.view" id="pos_credit_inherit">
+		<field name="name">pos.order.view.form</field>
+		<field name="model">pos.order</field>
+		<field name="inherit_id" ref="point_of_sale.view_pos_pos_form"/>
+		<field name="arch" type="xml">
+			<field name="partner_id" position="after">
+				<field name="credit_check" invisible="1"/>
+			</field>
+		</field>
+	</record>
+	
+	   <menuitem id="menu_sale_credit"
+			name="Credit"
+			parent="sale.sale_menu_root"
+			sequence="6"/>
+			
+	   <menuitem action="action_pos_credit"
+			id="menu_sale_order_invoice" parent="menu_sale_credit"
+	   />
+
+		
+	</data>
+</openerp>        

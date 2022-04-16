@@ -1,0 +1,105 @@
+
+.addonpane{
+    visibility: hidden;
+    position: fixed;
+    z-index: 1;
+    width: 0%;
+    transition: 0.5s;
+    margin-left: 51%;
+    padding-top: 1.7%;
+    margin-top: 60px;
+    right:0%;
+    background-color: #d3d3d3;
+
+}
+
+
+
+
+.addons-table{
+    width: 100%;
+    border-radius: 5px;
+    border-collapse: inherit;
+}
+.addons-head{
+    font-size: 14px;
+    padding: 4px 12px;
+    line-height: 35px;
+    flex-grow: 1;
+    background: #e2e2e2;
+    border-bottom: solid 3px rgb(110, 200, 155);
+    border-spacing: 0px;
+    border-top: 0.5px solid #c7c7c7;
+    border-left: 0.5px solid #c7c7c7;
+    border-right: 0.5px solid #c7c7c7;
+
+}
+.addon-contents{
+    text-align: left;
+}
+.addons-item {
+    padding: 8px;
+    border-bottom: 1px solid #bfbfbf;
+    background-color: #5c5c5c;
+    color: #fff;;
+    cursor: pointer;
+    z-index: 1000;
+}
+.addons-item:hover {
+  background-color: #666;
+}
+.addons-item:hover:active {
+  background-color: white;
+  color: black;
+}
+.addon-orderline-items{
+    padding-left :25px !important;
+    color: #888;
+}
+.addon-orderline-item{
+    font-size: 15px !important;
+    font-style: italic !important;
+
+}
+.pos .categories {
+    position: relative;
+    border-bottom: solid 3px rgb(110, 200, 155);
+}
+.layout-table {
+    transition: 0.5s;
+    border: none;
+}
+
+.addon-orderline{
+    margin-left: 25px;
+    color: #948888;
+}
+.addon-orderline-name {
+    padding: 0;
+    display: inline-block;
+    width: 70%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: small;
+    font-weight: bold;
+
+}
+.addon-orderline-price {
+    padding: 0;
+    font-size: small;
+    font-weight: bold;
+}
+.addon-orderline-uom {
+    padding: 0;
+    display: inline-block;
+    width: 70%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: small;
+    font-weight: normal;
+}
+.pos .addon-receipt{
+    font-size: 13px;
+    font-style: italic;
+}
+

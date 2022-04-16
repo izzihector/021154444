@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="stock_inventory_tree_view" model="ir.ui.view">
+        <field name="name">stock.inventory.tree</field>
+        <field name="model">stock.quant</field>
+        <field name="inherit_id" ref="stock.view_stock_quant_tree_inventory_editable"/>
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='action_inventory_history']" position="after">
+                <button name="action_submit_to_manager" class="btn-primary" string="Submit To Manager"
+                        type="object"/>
+            </xpath>
+
+            <xpath expr="//button[@name='action_submit_to_manager']" position="replace">
+                <button name="action_submit_to_manager" class="btn-primary" string="Submit To Manager"
+                        type="object"
+                        attrs="{'invisible': [('state', 'not in', ['draft'])]}"/>
+            </xpath>
+
+            <xpath expr="//button[@name='action_apply_inventory']" position="replace">
+                <button name="action_apply_inventory"
+                        groups="ibos_inventory_adjustment_approval.inventory_adjustment_approval_group"
+                        type="object" string="Apply"
+                        class="btn btn-link" icon="fa-save"
+                        attrs="{'invisible': [('inventory_quantity_set', '=', False)]}"/>
+            </xpath>
+
+            <xpath expr="//button[@name='action_set_inventory_quantity']" position="replace">
+                <button name="action_set_inventory_quantity" type="object" string="Set Up" class="btn btn-link"
+                        icon="fa-bullseye" attrs="{'invisible': [('inventory_quantity_set', '=', True)]}"
+                        groups="ibos_inventory_adjustment_approval.inventory_adjustment_approval_group"/>
+            </xpath>
+
+            <xpath expr="//button[@name='action_set_inventory_quantity_to_zero']" position="attributes">
+                <attribute name="groups">ibos_inventory_adjustment_approval.inventory_adjustment_approval_group</attribute>
+            </xpath>
+
+
+
+            <xpath expr="//button[@name='action_set_inventory_quantity_to_zero']" position="after">
+                <field name="state" widget="badge" decoration-danger="state == 'clear'" decoration-info="state == 'draft'"/>
+            </xpath>
+
+            <xpath expr="//field[@name='inventory_quantity']" position="attributes">
+                <attribute name="attrs">{'readonly':[('state','not in',['draft','clear','apply','set'])]}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='inventory_date']" position="attributes">
+                <attribute name="attrs">{'readonly':[('state','not in',['draft','clear','apply','set'])]}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='user_id']" position="attributes">
+                <attribute name="attrs">{'readonly':[('state','not in',['draft','clear','apply','set'])]}</attribute>
+            </xpath>
+
+        </field>
+    </record>
+</odoo>

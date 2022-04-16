@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (c) 2016-Present Webkul Software Pvt. Ltd. (<https://webkul.com/>) -->
+<!-- See LICENSE file for full copyright and licensing details. -->
+<!-- License URL : <https://store.webkul.com/license.html/> -->
+<odoo>
+
+    <record model="ir.ui.view" id="pos_loyalty_history_tree">
+        <field name="name">POS Loyalty History Tree</field>
+        <field name="model">pos.loyalty.history</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree string="Loyalty History Tree" create="false">
+                <field name="pos_order_id" />
+                <field name="customer_id" />
+                <field name="tx_type" />
+                <field name="tx_date" />
+                <field name="tx_points" />
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="pos_loyalty_history_form">
+        <field name="name">POS Loyalty History Form</field>
+        <field name="model">pos.loyalty.history</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form string="Loyalty History Form" readonly="1" edit="false" create="false">
+                <sheet>
+                    <group col="4">
+                        <field name="pos_order_id" />
+                        <field name="session_id" />
+                        <field name="customer_id" />
+                        <field name="tx_type" />
+                        <field name="tx_date" />
+                        <field name="tx_points" />
+                        <field name="remain_points" />
+                        <field name="salesman_id" />
+                        <field name="source" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_loyalty_history_filter" model="ir.ui.view">
+        <field name="name">Loyalty History Filter</field>
+        <field name="model">pos.loyalty.history</field>
+        <field name="arch" type="xml">
+            <search string="POS Loyalty History">
+                <field name="pos_order_id" string="Order Reference" filter_domain="['|',('pos_order_id','ilike',self),('pos_order_id','ilike',self)]"/>
+                <filter string="Credit" name="tx_type" domain="[('tx_type','=','credit')]"/>
+                <filter string="Debit" name="tx_type" domain="[('tx_type','=','debit')]"/>
+                <filter string="Source" name="source" domain="[('source','=','pos')]"/>
+
+                <group expand="0" string="Group By">
+                    <filter string="Create Date" name="" domain="[]" context="{'group_by':'tx_date'}"/>
+                    <filter string="Customer" name="" domain="[]" context="{'group_by':'customer_id'}"/>
+                    <filter string="Salesman" name="" domain="[]" context="{'group_by':'salesman_id'}"/>
+                    <filter string="Session" name="" domain="[]" context="{'group_by':'session_id'}"/>
+                </group>
+           </search>
+        </field>
+    </record>
+
+    <record id="action_pos_loyalty_history" model="ir.actions.act_window">
+        <field name="name">Loyalty History</field>
+        <field name="res_model">pos.loyalty.history</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="pos_loyalty_history_tree" />
+        <field name="context">{'search_default_source': 1}</field>
+    </record>
+
+    <menuitem id="menu_pos_loyalty_history" parent="point_of_sale.menu_point_of_sale" action="action_pos_loyalty_history" />
+
+</odoo>

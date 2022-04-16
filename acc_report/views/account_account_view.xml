@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>		
+	<record id="view_account_form_inherit" model="ir.ui.view">
+        <field name="name">account.account.form</field>
+        <field name="model">account.account</field>
+        <field name="inherit_id" ref="account.view_account_form"/>
+        <field name="arch" type="xml">
+        	<xpath expr="//group/group" position="after">
+                <group>
+            		<field name="ma"/>
+            		<field name="ragio"/>
+            		<field name="cargo"/>
+            		<field name="total_group_id"/>
+            		<field name="group_type"/>
+                </group>
+        	</xpath>
+        </field>
+    </record>
+
+    <menuitem name="Account Report" action="action_account_report_wiz" id="menu_action_account_report" parent="account.account_reports_management_menu" sequence="
+        3"/>
+</odoo>

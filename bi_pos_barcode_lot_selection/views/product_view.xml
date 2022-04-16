@@ -1,0 +1,90 @@
+<?xml version="1.0"?>
+<odoo>
+	<data>
+		<record id="product_variant_barcode_lot" model="ir.ui.view">
+			<field name="name">product.variant.barcode.lot.view.form</field>
+			<field name="model">product.product</field>
+			<field name="inherit_id" ref="product.product_normal_form_view" />
+			<field name="arch" type="xml">
+				<field name="categ_id" position="after">
+					<field name="barcode_ids">
+						<tree>
+							<field name="name" />
+							<field name="lot_name"/>
+							<field name="product_qty"/>
+							<field name="list_price"/>
+						</tree>
+					</field>
+				</field>
+			</field>
+		</record>
+
+		<record id="product_template_barcode_lot" model="ir.ui.view">
+			<field name="name">product.template.barcode.lot.form</field>
+			<field name="model">product.template</field>
+			<field name="inherit_id" ref="product.product_template_only_form_view"/>
+			<field name="arch" type="xml">
+				<field name="barcode" position="after">
+					<field name="barcode_ids" attrs="{'invisible': [('product_variant_count', '&gt;', 1)]}" >
+						<tree>
+							<field name="name" />
+							<field name="lot_name"/>
+							<field name="product_qty"/>
+							<field name="list_price"/>
+						</tree>
+					</field>
+				</field>
+			</field>
+		</record>
+
+		<record id="view_production_lot_form_inherit" model="ir.ui.view">
+			<field name="name">stock.production.lot.form.inherit</field>
+			<field name="model">stock.production.lot</field>
+			<field name="inherit_id" ref="stock.view_production_lot_form"/>
+			<field name="arch" type="xml">
+				<field name="company_id" position="after">
+					<field name="list_price"/>
+					<field name="lot_name"/>
+					<field name="expiry_date" invisible="1"/>
+					<field name="avail_locations" widget="many2many_tags" invisible="1"/>
+					<field name="quant_text" invisible="1"/>
+				</field>
+			</field>
+		</record>
+
+		<record model="ir.ui.view" id="custom_pos_config_extended_form_view">
+			<field name="name">pos.config.form.extended.view</field>
+			<field name="model">pos.config</field>
+			<field name="inherit_id" ref="point_of_sale.pos_config_view_form"/>
+			<field name="arch" type="xml">
+				<xpath expr="//div[@id='inventory_location']" position="inside">
+					<div class="col-xs-12 col-md-6 o_setting_box" id="stock_location">
+						<div class="o_setting_right_pane">
+							<label for="show_stock_location"/>
+							<div class="text-muted">
+								Lot location type
+							</div>
+							<div class="content-group">
+								<div class="mt16">
+									<field name="show_stock_location" class="o_light_label" widget="radio"/>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-xs-12 col-md-6 o_setting_box">
+						<div class="o_setting_right_pane">
+							<label for="op_typ_loc_id"/>
+							<div class="text-muted">
+								Stock location used for inventory
+							</div>
+							<div class="content-group mt16">
+								<field name="op_typ_loc_id"/>
+							</div>
+						</div>
+					</div>
+				</xpath>
+			</field>
+		</record>
+
+	</data>
+</odoo>

@@ -1,0 +1,65 @@
+<odoo>
+  <data>
+    <record id="pos_config_view_form_inherit_pos_custom_receipt" model="ir.ui.view">
+        <field name="name">pos.config.form.inherit.pos.custom.receipt</field>
+        <field name="model">pos.config</field>
+        <field name="inherit_id" ref="point_of_sale.pos_config_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form//sheet" position="inside">
+                <h2>Configuration Pos Custom</h2>
+                <div class="row mt16 o_settings_container" id="accounting_section">
+                    <div class="col-12 col-lg-6 o_setting_box"
+	                     id="pos_custom_receipt">
+	                    <div class="o_setting_left_pane">
+	                        <field name="pos_custom_receipt"/>
+	                    </div>
+	                    <div class="o_setting_right_pane">
+	                        <label for="pos_custom_receipt"/>
+	                        <div class="text-muted mb16">
+                                    pos_custom_receipt
+                            </div>
+                            <div class="content-group pos_iot_config" attrs="{'invisible' : [('pos_custom_receipt', '=', False)]}">
+                                    <div class="row">
+                                        <label string="show company contact address" for="show_company_contact_address" class="col-lg-4 o_light_label"/>
+                                        <field name="show_company_contact_address"/>
+                                    </div>
+                                    <div class="row">
+                                        <label string="Show Company Phone" for="show_company_phone" class="col-lg-4 o_light_label"/>
+                                        <field name="show_company_phone"/>
+                                    </div>
+                                    <div class="row">
+                                        <label string="Show Company Email" for="show_company_email" class="col-lg-4 o_light_label"/>
+                                        <field name="show_company_email"/>
+                                    </div>
+                                    <div class="row">
+                                        <label string="Show Company Website" for="show_company_website" class="col-lg-4 o_light_label"/>
+                                        <field name="show_company_website"/>
+                                    </div>
+                                    <div class="row">
+                                        <label string="Show QR Code in Receipt" for="show_qr_code" class="col-lg-4 o_light_label"/>
+                                        <field name="show_qr_code"/>
+                                    </div>
+                            </div>
+                            <div class="row">
+
+                                    <label string="left Pane Width" for="leftpane_width" class="o_form_label col-lg-3 o_light_label"/>
+                                    <field name="leftpane_width" class="o_field_char o_field_widget o_quick_editable o_input"/>
+                            </div>
+                            <div class="row">
+                                    <label string="Product Name Font Size" for="product_name_font_size" class="o_form_label col-lg-3 o_light_label"/>
+                                    <field name="product_name_font_size" class="o_field_char o_field_widget o_quick_editable o_input"/>
+                            </div>
+                            <div class="row">
+                                    <label string="Category Name Font Size" for="category_name_font_size" class="o_form_label col-lg-3 o_light_label"/>
+                                    <field name="category_name_font_size" class="o_field_char o_field_widget o_quick_editable o_input"/>
+
+                            </div>
+                        </div>
+                </div>
+
+                </div>
+            </xpath>
+        </field>
+    </record>
+  </data>
+</odoo>

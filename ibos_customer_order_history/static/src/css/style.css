@@ -1,0 +1,234 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
+/* Root css */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  width: 100%;
+  height: 100vh;
+  font-family: "Poppins", sans-serif;
+}
+h1,h2,h3,h4,h5,h6{
+    font-weight: 600;
+}
+/* Header */
+.company-address{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0 auto;
+    padding-right: 50px;
+}
+/* Element style */
+img{
+    max-width: 100%
+}
+sup {
+  font-size: 8px;
+}
+table {
+  border-collapse: collapse;
+  width: 100%;
+  /* table-layout: fixed;  */
+  width: 100%;
+  margin-bottom: 10px;
+}
+th,
+td {
+  /* border: 1px solid #D6DADD; */
+  padding: 6px 12px;
+}
+tr:nth-child(even) {
+  background: #f6f7f9;
+}
+th {
+  background-color: #54b6e7;
+  font-size: 14px;
+  font-weight: 500;
+  color: #fff;
+  text-align: left;
+  text-transform: uppercase;
+}
+td {
+    font-size: 14px;
+    letter-spacing: .1px;
+    word-wrap: break-word;
+}
+p {
+  font-size: 15px;
+  line-height: 18px
+}
+.bold{
+    font-weight: 600;
+}
+.normal{
+    font-weight: normal
+}
+/* Main container css */
+.container {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 20px 30px;
+    padding-top: 0;
+    overflow: hidden
+}
+/* Header css */
+.header h2 > img{
+    max-width: 350px;
+    max-height: 50px;
+   /* margin-left: 10px; */
+}
+.header {
+    padding-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+.header .bar-code {
+    max-width: 400px;
+    text-align: center;
+    max-height: 60px;
+}
+.bar-code > span {
+	font-size: 11px;
+}
+/* Order details css */
+.order-details .details h4 {
+    font-size: 18px;
+}
+.order-details {
+  display: flex;
+  /* justify-content: space-around; */
+  padding-bottom: 15px;
+}
+.order-details .purchase-control {
+  width: 50%;
+  /*padding-left: 50px;*/
+}
+.order-details .purchase-order {
+  width: 50%;
+  padding-left: 50px;
+}
+
+
+/* Supplier details css */
+.supplier-details table tr td > h4 {
+    font-size: 12px;
+}
+.supplier-details p {
+    font-size: 14px;
+}
+.supplier-details table th {
+  width: 50%;
+  text-align: left;
+  /*padding-left: 50px;*/
+}
+.supplier-address{
+    padding-left: 50px;
+}
+.supplier-details table td {
+  background: #f6f7f9;
+  /*padding-left: 50px;*/
+  padding-right: 50px;
+}
+.total-amount {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+.total-amount h4 {
+    padding: 5px 10px;
+    background-color: #54b6e7;
+    letter-spacing: .5px;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+.total-amount .amount {
+  background-color: #f6f7f9;
+  color: black;
+  font-weight: bold;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+/* Amount calculattion */
+.total-amount table tr td {
+    padding: 5px 25px;
+}
+.total-amount table {
+    width: auto;
+}
+.total-amount table tr{
+    border: none;
+    border-bottom: 1px solid #D6DADD;
+}
+.total-amount table th {
+    background: #f6f7f9;
+    color: #403F28;
+}
+/* Footer */
+footer .terms-condition{
+    padding-top: 15px;
+}
+footer .terms-condition h4{
+    font-size: 15px;
+    font-weight: 600;
+}
+footer .terms-condition p{
+    text-align: justify;
+    font-size: 13px;
+}
+footer .footer-signature{
+    padding-top: 80px;
+    display: flex;
+    /* justify-content: space-around; */
+    justify-content: space-between;
+    /* justify-content: space-evenly; */
+}
+.relative{
+    position: relative;
+}
+footer .footer-signature .signature {
+    display: block;
+    flex-direction: column;
+    justify-content: center;
+}
+footer .footer-signature .signature .line{
+    /* position: absolute; */
+    width: 200px;
+    height: 1px;
+    background-color: black;
+    margin-bottom: 5px;
+
+}
+
+.signature{
+    width: 50%;
+    margin: 0 auto;
+}
+
+.customer{
+    float: left;
+    align-items: start;
+}
+
+.authorized{
+    float: right;
+    align-items: end;
+}
+/* .footer-signature .signature::before{
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 1px;
+    background-color: black;
+    top: -5px;
+    left: 0
+} */
+
+
+.text-bold{
+  font-weight: bold;
+}

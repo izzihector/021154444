@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Account Financial Report Assets -->
+<!--        <template id="account_reports_backend_inherit" inherit_id="account_reports.account_reports_backend" active="True">
+            <xpath expr="." position="inside">
+                <script type="text/javascript" src="/wk_accounts_reports/static/src/js/report.js"></script>
+            </xpath>
+        </template>-->
+
+        <record id="wk_accounts_reports.account_reports_backend_inherit" model="ir.asset">
+            <field name="name">account_reports_backend_inherit</field>
+            <field name="bundle">web.assets_backend</field>
+            <field name="path">/wk_accounts_reports/static/src/js/report.js</field>
+        </record>
+
+        <template id="inherit_search_template" inherit_id="account_reports.search_template">
+            <xpath expr="//div[@id='extra_options_dropdown']" position="attributes">
+                <attribute name="t-if" >"options.get('cash_basis') != None or options.get('all_entries') != None or options.get('unfold_all') != None or options.get('movements') != None"</attribute>
+            </xpath>
+        </template>
+
+        <template id="search_template_extra_options" inherit_id="account_reports.search_template_extra_options">
+            <xpath expr="//a" position="inside">
+                <t t-if="options.get('all_entries') != None">, </t>
+                <t t-if="options.get('movements') != None">
+                    <t t-if="options['movements']">With movements</t>
+                    <t t-if="not options['movements']">with no movement</t>
+                </t>
+            </xpath>
+            <xpath expr="//div" position="inside">
+                <a role="menuitem" class="dropdown-item js_account_report_bool_filter" t-if="options.get('movements') != None" title="with no movement" data-filter="movements" groups="account.group_account_user">With no movement</a>
+            </xpath>
+        </template>
+        <template id="line_template_inherit"  inherit_id="account_reports.line_template">
+            <xpath expr="//t/tr/td[1]" position="after">
+                <t t-if="context.get('print_mode')">
+                    <t t-if="line.get('title') and line.get('caret_options')">
+                        <td><t t-esc="line.get('title')" t-att-class="domainClass"/></td>
+                    </t>
+                </t>
+            </xpath>
+        </template>
+
+    </data>
+</odoo>

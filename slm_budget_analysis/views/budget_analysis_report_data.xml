@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+         <menuitem id="budget_analysis_reports_menu" name="Budget Analysis Reports"
+                  parent="account.menu_finance_reports" sequence="9"
+                  groups="slm_encryption_reports.group_advanced_reports"
+        />
+        <record id="action_budget_analysis_report" model="ir.actions.client">
+            <field name="name">Budget Analysis Report</field>
+            <field name="tag">account_report</field>
+            <field name="context" eval="{'model': 'budget.analysis.report'}"/>
+        </record>
+
+
+        <menuitem id="menu_budget_analysis_report" name="Budget Analysis Report"
+                  action="action_budget_analysis_report"
+                  parent="budget_analysis_reports_menu" groups="slm_encryption_reports.group_advanced_reports"/>
+    </data>
+</odoo>

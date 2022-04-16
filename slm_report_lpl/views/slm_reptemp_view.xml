@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>		
+			
+	<menuitem 
+		id="account_account_menu_xetechs" 
+		name="Xetechs Custom Reports" 
+		parent="account.menu_finance_configuration" 
+		groups="slm_encryption_reports.group_advanced_reports"
+		sequence="6"/> 					
+
+	<record id="view_slm_financial_reports_define_tree" model="ir.ui.view">
+        <field name="name">slm.financial.reports.define.tree</field>
+        <field name="model">slm.financial.reports.define</field>
+        <field name="arch" type="xml">
+	        <tree string="Define Report" class="o_define_report">
+	           	<field name="name"/>
+	           	<field name="description"/>
+	           	<field name="company_id" invisible="1"/>	        
+	        </tree>
+	    </field>
+	</record>	        
+
+	<record id="view_slm_financial_reports_define_form" model="ir.ui.view">
+        <field name="name">slm.financial.reports.define.form</field>
+        <field name="model">slm.financial.reports.define</field>
+        <field name="arch" type="xml">
+	        <form string="Define Report" class="o_define_report">
+		        <header>
+				</header>
+	            <sheet>
+	            	<div class="oe_button_box" name="button_box">
+	            	</div>
+		            <group>
+		            	<field name="name"/>
+		            	<field name="description"/>
+		            	<field name="type"/>
+		            	<field name="company_id" invisible="1"/>	            	
+		            </group>
+		            <notebook>
+		            	<page string="Report Lines" name="report_lines">
+		                    <field
+		                        name="report_line"
+		                        widget="section_and_note_one2many"
+		                        mode="tree"                        
+		                    >	            
+			                    <form>
+			                    	<group colspan="4">
+				                    	<group>
+				                    		<field name="name"/>
+				                    		<field name="code"/>
+				                    	</group>
+				                    	<group>
+				                    		<field name="type"/>
+				                    		<field name="sign"/>
+											<field name="reverse_order"/>
+				                    	</group>
+				                    	<group>
+				                    		<field name="tag_ids" widget="many2many_tags" attrs="{'invisible': [('type', '=', 'tittle')]}"/>
+				                    		<field name="formula"/><!--  attrs="{'invisible': [('type', '!=', 'tittle')]}"/>  -->		                    	
+				                    	</group>
+				                    	<group>
+				                    		<field name="group_ids" widget="many2many_tags" attrs="{'invisible': [('type', '=', 'tittle')]}"/>
+				                    		<field name="subgroup_ids" widget="many2many_tags" attrs="{'invisible': [('type', '=', 'tittle')]}"/>
+				                    	</group>
+			                    	</group>	
+			                    </form>
+			                    <tree decoration-bf="type == 'tittle'">
+			                    	<field name="sequence" widget="handle"/>
+			                    	<field name="name"/>
+			                    	<field name="code"/>
+			                    	<field name="type"/>
+			                    	<field name="tag_ids" widget="many2many_tags"/>
+			                    	<field name="formula"/>
+			                    	<field name="sign"/>			                    	                    
+			                    </tree>
+		                    </field>	
+		            	</page>
+		            </notebook>
+	           	</sheet>
+            </form>	        
+        </field>
+    </record>
+    
+    <record id="view_slm_financial_reports_define_search" model="ir.ui.view">
+        <field name="name">slm.financial.reports.define.search</field>
+        <field name="model">slm.financial.reports.define</field>
+        <field name="arch" type="xml">
+            <search string="Financial Reports Define">
+                <field name="name" filter_domain="['|', ('name','ilike',self), ('description','=like',str(self)+'%')]" string="Name"/>
+            </search>
+        </field>
+    </record>    
+
+    <record id="action_slm_financial_reports_define_form" model="ir.actions.act_window">
+        <field name="name">Layout Profit and Loss</field>
+        <field name="res_model">slm.financial.reports.define</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="view_slm_financial_reports_define_search"/>
+        <field name="view_id" ref="view_slm_financial_reports_define_tree"/>
+        <field name="help" type="html">
+          <p class="o_view_nocontent_smiling_face">
+            Add a new financial report define
+          </p><p>
+            Add a new financial report define
+          </p>
+        </field>
+    </record>
+
+    <menuitem 
+    	name="Xetechs Reports"
+    	action="action_slm_financial_reports_define_form" 
+    	id="menu_action_account_form" 
+    	parent="account_account_menu_xetechs"
+    	groups="slm_encryption_reports.group_advanced_reports"
+    	sequence="5"/>
+    	    	
+</odoo>

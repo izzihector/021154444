@@ -1,0 +1,22 @@
+<odoo>
+  <data>
+    <template id="gs_report_invoice_document" inherit_id="account.report_invoice_with_payments">
+      <xpath expr="//t" position="replace">
+        <t t-call="gs_invoice_pdf_report.report_sale_invoice_document1"/>
+      </xpath>
+    </template>
+
+    <record id="account_sale_invoice_uae" model="ir.actions.report">
+        <field name="name">VAT Invoice فاتورة ضريبية</field>
+        <field name="model">account.move</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">gs_invoice_pdf_report.gs_report_invoice_document</field>
+        <field name="report_file">gs_invoice_pdf_report.gs_report_invoice_document</field>
+        <field name="paperformat_id" ref="gs_invoice_pdf_report.paperformat_sale_invoice_report"/>
+        <field name="print_report_name">(object._get_report_base_filename())</field>
+        <field name="print_report_name">'Invoice - %s' % (object.name)</field>
+        <field name="binding_model_id" ref="account.model_account_move"/>
+        <field name="binding_type">report</field>
+    </record>
+  </data>
+</odoo>

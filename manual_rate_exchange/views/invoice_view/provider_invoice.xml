@@ -1,0 +1,35 @@
+<odoo>
+    <!-- views -->
+
+    <!-- Form -->
+
+  <record id="manual_rate_exchange_factura_proveedor_form_view" model="ir.ui.view">
+        <field name="name">factura.proveedor.form</field>
+        <field name="model">account.invoice</field>
+        <field name="inherit_id" ref="account.invoice_supplier_form"/>
+        <field name="arch" type="xml">
+
+
+        <xpath expr="//field[@name='date_due']" position="after">
+            <field name="check_rate"/>
+            <field name="rate_exchange" attrs="{'invisible': [('check_rate', '=', False)]}"/>
+        </xpath>
+
+
+        <xpath expr="//form/header/button[@name='action_invoice_open']" position="attributes">
+            <attribute name="context">{'value_check_rate':check_rate, 'value_rate_exchange': rate_exchange}</attribute>
+        </xpath>
+
+
+           <xpath expr="//field[@name='price_unit']" position="after">
+            <field name="local_currency_price" />
+        </xpath>
+
+
+
+        </field>
+    </record>
+
+
+
+</odoo>

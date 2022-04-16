@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_budget_encryption_mapping_tree" model="ir.ui.view">
+            <field name="name">budget.encryption.mapping.tree</field>
+            <field name="model">budget.encryption.mapping</field>
+            <field name="arch" type="xml">
+                <tree string="Values">
+                    <field name="year"/>
+                    <field name="month"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_budget_encryption_mapping_form" model="ir.ui.view">
+            <field name="name">budget.encryption.mapping.form</field>
+            <field name="model">budget.encryption.mapping</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="year" required="1"/>
+                                <field name="month" required="1"/>
+                            </group>
+                            <group style="text-align:right">
+                                <button name="duplicate_data" type="object" string="Copy data from last month"
+                                        class="oe_highlight" attrs="{'disabled':[('line_ids','!=',False)]}"
+                                        help="This button will remove current encryption lines and
+                                        will copy lines from last month non-empty"
+                                />
+                            </group>
+                        </group>
+                        <group>
+                            <field name="line_ids" widget="section_and_note_one2many"
+                                   mode="tree,kanban" nolabel="1">
+                                <tree editable="bottom">
+
+                                    <field name="analytical_account_id" required="1"/>
+                                    <field name="cost_center" context="{'active_test': False}"
+                                           domain="['|', ('code', '=like', '6%'), ('code', '=like', '7%')]" required="1"/>
+                                    <field name="encryption" required="1"/>
+                                </tree>
+                            </field>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_budget_encryption_mapping" model="ir.actions.act_window">
+            <field name="name">Budget Encryption Mapping</field>
+            <field name="res_model">budget.encryption.mapping</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_budget_encryption_mapping_tree"/>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Add a new budget encryption mapping record
+                </p>
+            </field>
+        </record>
+        <menuitem
+                name="Encryption Mapping"
+                action="action_budget_encryption_mapping"
+                id="menu_budget_action_encryption_mapping"
+                parent="slm_budget_reports.config_menu_budget_reports"
+                groups="slm_encryption_reports.group_advanced_reports"
+                sequence="8"/>
+    </data>
+</odoo>

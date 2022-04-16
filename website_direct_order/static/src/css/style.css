@@ -1,0 +1,25 @@
+.do_table_div{
+	padding: 30px;
+}
+.do_table{
+	border: 1px solid black;
+}
+.do_th{
+	border: 1px solid black;
+}
+
+.my_do_comment{
+	width:100%;
+	height:40px;
+}
+.td_my_note{
+	width:100%;
+	height:40px;
+}
+.my_order_qty{
+	float: right;
+}
+#selProduct_Template{
+	-webkit-appearance: none;
+    background: white;
+}

@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="portal_my_home_do" name="Portal My Home : sales entries" inherit_id="portal.portal_my_home" priority="20">
+        <xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
+            <t t-call="portal.portal_docs_entry" groups='website_direct_order.manage_direct_order_group_admin'>
+                <t t-set="title">Direct Orders</t>
+                <t t-set="url" t-value="'/my/direct/order'"/>
+                <t t-set="placeholder_count" t-value="'direct_order_count'"/>
+            </t>
+        </xpath>
+    </template>
+
+    <template id="sale.portal_my_home_menu_sale" name="Portal layout : sales menu entries" inherit_id="portal.portal_breadcrumbs" priority="20">
+        <xpath expr="//ol[hasclass('o_portal_submenu')]" position="inside">
+            <li t-if="page_name == 'quote' or sale_order and sale_order.state in ('sent', 'cancel')" t-attf-class="breadcrumb-item #{'active ' if not sale_order else ''}">
+                <a t-if="sale_order" t-attf-href="/my/quotes?{{ keep_query() }}">Quotations</a>
+                <t t-else="">Quotations</t>
+            </li>
+
+            <li t-if="page_name == 'direct_order' or sale_order and sale_order.state in ('draft','done') and sale_order.is_direct_order" t-attf-class="breadcrumb-item #{'active ' if not sale_order else ''}">
+                <a t-if="sale_order" t-attf-href="/my/direct/order?{{ keep_query() }}">Direct Order</a>
+                <t t-else="">Direct Orders</t>
+            </li>
+
+            <li t-if="page_name == 'order' or sale_order and sale_order.state not in ('sent', 'cancel','draft') and not sale_order.is_direct_order " t-attf-class="breadcrumb-item #{'active ' if not sale_order else ''}">
+                <a t-if="sale_order" t-attf-href="/my/orders?{{ keep_query() }}">Sales Orders</a>
+                <t t-else="">Sales Orders</t>
+            </li>
+
+            <li t-if="sale_order" class="breadcrumb-item active">
+                <span t-field="sale_order.type_name"/>
+                <t t-esc="sale_order.name"/>
+            </li>
+        </xpath>
+    </template>
+
+
+    <!-- My Direct Order -->
+
+    <template id="portal_my_direct_orders" name="My Sales Orders">
+        <t t-call="portal.portal_layout">
+            <t t-set="breadcrumbs_searchbar" t-value="True"/>
+
+            <t t-call="portal.portal_searchbar">
+                <t t-set="title">Direct Orders</t>
+            </t>
+
+            <t t-if="not direct_orders">
+                <p>There are currently no orders for your account.</p>
+            </t>
+            <t t-if="direct_orders" t-call="portal.portal_table">
+                <thead>
+                    <tr class="active">
+                        <th>
+                            <span class='d-none d-md-inline'>Direct Order #</span>
+                            <span class='d-block d-md-none'>Ref.</span>
+                        </th>
+                        <th class="text-right">Order Date</th>
+                        <th class="text-center"/>
+                        <th class="text-right">Total</th>
+                    </tr>
+                </thead>
+                <t t-foreach="direct_orders" t-as="direct_order">
+                    <tr>
+                        <td><a t-att-href="direct_order.get_portal_url()"><t t-esc="direct_order.name"/></a></td>
+                        <td class="text-right">
+                            <span t-field="direct_order.date_order" t-options="{'widget': 'date'}"/>&amp;nbsp;
+                            <span class='d-none d-md-inline' t-field="direct_order.date_order" t-options="{'time_only': True}"/>
+                        </td>
+                        <td class="text-center">
+                            <span t-if="direct_order.state == 'done'"  class="badge badge-pill badge-success">
+                                <i class="fa fa-fw fa-check" role="img" aria-label="Done" title="Done"/>Done
+                            </span>
+                        </td>
+                        <td class="text-right"><span t-field="direct_order.amount_total"/></td>
+                    </tr>
+                </t>
+            </t>
+        </t>
+    </template>
+
+    <template id="sale_order_portal_content_inherit" name="Sales Order Portal Content" inherit_id="sale.sale_order_portal_content" priority="20">
+
+        <xpath expr="//tbody/t[@t-as='line']" position="after">
+             <tr class="d-none my_do_tr">
+                <t>
+                    <td id="product_name">
+                        <t t-set="product_id" t-value="request.env['product.product'].sudo().search([])"/>
+                        <input name="selProduct" type="hidden" style="width: 200px;" id="selProduct"></input>
+
+                    </td>
+                    <td id="unit_qty" contenteditable='true' class="text-right">
+                        <div id="my_quote_qty my_order_qty">
+                            <span
+                             class="my_quote_qty">1</span>
+                        </div>
+                    </td>
+                    <td class="text-right">
+                        <span class="unit_price">0.00</span>
+                    </td>
+                    <td class="text-right my_do_tax"><span></span></td>
+                    <td class="text-right"><span class="do_order_line_price_subtotal oe_currency_value">0.00</span></td>
+                    <td><span class=" my_do_table_td  text-center fa fa-trash"></span></td>
+                </t>
+            </tr>
+
+            <tr class="my_do_note d-none">
+                <td colspan="5" class="td_my_note"><textarea class="my_do_comment"></textarea></td>
+                <td><span class="my_do_table_td glyphicon text-center fa fa-trash"></span></td>
+            </tr>
+        </xpath>
+
+        <xpath expr="//div[@id='introduction']/h2/em" position="after">
+            <button t-if="sale_order.is_direct_order and sale_order.state == 'draft'" style="float:right;" id="my_confirm_order" class="btn btn-primary">Confirm</button>
+        </xpath>
+
+        <xpath expr="//div[@id='total']" position="before">
+            <div id="add_clone_tr" class="row" name="total" style="page-break-inside: avoid;">
+                <div t-if="sale_order.is_direct_order and sale_order.state == 'draft'" t-attf-class="#{'col-4' if report_type != 'html' else 'col-sm-12 col-md-12'} ml-auto">
+                    <button id="my_direct_clone_tr" class="btn btn-primary do_add_clone_tr">Add Item</button>
+                    <button id="my_do_note_tr" class="btn btn-primary do_add_note_tr">Add Note</button>
+                    <button id="my_save_do_id" class="btn btn-primary my_save_do">Save</button>
+                </div>
+            </div>
+        </xpath>
+
+        <xpath expr="//thead/tr/th[last()]" position="before">
+            <th></th> 
+        </xpath>
+
+        <xpath expr="//tbody/t[@t-as='line']/tr/t/td[last()]" position="after">
+            <td style="text-align:center;" class="text-center"><span class="my_do_table-remove fa fa-trash"></span></td>
+        </xpath>
+
+        <xpath expr="//tbody/t[@t-as='line']/tr/t/td[2]" position="attributes">
+            <attribute name="class">my_order_qty</attribute>
+        </xpath>
+
+        <xpath expr="//tbody/t[@t-as='line']/tr/t/td[6]/span" position="attributes">
+            <attribute name="class">my_line_sub_total</attribute>
+        </xpath>
+
+        <xpath expr="//tbody/t[@t-as='line']/tr/t[3]" position="replace">
+            <t t-if="line.display_type == 'line_note'">
+                <td colspan="5">
+                    <span t-field="line.name"/>
+                </td>
+                <td class="text-center"><span class="my_do_table-remove text-center fa fa-trash"></span></td>
+            </t>
+        </xpath>
+        
+    </template>
+
+</odoo>

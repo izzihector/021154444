@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="sale_product_pricelist_view_contract_inherit" model="ir.ui.view">
+            <field name="name">sale.product.pricelist.view.contract.inherit</field>
+            <field name="model">product.pricelist</field>
+            <field name="inherit_id" ref="product.product_pricelist_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='company_id']" position="after">
+                    <field name="contract_product_ids" invisible="1"/>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

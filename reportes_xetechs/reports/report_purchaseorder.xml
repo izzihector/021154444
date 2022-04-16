@@ -1,0 +1,14 @@
+<odoo>
+    <data>
+        <template id="slm_report_purchaseorder_document" inherit_id="purchase.report_purchaseorder_document">
+            <xpath expr="//div[@class='page']/table/thead/tr/th[3]" position="after">
+                <th class="text-right"><strong>Analytic Account</strong></th>
+            </xpath>
+            <xpath expr="//div[@class='page']/table/tbody/tr/td[4]" position="before">
+                <td class="text-right">
+                    <span t-field="line.account_analytic_id"/>
+                </td>
+            </xpath>
+        </template>
+    </data>
+</odoo>

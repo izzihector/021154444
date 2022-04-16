@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+       <!--  <record id="inherit_stockinventory_line_view_form_readonly" model="ir.ui.view">
+            <field name="name">inherit.stockinventoryline.remarks.form.readonly</field>
+            <field name="model">stock.inventory.line</field>
+            <field name="inherit_id" ref="stock.stock_inventory_line_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='prod_lot_id']" position="after">
+                    <field name="transfer_remark7"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="inherit_stockinventory_view_form_readonly" model="ir.ui.view">
+            <field name="name">inherit.stockinventory.form.readonly</field>
+            <field name="model">stock.inventory</field>
+            <field name="inherit_id" ref="stock.view_inventory_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='action_validate']" attrs="{'invisible': ['|', ('state', '!=', 'confirm'), ('line_ids', '!=', [])]}" position="replace">
+                    <button name="action_validate_custom" string="Validate Inventory" type="object" class="oe_highlight" attrs="{'invisible': ['|', ('state', '!=', 'confirm'), ('line_ids', '!=', [])]}"/>
+                </xpath>
+                <xpath expr="//button[@name='action_validate']" attrs="{'invisible': ['|', ('state', '!=', 'confirm'), ('line_ids', '=', [])]}" position="replace">
+                    <button name="action_validate_custom" string="Validate Inventory" type="object" class="oe_highlight" attrs="{'invisible': ['|', ('state', '!=', 'confirm'), ('line_ids', '=', [])]}"/>
+                </xpath>
+
+            </field>
+        </record> -->
+
+</odoo>

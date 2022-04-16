@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_encryption_mapping_tree" model="ir.ui.view">
+            <field name="name">encryption.mapping.tree</field>
+            <field name="model">encryption.mapping</field>
+            <field name="arch" type="xml">
+                <tree string="Valores">
+                    <field name="fiscal_year"/>
+                    <field name="date_from"/>
+                    <field name="date_to"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_encryption_mapping_form" model="ir.ui.view">
+            <field name="name">encryption.mapping.form</field>
+            <field name="model">encryption.mapping</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="fiscal_year"/>
+                                <field t-if="fiscal_year" name="date_from"/>
+                                <field t-if="fiscal_year" name="date_to"/>
+                            </group>
+                        </group>
+                        <group>
+                            <field t-if="fiscal_year" name="line_ids" widget="section_and_note_one2many"
+                                   mode="tree,kanban" nolabel="1">
+                                <tree editable="bottom">
+
+                                    <field name="analytical_account_id"/>
+                                    <field name="cost_center" context="{'active_test': False}"
+                                           domain="['|', ('code', '=like', '6%'), ('code', '=like', '7%')]"/>
+                                    <field name="encryption"/>
+                                </tree>
+                            </field>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_encryption_mapping" model="ir.actions.act_window">
+            <field name="name">Encryption Mapping</field>
+            <field name="res_model">encryption.mapping</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_encryption_mapping_tree"/>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Add a new encryption mapping record
+                </p>
+            </field>
+        </record>
+        <menuitem
+                action="action_encryption_mapping"
+                id="menu_action_encryption_mapping"
+                parent="slm_report_lpl.account_account_menu_xetechs"
+                groups="slm_encryption_reports.group_advanced_reports"
+                sequence="6"/>
+    </data>
+</odoo>

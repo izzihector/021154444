@@ -1,0 +1,16 @@
+<odoo>
+    <!-- Inherit  res partner form  View to Modify it add some fields -->
+    <record id="res_partner_form_inherit0" model="ir.ui.view">
+        <field name="name">contact.form.inherit1</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='function']" position="after">
+                <field name="contact_name"/>
+            </xpath>
+            <xpath expr="//field[@name='vat']" position="after">
+                <field name="cr_id"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

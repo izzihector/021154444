@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="purchase_order_line_inherit_erp_integration" model="ir.ui.view">
+        <field name="name">purchase.order.line.mrp.price</field>
+        <field name="model">purchase.order.line</field>
+        <field name="inherit_id" ref="purchase.purchase_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='order_line']/form/group/group/field[@name='price_unit']" position="before">
+                <field name="mrp_unit" readonly="1"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

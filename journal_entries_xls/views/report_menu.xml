@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Export to XLSX QWEB-->
+        <record id="partner_xlsx" model="ir.actions.report">
+            <field name="name">Export to XLSX</field>
+            <field name="model">account.move</field>
+            <field name="report_type">xlsx</field>
+            <field name="report_name">account.move.xls</field>
+            <field name="report_file">account_move_xls</field>
+            <field name="binding_model_id" ref="account.model_account_move"/>
+            <field name="binding_type">report</field>
+            <field name="attachment_use">False</field>
+        </record>
+    </data>
+</odoo>

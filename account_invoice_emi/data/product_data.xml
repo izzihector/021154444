@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding='UTF-8'?>
+<odoo>
+    <record id="service_project_product_emi" model="product.product">
+        <field name="name">Project Product</field>
+        <field name="default_code">Commission</field>
+        <field name="type">service</field>
+        <field name="invoice_policy">order</field>
+        <field name="taxes_id" eval="[(5,)]"/>
+        <field name="categ_id">1</field>
+        <field name="uom_id">1</field>
+    </record>
+</odoo>

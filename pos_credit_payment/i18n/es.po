@@ -1,0 +1,399 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* pos_credit_payment
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 13.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-02-13 08:28+0000\n"
+"PO-Revision-Date: 2020-02-13 08:28+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: pos_credit_payment
+#: model_terms:ir.ui.view,arch_db:pos_credit_payment.invoice_credit_payment
+msgid "<span>Allow credit in invoice</span>"
+msgstr "<span> Permitir crédito en factura </span>"
+
+#. module: pos_credit_payment
+#: model:ir.model.fields,field_description:pos_credit_payment.field_update_credit_history__balance
+#: model:ir.model.fields,field_description:pos_credit_payment.field_update_credit_history_payment__balance
+msgid "Balance"
+msgstr "Equilibrar"
+
+#. module: pos_credit_payment
+#: model:ir.model.fields,field_description:pos_credit_payment.field_credit_history__balance_credit_amount
+msgid "Balance Credit Amount"
+msgstr "Monto del saldo acreedor"
+
+#. module: pos_credit_payment
+#: model_terms:ir.ui.view,arch_db:pos_credit_payment.view_credit_account
+msgid "Cancel"
+msgstr "Cancelar"
+
+#. module: pos_credit_payment
+#: model:ir.model,name:pos_credit_payment.model_res_partner
+msgid "Contact"
+msgstr "Contacto"
+
+#. module: pos_credit_payment
+#: model:ir.model.fields,field_description:pos_credit_payment.field_credit_account__create_uid
+#: model:ir.model.fields,field_description:pos_credit_payment.field_credit_history__create_uid
+#: model:ir.model.fields,field_description:pos_credit_payment.field_partner_credit__create_uid
+#: model:ir.model.fields,field_description:pos_credit_payment.field_update_credit_history__create_uid
+#: model:ir.model.fields,field_description:pos_credit_payment.field_update_credit_history_payment__create_uid
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: pos_credit_payment
+#: model:ir.model.fields,field_description:pos_credit_payment.field_credit_account__create_date
+#: model:ir.model.fields,field_description:pos_credit_payment.field_credit_history__create_date
+#: model:ir.model.fields,field_description:pos_credit_payment.field_partner_credit__create_date
+#: model:ir.model.fields,field_description:pos_credit_payment.field_update_credit_history__create_date
+#: model:ir.model.fields,field_description:pos_credit_payment.field_update_credit_history_payment__create_date
+msgid "Created on"
+msgstr "Creado en"
+
+#. module: pos_credit_payment
+#: model:ir.model.fields,field_description:pos_credit_payment.field_partner_credit__credit_jr
+#: model:ir.model.fields,field_description:pos_credit_payment.field_pos_order__credit_check
+#: model:ir.model.fields,field_description:pos_credit_payment.field_res_partner__custom_credit
+#: model:ir.model.fields,field_description:pos_credit_payment.field_res_users__custom_credit
+#: model:ir.ui.menu,name:pos_credit_payment.menu_sale_credit
+#: model_terms:ir.ui.view,arch_db:pos_credit_payment.credit_detail_button_res_partner
+msgid "Credit"
+msgstr "Crédito"
+
+#. module: pos_credit_payment
+#. openerp-web
+#: code:addons/pos_credit_payment/static/src/xml/pos_extended.xml:0
+#: model:ir.model.fields,field_description:pos_credit_payment.field_credit_account__credit_amount
+#, python-format
+msgid "Credit Amount"
+msgstr "Monto de crédito"
+
+#. module: pos_credit_payment
+#: model:ir.actions.act_window,name:pos_credit_payment.action_pos_credit
+#: model:ir.ui.menu,name:pos_credit_payment.menu_sale_order_invoice
+#: model_terms:ir.ui.view,arch_db:pos_credit_payment.view_credit_tree
+msgid "Credit Details"
+msgstr "Detalles de crédito"
+
+#. module: pos_credit_payment
+#: model:ir.model.fields,field_description:pos_credit_payment.field_res_partner__credit_ids
+#: model:ir.model.fields,field_description:pos_credit_payment.field_res_users__credit_ids
+msgid "Credit History"
+msgstr "Historial de crédito"
+
+#. module: pos_credit_payment
+#: model:ir.actions.act_window,name:pos_credit_payment.action_view_credit_account
+#: model_terms:ir.ui.view,arch_db:pos_credit_payment.invoice_credit_payment
+#: model_terms:ir.ui.view,arch_db:pos_credit_payment.view_credit_account
+msgid "Credit Payment"
+msgstr "Pago de crédito"
+
+#. module: pos_credit_payment
+#: model:ir.model.fields,field_description:pos_credit_payment.field_credit_account__credit_id
+#: model:ir.model.fields,field_description:pos_credit_payment.field_credit_history__partner_id
+#: model:ir.model.fields,field_description:pos_credit_payment.field_partner_credit__partner_id
+#: model:ir.model.fields,field_description:pos_credit_payment.field_update_credit_history__partner_id
+#: model:ir.model.fields,field_description:pos_credit_payment.field_update_credit_history_payment__partner_id
+msgid "Customer"
+msgstr "Cliente"
+
+#. module: pos_credit_payment
+#: code:addons/pos_credit_payment/models/custom_sale.py:0
+#, python-format
+msgid "Customer Invoice"
+msgstr "Factura de cliente"
+
+#. module: pos_credit_payment
+#. openerp-web
+#: code:addons/pos_credit_payment/static/src/js/pos_extended.js:0
+#: code:addons/pos_credit_payment/static/src/js/pos_extended.js:0
+#, python-format
+msgid "Customer has not Sufficient Credit To Pay"
+msgstr "La cliente no tiene crédito suficiente para pagar"
+
+#. module: pos_credit_payment
+#: model:ir.model.fields,field_description:pos_credit_payment.field_credit_history__date
+#: model:ir.model.fields,field_description:pos_credit_payment.field_update_credit_history__date_update
+#: model:ir.model.fields,field_description:pos_credit_payment.field_update_credit_history_payment__date_update
+msgid "Date"
+msgstr "Fecha"
+
+#. module: pos_credit_payment
+#: model:ir.model.fields,field_description:pos_credit_payment.field_credit_account__display_name
+#: model:ir.model.fields,field_description:pos_credit_payment.field_credit_history__display_name
+#: model:ir.model.fields,field_description:pos_credit_payment.field_partner_credit__display_name
+#: model:ir.model.fields,field_description:pos_credit_payment.field_update_credit_history__display_name
+#: model:ir.model.fields,field_description:pos_credit_payment.field_update_credit_history_payment__display_name
+msgid "Display Name"
+msgstr "Nombre para mostrar"
+
+#. module: pos_credit_payment
+#. openerp-web
+#: code:addons/pos_credit_payment/static/src/js/pos_extended.js:0
+#, python-format
+msgid "Empty Order"
+msgstr "Pedido vacío"
+
+#. module: pos_credit_payment
+#: model:ir.model.fields.selection,name:pos_credit_payment.selection__pos_config__invoice_credit_payment__full_amount
+msgid "Full Amount(without credit)"
+msgstr "Monto total (sin crédito)"
+
+#. module: pos_credit_payment
+#: model:ir.model.fields,field_description:pos_credit_payment.field_credit_account__id
+#: model:ir.model.fields,field_description:pos_credit_payment.field_credit_history__id
+#: model:ir.model.fields,field_description:pos_credit_payment.field_partner_credit__id
+#: model:ir.model.fields,field_description:pos_credit_payment.field_update_credit_history__id
+#: model:ir.model.fields,field_description:pos_credit_payment.field_update_credit_history_payment__id
+msgid "ID"
+msgstr "CARNÉ DE IDENTIDAD"
+
+#. module: pos_credit_payment
+#: model:ir.model.fields,field_description:pos_credit_payment.field_pos_config__invoice_credit_payment
+msgid "Invoice Credit Payment"
+msgstr "Pago de crédito de factura"
+
+#. module: pos_credit_payment
+#: model:ir.model,name:pos_credit_payment.model_account_journal
+msgid "Journal"
+msgstr "Diario"
+
+#. module: pos_credit_payment
+#: model:ir.model.fields,field_description:pos_credit_payment.field_credit_account____last_update
+#: model:ir.model.fields,field_description:pos_credit_payment.field_credit_history____last_update
+#: model:ir.model.fields,field_description:pos_credit_payment.field_partner_credit____last_update
+#: model:ir.model.fields,field_description:pos_credit_payment.field_update_credit_history____last_update
+#: model:ir.model.fields,field_description:pos_credit_payment.field_update_credit_history_payment____last_update
+msgid "Last Modified on"
+msgstr "Última modificación el"
+
+#. module: pos_credit_payment
+#: model:ir.model.fields,field_description:pos_credit_payment.field_credit_account__write_uid
+#: model:ir.model.fields,field_description:pos_credit_payment.field_credit_history__write_uid
+#: model:ir.model.fields,field_description:pos_credit_payment.field_partner_credit__write_uid
+#: model:ir.model.fields,field_description:pos_credit_payment.field_update_credit_history__write_uid
+#: model:ir.model.fields,field_description:pos_credit_payment.field_update_credit_history_payment__write_uid
+msgid "Last Updated by"
+msgstr "Última actualización por"
+
+#. module: pos_credit_payment
+#: model:ir.model.fields,field_description:pos_credit_payment.field_credit_account__write_date
+#: model:ir.model.fields,field_description:pos_credit_payment.field_credit_history__write_date
+#: model:ir.model.fields,field_description:pos_credit_payment.field_partner_credit__write_date
+#: model:ir.model.fields,field_description:pos_credit_payment.field_update_credit_history__write_date
+#: model:ir.model.fields,field_description:pos_credit_payment.field_update_credit_history_payment__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: pos_credit_payment
+#. openerp-web
+#: code:addons/pos_credit_payment/static/src/js/pos_extended.js:0
+#: code:addons/pos_credit_payment/static/src/js/pos_extended.js:0
+#, python-format
+msgid "Not Sufficient Credit"
+msgstr "Ultima actualización en"
+
+#. module: pos_credit_payment
+#: model:ir.model.fields,field_description:pos_credit_payment.field_update_credit_history__old_credit_bal
+#: model:ir.model.fields,field_description:pos_credit_payment.field_update_credit_history_payment__old_credit_bal
+msgid "Old Credit Balance"
+msgstr "Saldo de crédito antiguo"
+
+#. module: pos_credit_payment
+#: model:ir.model.fields,field_description:pos_credit_payment.field_account_journal__credit_jr
+#: model:ir.model.fields,field_description:pos_credit_payment.field_pos_payment_method__credit_jr
+msgid "POS Credit Journal"
+msgstr "Diario de crédito de punto de venta"
+
+#. module: pos_credit_payment
+#: model_terms:ir.ui.view,arch_db:pos_credit_payment.credit_detail_button_res_partner
+msgid "POS Customer Credit Details"
+msgstr "Detalles de crédito del cliente POS"
+
+#. module: pos_credit_payment
+#: model:ir.model.fields,field_description:pos_credit_payment.field_credit_history__pos_order_id
+msgid "POS Order"
+msgstr "Orden POS"
+
+#. module: pos_credit_payment
+#: model:ir.model.fields,field_description:pos_credit_payment.field_credit_history__pos_order_amount
+msgid "POS Order Amount"
+msgstr "Cantidad de pedido de POS"
+
+#. module: pos_credit_payment
+#: model_terms:ir.ui.view,arch_db:pos_credit_payment.credit_detail_button_res_partner
+msgid "POS Orders Credit Payment History"
+msgstr "Historial de pagos de crédito de pedidos de punto de venta"
+
+#. module: pos_credit_payment
+#: model:ir.model.fields.selection,name:pos_credit_payment.selection__pos_config__invoice_credit_payment__partial_amount
+msgid "Partial Amount(with credit)"
+msgstr "Monto parcial (con crédito)"
+
+#. module: pos_credit_payment
+#. openerp-web
+#: code:addons/pos_credit_payment/static/src/js/pos_extended.js:0
+#, python-format
+msgid "Payment Amount Exceeded"
+msgstr "Monto de pago excedido"
+
+#. module: pos_credit_payment
+#: model:ir.model.fields,field_description:pos_credit_payment.field_credit_account__journal_id
+msgid "Payment Journal"
+msgstr "Diario de pago"
+
+#. module: pos_credit_payment
+#: model:ir.model.fields,field_description:pos_credit_payment.field_update_credit_history_payment__payment_refer
+msgid "Payment Ref."
+msgstr "Pago Ref."
+
+#. module: pos_credit_payment
+#: code:addons/pos_credit_payment/models/custom_sale.py:0
+#, python-format
+msgid "Please provide a partner for the sale."
+msgstr "Por favor indique una empresa para la venta."
+
+#. module: pos_credit_payment
+#: model:ir.model,name:pos_credit_payment.model_pos_config
+msgid "Point of Sale Configuration"
+msgstr "Configuración del TPV"
+
+#. module: pos_credit_payment
+#: model:ir.model,name:pos_credit_payment.model_pos_order
+msgid "Point of Sale Orders"
+msgstr "Pedidos del TPV"
+
+#. module: pos_credit_payment
+#: model:ir.model,name:pos_credit_payment.model_pos_payment_method
+msgid "Point of Sale Payment Methods"
+msgstr "Métodos de pago en el punto de venta"
+
+#. module: pos_credit_payment
+#: model_terms:ir.ui.view,arch_db:pos_credit_payment.view_credit_account
+msgid "Submit"
+msgstr "Enviar"
+
+#. module: pos_credit_payment
+#. openerp-web
+#: code:addons/pos_credit_payment/static/src/js/pos_extended.js:0
+#, python-format
+msgid ""
+"There must be at least one product in your order before it can be validated."
+msgstr "Debe haber al menos un producto en su pedido antes de que pueda ser validado."
+
+#. module: pos_credit_payment
+#: code:addons/pos_credit_payment/models/custom_sale.py:0
+#, python-format
+msgid ""
+"This invoice has been created from the point of sale session: <a href=# "
+"data-oe-model=pos.order data-oe-id=%d>%s</a>"
+msgstr ""
+"Esta factura se ha creado desde la sesión del punto de venta: <a href=# "
+"data-oe-model=pos.order data-oe-id=%d>%s</a>"
+
+#. module: pos_credit_payment
+#. openerp-web
+#: code:addons/pos_credit_payment/static/src/js/pos_extended.js:0
+#, python-format
+msgid "Unknown customer/use credit payment"
+msgstr "Cliente desconocido / pago de crédito de uso"
+
+#. module: pos_credit_payment
+#. openerp-web
+#: code:addons/pos_credit_payment/static/src/js/pos_extended.js:0
+#, python-format
+msgid "Unknown customer1"
+msgstr "Cliente desconocido1"
+
+#. module: pos_credit_payment
+#: model:ir.model.fields,field_description:pos_credit_payment.field_partner_credit__update
+#: model_terms:ir.ui.view,arch_db:pos_credit_payment.view_credit_tree
+msgid "Update"
+msgstr "Actualizar"
+
+#. module: pos_credit_payment
+#: model:ir.model.fields,field_description:pos_credit_payment.field_res_partner__update_credit_ids
+#: model:ir.model.fields,field_description:pos_credit_payment.field_res_users__update_credit_ids
+msgid "Update Credit History"
+msgstr "Actualizar historial de crédito"
+
+#. module: pos_credit_payment
+#: model:ir.model.fields,field_description:pos_credit_payment.field_res_partner__update_credit_payment_ids
+#: model:ir.model.fields,field_description:pos_credit_payment.field_res_users__update_credit_payment_ids
+msgid "Update Credit History with Accounting Entry"
+msgstr "Actualizar historial de crédito con entrada contable"
+
+#. module: pos_credit_payment
+#: model:ir.model.fields,field_description:pos_credit_payment.field_update_credit_history__update_credit_amount
+#: model:ir.model.fields,field_description:pos_credit_payment.field_update_credit_history_payment__update_credit_amount
+msgid "Update Credit amount"
+msgstr "Actualizar cantidad de crédito"
+
+#. module: pos_credit_payment
+#: model_terms:ir.ui.view,arch_db:pos_credit_payment.credit_detail_button_res_partner
+msgid "Update Customer Credit History"
+msgstr "Actualizar historial de crédito del cliente"
+
+#. module: pos_credit_payment
+#: model_terms:ir.ui.view,arch_db:pos_credit_payment.credit_detail_button_res_partner
+msgid "Update Customer Credit with Payment History"
+msgstr "Actualizar crédito de cliente con historial de pagos"
+
+#. module: pos_credit_payment
+#: model_terms:ir.ui.view,arch_db:pos_credit_payment.view_credit_tree
+msgid "Update With Accounting Entry"
+msgstr "Actualizar con entrada contable"
+
+#. module: pos_credit_payment
+#: model:ir.model.fields,field_description:pos_credit_payment.field_credit_history__used_credit_amount
+msgid "Used Credit Amount"
+msgstr "Monto de crédito usado"
+
+#. module: pos_credit_payment
+#. openerp-web
+#: code:addons/pos_credit_payment/static/src/js/pos_extended.js:0
+#, python-format
+msgid "You cannot Pay More than Total Amount"
+msgstr "No puede pagar más del monto total"
+
+#. module: pos_credit_payment
+#. openerp-web
+#: code:addons/pos_credit_payment/static/src/js/pos_extended.js:0
+#: code:addons/pos_credit_payment/static/src/js/pos_extended.js:0
+#, python-format
+msgid "You cannot use Credit payment. Select customer first."
+msgstr "No puede usar el pago de crédito. Seleccione el cliente primero."
+
+#. module: pos_credit_payment
+#: model:ir.model,name:pos_credit_payment.model_credit_account
+msgid "credit.account"
+msgstr "cuenta.crédito"
+
+#. module: pos_credit_payment
+#: model:ir.model,name:pos_credit_payment.model_credit_history
+msgid "credit.history"
+msgstr "historial.crédito"
+
+#. module: pos_credit_payment
+#: model:ir.model,name:pos_credit_payment.model_partner_credit
+msgid "partner.credit"
+msgstr "socio.crédito"
+
+#. module: pos_credit_payment
+#: model:ir.model,name:pos_credit_payment.model_update_credit_history
+msgid "update.credit.history"
+msgstr "update.credit.history"
+
+#. module: pos_credit_payment
+#: model:ir.model,name:pos_credit_payment.model_update_credit_history_payment
+msgid "update.credit.history.payment"
+msgstr "update.credit.history.payment"

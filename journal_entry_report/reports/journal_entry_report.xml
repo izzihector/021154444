@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="report_journal_entries">
+        <t t-call="web.html_container">
+            <t t-call="journal_entry_report.custom_journal_header"/>
+            <t t-call="web.external_layout">
+                <t t-foreach="docs" t-as="o">
+                    <t t-set="o" t-value="o.with_context(lang=lang)"/>
+                    <t t-call="journal_entry_report.custom_journal_footer"/>
+
+                    <style>
+                        @font-face {
+                            font-family: 'Cairo-Regular';
+                            src: local('Cairo-Regular'), local('Cairo-Regular'), url(/journal_entry_report/static/src/fonts/cairo/Cairo-Regular.ttf) format('opentype');
+                        }
+
+                        .font_cairo{
+                            font-family: Cairo-Regular;
+                        }
+                        table {
+                          border-collapse: collapse;
+                        }
+
+                    </style>
+
+                    <div class="font_cairo">
+                    <div class="page" style="font-size:15px;">
+                        <div style="direction:ltr" class="font_cairo">
+<!--                            t-if="o.user_id.lang !='ar_001'"-->
+<!--                            <h1 class="text-center" style="position:relative;bottom:55px;">-->
+<!--                                -->
+<!--                            </h1>                    -->
+                            <div style="position:relative;top:30px;margin-bottom:-20px;text-align:center;border-radius: 25px;background: #eef2f3; padding: 3px 0 3px 0; font-size:18px;
+                                width:45%;border:2px solid #38383d;margin:-37px 27.5% 10px 27.5%;z-index:1000;direction:ltr">
+                                <strong style="margin: 0 8px 0 8px;font-size: 15px;">Journal Entry- قيد يومية</strong>
+                            </div>
+
+<!--                            <div class="row ml-1" style="position:relative;bottom:30px;">-->
+<!--                                <div class="col-3">-->
+<!--                                    &lt;!&ndash;                                    style="position:relative;left:200px;"&ndash;&gt;-->
+<!--                                    <div class="text-center-->
+<!--                                     pt-2 pb-1">-->
+<!--                                        <h6>-->
+<!--                                            JournalReference-->
+<!--                                            <span class="pl-2">الرقم المرجعي للقيد</span>-->
+<!--                                        </h6>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                                <div class="col-2" style="position:relative;top:10px;">-->
+<!--                                    &lt;!&ndash;                                    ;left:155px;&ndash;&gt;-->
+<!--                                    <strong style="color:#5d4037;" t-field=" o.name"/>-->
+<!--                                </div>-->
+<!--                                <div class="col-3">-->
+<!--                                    &lt;!&ndash;                                    style="position:relative;left:150px;"&ndash;&gt;-->
+<!--                                    <div class="text-center pt-2 pb-1">-->
+<!--                                        <h6>User-->
+<!--                                            <span class="pl-2">اسم المستخدم</span>-->
+<!--                                        </h6>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                                <div  t-if="o.user_id.lang != 'ar_001'" class="col-3" style="position:relative;top:10px; right:3%;">-->
+<!--                                    &lt;!&ndash;                                    ;left:155px;&ndash;&gt;-->
+<!--                                    <strong style="color:#5d4037;" t-field="o.user_id.name"/>-->
+<!--                                </div>-->
+<!--                                <div t-if="o.user_id.lang == 'ar_001'" class="col-3" style="position:relative;top:10px; right:15%;">-->
+<!--                                    <strong style="color:#5d4037;" t-field="o.user_id.name"/>-->
+<!--                                </div>-->
+<!--                                &lt;!&ndash;                                <div class="col-2" style="position:relative;top:10px;">&ndash;&gt;-->
+<!--                                &lt;!&ndash;&lt;!&ndash;                                    left:105px&ndash;&gt;&ndash;&gt;-->
+<!--                                &lt;!&ndash;                                    <strong style="color:#5d4037;" t-field="o.user_id.name"/>&ndash;&gt;-->
+<!--                                &lt;!&ndash;                                </div>&ndash;&gt;-->
+<!--                            </div>-->
+                            <table class="table table-borderless" style="position:relative;top:20px;font-size:15px;width:100%">
+                                <tr >
+<!--                                    <td t-if="user.lang == 'en_US' and user.name" class="text-left"><strong>UserName:</strong></td>-->
+<!--                                    <td width="25%"><strong t-if="user.name" t-field="user.name"/></td>-->
+<!--                                    <td t-if="user.lang == 'ar_001' and user.name" class="text-right"><strong>اسم المستخدم:</strong></td>-->
+<!--                                    <td width="1%"><strong>|</strong></td>-->
+                                    <td t-if="user.lang == 'en_US' and o.name" class="text-left"><strong>JournalReference:</strong></td>
+                                    <td width="50%"><strong t-if="o.name" t-field="o.name"/></td>
+                                    <td t-if="user.lang == 'ar_001' and o.name" class="text-right"><strong>الرقم المرجعي للقيد:</strong></td>
+<!--                                    <td width="40%"><strong>User Name</strong>&#160; <strong t-if="o.user_id.name" t-field="o.user_id.name"/><strong t-else="">&#160; &#160; &#160; ... &#160; &#160; &#160; </strong>&#160;<span>اسم المستخدم</span>&#160; </td>-->
+<!--                                    <td width="60%"><strong>JournalReference</strong>&#160; <strong t-if="o.name" t-field="o.name"/><strong t-else="">&#160; &#160; &#160; ... &#160; &#160; &#160; </strong>الرقم المرجعي للقيد&#160; </td>-->
+                                </tr>
+                            </table>
+                            <table class="table table-bordered" width="100%" style="font-size:16px">
+
+                                <tr class="thead-light" t-if="user.lang == 'en_US'">
+                                    <th class="text-center">Journal</th>
+                                    <th class="text-center">Posting Date</th>
+                                    <th class="text-center">Entry Date</th>
+                                    <th class="text-center">Journal Date</th>
+                                </tr>
+                                <tr class="thead-light" t-if="user.lang == 'ar_001'">
+                                    <th class="text-center">اليومية</th>
+                                    <th class="text-center">تاريخ الترحيل</th>
+                                    <th class="text-center">تاريخ الإدخال</th>
+                                    <th class="text-center"> تاريخ القيد</th>
+                                </tr>
+                                <tr>
+                                    <td class="text-center"><strong  t-field="o.journal_id.name"/></td>
+                                    <td class="text-center"><strong class="text-center" t-field="o.write_date"/></td>
+                                    <td class="text-center"><strong class="text-center" t-field="o.create_date"/></td>
+                                    <td class="text-center"><strong class="text-center" t-field="o.date" t-options="{'widget': 'date'}"/></td>
+                                </tr>
+                            </table>
+
+                        </div>
+
+                        <div class="row">
+                            <table style="border-collapse: collapse; font-size: 14px" width="100%" class="table-bordered table table-striped table-sm">
+                                <thead>
+                                    <tr class="thead-light" t-if="user.lang == 'en_US'">
+                                        <th class="text-center" width="3%">#</th>
+                                        <th class="text-center" width="15%">Account Name</th>
+                                        <th class="text-center" width="8%">Partner</th>
+                                        <th class="text-center" width="8%">Analytic Account</th>
+                                        <th class="text-center" width="8%">Branch</th>
+                                        <th class="text-center" width="48%">Description</th>
+                                        <th class="text-center" width="5%">Debit</th>
+                                        <th class="text-center" width="5%">Credit</th>
+                                    </tr>
+                                    <tr class="thead-light" t-if="user.lang == 'ar_001'">
+                                        <th class="text-center" width="3%">م</th>
+                                        <th class="text-center" width="15%">اسم الحساب الرئيسي</th>
+                                        <th class="text-center" width="8%">اسم الحساب الفرعي</th>
+                                        <th class="text-center" width="8%">الحساب التحليلي</th>
+                                        <th class="text-center" width="8%">الفرع</th>
+                                        <th class="text-center" width="48%">البيان</th>
+                                        <th class="text-center" width="5%">مدين</th>
+                                        <th class="text-center" width="5%">دائن</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="text-center">
+                                    <t t-set="sequence" t-value="1"/>
+                                    <t t-set="total_credit" t-value="0"/>
+                                    <t t-set="total_debit" t-value="0"/>
+                                    <t t-foreach="o.line_ids" t-as="line">
+                                        <tr>
+                                            <td>
+                                                <span t-esc="sequence"/>
+                                                <span t-set="sequence" t-value="sequence+1"/>
+                                            </td>
+<!--                                            <td>-->
+<!--                                                <span t-field="line.account_id.code"/>-->
+<!--                                            </td>-->
+                                            <td>
+<!--                                                <span t-field="line.account_id.name"/>-->
+                                                <span t-field="line.account_id.code"/> -
+                                                <span t-if="user.lang == 'en_US'" t-field="line.with_context(lang='en_US').account_id.name"/>
+                                                <span t-if="user.lang == 'ar_001'" t-field="line.with_context(lang='ar_001').account_id.name"/>
+                                            </td>
+                                            <td>
+                                                <span t-field="line.partner_id.display_name"/>
+                                            </td>
+                                            <td>
+                                                <span t-field="line.analytic_account_id.display_name"/>
+                                            </td>
+                                            <td>
+                                                <span t-field="line.branch_id.name"/>
+                                            </td>
+                                            <td>
+                                                <span style='width:35%' t-field="line.name"/>
+                                            </td>
+                                            <td>
+                                                <span t-esc="'{:,.2f}'.format(line.debit)"/>
+                                            </td>
+                                            <td>
+                                                <span t-esc="'{:,.2f}'.format(line.credit)"/>
+                                            </td>
+                                            <t t-set="total_credit" t-value="total_credit + line.credit"/>
+                                            <t t-set="total_debit" t-value="total_debit + line.debit"/>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                                <tfooter style="background-color:#DDD;">
+
+                                    <tr class="text-center" style="background-color:#DDD;">
+                                        <td colspan="6" style="font-size: 15px">
+                                            <strong t-if="user.lang == 'ar_001'">
+                                                الاجمالي:<u><span t-esc="'{:,.2f}'.format(total_debit)"></span></u>
+                                                &#160;(&#160;<span t-esc="o.compute_amount_in_word_ar(total_debit)"/>&#160;)&#160;
+                                            </strong>
+                                            <strong t-if="user.lang == 'en_US'">
+                                                Total: <u><span t-esc="'{:,.2f}'.format(total_debit)"></span></u>
+                                                &#160;(&#160;<span t-esc="o.compute_amount_in_word_en(total_debit)"/>&#160;)&#160;
+                                            </strong>
+                                        </td>
+
+                                        <td>
+                                            <strong>
+                                                <span t-esc="'{:,.2f}'.format(total_debit)"/>
+                                            </strong>
+                                        </td>
+
+                                        <td>
+                                            <strong>
+                                                <span t-esc="'{:,.2f}'.format(total_credit)"/>
+                                            </strong>
+                                        </td>
+                                    </tr>
+
+<!--                                    todo please do not remove these commented rows .. (we will use them to show the both ar&en text amount)-->
+<!--                                    <tr class="text-center" style="background-color:#DDD;">-->
+<!--                                        <td colspan="4" style="font-size: 15px">-->
+<!--                                            <strong style="text-align:right">-->
+<!--                                                <span>الاجمالي:<u><span t-esc="'{:,.2f}'.format(total_debit)"></span></u></span>-->
+<!--                                                <span>&#160;&#160;<span/><span t-esc="o.compute_amount_in_word_ar(total_debit)"/></span>-->
+
+
+<!--                                            </strong>-->
+<!--                                        </td>-->
+
+<!--                                        <td style="position:relative" rowspan="2">-->
+<!--                                            <strong style="position:absolute;top:35%;left:0">-->
+<!--                                                <span t-esc="'{:,.2f}'.format(total_debit)"/>-->
+<!--                                            </strong>-->
+<!--                                        </td>-->
+
+<!--                                        <td style="position:relative" rowspan="2">-->
+<!--                                            <strong style="position:absolute;top:35%;left:0">-->
+<!--                                                <span t-esc="'{:,.2f}'.format(total_credit)"/>-->
+<!--                                            </strong>-->
+<!--                                        </td>-->
+<!--                                    </tr>-->
+<!--                                    <tr class="text-center" style="background-color:#DDD;">-->
+<!--                                        <td colspan="4" style="font-size: 15px">-->
+<!--                                            <strong>-->
+<!--                                                Total: <u><span t-esc="'{:,.2f}'.format(total_debit)"></span></u>-->
+<!--                                                <span>&#160;&#160;</span><span t-esc="o.compute_amount_in_word_en(total_debit)"/>-->
+<!--                                            </strong>-->
+<!--                                        </td>-->
+<!--                                    </tr>-->
+                                </tfooter>
+                            </table>
+                        </div>
+                    </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

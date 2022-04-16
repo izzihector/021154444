@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="inventory_movement_report_action_client" model="ir.actions.client">
+        <field name="name">Inventory Movement</field>
+        <field name="tag">inventory_movement_report</field>
+    </record>
+
+    <menuitem
+        id="menu_inventory_movement_report"
+        name="Inventory Movement"
+        action="inventory_movement_report_action_client"
+        groups="stock.group_stock_manager"
+        sequence="120"
+        parent="stock.menu_warehouse_report"/>
+</odoo>

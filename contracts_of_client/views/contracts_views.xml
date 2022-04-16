@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        
+        <!-- View tree of contracts -->
+        <record id="contract_client_view_tree" model="ir.ui.view">
+            <field name="name">contract.client.view.tree</field>
+            <field name="model">sale.contract.client</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name" />
+                    <field name="date_assign" readonly="1" />
+                    <field name="name_of_contract" />
+                    <field name="partner_id" />
+                </tree>
+            </field>
+        </record>
+        
+        <!-- View form of contracts -->
+        <record id="contract_client_view_form" model="ir.ui.view">
+            <field name="name">contract.client.view.form</field>
+            <field name="model">sale.contract.client</field>
+            <field name="arch" type="xml">
+                <form string="">
+                    <header></header>
+                    <sheet>
+
+                        <div class="oe_title col-9 float-left">
+                            <h1>
+                                <field name="name" force_save="1" />
+                            </h1>
+                        </div>
+                        <div class="col-3 float-right text-right"></div>
+                        <group>
+                            <group>
+                                <field string="Nombre de contrato" name="name_of_contract" />
+                                <field string="Cliente" name="partner_id" />
+<!--                                 <field string="Lista de Precios" name="price_ids" /> -->
+                                <field string="Responsable" name="user_id" />
+                                <field string="Tipo de contrato" name="type_contract" />
+                            </group>
+                            <group>
+                                <field string="Fecha de Inicio" name="date_assign" />
+                                <field string="Fecha de Finalización" name="date_closed" />
+                                <field string="Fecha de entrega" name="planned_date" />
+                                <field string="Fecha de factura" name="invoice_date" />
+                                <field string="Fecha de corte" name="cut_date" />
+                            </group>
+                        </group>
+                        <notebook>
+                            <!-- Page information of price list-->
+<!--                             <page name="resources_page" string="Lista de Precios">
+                                <group class="col-12">
+                                    <label for="price_ids" />
+                                    <field name="price_ids" nolabel="1">
+                                        <tree editable="bottom">
+                                            <field name="name" />
+                                        </tree>
+                                    </field>
+                                </group>
+                            </page> -->
+                            <!-- Page information of products -->
+                            <page name="product_ids" string="Lista de Precios y Productos">
+                                <group class="col-6">
+                                    <field string="Lista de Precios" name="price_ids" />
+                                </group>
+                                <group class="col-12">
+                                    <label for="product_ids"/>
+                                    <field name="product_ids" nolabel="1">
+                                        <tree>
+                                            <field name="name"/>
+                                            <field name="min_quantity"/>
+                                            <field name="price"/>
+                                            <field name="date_start"/>
+                                            <field name="date_end"/>
+                                        </tree>
+                                    </field>
+                                </group>
+                            </page>
+                            <!-- Page information of users of portal -->
+                            <page name="user_portal_ids" string="Usuarios del portal">
+                                <group class="col-12">
+<!--                                     <label for="user_portal_ids" /> -->
+                                    <field name="user_portal_ids" nolabel="1">
+                                        <tree editable="bottom">
+                                            <field name="name" />
+                                        </tree>
+                                    </field>
+                                </group>
+                                <br />
+                            </page>
+                            <!-- Page information of invoicing -->
+                            <page string="Facturación">
+                                <group class="col-6">
+                                    <field name="property_payment_term_id" force_save="1" />
+                                </group>
+                                <group class="col-6">
+                                    <field name="vendor_id"/>
+                                    <field name="rsc_id"/>
+                                </group>
+                                <group class="col-6" string="Administración Productos Propios">
+                                    <field name="amount_base_pp" />
+                                    <field name="factor_pp" />
+                                    <field name="factor_urgent_pp" />
+                                </group>
+                                <group class="col-6" string="Administración Productos de Transferencia">
+                                    <field name="amount_base_pt" />
+                                    <field name="factor_pt" />
+                                    <field name="factor_urgent_pt" />
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="contract_client_type_action" model="ir.actions.act_window">
+            <field name="name">Contratos</field>
+            <field name="res_model">sale.contract.client</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!-- Filters -->
+        <record id="sale_contract_view_search" model="ir.ui.view">
+            <field name="name">sale.contract.view.search</field>
+            <field name="model">sale.contract.client</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name"/>
+                    <field name="name_of_contract"/>
+                    <field name="date_assign"/>
+                    <field name="date_closed"/>
+                    <field name="user_id"/>
+                    <field name="partner_id"/>
+                </search>
+            </field>
+        </record>
+
+        <!-- Menu of maintenance at contract -->
+        <menuitem id="menu_contract_type_action" name="Contratos" parent="sale.sale_order_menu" action="contract_client_type_action" sequence="10" />
+
+        <menuitem id="sale_contract_submenu" name="Contratos" action="contract_client_type_action" parent="menu_contract_type_action" sequence="10" />
+
+    </data>
+</odoo>

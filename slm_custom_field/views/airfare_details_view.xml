@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record model="ir.ui.view" id="view_airfare_details_tree">
+            <field name="name">airfare.details.tree</field>
+            <field name="model">airfare.details</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="date"/>
+                    <field name="vlnr"/>
+                    <field name="total_seats"/>
+                    <field name="total_pax"/>
+                    <field name="total_blockhours"/>
+                    <field name="total_kilograms"/>
+                    <field name="total_flights"/>
+                </tree>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="view_airfare_details_form">
+            <field name="name">airfare.details.form</field>
+            <field name="model">airfare.details</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="date"/>
+                                <field name="vlnr"/>
+                                <field name="total_seats"/>
+                                <field name="total_pax"/>
+                                <field name="total_blockhours"/>
+                                <field name="total_kilograms"/>
+                                <field name="total_flights"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="action_airfare_details" model="ir.actions.act_window">
+            <field name="name">Totals per flight</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">airfare.details</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_airfare_details_tree"/>
+        </record>
+        <menuitem id="menu_flight_detail"
+                  name="Flight Detail"
+                  parent="account_accountant.menu_accounting"
+                  sequence="4"
+                  groups="base.group_system"
+        />
+        <menuitem id="menu_airfare_detail"
+                  action="action_airfare_details"
+                  parent="menu_flight_detail"
+                  sequence="3"
+                  name="Totals per flight"
+                  groups="base.group_system"
+
+        />
+    </data>
+</odoo>

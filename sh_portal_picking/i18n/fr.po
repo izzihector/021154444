@@ -1,0 +1,280 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* sh_portal_picking
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.1alpha1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-09-28 09:56+0000\n"
+"PO-Revision-Date: 2020-09-28 09:56+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: sh_portal_picking
+#: model_terms:ir.ui.view,arch_db:sh_portal_picking.picking_my_picking
+msgid "<em class=\"font-weight-normal text-muted\">Picking Type:</em>"
+msgstr "<em class=\"font-weight-normal text-muted\"> Type de cueillette: </ em>"
+
+#. module: sh_portal_picking
+#: model_terms:ir.ui.view,arch_db:sh_portal_picking.picking_my_picking
+msgid "<em class=\"font-weight-normal text-muted\">Responsible:</em>"
+msgstr "<em class=\"font-weight-normal text-muted\"> responsable: </ em>"
+
+#. module: sh_portal_picking
+#: model_terms:ir.ui.view,arch_db:sh_portal_picking.picking_my_picking
+msgid "<em class=\"font-weight-normal text-muted\">Source Document:</em>"
+msgstr "<em class=\"font-weight-normal text-muted\"> Document source: </ em>"
+
+#. module: sh_portal_picking
+#: model_terms:ir.ui.view,arch_db:sh_portal_picking.picking_my_picking
+msgid "<em class=\"font-weight-normal text-muted\">Status:</em>"
+msgstr "<em class=\"font-weight-normal text-muted\"> Statut: </ em>"
+
+#. module: sh_portal_picking
+#: model_terms:ir.ui.view,arch_db:sh_portal_picking.portal_picking_form_template
+msgid "<i class=\"fa fa-comment\"/> Send message"
+msgstr "<i Classe = \ "Fa Fa-comment \" /> Envoyer un message"
+
+#. module: sh_portal_picking
+#: model_terms:ir.ui.view,arch_db:sh_portal_picking.portal_picking_form_template
+msgid "<i class=\"fa fa-download\"/> Download"
+msgstr "<i Class = \ "Fa Fa-download \" /> Télécharger"
+
+#. module: sh_portal_picking
+#: model_terms:ir.ui.view,arch_db:sh_portal_picking.portal_picking_form_template
+msgid "<strong class=\"text-muted\">Responsible</strong>"
+msgstr "<strong class = \ "text-sourd \"> responsable </ fort>"
+
+#. module: sh_portal_picking
+#: model_terms:ir.ui.view,arch_db:sh_portal_picking.picking_portal_content
+msgid "<strong>Delivery Address:</strong>"
+msgstr "<strong> Adresse de livraison: </ strong>"
+
+#. module: sh_portal_picking
+#: model_terms:ir.ui.view,arch_db:sh_portal_picking.picking_portal_content
+msgid "<strong>Note:</strong>"
+msgstr "<strong> NOTE: </ strong>"
+
+#. module: sh_portal_picking
+#: model_terms:ir.ui.view,arch_db:sh_portal_picking.picking_portal_content
+msgid "<strong>Picking Type:</strong>"
+msgstr "<strong> Type de cueillette: </ strong>"
+
+#. module: sh_portal_picking
+#: model_terms:ir.ui.view,arch_db:sh_portal_picking.picking_portal_content
+msgid "<strong>Responsible:</strong>"
+msgstr "<strong> responsable: </ strong>"
+
+#. module: sh_portal_picking
+#: model_terms:ir.ui.view,arch_db:sh_portal_picking.picking_portal_content
+msgid "<strong>Scheduled Date:</strong>"
+msgstr "<strong> Date prévue: </ strong>"
+
+#. module: sh_portal_picking
+#: model_terms:ir.ui.view,arch_db:sh_portal_picking.picking_portal_content
+msgid "<strong>Source Document:</strong>"
+msgstr "<strong> DOCUMENT SOURCE: </ STRUT>"
+
+#. module: sh_portal_picking
+#: model:ir.model.fields,field_description:sh_portal_picking.field_stock_picking__access_warning
+msgid "Access warning"
+msgstr "Avertissement d'accès"
+
+#. module: sh_portal_picking
+#: code:addons/sh_portal_picking/controllers/portal.py:0
+#, python-format
+msgid "All"
+msgstr "Tous"
+
+#. module: sh_portal_picking
+#: model_terms:ir.ui.view,arch_db:sh_portal_picking.portal_picking_form_template
+msgid "Contact"
+msgstr "Contact"
+
+#. module: sh_portal_picking
+#: model:ir.model.fields,help:sh_portal_picking.field_stock_picking__access_url
+msgid "Customer Portal URL"
+msgstr "URL du portail client"
+
+#. module: sh_portal_picking
+#: model_terms:ir.ui.view,arch_db:sh_portal_picking.picking_portal_content
+msgid "Demand"
+msgstr "Demande"
+
+#. module: sh_portal_picking
+#: model:ir.model.fields,field_description:sh_portal_picking.field_stock_picking__display_name
+msgid "Display Name"
+msgstr "Afficher un nom"
+
+#. module: sh_portal_picking
+#: model_terms:ir.ui.view,arch_db:sh_portal_picking.picking_portal_content
+msgid "Done"
+msgstr "Terminé"
+
+#. module: sh_portal_picking
+#: model_terms:ir.ui.view,arch_db:sh_portal_picking.portal_picking_form_template
+msgid "Download"
+msgstr "Télécharger"
+
+#. module: sh_portal_picking
+#: model_terms:ir.ui.view,arch_db:sh_portal_picking.portal_picking_form_template
+msgid "History"
+msgstr "Histoire"
+
+#. module: sh_portal_picking
+#: model:ir.model.fields,field_description:sh_portal_picking.field_stock_picking__id
+msgid "ID"
+msgstr "identifiant"
+
+#. module: sh_portal_picking
+#: model:ir.model.fields,field_description:sh_portal_picking.field_stock_picking____last_update
+msgid "Last Modified on"
+msgstr "Dernière modification sur"
+
+#. module: sh_portal_picking
+#: code:addons/sh_portal_picking/controllers/portal.py:0
+#, python-format
+msgid "Last month"
+msgstr "Le mois dernier"
+
+#. module: sh_portal_picking
+#: code:addons/sh_portal_picking/controllers/portal.py:0
+#, python-format
+msgid "Last week"
+msgstr "La semaine dernière"
+
+#. module: sh_portal_picking
+#: code:addons/sh_portal_picking/controllers/portal.py:0
+#, python-format
+msgid "Last year"
+msgstr "L'année dernière"
+
+#. module: sh_portal_picking
+#: code:addons/sh_portal_picking/controllers/portal.py:0
+#: model_terms:ir.ui.view,arch_db:sh_portal_picking.picking_my_picking
+#, python-format
+msgid "Name"
+msgstr "Nom"
+
+#. module: sh_portal_picking
+#: code:addons/sh_portal_picking/controllers/portal.py:0
+#, python-format
+msgid "Newest"
+msgstr "Nouveau"
+
+#. module: sh_portal_picking
+#: code:addons/sh_portal_picking/controllers/portal.py:0
+#, python-format
+msgid "None"
+msgstr "Rien"
+
+#. module: sh_portal_picking
+#: model_terms:ir.ui.view,arch_db:sh_portal_picking.picking_portal_content
+msgid "Operations"
+msgstr "Exploitation"
+
+#. module: sh_portal_picking
+#: model_terms:ir.ui.view,arch_db:sh_portal_picking.picking_my_picking
+#: model_terms:ir.ui.view,arch_db:sh_portal_picking.picking_portal_my_home
+#: model_terms:ir.ui.view,arch_db:sh_portal_picking.picking_portal_my_home_menu
+msgid "Picking Orders"
+msgstr "Cueillette"
+
+#. module: sh_portal_picking
+#: code:addons/sh_portal_picking/controllers/portal.py:0
+#: model_terms:ir.ui.view,arch_db:sh_portal_picking.picking_my_picking
+#, python-format
+msgid "Picking Type"
+msgstr "Type de cueillette"
+
+#. module: sh_portal_picking
+#: model:ir.model.fields,field_description:sh_portal_picking.field_stock_picking__access_url
+msgid "Portal Access URL"
+msgstr "URL d'accès au portail"
+
+#. module: sh_portal_picking
+#: model_terms:ir.ui.view,arch_db:sh_portal_picking.picking_portal_content
+msgid "Products"
+msgstr "Des produits"
+
+#. module: sh_portal_picking
+#: code:addons/sh_portal_picking/controllers/portal.py:0
+#: model_terms:ir.ui.view,arch_db:sh_portal_picking.picking_my_picking
+#, python-format
+msgid "Responsible"
+msgstr "Responsable"
+
+#. module: sh_portal_picking
+#: model_terms:ir.ui.view,arch_db:sh_portal_picking.picking_my_picking
+msgid "Scheduled Date"
+msgstr "Date prévue"
+
+#. module: sh_portal_picking
+#: code:addons/sh_portal_picking/controllers/portal.py:0
+#, python-format
+msgid "Search in All"
+msgstr "Chercher dans tout"
+
+#. module: sh_portal_picking
+#: model:ir.model.fields,field_description:sh_portal_picking.field_stock_picking__access_token
+msgid "Security Token"
+msgstr "Jeton de sécurité"
+
+#. module: sh_portal_picking
+#: code:addons/sh_portal_picking/controllers/portal.py:0
+#: model_terms:ir.ui.view,arch_db:sh_portal_picking.picking_my_picking
+#, python-format
+msgid "Source Document"
+msgstr "Document source"
+
+#. module: sh_portal_picking
+#: code:addons/sh_portal_picking/controllers/portal.py:0
+#: model_terms:ir.ui.view,arch_db:sh_portal_picking.picking_my_picking
+#, python-format
+msgid "Status"
+msgstr "Statut"
+
+#. module: sh_portal_picking
+#: model_terms:ir.ui.view,arch_db:sh_portal_picking.picking_my_picking
+msgid "There are no Picking Orders."
+msgstr "Il n'y a pas de commandes de cueillette."
+
+#. module: sh_portal_picking
+#: code:addons/sh_portal_picking/controllers/portal.py:0
+#, python-format
+msgid "This Quarter"
+msgstr "Ce trimestre"
+
+#. module: sh_portal_picking
+#: code:addons/sh_portal_picking/controllers/portal.py:0
+#, python-format
+msgid "This month"
+msgstr "Ce mois-ci"
+
+#. module: sh_portal_picking
+#: code:addons/sh_portal_picking/controllers/portal.py:0
+#, python-format
+msgid "This week"
+msgstr "Cette semaine"
+
+#. module: sh_portal_picking
+#: code:addons/sh_portal_picking/controllers/portal.py:0
+#, python-format
+msgid "This year"
+msgstr "Cette année"
+
+#. module: sh_portal_picking
+#: code:addons/sh_portal_picking/controllers/portal.py:0
+#, python-format
+msgid "Today"
+msgstr "Aujourd'hui"
+
+#. module: sh_portal_picking
+#: model:ir.model,name:sh_portal_picking.model_stock_picking
+msgid "Transfer"
+msgstr "Transfert"

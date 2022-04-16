@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="stock_internal_transfer_tree" model="ir.ui.view">
+        <field name="name">stock.internal.transfer.tree</field>
+        <field name="model">stock.internal.transfer</field>
+        <field name="arch" type="xml">
+            <tree string="Stock Internal Transfer">
+                <field name="name" select="1"/>
+                <field name="date" select="1"/>
+                <field name="source_warehouse_id" select="1"/>
+                <field name="dest_warehouse_id" select="1"/>
+                <field name="backorder_id" select="1"/>
+                <field name="state" select="1"/>
+            </tree>
+        </field>
+    </record>
+    <record id="stock_internal_transfer_kanban" model="ir.ui.view">
+        <field name="name">stock.internal.transfer.kanban</field>
+        <field name="model">stock.internal.transfer</field>
+        <field name="arch" type="xml">
+            <kanban class="o_broker_profile_kanban">
+                <field name="id"/>
+                <field name="name"/>
+                <field name="date"/>
+                <field name="source_warehouse_id"/>
+                <field name="dest_warehouse_id"/>
+                <field name="state"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click o_res_partner_kanban">
+                            <div class="oe_kanban_details">
+                                <h3>
+                                    <field name="name"/>
+                                </h3>
+                                <ul>
+                                    <li>
+                                        <b>Date:</b>
+                                        <field name="date"/>
+                                    </li>
+                                    <li>
+                                        <b>Source Warehouse:</b>
+                                        <field name="source_warehouse_id"/>
+                                    </li>
+                                    <li>
+                                        <b>Destination Warehouse:</b>
+                                        <field name="dest_warehouse_id"/>
+                                    </li>
+                                </ul>
+                                <div class="o_kanban_record_bottom h5 mt-2 mb-0">
+                                    <div id="utm_statistics" class="d-flex flex-grow-1 text-600 mt-1"/>
+                                    <div class="oe_kanban_bottom_right">
+                                        <span class="badge badge-pill float-right mt4 mr16"
+                                              style="border-color:#5e75c8;background: #5e75c8;color: whitesmoke;">
+                                            <field name="state"/>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="stock_internal_transfer_form" model="ir.ui.view">
+        <field name="name">stock.internal.transfer.form</field>
+        <field name="model">stock.internal.transfer</field>
+        <field name="arch" type="xml">
+            <form string="Stock Internal Transfer">
+                <header>
+                    <button name="action_submit" type="object"  states="draft" class="oe_highlight" string="Submit"/>
+                    <button name="action_approved" type="object"  states="submit" class="oe_highlight" string="Approve"/>
+                    <button name="do_enter_wizard" type="object" states="approved" class="oe_highlight" string="Send"/>
+                    <button name="do_enter_wizard" type="object" states="send" class="oe_highlight" string="Receive"/>
+                    <button name="action_cancel" type="object" states="draft,send" string="Cancel"/>
+                    <button name="action_draft" type="object" invisible="1" class="oe_highlight" string="Set to Draft"/>
+                    <button name="print_stock_internal_transfer_report" type="object" string="Print" class="oe_highlight"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,submit,approved,send,done"/>
+                </header>
+
+                <sheet>
+                    <h1>
+                        <field name="name" required="1" placeholder="Reference" attrs="{'readonly':[('state','!=','draft')]}"/>
+                    </h1>
+
+                    <group>
+                        <field name="date" required="1" attrs="{'readonly':[('state','!=','draft')]}"/>
+                    </group>
+
+                    <group col="4">
+                        <field name="source_warehouse_id" required="1" attrs="{'readonly':[('state','!=','draft')]}"/>
+                        <field name="dest_warehouse_id" required="1" attrs="{'readonly':[('state','!=','draft')]}"/>
+                    </group>
+
+                    <group>
+                        <field name="backorder_id" readonly="1"/>
+                    </group>
+
+                    <notebook>
+                        <page string="Product">
+                            <field name="line_ids" nolabel="1" attrs="{'readonly':[('state','!=','draft')]}">
+                                <tree editable="bottom">
+                                    <field name="product_id" domain="[('type', '!=', 'service')]" required="1"/>
+                                    <field name="qty_available" invisible="0"/>
+                                    <field name="product_qty" required="1"/>
+                                    <field name="product_uom_id" groups="uom.group_uom" required="1"/>
+                                </tree>
+                            </field>
+                        </page>
+
+                        <page string="Pickings">
+                            <field name="picking_ids" readonly="1" nolabel="1" attrs="{'readonly':[('state','!=','draft')]}"/>
+                        </page>
+                    </notebook>
+                </sheet>
+
+                <div class="oe_chatter" colspan="4">
+                    <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_stock_internal_transfer" model="ir.actions.act_window">
+        <field name="name">Stock Internal Transfer</field>
+        <field name="res_model">stock.internal.transfer</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_mode">tree,form,kanban</field>
+    </record>
+
+    <menuitem action="action_stock_internal_transfer" id="menu_stock_internal_transfer" parent="stock.menu_stock_warehouse_mgmt" sequence="1"/>
+</odoo>

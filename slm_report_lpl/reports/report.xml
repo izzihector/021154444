@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="paperformat_layoutprofitlosse" model="report.paperformat">
+            <field name="name">Horizontal-Oficio</field>
+            <field eval="True" name="default"/>
+            <field name="format">custom</field>
+            <field name="page_height">280</field>
+            <field name="page_width">216</field>
+            <field name="orientation">Landscape</field>
+            <field name="margin_top">20</field>
+            <field name="margin_bottom">20</field>
+            <field name="margin_left">7</field>
+            <field name="margin_right">7</field>
+            <field eval="False" name="header_line"/>
+            <field name="header_spacing">15</field>
+            <field name="dpi">90</field>
+        </record>
+        <!-- Report Layout Profit and Loss QWEB-->
+        <record id="action_layoutprofitloss" model="ir.actions.report">
+            <field name="name">Report Layout Profit and Loss</field>
+            <field name="model">account.layoutprofitloss.report</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">slm_report_lpl.report_layoutprofitloss</field>
+            <field name="report_file">slm_report_lpl.report_layoutprofitloss</field>
+            <field name="binding_model_id" ref="model_account_layoutprofitloss_report"/>
+            <field name="binding_type">report</field>
+            <field name="paperformat_id" ref="slm_report_lpl.paperformat_layoutprofitlosse"/>
+        </record>
+        <!-- Report Layout Profit and Loss XLSX -->
+        <record id="action_layoutprofitloss_xls" model="ir.actions.report">
+            <field name="name">Report Layout Profit and Loss</field>
+            <field name="model">account.layoutprofitloss.report</field>
+            <field name="report_type">xlsx</field>
+            <field name="report_name">slm_report_lpl.report_layoutprofitloss.xlsx</field>
+            <field name="report_file">slm_report_lpl.report_layoutprofitloss.xlsx</field>
+            <field name="binding_model_id" ref="model_account_layoutprofitloss_report"/>
+            <field name="binding_type">report</field>
+            <field name="attachment_use">False</field>
+        </record>
+        <!-- Report Layout Balance sheet QWEB-->
+        <record id="action_balancesheet" model="ir.actions.report">
+            <field name="name">Report Layout Balance sheet</field>
+            <field name="model">account.balancesheet.report</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">slm_report_lpl.report_balancesheet</field>
+            <field name="report_file">slm_report_lpl.report_balancesheet</field>
+            <field name="binding_model_id" ref="model_account_balancesheet_report"/>
+            <field name="binding_type">report</field>
+            <field name="paperformat_id" ref="slm_report_lpl.paperformat_layoutprofitlosse"/>
+        </record>
+        <!-- Report Layout Balance sheet XLSX -->
+        <record id="action_balancesheet_xls" model="ir.actions.report">
+            <field name="name">Report Layout Balance sheet</field>
+            <field name="model">account.balancesheet.report</field>
+            <field name="report_type">xlsx</field>
+            <field name="report_name">slm_report_lpl.report_balancesheet.xlsx</field>
+            <field name="report_file">slm_report_lpl.report_balancesheet.xlsx</field>
+            <field name="binding_model_id" ref="model_account_balancesheet_report"/>
+            <field name="binding_type">report</field>
+            <field name="attachment_use">False</field>
+        </record>
+    </data>
+</odoo>

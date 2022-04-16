@@ -1,0 +1,58 @@
+<odoo>
+    <data>
+        <record id="gs_petrol_station_tree" model="ir.ui.view">
+            <field name="name">gs.petrol.station.tree</field>
+            <field name="model">gs.petrol.station</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="code"/>
+                    <field name="name"/>
+                    <field name="partner_id"/>
+                </tree>
+            </field>
+        </record>
+        <record id="gs_petrol_station_form" model="ir.ui.view">
+            <field name="name">gs.petrol.station.form</field>
+            <field name="model">gs.petrol.station</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="code"/>
+                            </group>
+                            <group>
+                                <field name="name"/>
+                                <field name="partner_id"/>
+                                <field name="warehouse_id"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Pumps">
+                                <field name="petrol_station_ids" nolabel="1">
+                                    <tree editable="bottom" readonly="1">
+                                        <field name="link_id" invisible="1"/>
+                                        <field name="pump"/>
+                                        <field name="type_pump_id"/>
+                                        <field name="nozzle_petrol_id"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_gs_petrol_station" model="ir.actions.act_window">
+            <field name="name">Station</field>
+            <field name="res_model">gs.petrol.station</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem name="Configuration" id="menu_gs_petrol_station_config" parent="menu_gs_petrol_station" sequence="100"/>
+        <menuitem id="sub_gs_petrol_station" name="Station" action="action_gs_petrol_station"
+                  parent="menu_gs_petrol_station_config" sequence="1"/>
+    </data>
+</odoo>

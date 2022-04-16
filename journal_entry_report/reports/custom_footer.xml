@@ -1,0 +1,46 @@
+<odoo>
+    <template id="custom_journal_footer">
+        <!--        <t t-set="company" t-value="user.company_id"/>-->
+        <div class="footer" style="font-family: 'Trebuchet MS', sans-serif;">
+            <div class="text-center" style="border-top: 4px solid black;direction:ltr;">
+                <div class="row mt-4">
+                    <div class="col-4">
+                        <strong>FINANCIAL MANAGER</strong>
+                    </div>
+                    <div class="col-4">
+                        <strong>AUDITOR</strong>
+                    </div>
+                    <div class="col-4">
+                        <strong>ACCOUNTANT</strong>
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-4">
+                        <strong>:المدير المالي</strong>
+                    </div>
+                    <div class="col-4">
+                        <strong>:المراجع</strong>
+                    </div>
+                    <div class="col-4">
+                        <strong>:المحاسب</strong>
+                    </div>
+                </div>
+                <div class="row mb3 mt-4">
+                    <div t-if="report_type == 'pdf'" class="col-6 bold text-primary"
+                         style="position:relative;right:270px">
+                        <b><li class="list-inline-item font-italic"><u><span class="page"/> / <span
+                                class="topage"/></u></li></b>
+                        <b><span stlye="position:relative;left:20px;font-size:25px;">:صفحة </span></b>
+                    </div>
+                    <div class="col-6 text-primary bold" style="position:relative;left:220px">
+                        <b>
+                            <span class="font-italic"
+                                  t-esc="context_timestamp(datetime.datetime.now()).strftime('%Y-%m-%d %H:%M')"/>
+                            <span stlye="position:relative;left:190px">:تاريخ الطباعة</span>
+                        </b>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+</odoo>

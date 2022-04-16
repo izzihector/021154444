@@ -1,0 +1,19 @@
+
+.barcode_selector {
+	text-align: left;
+    display: inline-block;
+    overflow: hidden;
+    background: white;
+    min-height: 44px;
+    font-family: "Lato";
+    font-size: 20px;
+    color: #444;
+    padding: 10px;
+    border-radius: 3px;
+    border: none;
+    box-shadow: 0px 0px 0px 1px rgb(220,220,220) inset;
+    box-sizing: border-box;
+    width: 83%;
+    margin-bottom: 15px;
+
+}

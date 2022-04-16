@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Bank Statement-Detail QWEB-->
+    <record id="bank_statement_detail" model="ir.actions.report">
+        <field name="name">Bank Statement-Detail</field>
+        <field name="model">bank.acc.rec.statement</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">account_banking_reconciliation.report_bank_statement_detail</field>
+        <field name="report_file">account_banking_reconciliation.report_bank_statement_detail</field>
+        <field name="binding_model_id" ref="model_bank_acc_rec_statement"/>
+        <field name="binding_type">report</field>
+        <field name="attachment">'Detail Statement-'+(object.name)+'.pdf'</field>
+    </record>
+    <!-- Bank Statement-Summary QWEB-->
+    <record id="bank_statement_summary" model="ir.actions.report">
+        <field name="name">Bank Statement-Summary</field>
+        <field name="model">bank.acc.rec.statement</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">account_banking_reconciliation.report_bank_statement_summary</field>
+        <field name="report_file">account_banking_reconciliation.report_bank_statement_summary</field>
+        <field name="binding_model_id" ref="model_bank_acc_rec_statement"/>
+        <field name="binding_type">report</field>
+        <field name="attachment">'Summary Statement-'+(object.name)+'.pdf'</field>
+    </record>
+</odoo>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template_custom_pos_branch_extended" inherit_id="point_of_sale.template" xml:space="preserve">
+		<!-- <t t-extend="OrderLinesReceipt" t-inherit="point_of_sale.OrderReceipt" t-inherit-mode="extension" owl="1">
+		    <xpath expr="//div[hasclass('cashier')]" t-operation="after">
+		        Branch: <t t-esc="env.pos.pos_session.branch_id[1]"/> 
+		    </xpath>
+		</t>  -->
+</templates>
+
+

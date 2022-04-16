@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (c) 2016-Present Webkul Software Pvt. Ltd. (<https://webkul.com/>) -->
+<!-- See LICENSE file for full copyright and licensing details. -->
+<!-- License URL : <https://store.webkul.com/license.html/> -->
+<templates id="template" xml:space="preserve">
+
+    <t t-name="LoyaltyPoints">
+        <div class='loyalty-points'>
+            <span class="wk_won">
+                <span class='wk_value'><t t-esc='wonpoints'/></span> Points.
+            </span>
+            <span class='wk_total'>
+                Total:&amp;nbsp;<span class='wk_value'><t t-esc='totalpoints' /></span>
+            </span>
+        </div>
+    </t>
+    <t t-name="WkLoyaltyAlertPopUp" owl="1">
+        <div class="modal-dialog">
+            <div class="popup popup-textinput" style="height:260px !important">
+                <header class="title" style="width:92%">
+                    <t t-esc=" props.title || 'Message' " />
+                </header>
+                <main class="body" style="height:35%;">
+                    <t t-esc="  props.body || '' " />
+                </main>
+                <footer class="footer">
+                    <div class="button cancel" t-on-click="cancel">
+                        OK
+                    </div>
+                </footer>
+            </div>
+        </div>
+    </t>
+
+
+    <t t-name="OrderSummary" t-inherit="point_of_sale.OrderSummary" t-inherit-mode="extension" owl="1">
+        <xpath expr="//div[hasclass('summary')]" position='inside'>
+            <div class='loyalty-points oe_hidden'>.</div>
+        </xpath>
+    </t>
+
+    <t t-name='ClientListScreen' t-inherit="point_of_sale.ClientListScreen" t-inherit-mode="extension" owl="1">
+        <xpath expr='//table[hasclass("client-list")]//thead//tr' position='inside'>
+            <th>Loyalty Points</th>
+        </xpath>
+    </t>
+
+    <t t-name='ClientLine' t-inherit="point_of_sale.ClientLine" t-inherit-mode="extension" owl="1">
+        <xpath expr='//tr' position='inside'>
+            <td class="wk_loyalty">
+                <t t-esc='env.pos.format_pr(props.partner.wk_loyalty_points || 0)' />
+            </td>
+        </xpath>
+    </t>
+
+    <t t-name="CustomerRedeemButton" owl="1">
+        <div class="control-button">
+            Redeem
+        </div>
+    </t>
+
+
+    <t t-name="LoyaltyRedeemPopupWidget" owl="1">
+		<div class="modal-dialog">
+			<div class="wk_redeem_popup" style="padding:10px;overflow:hidden;">
+                <header class="title">
+                    <i class="fa fa-times cancel" t-on-click="wk_click_cancel" style="font-size:25px;float:right;margin-top:-5px;cursor:pointer" aria-hidden="true"></i>
+                </header>
+                <div class="wk_loyalty_image">
+                    <img style="pointer-events: none;" src="/pos_loyalty_management/static/description/icon.png" width="70px" height="70px" />
+                    <h3 style="font-size:18px">Point Redemption</h3>
+                </div>
+                <div style="height:156px">
+                    <div>
+                        <table>
+                            <tr>
+                                <td  style="text-align:left">
+                                    <h3 style="font-size:16px;margin-left:11px">Customer Name </h3>
+                                </td>
+                                <td>
+                                    <h3 style="color:#37644e;"><t t-esc=" props.name || '' " /></h3>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td  style="text-align:left">
+                                    <h3 style="font-size:16px;margin-left:11px">Total Earned Points </h3>
+                                </td>
+                                <td>
+                                    <h3 style="color:#37644e;"><t t-esc=" props.points || '' " /></h3>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td  style="text-align:left">
+                                    <h3  style="font-size:16px;margin-left:11px">Total Discount  </h3>
+                                </td> 
+                                <td>
+                                    <h3  style="color:#37644e;"><t t-esc="env.pos.format_currency(props.discount) || '' " /></h3>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <footer>
+                    <button class="button wk_redeem_now" t-on-click="loyalty_redeem_now" >REDEEM NOW</button>
+                </footer>
+			</div>
+		</div>
+	</t>
+
+
+    <t t-name="OrderReceipt" t-inherit="point_of_sale.OrderReceipt" t-inherit-mode="extension" owl="1">
+        <xpath expr="//div[hasclass('before-footer')]" position="before">
+            <div id="loyalty-points">
+                  
+                        <div>
+                            Total Earned Points
+                            <span t-esc="receipt.wk_loyalty_points" class="pos-receipt-right-align"/>
+                        </div>
+                
+            </div>
+        </xpath>
+    </t>
+
+</templates>

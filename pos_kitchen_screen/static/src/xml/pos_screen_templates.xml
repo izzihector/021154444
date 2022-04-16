@@ -1,0 +1,532 @@
+<templates>
+    <t t-name="WkKitchenOrderLine">
+        <tr class='wk-order-line' t-att-data-id='order.id' style="cursor:pointer;">
+            <td>
+                <t t-esc='order.kitchen_order_name' />
+            </td>
+
+            <td>
+                <t t-if="order.name">
+                    <t t-esc="order.name"/>
+                </t>
+                <t t-else="">
+                    <t t-esc="order.pos_reference"/>
+                </t>
+            </td>
+
+            <td>
+                <t t-esc="order.partner_id[1] || '-'" />
+            </td>
+            <td>
+                <t t-esc='order.date_order' />
+            </td>
+            <td>
+                <t t-if="order.order_progress == 'new'">
+                        New
+                    </t>
+                <t t-if="order.order_progress == 'partially_done'">
+                        Partially Done
+                    </t>
+                <t t-if="order.order_progress == 'pending'">
+                        Pending
+                    </t>
+                <t t-if="order.order_progress == 'done'">
+                        Done
+                    </t>
+                <t t-if="order.order_progress == 'cancel'">
+                        Cancel
+                    </t>
+            </td>
+            <t t-if="env.pos.config.is_table_management">
+                <t t-if="order.floor_id">
+                    <td>
+                        <t t-esc='order.floor_id[1]' />
+                    </td>
+                </t>
+                <t t-else="">
+                    <td>
+                        -
+                    </td>
+                </t>
+                <t t-if="order.table_id">
+                    <td>
+                        <t t-esc='order.table_id[1]' />
+                    </td>
+                </t>
+                <t t-else="">
+                    <td>
+                        -
+                    </td>
+                </t>
+            </t>
+            <td>
+                <t t-esc='order.items' />
+            </td>
+        </tr>
+    </t>
+
+
+    <t t-name="KitchenOrdersButton" owl="1">
+        <span class="control-button" id="kitchen_orders">
+            Show Kitchen Orders
+        </span>
+    </t>
+
+<!--
+    <t t-name="OrderDetails">
+        <section class='order-details' style="border-bottom: solid 5px rgb(110,200,155);">
+            <div class='client-details-box clearfix' style="padding:2%;background-color: rgb(252, 252, 252);">
+                <div class='client-detail'>
+                    <h2 style="color: rgb(67, 134, 111);">Order Details</h2>
+                </div>
+                <div style="display:inline-block;width:75%;float:left;">
+                    <div style="display:block;float:left;width:290px;'">
+                        <div style="display:inline-block;float:left;">
+                            <div style="display:block;float:left;font-weight: bold;display: inline-block;width: 80px;text-align: left;margin-right: 8px;">
+                                    Token No. :
+                                </div>
+                            <div style="display:block;float:right;margin-left:7px;">
+                                <t t-esc="order.kitchen_order_name"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="display:block;">
+                        <div style="display:inline-block;float:left;">
+                            <div style="display:block;float:left;font-weight: bold;display: inline-block;width: 83px;text-align: left;margin-right: 8px;">
+                                    Order Ref. :
+                                </div>
+                            <div style="display:block;float:right;margin-left:7px;">
+                                <t t-esc="order.name || order.pos_reference"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div style="display:inline-block;width:75%;float:left;padding:8px 0 5px 0;">
+                    <t t-if="order.floor_id">
+                        <div style="display:block;float:left;width:290px;'">
+                            <div style="display:inline-block;float:left;">
+                                <div style="display:block;float:left;font-weight: bold;display: inline-block;width: 80px;text-align: left;margin-right: 8px;">
+                                        Floor :
+                                    </div>
+                                <div style="display:block;float:right;margin-left:7px;">
+                                    <t t-esc="order.floor_id[1]"/>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                    <t t-if="order.table_id">
+                        <div style="display:block;">
+                            <div style="display:inline-block;float:left;">
+                                <div style="display:block;float:left;font-weight: bold;display: inline-block;width: 83px;text-align: left;margin-right: 8px;">
+                                        Table No. :
+                                    </div>
+                                <div style="display:block;float:right;margin-left:7px;">
+                                    <t t-esc="order.table_id[1]"/>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </div>
+                <div style="display:inline-block;width:75%;padding:7px 0;float:left;">
+                    <div style="display:block;float:left;width:290px;'">
+                        <div style="display:inline-block;float:left;">
+                            <div style="display:block;float:left;font-weight: bold;display: inline-block;width: 81px;text-align: left;margin-right: 8px;">
+                                    Customer :
+                                </div>
+                            <div style="display:block;float:right">
+                                <t t-if="order.partner_id">
+                                    <t t-esc="order.partner_id[1]"/></t>
+                                <t t-else="" style="margin-left:7px;">
+                                        -
+                                    </t>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="display:block;">
+                        <div style="display:inline-block;float:left;">
+                            <div style="display:block;float:left;font-weight: bold;display: inline-block;width: 75px;text-align: left;margin-right: 8px;">
+                                    Date :
+                                </div>
+                            <div style="display:block;float:right;margin-left:7px;">
+                                <t t-esc="order.date_order"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div style="display:inline-block;width:75%;float:left;">
+                    <div style="display:block;float:left;width:290px;'">
+                        <div style="display:inline-block;float:left;">
+                            <div style="display:block;float:left;font-weight: bold;display: inline-block;width: 120px;text-align: left;margin-right: 8px;">
+                                    Order Progress :
+                                </div>
+                            <div style="display:block;float:right;margin-left:7px;">
+                                <t t-if="order.order_progress == 'new'">
+                                        New
+                                    </t>
+                                <t t-if="order.order_progress == 'partially_done'">
+                                        Partially Done
+                                    </t>
+                                <t t-if="order.order_progress == 'pending'">
+                                        Pending
+                                    </t>
+                                <t t-if="order.order_progress == 'done'">
+                                        Done
+                                    </t>
+                                <t t-if="order.order_progress == 'cancel'">
+                                        Cancel
+                                    </t>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class='order-detail' style="width: 100%;text-align: left;margin-left: 3%;">
+                    <table border="1" frame="void" rules="rows" id="order_line_content" style="width: 94%;text-align:center;border-bottom: 3px solid rgb(70, 150, 110);">
+                        <tr style="color: rgb(51, 112, 39);border-bottom: 3px solid rgb(67, 134, 111);">
+                            <th style="text-align:left;width: 35%;">Product</th>
+                            <th style="width: 10%;">Quantity</th>
+                        </tr>
+                        <t t-foreach='orderlines' t-as='line'>
+                            <t t-if="line.total_qtys">
+                                <tr>
+                                    <td style="text-align:left">
+                                        <t t-if="widget.pos.db.get_product_by_id(line.product_id[0])">
+                                            <t t-esc="line.product_id[1]"/></t>
+                                    </td>
+                                    <td>
+                                        <t t-esc="line.total_qtys"/>
+                                    </td>
+                                </tr>
+                            </t>
+                        </t>
+                    </table>
+                </div>
+            </div>
+            <br/>
+        </section>
+    </t>
+
+  -->
+	<t t-name="KitchenScreenWidget" owl="1">
+    	<div class="clientlist-screen screen">
+            <div class="orders-screen-content">
+                <section class="top-content">
+                    <span class='button back' t-on-click="clickBack">
+                        <i class='fa fa-angle-double-left'></i>
+                        Back
+                    </span>
+                    <span class="searchbox">
+                        <input style="margin: 15px;" placeholder="Search Orders" t-on-keyup="keyup_order_search" class="order_search"/>
+                        <span class="search-clear"></span>
+                    </span>
+                </section>
+                <section class="full-content">
+                    <div class='window'>
+                        <section class='subwindow collapsed'>
+                            <div class='subwindow-container collapsed'>
+                                <div class='subwindow-container-fix order-details-contents'>
+                                </div>
+                            </div>
+                        </section>
+                        <section class='subwindow'>
+                            <div class='wk_table_back subwindow-container'>
+                                <div class='subwindow-container-fix touch-scrollable scrollable-y' style="background-color: rgb(240, 238, 238);overflow-y: scroll;">
+                                    <table class='client-list wk_order_list'>
+                                        <thead>
+                                            <tr style="background-color: rgb(135, 160, 166);color: white;">
+                                                <th>Token No.</th>
+                                                <th>Order Ref.</th>
+                                                <th>Customer</th>
+                                                <th>Order Date</th>
+                                                <th>Progress</th>
+                                                <t t-if="env.pos.config.is_table_management">
+                                                    <th>Floor</th>
+                                                    <th>Table No.</th>
+                                                </t>
+                                                <th>Total Items</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class='wk-kitchen-list-contents'>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </t>
+
+    <!-- <t t-name="KitchenScreenWidgets" owl="1">
+        <div class="clientlist-screen screen">
+            <div class="orders-screen-content">
+                <section class="top-content">
+                    <span class='button back' t-on-click="clickBack">
+                        <i class='fa fa-angle-double-left'></i>
+                        Back
+
+
+                    </span>
+                </section>
+                <span class="searchbox">
+                    <input placeholder="Search Orders" class="order_search" t-on-keyup="keyup_order_search"/>
+                    <span class="search-clear"></span>
+                </span>
+                <section class="full-content">
+                    <div class='window'>
+                        <section class='subwindow collapsed'>
+                            <div class='subwindow-container collapsed'>
+                                <div class='subwindow-container-fix order-details-contents'></div>
+                            </div>
+                        </section>
+                        <section class='subwindow'>
+                            <div class='wk_table_back subwindow-container'>
+                                <div class='subwindow-container-fix touch-scrollable scrollable-y' style="background-color: rgb(240, 238, 238);overflow-y: scroll;">
+                                    <table class='client-list wk_order_list'>
+                                        <thead>
+                                            <tr style="background-color: rgb(135, 160, 166);color: white;">
+                                                <th>Token No.</th>
+                                                <th>Order Ref.</th>
+                                                <th>Customer</th>
+                                                <th>Order Date</th>
+                                                <th>Progress</th>
+                                                <t t-if="widget.pos and widget.pos.config and widget.pos.config.module_pos_restaurant and widget.pos.config.is_table_management">
+                                                    <th>Floor</th>
+                                                    <th>Table No.</th>
+                                                </t>
+                                                <th>Total Items</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class='wk-kitchen-list-contents'></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </t> -->
+
+
+
+    <t t-name="OrderReceipt" t-inherit="point_of_sale.OrderReceipt" t-inherit-mode="extension" owl="1">
+        <xpath expr="//div[hasclass('pos-receipt-contact')]" position="inside">
+            <t t-if="env.pos.get_order() and env.pos.get_order().token_number">
+                <div>Token No. : <t t-esc='env.pos.get_order().token_number' /></div>
+            </t>
+        </xpath>
+    </t>
+
+
+    <t t-name="PushNotificationWidget">
+    <!-- <div style="position:absolute;top:0;width:300px;height:500px;background:red;z-index:50;">Hiiii</div> -->
+        <div class="push_notification" style="position:absolute;top:10%;width:100%;">
+            <div style="float:right;background: #222222;box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.16);border-radius: 6px;width:231px;min-height:90px;">
+                <div style="padding:3px 12px;height:34px;background: rgba(255, 255, 255, 0.03);">
+                    <div style="display:inline-block;width:100%;margin-top:4px;">
+                        <div style="display:block;float:left;font-style: normal;font-weight: 600;font-size: 12px;line-height: 63.8%;text-transform: uppercase;color: #FFFFFF;">
+                            <img style="position:relative;top:4px" src="/pos_kitchen_screen/static/src/img/PNChef.png"/><span style="margin-left:5px;">KITCHEN</span>
+                        </div>
+                        <div style="margin-top:9px;display:block;float:right;font-style: normal;font-weight: normal;font-size: 10px;line-height: 63.8%;text-transform: uppercase;color: #FFFFFF;">
+                            <!-- Time -->
+                            <t t-esc="time"/>
+                        </div>
+                    </div>
+                </div>
+                <div style="padding:10px 12px;">
+                    <t t-foreach="orders" t-as="res">
+                        <t t-set="state" t-value="orders[res][0]"/>
+                        <div class="recent_item">
+                            <div style="margin-top:5px;font-family: Open Sans;font-style: normal;font-weight: 600;font-size: 12px;line-height: 63.8%;color: #FFFFFF;">
+                                Order Id: <span class="push_token_number"><t t-esc="res"/></span>
+                            </div>
+                            <p style="font-style: normal;font-weight: normal;font-size: 12px;line-height: 63.8%;color: #FFFFFF;">
+                            The Order has been
+                                <t t-if="state == 'new'">
+                                        New
+                                </t>
+                                <t t-if="state == 'partially_done'">
+                                        Partially Done
+                                </t>
+                                <t t-if="state == 'pending'">
+                                        Pending
+                                </t>
+                                <t t-if="state == 'done'">
+                                        Done
+                                </t>
+                                <t t-if="state == 'cancel'">
+                                        Cancel
+                                </t>
+                                now.
+                            </p>
+                        </div>
+                        <br/>
+                    </t>
+                </div>
+            </div>
+        </div>
+    </t>
+
+
+    <t t-name="RecentNotificationsTemplate">
+        <div class="push_notification" style="position:absolute;top:10%;width:100%;">
+            <div style="float:right;background: #222222;box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.16);border-radius: 6px;width:231px;">
+                <div style="padding:3px 12px;height:34px;background: rgba(255, 255, 255, 0.03);">
+                    <div style="display:inline-block;width:100%;margin-top:4px;">
+                        <div style="display:block;float:left;font-style: normal;font-weight: 600;font-size: 12px;line-height: 63.8%;text-transform: uppercase;color: #FFFFFF;">
+                            <img style="position:relative;top:4px" src="/pos_kitchen_screen/static/src/img/PNChef.png"/><span style="margin-left:5px;">KITCHEN</span>
+                        </div>
+                        <!-- <div style="margin-top:9px;display:block;float:right;font-style: normal;font-weight: normal;font-size: 10px;line-height: 63.8%;text-transform: uppercase;color: #FFFFFF;">
+                            Time
+                        </div> -->
+                    </div>
+                </div>
+                <div style="padding:10px 12px;">
+                    <t t-foreach="data" t-as="res">
+                        <div class="recent_item">
+                            <div style="margin-top:5px;font-family: Open Sans;font-style: normal;font-weight: 600;font-size: 12px;line-height: 63.8%;color: #FFFFFF;">
+                            Order Id:
+                                <span class="push_token_number">
+                                    <t t-esc="res[0]"/>
+                                </span>
+                                <span style="float:right" class="time">
+                                    <t t-esc="res[2]"/>
+                                </span>
+                            </div>
+                            <p style="font-style: normal;font-weight: normal;font-size: 12px;line-height: 11px;color: #FFFFFF;">
+                            The Order has been
+
+                                <t t-if="res[1][0] == 'new'">
+                                        New
+                                </t>
+                                <t t-if="res[1][0] == 'partially_done'">
+                                        Partially Done
+                                </t>
+                                <t t-if="res[1][0] == 'pending'">
+                                        Pending
+                                </t>
+                                <t t-if="res[1][0] == 'done'">
+                                        Done
+                                </t>
+                                <t t-if="res[1][0] == 'cancel'">
+                                        Cancel
+                                </t>
+                                now.
+
+                            </p>
+                        </div>
+                        <br/>
+                    </t>
+                </div>
+            </div>
+        </div>
+    </t>
+
+
+    <t t-extend="ProductCategoriesWidget" >
+        <t t-jquery="div.searchbox" t-operation="after">
+            <div class=" recent_notification" style="float:right;cursor:pointer">
+                <img style="margin-top:4px;margin-right:9px;width:43px;position: relative;left: 4px;" src="/pos_kitchen_screen/static/src/img/push_notification.png"/>
+            </div>
+        </t>
+    </t>
+
+    <t t-extend="OrderSelectorWidget">
+        <t t-jquery=".orders.touch-scrollable" t-operation="replace">
+            <span class="orders touch-scrollable">
+                <t t-foreach="widget.pos.get_order_list()" t-as="order">
+                    <t t-if="order === widget.pos.get_order()">
+                        <t t-if="order.order_progress and order.order_progress == 'done'">
+                            <span class="order-button select-order selected" style="width:108px;background:#06f106;" t-att-data-uid="order.uid">
+                                <span class="order-sequence">
+                                    <t t-esc="order.sequence_number" />
+                                </span>
+                                <t t-esc="moment(order.creation_date).format('hh:mm')"/>
+                                <span style="position:relative;bottom:28px;left:12px;">
+                                    <t t-if="widget.pos.get_order()">
+                                        <t t-esc="order.token_number"/>
+                                    </t>
+                                </span>
+                            </span>
+                        </t>
+                        <t t-elif="order.order_progress and (order.order_progress == 'pending' or order.order_progress == 'partially_paid')">
+                            <span class="order-button select-order selected" style="width:108px;background:#f19114;" t-att-data-uid="order.uid">
+                                <span class="order-sequence">
+                                    <t t-esc="order.sequence_number" />
+                                </span>
+                                <t t-esc="moment(order.creation_date).format('hh:mm')"/>
+                                <span style="position:relative;bottom:28px;left:12px;">
+                                    <t t-if="widget.pos.get_order()">
+                                        <t t-esc="order.token_number"/>
+                                    </t>
+                                </span>
+                            </span>
+                        </t>
+                        <t t-else="">
+                            <span class="order-button select-order selected" style="width:108px;" t-att-data-uid="order.uid">
+                                <span class="order-sequence">
+                                    <t t-esc="order.sequence_number" />
+                                </span>
+                                <t t-esc="moment(order.creation_date).format('hh:mm')"/>
+                                <span style="position:relative;bottom:28px;left:12px;">
+                                    <t t-if="widget.pos.get_order()">
+                                        <t t-esc="order.token_number"/>
+                                    </t>
+                                </span>
+                            </span>
+                        </t>
+                    </t>
+                    <t t-if="order !== widget.pos.get_order()">
+                        <t t-if="order.order_progress and order.order_progress == 'done'">
+                            <span class="order-button select-order" style="width:7px;background:#06f106;" t-att-data-uid="order.uid">
+                                <span class="order-sequence">
+                                    <t t-esc="order.sequence_number" />
+                                </span>
+                                <span style="position:relative;bottom:28px;color:black;">
+                                    <t t-if="widget.pos.get_order()">
+                                        <t t-esc="order.token_number"/>
+                                    </t>
+                                </span>
+                            </span>
+                        </t>
+                        <t t-elif="order.order_progress and (order.order_progress == 'pending' or order.order_progress == 'partially_paid')">
+                            <span class="order-button select-order" style="width:7px;background:#f19114;" t-att-data-uid="order.uid">
+                                <span class="order-sequence">
+                                    <t t-esc="order.sequence_number" />
+                                </span>
+                                <span style="position:relative;bottom:28px;color:black;">
+                                    <t t-if="widget.pos.get_order()">
+                                        <t t-esc="order.token_number"/>
+                                    </t>
+                                </span>
+                            </span>
+                        </t>
+                        <t t-else="">
+                            <span class="order-button select-order" style="width:7px;" t-att-data-uid="order.uid">
+                                <span class="order-sequence">
+                                    <t t-esc="order.sequence_number" />
+                                </span>
+                                <span style="position:relative;bottom:28px;color:black;">
+                                    <t t-if="widget.pos.get_order()">
+                                        <t t-esc="order.token_number"/>
+                                    </t>
+                                </span>
+                            </span>
+                        </t>
+                    </t>
+                </t>
+            </span>
+        </t>
+    </t>
+
+
+    <t t-name="SendOrderButton" owl="1">
+        <span class="control-button order-submit" t-att-class="addClasses">
+            <i class="fa fa-cutlery"></i>
+            Send Order
+        </span>
+    </t>
+
+
+</templates>

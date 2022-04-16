@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="search_template_profit_center">
+            <a class="dropdown-toggle" data-toggle="dropdown" type="button">
+                <span class="fa fa-filter"/>Profit Centers:
+                
+                <t t-set="selected_reports" t-value="', '.join(report.get('name') for report in options['profit_center'] if report.get('selected'))"/>
+                <t t-if="selected_reports">
+                    <t t-esc="selected_reports"/></t>
+                <t t-else="">All
+                </t>
+            </a>
+            <div class="dropdown-menu o_filters_menu" role="menu">
+                <t t-as="c" t-foreach="options['profit_center']">
+                    <a class="dropdown-item js_account_report_choice_filter" data-filter="profit_center" role="menuitem" t-att-data-id="c.get('id')" t-att-title="c.get('name')">
+                        <t t-esc="c.get('name')"/>
+                    </a>
+                </t>
+            </div>
+        </template>
+        <template id="search_template_profit_center_accounts">
+            <a class="dropdown-toggle" data-toggle="dropdown" type="button">
+                <span class="fa fa-filter"/>Profit Centers:
+                
+                <t t-set="selected_reports" t-value="', '.join(report.get('name') for report in options['profit_center_accounts'] if report.get('selected'))"/>
+                <t t-if="selected_reports">
+                    <t t-esc="selected_reports"/></t>
+                <t t-else="">All
+                </t>
+            </a>
+            <div class="dropdown-menu o_filters_menu" role="menu">
+                <t t-as="c" t-foreach="options['profit_center_accounts']">
+                    <a class="dropdown-item js_account_report_choice_filter" data-filter="profit_center_accounts" role="menuitem" t-att-data-id="c.get('id')" t-att-title="c.get('name')">
+                        <t t-esc="c.get('name')"/>
+                    </a>
+                </t>
+            </div>
+        </template>
+        <template id="search_template_encryptions">
+            <a class="dropdown-toggle" data-toggle="dropdown" type="button">
+                <span class="fa fa-filter"/>Encryption:
+                
+                <t t-set="selected_encryptions" t-value="', '.join(encryption.get('name') for encryption in options['encryption'] if encryption.get('selected'))"/>
+                <t t-if="selected_encryptions">
+                    <t t-esc="selected_encryptions"/></t>
+                <t t-else="">All
+                </t>
+            </a>
+            <div class="dropdown-menu o_filters_menu" role="menu">
+                <t t-as="c" t-foreach="options['encryption']">
+                    <a class="dropdown-item js_account_report_choice_filter" data-filter="encryption" role="menuitem" t-att-data-id="c.get('id')" t-att-title="c.get('name')">
+                        <t t-esc="c.get('name')"/>
+                    </a>
+                </t>
+            </div>
+        </template>
+        <template id="search_template_business_unit">
+            <a class="dropdown-toggle" data-toggle="dropdown" type="button">
+                <span class="fa fa-filter"/>Business_unit:
+                
+                <t t-set="selected_business_unit" t-value="', '.join(business_unit.get('name') for business_unit in options['business_unit'] if business_unit.get('selected'))"/>
+                <t t-if="selected_business_unit">
+                    <t t-esc="selected_business_unit"/></t>
+                <t t-else="">All
+                </t>
+            </a>
+            <div class="dropdown-menu o_filters_menu" role="menu">
+                <t t-as="c" t-foreach="options['business_unit']">
+                    <a class="dropdown-item js_account_report_choice_filter" data-filter="business_unit" role="menuitem" t-att-data-id="c.get('id')" t-att-title="c.get('name')">
+                        <t t-esc="c.get('name')"/>
+                    </a>
+                </t>
+            </div>
+        </template>
+        <template id="search_template">
+            <div class="btn-group dropdown o_account_reports_filter_date" t-if="options.get('date') != None">
+                <t t-call="account_reports.search_template_date_filter"/>
+            </div>
+            <div class="btn-group dropdown o_account_reports_filter_date_cmp" t-if="options.get('comparison') != None">
+                <t t-call="account_reports.search_template_comparison"/>
+            </div>
+            <div class="btn-group dropdown o_account_reports_filter_journals" t-if="options.get('journals') != None">
+                <t t-call="account_reports.search_template_journals"/>
+            </div>
+            <div class="btn-group dropdown o_account_reports_filter_account_type" t-if="options.get('account_type') != None">
+                <t t-call="account_reports.search_template_account_type"/>
+            </div>
+            <div class="btn-group dropdown o_account_reports_filter_analytic" t-if="options.get('analytic') != None or options.get('analytic_tags') != None">
+                <t t-call="account_reports.search_template_analytic"/>
+            </div>
+            <div class="btn-group dropdown o_account_reports_filter_ir_filters" t-if="options.get('ir_filters') != None">
+                <t t-call="account_reports.search_template_ir_filters"/>
+            </div>
+            <div class="btn-group dropdown o_account_reports_filter_groupby_fields" t-if="options.get('groupby_fields')">
+                <t t-call="account_reports.search_template_groupby_fields"/>
+            </div>
+            <div class="btn-group dropdown o_account_reports_filter_partner" t-if="options.get('partner')">
+                <t t-call="account_reports.search_template_partner"/>
+            </div>
+            <div class="btn-group dropdown o_account_reports_filter_currency" t-if="options.get('currency_rates')">
+                <t t-call="account_reports.search_template_currency"/>
+            </div>
+            <div class="btn-group dropdown o_account_reports_filter_bool" id="extra_options_dropdown" t-if="options.get('cash_basis') != None or options.get('all_entries') != None or options.get('unfold_all') != None">
+                <t t-call="account_reports.search_template_extra_options"/>
+            </div>
+            <div class="btn-group dropdown o_account_reports_filter_ec_sale_code" t-if="options.get('ec_sale_code') != None">
+                <t t-call="account_reports.search_template_ec_sale_code"/>
+            </div>
+            <div class="btn-group dropdown o_account_reports_filter_fiscal_position" id="fiscal_position_choice_option" t-if="len(options['available_vat_fiscal_positions']) &gt;(0 if options['allow_domestic'] else 1)">
+                <t t-call="account_reports.search_template_fiscal_position_choser"/>
+            </div>
+            <div class="btn-group dropdown o_account_reports_filter_encryption" t-if="options.get('encryption') != None">
+                <t t-call="slm_encryption_reports.search_template_encryptions"/>
+            </div>
+            <div class="btn-group dropdown o_account_reports_filter_profit_center" t-if="options.get('profit_center') != None">
+                <t t-call="slm_encryption_reports.search_template_profit_center"/>
+            </div>
+            <div class="btn-group dropdown o_account_reports_filter_profit_center_accounts" t-if="options.get('profit_center_accounts') != None">
+                <t t-call="slm_encryption_reports.search_template_profit_center_accounts"/>
+            </div>
+            <div class="btn-group dropdown o_account_reports_filter_business_unit" t-if="options.get('business_unit') != None">
+                <t t-call="slm_encryption_reports.search_template_business_unit"/>
+            </div>
+        </template>
+        <!-- <template id="encryption_search_template" inherit_id="account_reports.search_template">
+            <xpath expr="//div" position="after">
+                <div class="btn-group dropdown o_account_reports_filter_encryption" t-if="options.get('encryption') != None">
+                    <t t-call="slm_encryption_reports.search_template_encryptions"/>
+                </div>
+                <div class="btn-group dropdown o_account_reports_filter_profit_center" t-if="options.get('profit_center') != None">
+                    <t t-call="slm_encryption_reports.search_template_profit_center"/>
+                </div>
+                <div class="btn-group dropdown o_account_reports_filter_profit_center_accounts" t-if="options.get('profit_center_accounts') != None">
+                    <t t-call="slm_encryption_reports.search_template_profit_center_accounts"/>
+                </div>
+                <div class="btn-group dropdown o_account_reports_filter_business_unit" t-if="options.get('business_unit') != None">
+                    <t t-call="slm_encryption_reports.search_template_business_unit"/>
+                </div>
+            </xpath>
+        </template> -->
+    </data>
+</odoo>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="pos_wallet_odoo_template" inherit_id="point_of_sale.template" xml:space="preserve">
+
+	<t t-name="EditListPopup" t-inherit="point_of_sale.EditListPopup" t-inherit-mode="extension" owl="1">
+		<xpath expr="//main[hasclass('list-lines')]" position="replace">
+			<main class="list-lines" t-on-remove-item="removeItem"
+				  t-on-create-new-item="createNewItem">
+				<select class="lots barcode_selector" id="lots" name="lots"
+					t-on-change="selectLot">
+					<option> --- Select Lot/Serial --- </option>
+					<t t-foreach="barcodes" t-as="brcd" t-key="brcd.id">
+						<option t-att-value="brcd.name">
+							<t t-esc='brcd.name'/>
+							<t t-if="env.pos.config.show_stock_location =='specific' ">
+								[Qty :<t t-esc="brcd.loc_qty"/> Price: <t t-esc="brcd.list_price"/>]
+							</t>
+							<t t-else="">
+								[Qty :<t t-esc="brcd.product_qty"/> Price: <t t-esc="brcd.list_price"/>]
+							</t>
+						</option>
+					</t>
+				</select>
+				<t t-foreach="state.array" t-as="item" t-key="item._id">
+					<EditListInput item="item" />
+				</t>
+			</main>
+		</xpath> 
+	</t>
+
+	<t t-name="OrderReceipt" t-inherit="point_of_sale.OrderReceipt" t-inherit-mode="extension" owl="1">
+		<xpath expr="//div[hasclass('orderlines')]" position="replace">
+			<div class="orderlines">
+				<table style="width:100%;">
+					<colgroup>
+						<col width='50%' />
+						<col width='25%' />
+						<col width='25%' />
+					</colgroup>
+					<thead>
+						<tr style="border-bottom: 2px solid black;">
+							<th>Product</th>
+							<th class="pos-right-align">Qty</th>
+							<th class="pos-right-align">Price</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr t-foreach="orderlines" t-as="line" t-key="line.id">
+							<td>
+								<t t-esc="line.get_product().display_name" />
+								<t t-if="line.get_discount() > 0">
+									<div>
+										Discount: <t t-esc='line.discount' />%
+									</div>
+								</t>
+								<t t-if="line.get_lot_barcodes()">
+									<li class="info">
+										<t t-foreach="line.get_lot_barcodes()" t-as="lots">
+											[<t t-esc="lots.name"/> ]
+											<t t-if="lots.expiry_date">
+												[<t t-esc="lots.expiry_date"/> ]
+											</t>
+											,
+										</t>
+									</li>
+								</t>
+							</td>
+							<td class="pos-right-align">
+								<t t-esc="line.get_quantity_str_with_unit()" />
+							</td>
+							<td class="pos-right-align">
+								<t t-esc="env.pos.format_currency(line.get_display_price())" />
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</xpath>
+	</t>
+
+</templates>
+	
+	

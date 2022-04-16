@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--<record id="general_ledger_updation.view_account_payment_invoice_form_inherited" model="ir.ui.view">
+        <field name="name">account.payment.invoice.form</field>
+        <field name="model">account.payment</field>
+        <field name="inherit_id" ref="account.view_account_payment_invoice_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='payment_date']" position="after">
+                <field name="pnr_airway"/>
+            </xpath>
+        </field>
+    </record>
+    <record id="general_ledger_updation.view_account_payment_from_invoices_inherit" model="ir.ui.view">
+        <field name="name">account.register.payments.wizard</field>
+        <field name="model">account.register.payments</field>
+        <field name="inherit_id" ref="account.view_account_payment_from_invoices" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='payment_date']" position="after">
+                <field name="pnr_airway"/>
+            </xpath>
+        </field>
+    </record>-->
+</odoo>

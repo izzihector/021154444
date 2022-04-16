@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	<templates id="template_custom_latest_extended" inherit_id="point_of_sale.template" xml:space="preserve">
+
+		<t t-extend="ClientDetails" t-inherit="point_of_sale.ClientDetailsEdit" t-inherit-mode="extension" owl="1">
+			<xpath expr="//div[hasclass('client-details-left')]" position="inside">
+				<div class="client-detail">
+					<span class='label'>Credit Amount</span>
+					<span> <t t-esc='props.partner.custom_credit'/></span>
+				</div>
+			</xpath>
+		</t>
+		
+		<t t-extend="ActionpadWidget" t-inherit="point_of_sale.ActionpadWidget" t-inherit-mode="extension" owl="1">
+			<xpath expr="//button[hasclass('set-customer')]" position="inside">
+				<br/>
+				<t t-if="env.pos.get_client()">
+					<span>
+					[Credit: 
+					<t t-esc="((env.pos.get_client().custom_credit * 100) / 100)"/>
+					]
+					</span>
+				</t>
+			</xpath>
+		</t>
+
+		<t t-name ="PaymentScreen" t-inherit="point_of_sale.PaymentScreen" t-inherit-mode="extension" owl="1">
+			<xpath expr="//span[hasclass('js_customer_name')]" position="after">
+				<t t-if="env.pos.get_client()">
+					<span>
+					[Credit: 
+					<t t-esc="((env.pos.get_client().custom_credit * 100) / 100)"/>
+					]
+					</span>
+				</t>
+			</xpath>
+		</t>
+
+		<t t-extend="ClientListScreenWidget" t-inherit="point_of_sale.ClientListScreen" t-inherit-mode="extension" owl="1">
+			<xpath expr="//table//thead//tr" position="inside">
+				<th>Credit Limit</th>
+				<th>Credit Consumed</th>
+			</xpath>
+		</t>
+
+		<t t-extend="ClientLine" t-inherit="point_of_sale.ClientLine" t-inherit-mode="extension" owl="1">
+			<xpath expr="//tr" position="inside">
+				<td id="bal"><t t-esc='props.partner.credit_limit or "0"' /></td>
+				<td id="bal"><t t-esc='props.partner.custom_credit or "0"' /></td>
+			</xpath>
+		</t>
+
+		<t t-extend="ClientListScreen" t-inherit="point_of_sale.ClientListScreen" t-inherit-mode="extension" owl="1">
+			<xpath expr="//div[hasclass('new-customer')]" position="replace">
+				 <div class="new-customer"></div>
+			</xpath>
+		</t>
+
+	
+	</templates>

@@ -1,0 +1,21 @@
+<odoo>
+    <!-- views -->
+    <!-- form -->
+    <record id="manual_rate_exchange_factura_cliente_form_view" model="ir.ui.view">
+        <field name="name">factura.cliente.form</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//label[@for='journal_id']" position="before">
+                <field name="check_rate"/>
+                <field attrs="{'invisible': [('check_rate', '=', False)]}" name="rate_exchange"/>
+            </xpath>
+            <xpath expr="//form/header/button[@name='preview_invoice']" position="attributes">
+                <attribute name="context">{'value_check_rate':check_rate, 'value_rate_exchange': rate_exchange}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='price_unit']" position="after">
+                <field name="local_currency_price"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

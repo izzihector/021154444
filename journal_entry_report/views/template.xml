@@ -1,0 +1,13 @@
+<odoo>
+    <data>
+        <template id="report_assets_common_custom_fonts" name="Custom QWeb fonts" inherit_id="web.layout">
+
+            <xpath expr="." position="inside">
+                <link href="/journal_entry_report/static/src/less/custom_font.less" rel="stylesheet" type="text/less"/>
+                <link href="/journal_entry_report/static/src/less/custom_style.css" rel="stylesheet" type="text/css"/>
+            </xpath>
+
+        </template>
+
+    </data>
+</odoo>

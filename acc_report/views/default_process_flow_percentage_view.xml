@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_default_cost_center_percentage_tree" model="ir.ui.view">
+        <field name="name">default.cost.center.percentage.tree</field>
+        <field name="model">default.cost.center.percentage</field>
+        <field eval="8" name="priority"/>
+        <field name="arch" type="xml">
+            <tree string="Cost Center Percentage">
+                <field name="currnt_year"/>
+            </tree>
+        </field>
+    </record>
+    <record id="view_default_cost_center_percentage_form" model="ir.ui.view">
+        <field name="name">default.cost.center.percentage.form</field>
+        <field name="model">default.cost.center.percentage</field>
+        <field name="arch" type="xml">
+            <form string="Cost Center Percentage">
+                <header>
+                    <button name="action_get_data" type="object"  string="Get Data" class="oe_highlight"/>
+                    <button name="action_done" type="object" attrs="{'invisible': [('state', '=', 'done')]}" string="Done" class="oe_highlight"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,done" />
+                </header>
+                <sheet string="Cost Center Percentage">
+                    <div class="oe_title">
+                        <label for="currnt_year" class="oe_edit_only"/>
+                        <h1>
+                            <field name="currnt_year" class="oe_inline" />
+                        </h1>
+                    </div>
+                    <field name="line_ids" mode='tree'>
+                        <tree editable="top" create='false' delete="false">
+                            <field name="analytic_id"/>
+                            <field name="ma"/>
+                            <field name="ragio"/>
+                            <field name="cargo"/>
+                            <field name="cost_group_id"/>
+                            <field name="process_flow_id"/>
+                        </tree>
+                    </field>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record model="ir.actions.act_window" id="action_default_cost_center_percentage">
+        <field name="name">Cost Center Percentage</field>
+        <field name="res_model">default.cost.center.percentage</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="view_default_cost_center_percentage_tree"/>
+        
+    </record>
+    <menuitem 
+            name="Cost Center Percentage"
+            action="action_default_cost_center_percentage" 
+            id="menu_default_cost_center_percentage" 
+            parent="account.menu_analytic_accounting" 
+            sequence="1"/>
+</odoo>

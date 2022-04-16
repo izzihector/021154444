@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<record id="view_cashbox_line_form_inherit" model="ir.ui.view">
+		<field name="name">cashbox.line.form.inherit</field>
+		<field name="model">account.bank.statement.cashbox</field>
+		<field name="inherit_id" ref="account.view_account_bnk_stmt_cashbox"/>
+		<field name="arch" type="xml">
+			<field name="number" position="after">
+				<field name="currency_id" widget="selection"/>
+				<field name="journal_id" domain="[('type', '=', 'cash')]" widget="Selection"/>
+				<field name="cash_session_id" invisible="1"/>
+			</field>
+			<field name="cashbox_lines_ids" position="before">
+				<group>
+					<field name="cash_session_id" invisible="1"/>
+				</group>
+			</field>
+		</field>
+	</record>
+</odoo>

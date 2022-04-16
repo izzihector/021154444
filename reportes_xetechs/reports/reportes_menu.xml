@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Invoices QWEB-->
+
+    <record id="action_reportes_xetechs_invoice_pdf_repot" model="report.paperformat">
+        <field name="name">Invoice</field>
+        <field name="default" eval="True"/>
+        <field name="format">Letter</field>
+        <field name="page_height">0</field>
+        <field name="page_width">0</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">45</field>
+        <field name="margin_bottom">25</field>
+        <field name="margin_left">10</field>
+        <field name="margin_right">10</field>
+        <field name="header_line" eval="False"/>
+        <field name="header_spacing">40</field>
+        <field name="dpi">90</field>
+
+    </record>
+    <record id="action_reportes_xetechs_invoice_pdf" model="ir.actions.report">
+        <field name="name">Invoice Branches</field>
+        <field name="model">account.move</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">reportes_xetechs.reportes_xetechs_invoice_pdf</field>
+        <field name="report_file">reportes_xetechs.reportes_xetechs_invoice_pdf</field>
+        <field name="binding_model_id" ref="account.model_account_move"/>
+        <field name="binding_type">report</field>
+        <field name="print_report_name">(object._get_report_base_filename())</field>
+        <field name="paperformat_id" ref="action_reportes_xetechs_invoice_pdf_repot"/>
+        <field name="attachment">(object.state in ('open','in_payment','paid')) and ('INV'+(object.number or '').replace('/','')+'.pdf')</field>
+    </record>
+
+
+    
+
+</odoo>

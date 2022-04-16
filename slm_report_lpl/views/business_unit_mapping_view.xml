@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_business_unit_mapping_tree" model="ir.ui.view">
+            <field name="name">business.unit.mapping.tree</field>
+            <field name="model">business.unit.mapping</field>
+            <field name="arch" type="xml">
+                <tree string="Values">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_business_unit_mapping_form" model="ir.ui.view">
+            <field name="name">business.unit.mapping.form</field>
+            <field name="model">business.unit.mapping</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="profit_center" context="{'active_test': False}"
+                                       autocomplete="off"
+                                       domain="[('code', '=like', '6%')]"/>
+                            </group>
+                        </group>
+                        <group>
+                            <notebook>
+                                <page string="Mapping lines" name="business_unit_mapping_lines">
+                                    <field name="line_ids" widget="section_and_note_one2many"
+                                           mode="tree" nolabel="1">
+                                        <tree editable="bottom">
+                                            <field name="id"/>
+                                            <field name="is_account_tag"/>
+                                            <field name="is_account_group"/>
+                                            <field name="is_account_expression"/>
+                                            <field name="account_id" autocomplete="off"
+                                                   attrs="{'invisible':[('is_account_tag','!=', False),
+                                                       ('is_account_group','!=', False),
+                                                       ('is_account_expression','!=', False)]}"/>
+                                            <field name="tag_id" autocomplete="off"
+                                                   attrs="{'invisible':[('is_account_tag','!=', True)]}"/>
+                                            <field name="group_id" autocomplete="off"
+                                                   attrs="{'invisible':[('is_account_group','!=', True)]}"/>
+                                            <field name="expression" autocomplete="off"
+                                                   attrs="{'invisible':[('is_account_expression','!=', True)]}"/>
+                                            <field name="tag" autocomplete="off"/>
+                                            <field name="group" autocomplete="off"/>
+                                        </tree>
+                                    </field>
+                                </page>
+                                <page string="Layout lines" name="business_unit_report_layout">
+                                    <field name="layout_lines" widget="section_and_note_one2many" mode="tree, kanban">
+                                        <tree decoration-bf="type == 'total'" editable="bottom">
+                                            <field name="sequence" widget="handle"/>
+                                            <field name="id"/>
+                                            <field name="type"/>
+                                            <field name="name"
+                                                   attrs="{'invisible':[('type','in', ['group','tag'])]}"/>
+                                            <field name="group"
+                                                   attrs="{'invisible':[('type','!=', 'group')]}"/>
+                                            <field name="tag" attrs="{'invisible':[('type','!=', 'tag')]}"/>
+                                            <field name="formula" attrs="{'invisible':[('type','!=', 'total')]}"/>
+                                            <field name="sign" attrs="{'invisible':[('type','=', 'title')]}"/>
+                                        </tree>
+                                    </field>
+                                </page>
+                            </notebook>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_business_unit_mapping" model="ir.actions.act_window">
+            <field name="name">Business Unit Mapping</field>
+            <field name="res_model">business.unit.mapping</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_business_unit_mapping_tree"/>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Add a new business unit mapping record
+                </p>
+            </field>
+        </record>
+        <menuitem
+                name="Business Unit Mapping"
+                action="action_business_unit_mapping"
+                id="menu_action_business_unit_mapping"
+                parent="slm_report_lpl.account_account_menu_xetechs"
+                groups="slm_encryption_reports.group_advanced_reports"
+                sequence="8"/>
+    </data>
+</odoo>

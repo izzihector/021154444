@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_slm_group_total_mapping_tree" model="ir.ui.view">
+            <field name="name">slm.group.total.mapping.tree</field>
+            <field name="model">slm.group.total.mapping</field>
+            <field name="arch" type="xml">
+                <tree string="Values">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_slm_group_total_mapping_form" model="ir.ui.view">
+            <field name="name">slm.group.total.mapping.form</field>
+            <field name="model">slm.group.total.mapping</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="business_units"/>
+                        </group>
+                        <group>
+                            <notebook>
+                                <page string="Layout lines" name="slm_group_report_layout">
+                                    <field name="layout_lines" widget="section_and_note_one2many" mode="tree, kanban">
+                                        <tree decoration-bf="type == 'total'" editable="bottom">
+                                            <field name="sequence" widget="handle"/>
+                                            <field name="id"/>
+                                            <field name="type"/>
+                                            <field name="name"
+                                                   attrs="{'invisible':[('type','in', ['group','tag'])]}"/>
+                                            <field name="group"
+                                                   attrs="{'invisible':[('type','!=', 'group')]}"/>
+                                            <field name="tag" attrs="{'invisible':[('type','!=', 'tag')]}"/>
+                                            <field name="formula" attrs="{'invisible':[('type','!=', 'total')]}"/>
+                                            <field name="sign" attrs="{'invisible':[('type','=', 'title')]}"/>
+                                        </tree>
+                                    </field>
+                                </page>
+                            </notebook>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_slm_group_total_mapping" model="ir.actions.act_window">
+            <field name="name">SLM Group Total Mapping</field>
+            <field name="res_model">slm.group.total.mapping</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_slm_group_total_mapping_tree"/>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Add a new SLM Group Total mapping record
+                </p>
+            </field>
+        </record>
+        <menuitem
+                name="SLM Group Total Mapping"
+                action="action_slm_group_total_mapping"
+                id="menu_action_slm_group_total_mapping"
+                parent="slm_report_lpl.account_account_menu_xetechs"
+                groups="slm_encryption_reports.group_advanced_reports"
+                sequence="10"/>
+    </data>
+</odoo>

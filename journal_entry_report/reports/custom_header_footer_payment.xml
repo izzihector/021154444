@@ -1,0 +1,47 @@
+<odoo>
+    <template id="custom_payment_header_footer">
+        <t t-set="company" t-value="user.company_id"/>
+        <div class="header font-weight-bold" style="  font-family: Arial, Helvetica, sans-serif;direction: rtl;">
+            <div class="row">
+                <div class="col-4 text-right">
+                    <div style="float:right">
+                        Date:
+                        <span
+                                t-esc="context_timestamp(datetime.datetime.now()).strftime('%Y-%m-%d %H:%M')"/>
+                    </div>
+                </div>
+
+                <div class="col-3 text-center">
+                    <center>
+
+                        <img t-if="company.logo" t-att-src="image_data_uri(company.logo)"
+                             style="max-height: 100px;max-width: 300px;"
+                             alt="Logo"/>
+
+                    </center>
+                </div>
+                <div class="col-5 text-left">
+                    <div t-field="company.partner_id" style="float:left; text-align:left"
+                         t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": true}'
+                    />
+                </div>
+            </div>
+            <div t-if="company.logo or company.report_header" class="row zero_min_height">
+                <div class="col-12">
+                </div>
+            </div>
+        </div>
+        <div class="footer" style="color:##023e8a;">
+            <div t-if="report_type == 'pdf'" class="text-muted">
+                Page:
+                <li class="list-inline-item">
+                    <strong>
+                        <span class="page"/>
+                        /
+                        <span class="topage"/>
+                    </strong>
+                </li>
+            </div>
+        </div>
+    </template>
+</odoo>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="view_profit_center_tree">
+            <field name="name">profit.center.tree</field>
+            <field name="model">profit.center</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="analytical_account_id"/>
+                </tree>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="view_profit_center_form">
+            <field name="name">profit.center.form</field>
+            <field name="model">profit.center</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="analytical_account_id" context="{'active_test': False}"
+                                                   autocomplete="off"
+                                                   domain="['|', ('code', '=like', '6%'), ('code', '=like', '7%')]"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="action_profit_center" model="ir.actions.act_window">
+            <field name="name">Profit Centers</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">profit.center</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_profit_center_tree"/>
+        </record>
+        <menuitem id="menu_profit_center"
+                  action="action_profit_center"
+                  parent="slm_report_lpl.account_account_menu_xetechs"
+                  sequence="3"
+                  name="Profit Centers"
+                  groups="slm_encryption_reports.group_advanced_reports"
+
+        />
+    </data>
+</odoo>

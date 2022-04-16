@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!--      menu_action-->
+    <record id="stock.stock_product_normal_action" model="ir.actions.act_window">
+        <field name="name">Product Items</field>
+    </record>
+    <!--    menu-->
+    <record id="stock.product_product_menu" model="ir.ui.menu">
+        <field name="name">Product Items</field>
+    </record>
+
+</odoo>

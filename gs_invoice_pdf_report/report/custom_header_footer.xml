@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="custom_invoice_payment_header">
+        <t t-set="company" t-value="user.company_id"/>
+
+        <div class="o_force_rtl header font-weight-bold" style="font-size: 22px;font-family:sans-serif;direction: rtl;">
+            <style>
+                @font-face {
+                    font-family: 'Cairo-Regular';
+                    src: local('Cairo-Regular'), local('Cairo-Regular'), url(/gs_invoice_pdf_report/static/src/fonts/cairo/Cairo-Regular.ttf) format('opentype');
+                }
+
+                .font_cairo{
+                    font-family: Cairo-Regular;
+                }
+            </style>
+            <div style="float:left;">
+                <img t-if="company.logo" t-att-src="image_data_uri(company.logo)" style="max-height: 150px;"
+                     alt="Logo"/>
+            </div>
+            <div class="font_cairo" style="width:70%;float:right;position:relative;left:18px;direction:rtl;">
+                <!-- <ul style="position:absolute">
+                    <strong  class='text-right' t-if="company.name1" style="font-size:17px; float:right;" t-esc="company.name1"/>
+                    <br/>
+                    <div class='text-right' style="font-size:17px;float:right;" t-field="company.partner_id"
+                         t-options='{"widget": "contact", "fields": ["name"], "no_marker": true}'
+                    />
+                    <br/>
+                    <div style="margin-left:150px;">
+                        <strong style="float-right">الرقم الضريبي</strong>
+                        <strong t-if="company.vat" class="list-inline-item d-inline">
+                            <strong t-field="company.vat"/>
+                            :VAT No
+                                                   <t t-esc="company.country_id.vat_label or 'Tax ID'"/>
+                        </strong>
+                    </div>
+                    <br/>
+                    <div style="margin-left:250px;">
+                        <strong style="float-right">السجل التجاري</strong>
+                        <strong t-if="company.company_registry" class="list-inline-item d-inline">
+                            <strong t-field="company.company_registry"/>:CR
+                        </strong>
+                    </div>
+                    <strong t-if="company.country_id.name" class="list-inline-item d-inline">
+                        <strong t-field="company.country_id1" style="float:right;"/>
+                        <strong t-field="company.city1" style="float:right;"/>
+                        <br/>
+                        <strong class='text-right' style="float-right" t-field="company.country_id.name"/>
+                        <strong class='text-right' style="float-right" t-field="company.city"/>
+                    </strong>
+                </ul> -->
+                <ul class="list-inline mb4" style="position:absolute">
+                    <strong  class='text-right' t-if="company.name1" style="float:right;" t-esc="company.name1"/>
+                    <br/>
+                    <div class='text-right' style="float:right;" t-field="company.partner_id"
+                         t-options='{"widget": "contact", "fields": ["name"], "no_marker": true}'
+                    />
+                    <br/>
+                    <div class="text-right" style="float:right; font-size: 16px;">
+                        <strong style="float-right">الرقم الضريبي</strong>
+                        <strong t-if="company.vat" class="list-inline-item d-inline">
+                            <strong t-field="company.vat"/>:VAT No</strong>
+                    </div>
+                    <br/>
+                    <div class="text-right" style="float:right; font-size: 16px;">
+                        <strong style="float-right">السجل التجاري</strong>
+                        <strong t-if="company.company_registry" class="list-inline-item d-inline">
+                        <strong t-field="company.company_registry"/>:CR</strong>
+                    </div>
+                    <div style="font-size: 16px;">
+                        <strong t-if="company.country_id.name" class="list-inline-item d-inline">
+                            <strong t-field="company.country_id1" style="float:right;"/>
+                            <strong t-field="company.city1" style="float:right;"/>
+                            <br/>
+                        </strong>
+                    </div>
+                </ul>
+            </div>
+        </div>
+        <div class="footer" style="width:100%;font-family: Arial, Helvetica, sans-serif;direction: rtl;">
+            <div class="mt-2 text-center" style="background-color:#e00814;color:#fff;">
+                <ul class="list-inline mb4 text-nowrap">
+                    <li t-if="company.street" class="list-inline-item d-inline">
+                        <span t-field="company.country_id.name"/>
+                    </li>
+
+                    <li class='list-inline-item d-inline' t-if="company.city1">
+                        <span t-field="company.city1"/>
+                    </li>
+                    <li t-if="company.street1" class="list-inline-item d-inline">
+                        <!--                        <t-->
+                        <!--                            t-esc="company.country_id.vat_label or 'Tax ID'"/>:-->
+                        <span t-field="company.street1"/>
+                    </li>
+                    <li t-if="company.street21" class="list-inline-item d-inline">
+                        <!--                        <t-->
+                        <!--                            t-esc="company.country_id.vat_label or 'Tax ID'"/>:-->
+                        <span t-field="company.street21"/>
+                    </li>
+                    <li t-if="company.phone" class="fa fa-phone fa-fw list-inline-item d-inline">
+                        <span class="o_force_ltr" t-field="company.phone"/>
+                    </li>
+                    <li t-if="company.whatsapp_no" class="fa fa-whatsapp fa-fw list-inline-item d-inline">
+                        <span class="o_force_ltr" t-field="company.whatsapp_no"/>
+                    </li>
+                    <br/>
+
+<!--                    <li t-if="company.vat" class="list-inline-item d-inline"><t-->
+<!--                            t-esc="company.country_id.vat_label or 'Tax ID'"/>:-->
+<!--                        <span t-field="company.vat"/>-->
+<!--                    </li>-->
+
+                    <li t-if="company.email" class="fa fa-envelope-o fa-fw list-inline-item d-inline">
+                        <span t-field="company.email"/>
+                    </li>
+                    <li t-if="company.website" class="fa fa-globe fa-fw list-inline-item d-inline">
+                        <span t-field="company.website"/>
+                    </li>
+                </ul>
+            </div>
+            <div t-if="report_type == 'pdf'" class="text-muted">
+                Page:
+                <li class="list-inline-item">
+                    <strong>
+                        <span class="page"/>
+                        /
+                        <span class="topage"/>
+                    </strong>
+                </li>
+            </div>
+        </div>
+    </template>
+
+<!-- <template id="external_layout_standard">
+        <div t-attf-class="header o_company_#{company.id}_layout" t-att-style="report_header_style">
+            <div class="row">
+                <div class="col-3 mb4">
+                    <img t-if="company.logo" t-att-src="image_data_uri(company.logo)" style="max-height: 45px;" alt="Logo"/>
+                </div>
+                <div class="col-9 text-right" style="margin-top:22px;" t-field="company.report_header" name="moto"/>
+            </div>
+            <div t-if="company.logo or company.report_header" class="row zero_min_height">
+                <div class="col-12">
+                    <div style="border-bottom: 1px solid black;"/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6" name="company_address">
+                    <div t-field="company.partner_id"
+                        t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": true}'
+                    />
+                </div>
+            </div>
+        </div>
+
+        <div t-attf-class="article o_report_layout_standard o_company_#{company.id}_layout"  t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id" t-att-data-oe-lang="o and o.env.context.get('lang')">
+            <div class="pt-5">
+                This div ensures that the address is not cropped by the header.
+                <t t-call="web.address_layout"/>
+            </div>
+            <t t-raw="0"/>
+        </div>
+
+        <div t-attf-class="footer o_standard_footer o_company_#{company.id}_layout">
+            <div class="text-center" style="border-top: 1px solid black;">
+                <ul class="list-inline mb4">
+                    using the list-inline-item class from bootstrap causes weird behaviours in pdf report
+                         adding d-inline class fixes the problem
+                    <li t-if="company.phone" class="list-inline-item d-inline"><span class="o_force_ltr" t-field="company.phone"/></li>
+                    <li t-if="company.email" class="list-inline-item d-inline"><span t-field="company.email"/></li>
+                    <li t-if="company.website" class="list-inline-item d-inline"><span t-field="company.website"/></li>
+                    <li t-if="company.vat" class="list-inline-item d-inline"><t t-esc="company.country_id.vat_label or 'Tax ID'"/>: <span t-field="company.vat"/></li>
+                </ul>
+
+                <div name="financial_infos">
+                    <span t-field="company.report_footer"/>
+                </div>
+
+                <div t-if="report_type == 'pdf'" class="text-muted">
+                    Page: <span class="page"/> / <span class="topage"/>
+                </div>
+            </div>
+        </div>
+    </template> -->
+
+</odoo>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_account_invoice_line_flight_slm" model="ir.ui.view">
+            <field name="name">view.account.move.line.flight.slm</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='invoice_line_ids']/tree/field[@name='currency_id']" position="after">
+                    <field name="opercde" groups="slm_custom_invoice_field.group_new_fields_invoice_line_slm"/>
+                    <field name="vlnr" groups="slm_custom_invoice_field.group_new_fields_invoice_line_slm"
+                           attrs="{'required': [('required_flight_number', '=', True)]}"/>
+                    <field name="gallon" groups="slm_custom_invoice_field.group_new_fields_invoice_line_slm"/>
+                    <field name="plcde" groups="slm_custom_invoice_field.group_new_fields_invoice_line_slm"/>
+                    <field name="handl" groups="slm_custom_invoice_field.group_new_fields_invoice_line_slm"/>
+                    <field name="maalt" groups="slm_custom_invoice_field.group_new_fields_invoice_line_slm"/>
+                    <field name="pax" groups="slm_custom_invoice_field.group_new_fields_invoice_line_slm"/>
+                    <field name="mandgn" groups="slm_custom_invoice_field.group_new_fields_invoice_line_slm"/>
+                    <field name="galprijs" groups="slm_custom_invoice_field.group_new_fields_invoice_line_slm"/>
+                    <field name="factdg" groups="slm_custom_invoice_field.group_new_fields_invoice_line_slm"/>
+                    <field name="factmd" groups="slm_custom_invoice_field.group_new_fields_invoice_line_slm"/>
+                    <field name="factjr" groups="slm_custom_invoice_field.group_new_fields_invoice_line_slm"/>
+                    <field name="vltype" groups="slm_custom_invoice_field.group_new_fields_invoice_line_slm"/>
+                    <field name="vltreg" groups="slm_custom_invoice_field.group_new_fields_invoice_line_slm"/>
+                    <field name="required_flight_number" invisible="1"/>
+                </xpath>
+                <field name="account_id" position="attributes">
+                    <attribute name="required">1</attribute>
+                </field>
+            </field>
+        </record>
+
+       <!--  <record id="view_account_invoice_line_vendor_flight_slm" model="ir.ui.view">
+            <field name="name">view.account.invoice.line.vendor.flight.slm</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_supplier_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='invoice_line_ids']/tree/field[@name='currency_id']" position="after">
+                    <field name="opercde" groups="slm_custom_invoice_field.group_new_fields_invoice_line_slm"/>
+                    <field name="vlnr" groups="slm_custom_invoice_field.group_new_fields_invoice_line_slm"
+                           attrs="{'required': [('required_flight_number', '=', True)]}"/>
+                    <field name="gallon" groups="slm_custom_invoice_field.group_new_fields_invoice_line_slm"/>
+                    <field name="plcde" groups="slm_custom_invoice_field.group_new_fields_invoice_line_slm"/>
+                    <field name="handl" groups="slm_custom_invoice_field.group_new_fields_invoice_line_slm"/>
+                    <field name="maalt" groups="slm_custom_invoice_field.group_new_fields_invoice_line_slm"/>
+                    <field name="pax" groups="slm_custom_invoice_field.group_new_fields_invoice_line_slm"/>
+                    <field name="mandgn" groups="slm_custom_invoice_field.group_new_fields_invoice_line_slm"/>
+                    <field name="galprijs" groups="slm_custom_invoice_field.group_new_fields_invoice_line_slm"/>
+                    <field name="factdg" groups="slm_custom_invoice_field.group_new_fields_invoice_line_slm"/>
+                    <field name="factmd" groups="slm_custom_invoice_field.group_new_fields_invoice_line_slm"/>
+                    <field name="factjr" groups="slm_custom_invoice_field.group_new_fields_invoice_line_slm"/>
+                    <field name="vltype" groups="slm_custom_invoice_field.group_new_fields_invoice_line_slm"/>
+                    <field name="vltreg" groups="slm_custom_invoice_field.group_new_fields_invoice_line_slm"/>
+                    <field name="required_flight_number" invisible="1"/>
+                </xpath>
+				<field name="date_due" position="attributes">
+                    <attribute name="required">1</attribute>
+                </field>
+				<field name="reference" position="attributes">
+                    <attribute name="string">Bill reference</attribute>
+                </field>
+				<field name="account_id" position="attributes">
+					<attribute name="required">1</attribute>
+				</field>
+            </field>
+        </record>
+ -->
+    </data>
+</odoo>

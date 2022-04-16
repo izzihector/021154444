@@ -1,0 +1,60 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+    <!--
+    <record model="ir.ui.view" id="journal_entries_xls.list">
+      <field name="name">journal_entries_xls list</field>
+      <field name="model">journal_entries_xls.journal_entries_xls</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="value"/>
+          <field name="value2"/>
+        </tree>
+      </field>
+    </record>
+    -->
+
+    <!-- actions opening views on models -->
+    <!--
+    <record model="ir.actions.act_window" id="journal_entries_xls.action_window">
+      <field name="name">journal_entries_xls window</field>
+      <field name="res_model">journal_entries_xls.journal_entries_xls</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+    -->
+
+    <!-- server action to the one above -->
+    <!--
+    <record model="ir.actions.server" id="journal_entries_xls.action_server">
+      <field name="name">journal_entries_xls server</field>
+      <field name="model_id" ref="model_journal_entries_xls_journal_entries_xls"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": self._name,
+        }
+      </field>
+    </record>
+    -->
+
+    <!-- Top menu item -->
+    <!--
+    <menuitem name="journal_entries_xls" id="journal_entries_xls.menu_root"/>
+    -->
+    <!-- menu categories -->
+    <!--
+    <menuitem name="Menu 1" id="journal_entries_xls.menu_1" parent="journal_entries_xls.menu_root"/>
+    <menuitem name="Menu 2" id="journal_entries_xls.menu_2" parent="journal_entries_xls.menu_root"/>
+    -->
+    <!-- actions -->
+    <!--
+    <menuitem name="List" id="journal_entries_xls.menu_1_list" parent="journal_entries_xls.menu_1"
+              action="journal_entries_xls.action_window"/>
+    <menuitem name="Server to list" id="journal_entries_xls" parent="journal_entries_xls.menu_2"
+              action="journal_entries_xls.action_server"/>
+    -->
+  </data>
+</odoo>

@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data noupdate="1">
+		<record id="slm_subgrupo_001" model="account.subgroup">	<field name="name">Bruto salarissen</field></record>
+		<record id="slm_subgrupo_002" model="account.subgroup">	<field name="name">Overwerkvergoedingen</field></record>
+		<record id="slm_subgrupo_003" model="account.subgroup">	<field name="name">Gratificaties</field></record>
+		<record id="slm_subgrupo_004" model="account.subgroup">	<field name="name">Vakantiegeld</field></record>
+		<record id="slm_subgrupo_005" model="account.subgroup">	<field name="name">Jubileumuitkeringen</field></record>
+		<record id="slm_subgrupo_006" model="account.subgroup">	<field name="name">Afkoop vakantiedagen</field></record>
+		<record id="slm_subgrupo_007" model="account.subgroup">	<field name="name">Freelancers en losse krachten</field></record>
+		<record id="slm_subgrupo_008" model="account.subgroup">	<field name="name">Kinderbijslag</field></record>
+		<record id="slm_subgrupo_009" model="account.subgroup">	<field name="name">Premie ziektekostenverzekering</field></record>
+		<record id="slm_subgrupo_010" model="account.subgroup">	<field name="name">Honoraria artsen en specialisten</field></record>
+		<record id="slm_subgrupo_011" model="account.subgroup">	<field name="name">Geneesmiddelen en andere voorzieningen</field></record>
+		<record id="slm_subgrupo_012" model="account.subgroup">	<field name="name">Schoolbeurzen</field></record>
+		<record id="slm_subgrupo_013" model="account.subgroup">	<field name="name">Overige sociale lasten</field></record>
+		<record id="slm_subgrupo_014" model="account.subgroup">	<field name="name">Werknemersbijdrage ziektekosten</field></record>
+		<record id="slm_subgrupo_015" model="account.subgroup">	<field name="name">Pensioenen/Onderstanden</field></record>
+		<record id="slm_subgrupo_016" model="account.subgroup">	<field name="name">Pensioenpremies</field></record>
+		<record id="slm_subgrupo_017" model="account.subgroup">	<field name="name">Werknemersbijdrage pensioenpremie</field></record>
+		<record id="slm_subgrupo_018" model="account.subgroup">	<field name="name">Vrijval / toevoeging voorziening Post Employment Benefits</field></record>
+		<record id="slm_subgrupo_019" model="account.subgroup">	<field name="name">Autotoelage</field></record>
+		<record id="slm_subgrupo_020" model="account.subgroup">	<field name="name">Representatie toelage</field></record>
+		<record id="slm_subgrupo_021" model="account.subgroup">	<field name="name">Algemene toelagen</field></record>
+		<record id="slm_subgrupo_022" model="account.subgroup">	<field name="name">Bedrijfskleding</field></record>
+		<record id="slm_subgrupo_023" model="account.subgroup">	<field name="name">Overwerkmaaltijden</field></record>
+		<record id="slm_subgrupo_024" model="account.subgroup">	<field name="name">Overige personeelskosten</field></record>
+		<record id="slm_subgrupo_025" model="account.subgroup">	<field name="name">Afschrijvingskosten gebouwen</field></record>
+		<record id="slm_subgrupo_026" model="account.subgroup">	<field name="name">Afschrijvingskosten inventaris</field></record>
+		<record id="slm_subgrupo_027" model="account.subgroup">	<field name="name">Afschrijvingskosten vervoermiddelen</field></record>
+		<record id="slm_subgrupo_028" model="account.subgroup">	<field name="name">Afschrijvingskosten machines &amp; gereedschappen</field></record>		
+		<record id="slm_subgrupo_029" model="account.subgroup">	<field name="name">Afschrijvingskosten vliegtuigen</field></record>
+		<record id="slm_subgrupo_030" model="account.subgroup">	<field name="name">Afschrijvingskosten herwaardering gebouwen</field></record>
+		<record id="slm_subgrupo_031" model="account.subgroup">	<field name="name">Afschrijvingskosten initiele kosten</field></record>
+		<record id="slm_subgrupo_032" model="account.subgroup">	<field name="name">Bewakingskosten gebouwen</field></record>
+		<record id="slm_subgrupo_033" model="account.subgroup">	<field name="name">Gas, water en elektra</field></record>
+		<record id="slm_subgrupo_034" model="account.subgroup">	<field name="name">Huurkosten</field></record>
+		<record id="slm_subgrupo_035" model="account.subgroup">	<field name="name">Onderhoud gebouwen en terreinen</field></record>
+		<record id="slm_subgrupo_036" model="account.subgroup">	<field name="name">Overige huisvestingskosten</field></record>
+		<record id="slm_subgrupo_037" model="account.subgroup">	<field name="name">Verzekering gebouwen</field></record>
+		<record id="slm_subgrupo_038" model="account.subgroup">	<field name="name">Abonnementen en contributies</field></record>
+		<record id="slm_subgrupo_039" model="account.subgroup">	<field name="name">Accountantskosten</field></record>
+		<record id="slm_subgrupo_040" model="account.subgroup">	<field name="name">Advieskosten</field></record>
+		<record id="slm_subgrupo_041" model="account.subgroup">	<field name="name">Automatiseringskosten</field></record>
+		<record id="slm_subgrupo_042" model="account.subgroup">	<field name="name">Bank- en incassokosten</field></record>
+		<record id="slm_subgrupo_043" model="account.subgroup">	<field name="name">Drukwerk en kantoorbenodigdheden</field></record>
+		<record id="slm_subgrupo_044" model="account.subgroup">	<field name="name">Juridische claims en honoraria</field></record>
+		<record id="slm_subgrupo_045" model="account.subgroup">	<field name="name">Overige algemene kosten</field></record>
+		<record id="slm_subgrupo_046" model="account.subgroup">	<field name="name">Reis- en verblijfkosten algemeen</field></record>
+		<record id="slm_subgrupo_047" model="account.subgroup">	<field name="name">Reparatie en onderhoud inventarissen</field></record>
+		<record id="slm_subgrupo_048" model="account.subgroup">	<field name="name">Telefoon en datacommunicatiekosten</field></record>
+		<record id="slm_subgrupo_049" model="account.subgroup">	<field name="name">Verzekering inventarissen</field></record>
+		<record id="slm_subgrupo_050" model="account.subgroup">	<field name="name">Brandstoffen</field></record>
+		<record id="slm_subgrupo_051" model="account.subgroup">	<field name="name">Onderhoud</field></record>
+		<record id="slm_subgrupo_052" model="account.subgroup">	<field name="name">Overige kosten transportmiddelen</field></record>
+		<record id="slm_subgrupo_053" model="account.subgroup">	<field name="name">Personeelsvervoer</field></record>
+		<record id="slm_subgrupo_054" model="account.subgroup">	<field name="name">Verzekeringen en belastingen</field></record>
+		<record id="slm_subgrupo_055" model="account.subgroup">	<field name="name">Bijdragen en giften</field></record>
+		<record id="slm_subgrupo_056" model="account.subgroup">	<field name="name">Dotatie / (vrijval) voorzieningen</field></record>
+		<record id="slm_subgrupo_057" model="account.subgroup">	<field name="name">Inflight entertainment</field></record>
+		<record id="slm_subgrupo_058" model="account.subgroup">	<field name="name">Overige verkoopkosten</field></record>
+		<record id="slm_subgrupo_059" model="account.subgroup">	<field name="name">Public relations en promotie</field></record>
+		<record id="slm_subgrupo_060" model="account.subgroup">	<field name="name">Reclame en advertenties</field></record>
+		<record id="slm_subgrupo_061" model="account.subgroup">	<field name="name">Representatiekosten</field></record>
+		<record id="slm_subgrupo_062" model="account.subgroup">	<field name="name">Reserveringskosten</field></record>
+		<record id="slm_subgrupo_063" model="account.subgroup">	<field name="name">Financiele baten en lasten</field></record>
+		<record id="slm_subgrupo_064" model="account.subgroup">	<field name="name">Resultaat uit deelneming</field></record>
+		<record id='slm_subgrupo_065' model='account.subgroup'> <field name='name'>Debiteuren</field></record>
+		<record id='slm_subgrupo_066' model='account.subgroup'> <field name='name'>Voorzieningen debiteuren</field></record>
+		<record id='slm_subgrupo_067' model='account.subgroup'> <field name='name'>Te vorderen passagegelden van agenten</field></record>
+		<record id='slm_subgrupo_068' model='account.subgroup'> <field name='name'>Te vorderen vrachtpenningen</field></record>
+		<record id='slm_subgrupo_069' model='account.subgroup'> <field name='name'>Te vorderen inzake passagevervoer</field></record>
+		<record id='slm_subgrupo_070' model='account.subgroup'> <field name='name'>Vooruitbetaalde facturen</field></record>
+		<record id='slm_subgrupo_071' model='account.subgroup'> <field name='name'>Rekening courant vestigingen en GSA's</field></record>
+		<record id='slm_subgrupo_072' model='account.subgroup'> <field name='name'>Rekening courant interline</field></record>
+		<record id='slm_subgrupo_073' model='account.subgroup'> <field name='name'>Nog te ontvangen bedragen</field></record>
+		<record id='slm_subgrupo_074' model='account.subgroup'> <field name='name'>Overige vorderingen en vooruitbetaald</field></record>
+		<record id='slm_subgrupo_075' model='account.subgroup'> <field name='name'>Waarborgsommen</field></record>
+		<record id='slm_subgrupo_076' model='account.subgroup'> <field name='name'>Catering en handelsvoorraden</field></record>
+		<record id='slm_subgrupo_077' model='account.subgroup'> <field name='name'>Inflight voorraden</field></record>
+		<record id='slm_subgrupo_078' model='account.subgroup'> <field name='name'>Technische voorraden</field></record>
+		<record id='slm_subgrupo_079' model='account.subgroup'> <field name='name'>Voorraden algemeen</field></record>
+		<record id='slm_subgrupo_080' model='account.subgroup'> <field name='name'>Voorziening incourant algemene voorraden</field></record>
+		<record id='slm_subgrupo_081' model='account.subgroup'> <field name='name'>Voorziening incourant catering en handelsvoorraden</field></record>
+		<record id='slm_subgrupo_082' model='account.subgroup'> <field name='name'>Voorziening incourant technische materialen</field></record>
+		<record id='slm_subgrupo_083' model='account.subgroup'> <field name='name'>RBC krediethypotheek</field></record>
+		<record id='slm_subgrupo_084' model='account.subgroup'> <field name='name'>Crediteuren</field></record>
+		<record id='slm_subgrupo_085' model='account.subgroup'> <field name='name'>Lening Surinaamse Luchtvaart Maatschappij N.V.</field></record>
+		<record id='slm_subgrupo_086' model='account.subgroup'> <field name='name'>Te betalen boetes</field></record>
+		<record id='slm_subgrupo_087' model='account.subgroup'> <field name='name'>Vooruitontvangen passagegelden</field></record>
+		<record id='slm_subgrupo_088' model='account.subgroup'> <field name='name'>Omzetbelasting</field></record>
+		<record id='slm_subgrupo_089' model='account.subgroup'> <field name='name'>Loonheffing</field></record>
+		<record id='slm_subgrupo_090' model='account.subgroup'> <field name='name'>Overige belastingen en heffingen</field></record>
+		<record id='slm_subgrupo_091' model='account.subgroup'> <field name='name'>Te betalen salarissen, vakantiegeld en gratificatie</field></record>
+		<record id='slm_subgrupo_092' model='account.subgroup'> <field name='name'>Te betalen vacatiegelden</field></record>
+		<record id='slm_subgrupo_093' model='account.subgroup'> <field name='name'>Ontvangen waarborgsommen en vooruitbetalingen</field></record>
+		<record id='slm_subgrupo_094' model='account.subgroup'> <field name='name'>Rekening courant Luchtvaartdienst</field></record>
+		<record id='slm_subgrupo_095' model='account.subgroup'> <field name='name'>Te betalen accountantskosten</field></record>
+		<record id='slm_subgrupo_096' model='account.subgroup'> <field name='name'>Nog te betalen claims en kortlopend deel boetes Belem</field></record>
+		<record id='slm_subgrupo_097' model='account.subgroup'> <field name='name'>Te betalen exploitatiekosten vliegoperatie</field></record>
+		<record id='slm_subgrupo_098' model='account.subgroup'> <field name='name'>Te betalen AOG kosten</field></record>
+		<record id='slm_subgrupo_099' model='account.subgroup'> <field name='name'>Rekening courant interline en clearing house</field></record>
+		<record id='slm_subgrupo_100' model='account.subgroup'> <field name='name'>Af te dragen pensioenpremies en overige inhoudingen</field></record>
+		<record id='slm_subgrupo_101' model='account.subgroup'> <field name='name'>Overige te betalen</field></record>
+		<record id='slm_subgrupo_102' model='account.subgroup'> <field name='name'>Terreinen</field></record>
+		<record id='slm_subgrupo_103' model='account.subgroup'> <field name='name'>Bedrijfsgebouwen</field></record>
+		<record id='slm_subgrupo_104' model='account.subgroup'> <field name='name'>Afhandelings equipment</field></record>
+		<record id='slm_subgrupo_105' model='account.subgroup'> <field name='name'>Inventarissen</field></record>
+		<record id='slm_subgrupo_106' model='account.subgroup'> <field name='name'>Vervoersmiddelen</field></record>
+		<record id='slm_subgrupo_107' model='account.subgroup'> <field name='name'>Voorraad reserve/ondh onderdelen</field></record>
+		<record id='slm_subgrupo_108' model='account.subgroup'> <field name='name'>Voorziening latente belastingverplichting</field></record>
+		<record id='slm_subgrupo_109' model='account.subgroup'> <field name='name'>Voorziening Maintenance Reserve vliegtuigen</field></record>"
+		<record id='slm_subgrupo_110' model='account.subgroup'> <field name='name'>Voorziening pensioen en doorbetaling salaris</field></record>
+		<record id='slm_subgrupo_111' model='account.subgroup'> <field name='name'>Voorziening medische kosten na pensionering</field></record>
+		<record id='slm_subgrupo_112' model='account.subgroup'> <field name='name'>Voorziening jubileumgratificaties werknemers</field></record>
+		<record id='slm_subgrupo_113' model='account.subgroup'> <field name='name'>Voorziening toeslagen en pensioengratificaties</field></record>
+		<record id='slm_subgrupo_114' model='account.subgroup'> <field name='name'>Voorziening uitfasering vliegtuigen</field></record>
+    </data>
+
+</odoo>

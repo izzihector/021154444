@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+
+  <record id="invoice_view_inherit_subtotal" model="ir.ui.view">
+      <field name="name">account.invoice.form.inherit.subtotal</field>
+      <field name="model">account.invoice</field>
+      <field name="inherit_id" ref="account.invoice_form"/>
+      <field name="arch" type="xml">
+
+          <field name="price_subtotal" position="after">
+              <field name="subtotal"/>
+          </field>
+        </field>
+    </record>
+
+</odoo>
+
+

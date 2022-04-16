@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="view_account_analytic_mandatory_tree">
+            <field name="name">account.analytic.mandatory.tree</field>
+            <field name="model">account.analytic.mandatory</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="account_id"/>
+                    <field name="analytic_account_ids" widget="many2many_tags"/>
+                    <field name="mandatory_vlnr" widget="many2many_tags"/>
+                    <field name="excluded_analytic_account_ids" widget="many2many_tags"/>
+                </tree>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="view_account_analytic_mandatory_form">
+            <field name="name">account.analytic.mandatory.form</field>
+            <field name="model">account.analytic.mandatory</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="account_id"/>
+                                <field name="analytic_account_ids" widget="many2many_tags"/>
+                                <field name="mandatory_vlnr" widget="many2many_tags"/>
+                                <field name="excluded_analytic_account_ids" widget="many2many_tags"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="action_account_analytic_mandatory" model="ir.actions.act_window">
+            <field name="name">Mandatory analytic accounts per account</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">account.analytic.mandatory</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_account_analytic_mandatory_tree"/>
+        </record>
+        <menuitem id="menu_account_analytic_mandatory"
+                  action="action_account_analytic_mandatory"
+                  parent="account.account_account_menu"
+                  sequence="101"
+                  name="Mandatory analytic accounts"
+                  groups="base.group_system"
+
+        />
+    </data>
+</odoo>

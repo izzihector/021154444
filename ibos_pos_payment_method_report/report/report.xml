@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="action_report_by_payment_type_customer" model="ir.actions.report">
+            <field name="name">By Payment Type</field>
+            <field name="model">pos.sales.report.wizard</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">ibos_pos_payment_method_report.report_payment_type</field>
+            <field name="report_file">ibos_pos_payment_method_report.report_payment_type</field>
+        </record>
+    </data>
+</odoo>

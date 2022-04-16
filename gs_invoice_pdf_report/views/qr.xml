@@ -1,0 +1,17 @@
+<odoo>
+    <data>
+        <template id="gs_invoice_qr2" inherit_id="gs_invoice_pdf_report.report_sale_invoice_document1">
+            <xpath expr="//div[@name='qr']" position="replace">
+                <div class="row text-center">
+                    <div class="col-auto col-2">
+                        <t t-if="doc.company_id.print_qr">
+                            <div style="width:100px;height:100px;float:right;">
+                                <span class="text-right" t-field="doc.qr_code_image" t-options='{"widget": "image"}'/>
+                            </div>
+                        </t>
+                    </div>
+                </div>
+            </xpath>
+        </template>
+    </data>
+</odoo>

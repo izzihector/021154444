@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-name="PrinterStatusWidget">
+        <div class="oe_status js_printer_status">
+            <span class='js_msg oe_hidden'>0</span>
+            <div class="js_connected oe_icon oe_green">
+                <i class='fa fa-fw fa-print'></i>
+            </div>
+            <div class="js_connecting oe_icon oe_hidden">
+                <i class='fa fa-fw fa-spin fa-spinner'></i>
+            </div>
+            <div class="js_disconnected oe_icon oe_red oe_hidden">
+                <i class='fa fa-fw fa-print'></i>
+            </div>
+            <div class="js_error oe_icon oe_red oe_hidden">
+                <i class='fa fa-fw fa-warning'></i>
+            </div>
+        </div>
+    </t>
+
+    <t t-name="SpoolerStatusWidget">
+        <div class="oe_status js_printer_status">
+            <span class='js_msg oe_hidden'>0</span>
+            <div class="js_connected oe_icon oe_green">
+                <i class='fa fa-fw fa-list'></i>
+            </div>
+            <div class="js_connecting oe_icon oe_hidden">
+                <i class='fa fa-fw fa-spin fa-spinner'></i>
+            </div>
+            <div class="js_disconnected oe_icon oe_red oe_hidden">
+                <i class='fa fa-fw fa-list'></i>
+            </div>
+            <div class="js_error oe_icon oe_red oe_hidden">
+                <i class='fa fa-fw fa-warning'></i>
+            </div>
+        </div>
+    </t>
+
+    <t t-name="XmlReceiptWrappedProductNameLines">
+        <t t-foreach="line.product_name_wrapped.slice(1)" t-as="wrapped_line">
+            <line>
+                <left><t t-esc="wrapped_line"/></left>
+            </line>
+        </t>
+    </t>
+
+    <t t-name="XmlReceipt">
+        <receipt  align='center' width='40'>
+            <t t-if='receipt.company.logo'>
+                <img class="pos-receipt-logo" t-att-src='receipt.company.logo' alt="Logo"/>
+                <br/>
+            </t>
+            <t t-if='!receipt.company.logo'>
+                <h2 class="pos-receipt-center-align">
+                    <t t-esc='receipt.company.name' />
+                </h2>
+                <br/>
+            </t>
+
+            <div class="pos-receipt-contact">
+                <t t-if='receipt.company.contact_address'>
+                    <div><t t-esc='receipt.company.contact_address' /></div>
+                </t>
+                <t t-if='receipt.company.phone'>
+                    <div>Tel:<t t-esc='receipt.company.phone' /></div>
+                </t>
+                <t t-if='receipt.company.vat'>
+                    <div>VAT:<t t-esc='receipt.company.vat' /></div>
+                </t>
+                <t t-if='receipt.company.email'>
+                    <div><t t-esc='receipt.company.email' /></div>
+                </t>
+                <t t-if='receipt.company.website'>
+                    <div><t t-esc='receipt.company.website' /></div>
+                </t>
+                <t t-if='receipt.header_html'>
+                    <t t-raw='receipt.header_html' />
+                </t>
+                <t t-if='!receipt.header_html and receipt.header'>
+                    <div><t t-esc='receipt.header' /></div>
+                </t>
+                <t t-if='receipt.cashier'>
+                    <div class='cashier'>
+                        <div>--------------------------------</div>
+                        <div>Served by <t t-esc='receipt.cashier' /></div>
+                    </div>
+                </t>
+            </div>
+            <br /><br />
+
+            <div class='orderlines' line-ratio='0.6'>
+                <t t-foreach='receipt.orderlines' t-as='line'>
+                    <t t-set='simple' t-value='line.discount === 0 and line.unit_name === "Unit(s)" and line.quantity === 1' />
+                    <t t-if='simple'>
+                        <line>
+                            <left><t t-esc='line.product_name_wrapped[0]' /></left>
+                            <right><value t-att-value-decimals='pos.currency.decimals'><t t-esc='line.price_display' /></value></right>
+                        </line>
+                        <t t-call="XmlReceiptWrappedProductNameLines"/>
+                    </t>
+                    <t t-if='!simple'>
+                        <line><left><t t-esc='line.product_name_wrapped[0]' /></left></line>
+                        <t t-call="XmlReceiptWrappedProductNameLines"/>
+                        <t t-if='line.discount !== 0'>
+                            <line indent='1'><left>Discount: <t t-esc='line.discount' />%</left></line>
+                        </t>
+                        <line indent='1'>
+                            <left>
+                                <value  value-autoint='on'>
+                                    <t t-esc='line.quantity' />
+                                </value>
+                                <t t-if='line.unit_name !== "Unit(s)"'>
+                                    <t t-esc='line.unit_name' />
+                                </t>
+                                x
+                                <value>
+                                    <t t-esc='line.price' />
+                                </value>
+                            </left>
+                            <right>
+                                <value t-att-value-decimals='pos.currency.decimals'><t t-esc='line.price_display' /></value>
+                            </right>
+                        </line>
+                    </t>
+                </t>
+            </div>
+
+
+            <!-- Subtotal -->
+
+            <t t-set='taxincluded' t-value='Math.abs(receipt.subtotal - receipt.total_with_tax) &lt;= 0.000001' />
+            <t t-if='!taxincluded'>
+                <line><right>--------</right></line>
+                <line><left>Subtotal</left><right><value t-att-value-decimals='pos.currency.decimals'><t t-esc="receipt.subtotal" /></value></right></line>
+                <t t-foreach='receipt.tax_details' t-as='tax'>
+                    <line>
+                        <left><t t-esc='tax.name' /></left>
+                        <right><value t-att-value-decimals='pos.currency.decimals'><t t-esc='tax.amount' /></value></right>
+                    </line>
+                </t>
+            </t>
+
+
+            <!-- Total -->
+
+            <line><right>--------</right></line>
+            <line class='total' size='double-height'>
+                <left><pre>        TOTAL</pre></left>
+                <right><value t-att-value-decimals='pos.currency.decimals'><t t-esc='receipt.total_with_tax' /></value></right>
+            </line>
+            <br/><br/>
+
+            <!-- Payment Lines -->
+
+            <t t-foreach='paymentlines' t-as='line'>
+                <line>
+                    <left><t t-esc='line.name' /></left>
+                    <right><value t-att-value-decimals='pos.currency.decimals'><t t-esc='line.get_amount()'/></value></right>
+                </line>
+            </t>
+            <br/>
+
+            <line size='double-height'>
+                <left><pre>        CHANGE</pre></left>
+                <right><value t-att-value-decimals='pos.currency.decimals'><t t-esc='receipt.change' /></value></right>
+            </line>
+            <br/>
+
+            <!-- Extra Payment Info -->
+
+            <t t-if='receipt.total_discount'>
+                <line>
+                    <left>Discounts</left>
+                    <right><value t-att-value-decimals='pos.currency.decimals'><t t-esc='receipt.total_discount'/></value></right>
+                </line>
+            </t>
+            <t t-if='taxincluded'>
+                <t t-foreach='receipt.tax_details' t-as='tax'>
+                    <line>
+                        <left><t t-esc='tax.name' /></left>
+                        <right><value t-att-value-decimals='pos.currency.decimals'><t t-esc='tax.amount' /></value></right>
+                    </line>
+                </t>
+                <line>
+                    <left>Total Taxes</left>
+                    <right><value t-att-value-decimals='pos.currency.decimals'><t t-esc='receipt.total_tax'/></value></right>
+                </line>
+            </t>
+
+            <div class='before-footer' />
+
+
+
+
+            <!-- Footer -->
+            <t t-if='receipt.footer_xml'>
+                <t t-raw='receipt.footer_xml' />
+            </t>
+
+            <t t-if='!receipt.footer_xml and receipt.footer'>
+                <br/>
+                <t t-esc='receipt.footer' />
+                <br/>
+                <br/>
+            </t>
+
+            <div class='after-footer' />
+
+            <br/>
+            <div font='b'>
+                <div><t t-esc='receipt.name' /></div>
+                <div><t t-esc='receipt.date.localestring' /></div>
+            </div>
+
+        </receipt>
+
+    </t>
+</templates>

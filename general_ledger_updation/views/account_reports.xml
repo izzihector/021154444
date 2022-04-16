@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="inherit_account_reports" inherit_id="account_reports.main_template">
+            <xpath expr="//div[@class='o_account_reports_body']" position="inside">
+                <style>
+                    .o_account_reports_no_print {
+                        max-width: 100% !important;
+                    }
+                    .o_account_reports_page .o_account_reports_default_style > td.o_account_report_line_indent > span:last-child {
+                        margin-left: 5px;
+                    }
+                    .o_account_reports_page .o_account_reports_domain_line_4 {
+                       margin-left: 15px;
+                    }
+                    .o_account_reports_page table > tbody > tr > td ~ td > span {
+                       margin-left: 5px;
+                    }
+                </style>
+            </xpath>
+        </template>
+    </data>
+</odoo>

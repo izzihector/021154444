@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+         <record id="cash_config_form_view" model="ir.ui.view">
+            <field name="name">cash.config.form</field>
+            <field name="model">cash.config</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="company_id"/>
+                                <field name="user_id" domain="[('company_id','=',company_id)]"/>
+                                <field name="currency_id"/>
+                            </group>
+                            <group>
+                                <field name="cash_control"/>
+                                <field name="journal_ids"/>
+                                <field name="journal_id" invisible="1"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="cash_config_tree_view" model="ir.ui.view">
+            <field name="name">cash.config.tree</field>
+            <field name="model">cash.config</field>
+            <field name="arch" type="xml">
+                <tree string="Cash Configuration">
+                    <field name="name"/>
+                    <field name="company_id"/>
+                    <field name="user_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_cash_config" model="ir.actions.act_window">
+            <field name="name">Cash Configuration</field>
+            <field name="res_model">cash.config</field>
+            <!--<field name='view_type'>form</field>-->
+            <field name='view_mode'>tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Click to create.
+                </p>
+            </field>
+        </record>
+
+        <menuitem
+            action="action_cash_config"
+            id="cash_config_menu"
+            parent="account.menu_finance_configuration"
+            sequence="46" />
+
+</odoo>

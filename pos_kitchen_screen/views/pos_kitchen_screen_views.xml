@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright (c) 2016-Present Webkul Software Pvt. Ltd. (<https://webkul.com/>) -->
+<!-- See LICENSE file for full copyright and licensing details. -->
+<!-- License URL : <https://store.webkul.com/license.html/> -->
+<odoo>
+	<data>
+
+		<!-- <record id="pos_config_form_inherited" model="ir.ui.view">
+			<field name="name">pos.config.form.inherit</field>
+			<field name="model">pos.config</field>
+			<field name="inherit_id" ref="point_of_sale.pos_config_view_form"/>
+			<field name="arch" type="xml">
+                <xpath expr="//div[@id='barcode_scanner']" position="after">
+					<div id="pos_kitchen_screen" class="col-12 col-lg-6 o_setting_box">
+						<div class="o_setting_left_pane">
+						</div>
+						<div class="o_setting_right_pane">
+							<span class="o_form_label">Pos Kitchen Screen Base</span>
+							<div class="text-muted">
+								Add the banners, title and other stuffs..
+							</div>
+							<div class="content-group mt16 row">
+								<field name="pos_kitchen_screen" widget="many2many_tags"/>
+							</div>
+							<div>
+								<div class="mt8">
+									<button name="open_screen_configuration" type="object" string="Screen Configuration" class="btn-link" icon="fa-arrow-right"/>
+								</div>
+							</div>
+						</div>
+					</div>
+				</xpath>
+			</field>
+		</record> -->
+
+		<record id="kitchen_pos_config_form_inherited_1" model="ir.ui.view">
+			<field name="name">pos.config.restaurant.form.inherit</field>
+			<field name="model">pos.config</field>
+			<field name="inherit_id" ref="point_of_sale.pos_config_view_form"/>
+			<field name="arch" type="xml">
+                <xpath expr="//div[@id='barcode_scanner']" position="after">
+					<div id="auto_accept" class="col-12 col-lg-6 o_setting_box">
+						<div class="o_setting_left_pane">
+							<div class="content-group">
+								<field name="auto_accept"  required="1"/>
+							</div>
+						</div>
+						<div class="o_setting_right_pane">
+							<span class="o_form_label">Auto Accept</span>
+							<div class="text-muted">
+								Auto Accept Kitchen Orders
+							</div>
+
+						</div>
+					</div>
+				</xpath>
+			</field>
+		</record>
+
+		<record id="pos_screen_conf_tree" model="ir.ui.view">
+			<field name="name">pos.kitchen.screen.config.tree</field>
+			<field name="model">pos.kitchen.screen.config</field>
+			<field name="arch" type="xml">
+				<tree string="POS Screen Config Tree">
+					<field name="name" string="Pos Config"/>
+					<field name="url" />
+					<field name="pos_config_ids" />
+				</tree>
+			</field>
+		</record>
+
+
+		<record id="pos_screen_conf_form" model="ir.ui.view">
+			<field name="name">pos.kitchen.screen.config.form</field>
+			<field name="model">pos.kitchen.screen.config</field>
+			<field name="arch" type="xml">
+				<form string="POS Kitchen Screen Form">
+					<sheet>
+						<h1 style="text-align:center;" name="configuration">General Configurations</h1>
+						<div class="row mt16 o_settings_container" id="screen_config_name">
+							<div class="oe_title" style="margin-left:5%;" id="title">
+								<label for="name" class="oe_edit_only"/>
+								<h1><field name="name" required="1"/></h1>
+							</div>
+						</div>
+						<div class="row mt16 o_settings_container" id="general_conf">
+							<group col="2" colspan="2">
+								<div class="col-12 col-lg-6 o_setting_box" >
+									<div class="o_setting_left_pane">
+									</div>
+									<div class="o_setting_right_pane">
+										<label for="url"/>
+										<div class="text-muted">
+											Pos Kitchen Screen Display Url
+										</div>
+										<field name="url"/>
+									</div>
+								</div>
+								<div id="go_to_customer_screen" class="col-12 col-lg-6 o_setting_box">
+									<div class="o_setting_left_pane">
+									</div>
+									<div class="o_setting_right_pane">
+										<span class="o_form_label">Pos Kitchen Screen</span>
+										<div class="text-muted">
+											Click here to redirect to kitchen screen
+										</div>
+										<div class="content-group mt16 ml16 row">
+											<button string="Go to Kitchen Screen" name="redirect_customer_screen" id="customer_screen" class="oe_highlight" type="object"/>
+										</div>
+									</div>
+								</div>
+							</group>
+							<group col="2" colspan="2">
+								<div class="row mt16 o_settings_container" style="margin-left:0;">
+									<div class="col-12 col-lg-6 o_setting_box" id="pos_config_ids">
+										<div class="o_setting_left_pane">
+										</div>
+										<div class="o_setting_right_pane">
+											<span class="o_form_label">Allowed POS</span>
+											<div class="text-muted">
+												Add Pos Allowed On Kitchen Screen
+											</div>
+											<div class="content-group mt16">
+												<field name="pos_config_ids" colspan="4" nolabel="1" widget="many2many_tags" required="1"/>
+											</div>
+										</div>
+									</div>
+									<div class="col-12 col-lg-6 o_setting_box" id="pos_category_ids">
+										<div class="o_setting_left_pane">
+										</div>
+										<div class="o_setting_right_pane">
+											<span class="o_form_label">Allowed POS Categories</span>
+											<div class="text-muted">
+												Add Pos Categories Allowed On Kitchen Screen
+											</div>
+											<div class="content-group mt16">
+												<field name="pos_category_ids" colspan="4" nolabel="1" widget="many2many_tags" required="1"/>
+											</div>
+										</div>
+									</div>
+									<div class="col-12 col-lg-6 o_setting_box" id="pos_category_ids">
+										<div class="o_setting_left_pane">
+										</div>
+										<div class="o_setting_right_pane">
+											<span class="o_form_label">Arragement of Kitchen Orders</span>
+											<div class="text-muted">
+												Select the order of kitchen orders
+											</div>
+											<div class="content-group mt16">
+												<field name="queue_order" colspan="4" nolabel="1" required="1"/>
+											</div>
+										</div>
+									</div>
+									<div class="col-12 col-lg-6 o_setting_box" id="orders_on_grid">
+										<div class="o_setting_left_pane">
+										</div>
+										<div class="o_setting_right_pane">
+											<span class="o_form_label">Orders On Grid Screen</span>
+											<div class="text-muted">
+												Add the orders on grid screen
+											</div>
+											<div class="content-group mt16">
+												<field name="orders_on_grid" required="1"/>
+											</div>
+										</div>
+									</div>
+								</div>
+							</group>
+						</div>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+
+		<record id="pos_order_kitchen_view_form" model="ir.ui.view">
+			<field name="name">pos.order.view.form</field>
+			<field name="model">pos.order</field>
+			<field name="inherit_id" ref="point_of_sale.view_pos_pos_form"/>
+			<field name="arch" type="xml">
+				<xpath expr="//notebook" position="inside">
+					<page string="Kitchen Order">
+						<group col="4" colspan="4">
+							<field name="order_progress"/>
+							<field name="kitchen_order_name"/>
+							<field name="out_of_stock_products" widget="many2many_tags" attrs="{'invisible':[('out_of_stock_products','=',[])]}"/>
+							<field name="cancellation_reason" attrs="{'invisible':[('cancellation_reason','=',False)]}"/>
+						</group>
+					</page>
+				</xpath>
+			</field>
+		</record>
+
+
+
+        <record id="view_kitchen_order_filter" model="ir.ui.view">
+            <field name="name">pos.order</field>
+            <field name="model">pos.order</field>
+            <field name="arch" type="xml">
+                <search string="Today Kitchen Order">
+                    <filter  name="order_today" string="Today" domain="[('date_order','&gt;=', datetime.datetime.combine(context_today(), datetime.time(0,0,0))), ('date_order','&lt;=', datetime.datetime.combine(context_today(), datetime.time(23,59,59)))]"/>
+                <!-- </search> -->
+        <!-- <field name="arch" type="xml">
+            <search string="Search Sales Order"> -->
+                <field name="name"/>
+                <field name="pos_reference"/>
+                <field name="date_order"/>
+                <field name="user_id"/>
+                <field name="partner_id"/>
+                <field name="session_id"/>
+                <filter string="Invoiced" name="invoiced" domain="[('state', '=', 'invoiced')]"/>
+                <filter string="Posted" name="posted" domain="[('state', '=', 'done')]"/>
+                <separator/>
+                <filter string="Order Date" name="order_date" date="date_order"/>
+                <group expand="0" string="Group By">
+                    <filter string="Session" name="session" domain="[]" context="{'group_by': 'session_id'}"/>
+                    <filter string="User" name="user_id" domain="[]" context="{'group_by': 'user_id'}"/>
+                    <filter string="Customer" name="customer" domain="[]" context="{'group_by': 'partner_id'}"/>
+                    <filter string="Status" name="status" domain="[]" context="{'group_by': 'state'}"/>
+                    <filter string="Kitchen Progress" name="order_progress" domain="[]" context="{'group_by': 'order_progress'}"/>
+                    <filter string="Order Date" name="order_month" domain="[]" context="{'group_by': 'date_order'}"/>
+                </group>
+            </search>
+            </field>
+        </record>
+
+
+		<record id="view_pos_kitchen_order_tree" model="ir.ui.view">
+			<field name="name">pos.order.tree</field>
+			<field name="model">pos.order</field>
+			<field name="inherit_id" ref="point_of_sale.view_pos_order_tree"></field>
+			<field name="arch" type="xml">
+				<xpath expr="//field[@name='name']" position="after">
+					<field name="kitchen_order_name"/>
+				</xpath>
+			</field>
+		</record>
+
+
+		<record id="pos_kitchen_screen_config_action_id" model="ir.actions.act_window">
+			<field name="name">POS  Kitchen Screen Config</field>
+            <field name="type">ir.actions.act_window</field>
+			<field name="res_model">pos.kitchen.screen.config</field>
+			<field name="view_mode">tree,form</field>
+			<field name="view_id" ref="pos_kitchen_screen.pos_screen_conf_tree" />
+		</record>
+
+
+		<record id="pos_kitchen_screen_order_action_id" model="ir.actions.act_window">
+			<field name="name">POS Kitchen Order</field>
+            <field name="type">ir.actions.act_window</field>
+			<field name="res_model">pos.order</field>
+			<field name="view_mode">tree,form</field>
+        	<field name="domain">[('kitchen_order_name','!=',False)]</field>
+			<field name="context">{"search_default_order_today":1}</field>
+			<field name="view_id" ref="view_pos_kitchen_order_tree" />
+		</record>
+
+		<menuitem
+			id="pos_kitchen_screen_main_menu"
+			parent="point_of_sale.menu_point_root"
+			name='Pos Kitchen Screen'
+			groups="point_of_sale.group_pos_manager"
+			sequence="37"
+			/>
+		<menuitem
+			id="pos_kitchen_screen_config_main_menu"
+			parent="pos_kitchen_screen_main_menu"
+			name='Pos Kitchen Screen Configuration'
+			groups="point_of_sale.group_pos_manager"
+			action="pos_kitchen_screen.pos_kitchen_screen_config_action_id"
+			sequence="38"
+			/>
+
+		<!-- <menuitem
+			id="pos_kitchen_screen_orders"
+			parent="pos_kitchen_screen_main_menu"
+			name='Pos Kitchen Orders'
+			groups="point_of_sale.group_pos_manager"
+			action="pos_kitchen_screen.pos_kitchen_screen_order_action_id"
+			sequence="38"
+			/> -->
+
+
+	</data>
+</odoo>

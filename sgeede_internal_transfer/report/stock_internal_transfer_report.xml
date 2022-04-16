@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record model="report.paperformat" id="paperformat_report">
+            <field name="name">A4 report</field>
+            <field name="default" eval="True"/>
+            <field name="format">A4</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">30</field>
+            <field name="margin_bottom">10</field>
+            <field name="margin_left">2</field>
+            <field name="margin_right">5</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">30</field>
+            <field name="dpi">90</field>
+        </record>
+
+        <record id="stock_internal_transfer_action" model="ir.actions.report">
+            <field name="name">Stock Internal Transfer Report</field>
+            <field name="model">stock.internal.transfer</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">sgeede_internal_transfer.stock_internal_transfer_view</field>
+            <field name="report_file">sgeede_internal_transfer.stock_internal_transfer_view</field>
+            <field name="binding_type">report</field>
+            <field name="paperformat_id" ref="sgeede_internal_transfer.paperformat_report"/>
+        </record>
+
+        <template id="stock_internal_transfer_view">
+            <t t-call="web.html_container">
+            <t t-call="web.internal_layout">
+                <div class="page">
+                    <div style="border-bottom: 3px solid black">
+                        <div>
+                            <h3  class='mt0' style="color:#4A2F7E;font-size:28px;text-align:center"> نقل مخزون داخلى  - Stock Internal Transfer</h3>
+                        </div>
+                        <br></br>
+                        <style>
+                            @font-face {
+                            font-family: 'Tajawal-Regular';
+                            src: local('Tajawal-Regular'), local('Tajawal-Regular'),
+                            url(/sgeede_internal_transfer/static/src/fonts/tajawal/Tajawal-Regular.ttf)
+                            format('opentype');
+                            }
+
+                            .font_tajawal{
+                            font-family: Tajawal-Regular;
+                            }
+
+                            tr:nth-child(even) {
+                            background-color: #eee;
+                            }
+                            tr:nth-child(odd) {
+                            background-color: #fff;
+                            }
+                            th {
+                            background-color: #0000FF;
+                            color: black;
+                            }
+                        </style>
+                        <table class='styled-table mt-2 font_tajawal'  style="border-collapse: collapse;border: 2px solid #ddd;font-size:14px; width:100%;padding-top:0;margin-top:0;direction: ltr;">
+                            <tr class="thead-light" style="padding:0px; margin:0px;border-top: 2px solid #ddd;">
+                                <th class="text-center" style="background-color:#D3D3D3;padding: 8px;border: 2px solid #ddd;text-align: center;width: 20%">
+                                    Order No. / رقم الطلب
+                                </th>
+                                <td class="text-center" style="padding: 8px;border: 2px solid #ddd;text-align: center;width: 30%"
+                                    t-esc="name"/>
+                                <th class="text-center"
+                                    style="background-color:#D3D3D3;padding: 8px;border: 2px solid #ddd;text-align: center;width: 20%">
+                                    Date / التاريخ
+                                </th>
+                                <td class="text-center" style="padding: 8px;border: 2px solid #ddd;text-align: center;width: 30%"
+                                    t-esc="date"/>
+                            </tr>
+                            <tr class="thead-light" style="padding:0px; margin:0px;border-top: 2px solid #ddd;">
+                                <th class="text-center" style="background-color:#D3D3D3;padding: 8px;border: 2px solid #ddd;text-align: center;width: 20%">
+                                    Source Warehouse  / مخزن التحويل
+                                </th>
+                                <td class="text-center" style="padding: 8px;border: 2px solid #ddd;text-align: center;width: 30%"
+                                    t-esc="source_warehouse_id"/>
+                                <th class="text-center" style="background-color:#D3D3D3;padding: 8px;border: 2px solid #ddd;text-align: center;width: 20%">
+                                    Destination Warehouse / مخزن الاستلام
+                                </th>
+                                <td class="text-center" style="padding: 8px;border: 2px solid #ddd;text-align: center;width: 30%"
+                                    t-esc="dest_warehouse_id"/>
+                            </tr>
+
+                        </table>
+                        <br></br>
+                        <br></br>
+                        <table class='styled-table mt-2 font_tajawal'  style="border-collapse: collapse;border: 2px solid #ddd;font-size:14px; width:100%;padding-top:0;margin-top:0;direction: ltr;">
+                            <tr class="thead-light" style="padding:0px; margin:0px;border-top: 2px solid #ddd;">
+                                <th class="text-center" style="background-color:#D3D3D3; color:black;width: 10%">sequence/تسلسل</th>
+                                <th class="text-center" style="background-color:#D3D3D3; color:black;width: 20%">Product/وصف المنتج</th>
+                                <th class="text-center" style="background-color:#D3D3D3; color:black;width: 10%">Quantity/الكمية</th>
+                                <th class="text-center" style="background-color:#D3D3D3; color:black;width: 20%">Unit of Measure/وحدة القياس</th>
+                            </tr>
+                            <tr t-foreach="docs" t-as="doc1">
+                                <td style="text-align:center">
+                                    <span t-esc="doc1['seq']"/>
+                                </td>
+                                <td style="text-align:center">
+                                    <span t-esc="doc1['product_id']"/>
+                                </td>
+                                <td style="text-align:center">
+                                    <span t-esc="doc1['product_qty']"/>
+                                </td>
+                                <td style="text-align:center">
+                                    <span t-esc="doc1['product_uom_id']"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </t>
+            </t>
+
+        </template>
+    </data>
+</odoo>

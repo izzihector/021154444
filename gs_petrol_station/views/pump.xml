@@ -1,0 +1,101 @@
+<odoo>
+    <data>
+        <record id="gs_pump_tree" model="ir.ui.view">
+            <field name="name">gs.pump.tree</field>
+            <field name="model">gs.pump</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="station_id"/>
+                </tree>
+            </field>
+        </record>
+        
+        <record id="gs_pump_kanban" model="ir.ui.view">
+            <field name="name">gs.pump.kanban</field>
+            <field name="model">gs.pump</field>
+            <field name="arch" type="xml">
+                <kanban class="o_broker_profile_kanban">
+                    <field name="id"/>
+                    <field name="station_id"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban_global_click o_res_partner_kanban">
+                                <div class="oe_kanban_details">
+                                    <h1 style="text-align: center;">
+                                        <field name="station_id"/>
+                                    </h1>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+        
+        <record id="gs_pump_form" model="ir.ui.view">
+            <field name="name">gs.pump.form</field>
+            <field name="model">gs.pump</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button name="action_set_line" type="object" class="oe_highlight" string="Done"/>
+                        <button name="action_submit_daily_sales" type="object" class="oe_highlight" string="Submit" attrs="{'invisible': [('is_submitted', '=', False)]}" />
+                        <button name="action_create_quotations_daily_sales" type="object" class="oe_highlight" string="Create quotations" attrs="{'invisible': [('is_create_quotations', '=', False)]}"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <field name="is_submitted" invisible="1"/>
+                            <field name="is_create_quotations" invisible="1"/>
+                            <group style="width:50%">
+                                <div>
+                                    <h1>
+                                        <b><label for="station_id" string="Station"/></b>
+                                        <br/>
+                                        <field name="station_id" style="width: 50%"  required="1"/>
+                                    </h1>
+                                </div>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Details">
+                                <field name="pump_line_ids" nolabel="1" force_save="1">
+                                    <tree editable="bottom" force_save="1">
+                                        <field name="link_id" invisible="1" force_save="1" />
+                                        <field name="is_done" invisible="1" force_save="1"/>
+                                        <field name="pump" force_save="1" required="1" readonly="1"/>
+                                        <field name="type_pump_id" force_save="1" readonly="1"/>
+                                        <field name="nozzle_petrol_id" force_save="1" readonly="1"/>
+                                        <field name="opening_pump" force_save="1" attrs="{'readonly': [('is_done', '=', True)]}"/>
+                                        <field name="ending_pump" force_save="1"/>
+                                        <field name="sales" force_save="1" readonly="1"/>
+                                        <field name="user_id" force_save="1" readonly="1"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_gs_pump" model="ir.actions.act_window">
+            <field name="name">Station</field>
+            <field name="res_model">gs.pump</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_mode">kanban,tree,form</field>
+        </record>
+
+        <menuitem id="menu_gs_petrol_station" name="Petrol Station" sequence="1"  web_icon="gs_petrol_station,static/description/index.png"/>
+        <menuitem id="sub_menu_gs_petrol_station" name="Petrol Station" parent="menu_gs_petrol_station" sequence="1"/>
+        <menuitem id="sub_gs_pump" name="Station" action="action_gs_pump"
+                  parent="sub_menu_gs_petrol_station" sequence="2"/>
+
+        <menuitem id="menu_gs_petrol_station_action_move" action="account.action_move_out_invoice_type" parent="sub_menu_gs_petrol_station" sequence="3"/>
+
+    </data>
+</odoo>

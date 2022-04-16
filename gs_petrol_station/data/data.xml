@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+<!--        <record id="gs_demo_account" model="account.account">
+            <field name="name">Bank and Cash</field>
+            <field name="code">1001</field>
+            <field name="user_type_id" ref="account.data_account_type_liquidity"/>
+        </record>-->
+
+        <record id="product_product_gs_petrol_91" model="product.template">
+            <field name="name">Petrol 91 بنزين</field>
+            <field name="categ_id" ref="product.product_category_all"/>
+            <field name="detailed_type">service</field>
+        </record>
+        <record id="product_product_gs_petrol_95" model="product.template">
+            <field name="name">Petrol 95 بنزين</field>
+            <field name="categ_id" ref="product.product_category_all"/>
+            <field name="detailed_type">service</field>
+        </record>
+        <record id="product_product_gs_diesel" model="product.template">
+            <field name="name">Diesel ديزل</field>
+            <field name="categ_id" ref="product.product_category_all"/>
+            <field name="detailed_type">service</field>
+        </record>
+
+        <record id="one_product_product_gs_petrol_91" model="product.product">
+            <field name="name">Petrol 91 بنزين</field>
+            <field name="description_sale">Petrol 91 بنزين</field>
+            <field name="categ_id" ref="product.product_category_all"/>
+            <field name="invoice_policy">order</field>
+            <field name="detailed_type">service</field>
+        </record>
+<!--        <record id="product_product_gs_petrol_91" model="product.product">
+            <field name="name">Petrol 91 بنزين</field>
+            <field name="categ_id" ref="product.product_category_all"/>
+            <field name="detailed_type">service</field>
+        </record>
+        <record id="product_product_gs_petrol_95" model="product.product">
+            <field name="name">Petrol 95 بنزين</field>
+            <field name="categ_id" ref="product.product_category_all"/>
+            <field name="detailed_type">service</field>
+        </record>
+        <record id="product_product_gs_diesel" model="product.product">
+            <field name="name">Diesel ديزل</field>
+            <field name="categ_id" ref="product.product_category_all"/>
+            <field name="detailed_type">service</field>
+        </record>-->
+
+
+
+        <record id="gs_petrol_91" model="gs.pump.type">
+            <field name="name">Petrol 91 بنزين</field>
+            <field name="product_tmpl_id" ref="gs_petrol_station.product_product_gs_petrol_91"/>
+        </record>
+        <record id="gs_petrol_95" model="gs.pump.type">
+            <field name="name">Petrol 95 بنزين</field>
+            <field name="product_tmpl_id" ref="gs_petrol_station.product_product_gs_petrol_95"/>
+        </record>
+        <record id="gs_diesel" model="gs.pump.type">
+            <field name="name">Diesel ديزل</field>
+            <field name="product_tmpl_id" ref="gs_petrol_station.product_product_gs_diesel"/>
+        </record>
+    </data>
+</odoo>

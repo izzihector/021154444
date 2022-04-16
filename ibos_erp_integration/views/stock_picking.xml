@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="stock_picking_api_origin_view" model="ir.ui.view">
+        <field name="name">stock.picking.api.origin</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="erp_po_code" readonly="1"/>
+            </xpath>
+
+            <xpath expr="//field[@name='location_dest_id']" position="after">
+                <field name="erp_inv_received_ref" readonly="1"/>
+                <field name="notes"/>
+                <field name="bill_id"/>
+            </xpath>
+
+            <xpath expr="//field[@name='date_deadline']" position="after">
+                <field name="warehouse_id"/>
+                <field name="challan_number"/>
+                <field name="challan_date"/>
+                <field name="vat_challan_number"/>
+                <field name="vat_challan_amount"/>
+                <field name="attachment_ids" widget="many2many_binary"/>
+            </xpath>
+
+            <xpath expr="//field[@name='name']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='date_deadline']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='partner_id']" position="attributes">
+                <attribute name="readonly">1</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='origin']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='branch_id']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="stock_picking_api_origin_view_tree" model="ir.ui.view">
+        <field name="name">stock.picking.api.origin.tree</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.vpicktree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="before">
+                <field name="erp_po_code" readonly="1"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="stock_picking_api_origin_view_search" model="ir.ui.view">
+        <field name="name">stock.picking.api.origin.tree</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_internal_search"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="before">
+                <field name="erp_po_code"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

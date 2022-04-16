@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <menuitem id="account_reports_encryption_reports_menu" name="Encryption Reports"
+                  parent="account.menu_finance_reports" sequence="7"
+                  groups="slm_encryption_reports.group_advanced_reports"
+        />
+
+        <record id="action_account_report_result_overview" model="ir.actions.client">
+            <field name="name">Result Overview per Route</field>
+            <field name="tag">account_report</field>
+            <field name="context" eval="{'model': 'account.break.report'}"/>
+        </record>
+
+        <record id="action_account_report_encryption" model="ir.actions.client">
+            <field name="name">Encryption Report</field>
+            <field name="tag">account_report</field>
+            <field name="context" eval="{'model': 'account.encryption.report'}"/>
+        </record>
+        <record id="action_account_report_profit_center" model="ir.actions.client">
+            <field name="name">Profit Center Report</field>
+            <field name="tag">account_report</field>
+            <field name="context" eval="{'model': 'account.profit.center.report'}"/>
+        </record>
+        <record id="action_account_report_business_unit" model="ir.actions.client">
+            <field name="name">Business Unit Report</field>
+            <field name="tag">account_report</field>
+            <field name="context" eval="{'model': 'account.business.unit.report'}"/>
+        </record>
+         <record id="action_account_report_slm_group" model="ir.actions.client">
+            <field name="name">SLM Group Report</field>
+            <field name="tag">account_report</field>
+            <field name="context" eval="{'model': 'account.slm.group.total.report'}"/>
+        </record>
+
+        <menuitem id="menu_action_account_report_result_overview" name="Result overview per route"
+                  action="action_account_report_result_overview"
+                  parent="account_reports_encryption_reports_menu" groups="slm_encryption_reports.group_advanced_reports"/>
+
+        <menuitem id="menu_action_account_report_encryption" name="Encryption Report"
+                  action="action_account_report_encryption"
+                  parent="account_reports_encryption_reports_menu" groups="slm_encryption_reports.group_advanced_reports"/>
+
+        <menuitem id="menu_action_account_report_profit_center" name="Profit Center Report"
+                  action="action_account_report_profit_center"
+                  parent="account_reports_encryption_reports_menu" groups="slm_encryption_reports.group_advanced_reports"/>
+
+        <menuitem id="menu_action_account_report_business_unit" name="Business Unit Report"
+                  action="action_account_report_business_unit"
+                  parent="account_reports_encryption_reports_menu" groups="slm_encryption_reports.group_advanced_reports"/>
+        <menuitem id="menu_action_account_report_slm_group_total" name="SLM Group Report"
+                  action="action_account_report_slm_group"
+                  parent="account_reports_encryption_reports_menu" groups="slm_encryption_reports.group_advanced_reports"/>
+    </data>
+</odoo>

@@ -1,0 +1,128 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* EasyERPS_pos_custom
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 15.0+e-20211128\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-01-30 22:29+0000\n"
+"PO-Revision-Date: 2022-01-31 01:36+0300\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"Language: ar\n"
+"X-Generator: Poedit 3.0\n"
+
+#. module: EasyERPS_pos_custom
+#: model:ir.model.fields,field_description:EasyERPS_pos_custom.field_pos_config__category_name_font_size
+#: model_terms:ir.ui.view,arch_db:EasyERPS_pos_custom.pos_config_view_form_inherit_pos_custom_receipt
+msgid "Category Name Font Size"
+msgstr "حجم خط اسم الفئة"
+
+#. module: EasyERPS_pos_custom
+#: model_terms:ir.ui.view,arch_db:EasyERPS_pos_custom.pos_config_view_form_inherit_pos_custom_receipt
+msgid "Configuration Pos Custom"
+msgstr "اعدادات نقاط البيع المعدلة"
+
+#. module: EasyERPS_pos_custom
+#: model:ir.model.fields,field_description:EasyERPS_pos_custom.field_pos_config__pos_custom_receipt
+msgid "Custom Receipt"
+msgstr "الفاتورة المعدلة"
+
+
+#. module: EasyERPS_pos_custom
+#: model:ir.model.fields,help:EasyERPS_pos_custom.field_pos_config__show_company_contact_address
+msgid "Enables Show Company Contact Address."
+msgstr "إظهار عنوان جهة اتصال الشركة"
+
+#. module: EasyERPS_pos_custom
+#: model:ir.model.fields,help:EasyERPS_pos_custom.field_pos_config__show_company_phone
+msgid "Enables Show Company Phone."
+msgstr "إظهار هاتف الشركة"
+
+#. module: EasyERPS_pos_custom
+#: model:ir.model.fields,help:EasyERPS_pos_custom.field_pos_config__show_company_email
+msgid "Enables how Company Email."
+msgstr "اظهار البريد الإلكتروني للشركة"
+
+
+#. module: EasyERPS_pos_custom
+#: model:ir.model.fields,field_description:EasyERPS_pos_custom.field_pos_config__product_name_font_size
+#: model_terms:ir.ui.view,arch_db:EasyERPS_pos_custom.pos_config_view_form_inherit_pos_custom_receipt
+msgid "Product Name Font Size"
+msgstr "حجم خط اسم المنتج"
+
+
+#. module: EasyERPS_pos_custom
+#: model:ir.model.fields,field_description:EasyERPS_pos_custom.field_pos_config__show_company_contact_address
+#, fuzzy
+msgid "Show Company Contact Address"
+msgstr "إظهار عنوان الاتصال بالشركة"
+
+#. module: EasyERPS_pos_custom
+#: model:ir.model.fields,field_description:EasyERPS_pos_custom.field_pos_config__show_company_email
+#: model_terms:ir.ui.view,arch_db:EasyERPS_pos_custom.pos_config_view_form_inherit_pos_custom_receipt
+#, fuzzy
+msgid "Show Company Email"
+msgstr "إظهار البريد الإلكتروني للشركة"
+
+#. module: EasyERPS_pos_custom
+#: model:ir.model.fields,field_description:EasyERPS_pos_custom.field_pos_config__show_company_phone
+#: model_terms:ir.ui.view,arch_db:EasyERPS_pos_custom.pos_config_view_form_inherit_pos_custom_receipt
+msgid "Show Company Phone"
+msgstr "اظهار هاتف الشركة"
+
+#. module: EasyERPS_pos_custom
+#: model:ir.model.fields,field_description:EasyERPS_pos_custom.field_pos_config__show_company_website
+#: model_terms:ir.ui.view,arch_db:EasyERPS_pos_custom.pos_config_view_form_inherit_pos_custom_receipt
+msgid "Show Company Website"
+msgstr "إظهار رابط موقع الشركة"
+
+#. module: EasyERPS_pos_custom
+#: model:ir.model.fields,help:EasyERPS_pos_custom.field_pos_config__show_company_website
+msgid "Show Company Website."
+msgstr "إظهار رابط موقع الشركة"
+
+#. module: EasyERPS_pos_custom
+#: model:ir.model.fields,field_description:EasyERPS_pos_custom.field_pos_config__show_qr_code
+#: model_terms:ir.ui.view,arch_db:EasyERPS_pos_custom.pos_config_view_form_inherit_pos_custom_receipt
+#, fuzzy
+msgid "Show QR Code in Receipt"
+msgstr "إظهار رمز الاستجابة السريعة في الإيصال"
+
+#. module: EasyERPS_pos_custom
+#. openerp-web
+#: code:addons/EasyERPS_pos_custom/static/src/xml/OrderReceipt.xml:0
+#, fuzzy, python-format
+msgid "Tel:"
+msgstr "الهاتف:"
+
+#. module: EasyERPS_pos_custom
+#. openerp-web
+#: code:addons/EasyERPS_pos_custom/static/src/xml/OrderReceipt.xml:0
+#, fuzzy, python-format
+msgid "Total"
+msgstr "المجموع"
+
+#. module: EasyERPS_pos_custom
+#: model:ir.model.fields,field_description:EasyERPS_pos_custom.field_pos_config__leftpane_width
+#: model_terms:ir.ui.view,arch_db:EasyERPS_pos_custom.pos_config_view_form_inherit_pos_custom_receipt
+#, fuzzy
+msgid "left Pane Width"
+msgstr "مقاس عرض السلة"
+
+#. module: EasyERPS_pos_custom
+#: model_terms:ir.ui.view,arch_db:EasyERPS_pos_custom.pos_config_view_form_inherit_pos_custom_receipt
+msgid "pos_custom_receipt"
+msgstr "الفاتورة المعدلة"
+
+#. module: EasyERPS_pos_custom
+#: model_terms:ir.ui.view,arch_db:EasyERPS_pos_custom.pos_config_view_form_inherit_pos_custom_receipt
+#, fuzzy
+msgid "show company contact address"
+msgstr "إظهار عنوان الاتصال بالشركة"
+

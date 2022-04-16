@@ -1,0 +1,128 @@
+<section class="oe_container app">
+    <div class="oe_row oe_spaced">
+        <h2 class="oe_slogan" style="color:#875A7B;">Tasa de cambio manual</h2>
+        <p class="text-justify">
+            ¿Es indispensable para su empresa poder manejar diferentes tasas de cambio para facturas de compra, venta, registro de pagos  y costos en el destino?.<br/><br/>
+
+            Este módulo permite hacer uso de diferentes tasas de cambio de acuerdo a su necesidad, el valor de la tasa se ingresa manualmente, es decir, se ingresa el valor que vaya a utilizar de acuerdo al caso donde lo debe implementar. <br/><br/>
+
+            La tasa se debe ingresar en la cantidad de unidades de la moneda base con respecto a la extranjera; no es necesario hacer la conversión de la moneda extranjera a la moneda local.<br/><br/>     
+        </p>
+    </div>
+</section>
+
+<section class="oe_container oe_dark">
+    <div class="oe_row oe_spaced">
+        <h2 class="oe_slogan" style="color:#875A7B;">Configuración</h2>
+        <h3 class="oe_slogan"></h3>
+        <div class="oe_span6 text-justify oe_mt32">
+            <p>
+               Se debe habilitar la opción de <b>Multidivisas</b> en la configuración del módulo de <b>Facturación</b>
+            </p>
+        </div>
+        <div class="oe_span6">
+            <img class="img-responsive" src="Configuración_Divisa.gif">
+        </div>
+    </div>
+</section>
+
+<section class="oe_container">
+    <div class="oe_row oe_spaced">
+        <div class="oe_span6">
+            <h2 class="oe_slogan" style="color:#875A7B; text-align: left;">Gestiona de forma manual la tasa de cambio para factura de compra</h2>
+            <p class="oe_mt32 text-justify">
+            Al crear la factura de compra debe habilitar la casilla <b>Tasa manual de cambio</b> para aplicar la tarifa manual de acuerdo a la tasa de cambio que desee.<br/><br/>
+
+            En la interfaz de factura de compra debe habilitar la casilla <b>Tasa manual de cambio</b>, este habilita el campo <b>Tasa de cambio</b> donde debe ingresar las unidades de la moneda base con respecto a la extranjera y  seleccionar en el campo <b>Moneda</b> el tipo de moneda, luego de esto ingresar los productos a comprar con precio unitario en la moneda extranjera y la plataforma se encarga de realizar la conversión.<br/><br/>
+
+            En caso de que se necesite hacer uso de la tasa automática que da el servicio de consulta de Odoo con las entidades bancarias no debe habilitar la casilla <b>Tasa manual de cambio</b> y la plataforma hace uso del flujo normal que maneja Odoo.<br/><br/>
+            </p>
+        </div>
+        <div class="oe_span6">
+            <img class='img-responsive' src="Factura-Compra.gif">
+        </div>
+    </div>
+</section>
+
+<section class="oe_container oe_dark">
+    <div class="oe_row oe_spaced">
+        <div class="oe_span6">
+            <h2 class="oe_slogan" style="color:#875A7B; text-align: left;">Gestiona de forma manual la tasa de cambio para factura de venta</h2>
+            <p class="oe_mt32 text-justify">
+                Al crear la factura de venta debe habilitar la casilla <b>Tasa manual de cambio</b> para aplicar la tarifa manual de acuerdo a la tasa de cambio que desee.<br/><br/>
+
+En la interfaz de factura de venta debe habilitar la casilla <b>Tasa manual de cambio</b>, este habilita  el campo <b>Tasa de cambio</b> donde debe ingresar las unidades de la moneda base con respecto a la extranjera y seleccionar en el campo <b>Moneda</b> el tipo de moneda, luego de esto ingresar los productos a vender con precio unitario en la moneda extranjera y la plataforma se encarga de realizar la conversión.<br/><br/>
+            </p>
+        </div>
+        <div class="oe_span6">
+            <img class="img-responsive" src="Factura_venta.gif"/>
+        </div>
+    </div>
+</section>
+
+<section class="oe_container">
+    <div class="oe_row oe_spaced">
+        <h2 class="oe_slogan" style="color:#875A7B;">Gestiona de forma manual la tasa de cambio para registrar pagos</h2>
+        <div class="oe_span6">
+            <p class="oe_mt32 text-justify">
+                Para registrar pagos con diferentes tasas de cambio debe crear un diario para el manejo de la información referente a pagos que generen ganancias o pérdidas y se debe agregar en la sección de <b>Multidivisas</b> en la configuración del módulo de <b>Facturación</b><br/><br/>
+
+                Al registrar el pago de una factura de compra o venta debe habilitar la opción de <b>Tasa manual de cambio</b> y aplique las tarifas de acuerdo a la tasa de cambio que desee.<br/><br/>
+
+En la interfaz de registrar pago  habilitar la casilla <b>Tasa manual de cambio</b>, este le habilita el campo <b>Tasa de cambio</b> donde debe ingresar unidades de la moneda base con respecto a la extranjera y en el campo <b>Precio en moneda local</b> de forma automática se visualiza el equivalente en la moneda base con respecto a la tasa de cambio que se ingresó.<br/><br/>
+            </p>
+        </div>
+        <div class="oe_span6">
+            <img class='img-responsive' src="Registro_pago.gif">
+        </div>
+    </div>
+</section>
+
+<section class="oe_container oe_dark">
+    <div class="oe_row oe_spaced">
+        <div class="oe_span6">
+            <h2 class="oe_slogan" style="color:#875A7B; text-align: left;">Gestiona de forma manual la tasa de cambio para costos en el destino</h2>
+            <p class="oe_mt32 text-justify">
+                Al crear los costos en el destino, debe habilitar la opción de cambio de moneda y aplique las tarifas de acuerdo a la tasa de cambio que desee.<br/><br/>
+
+En la interfaz de costos en el destino debe habilitar la casilla <b>Tasa manual de cambio</b>, este habilita el campo<b>Tasa de cambio</b> donde debe ingresar unidades de la moneda base con respecto a la extranjera y seleccionar el tipo de moneda del campo <b>Moneda</b>; al momento de registrar el producto en la línea de costos en el campo de <b>Valor de la moneda</b> se debe  ingresar el valor del costo en la moneda extranjera  y el sistema se encargará de hacer la operación matemática para obtener el valor del coste en moneda base por cada línea de costo que se hayan registrado.<br/><br/>
+            </p>
+        </div>
+        <div class="oe_span6">
+            <img class="img-responsive" src="Costo_Destino.gif"/>
+        </div>
+    </div>
+</section>
+
+<section class="oe_container">
+    <div class="oe_row oe_spaced">
+        <div class="oe_span6">
+            <h2 class="oe_slogan" style="color:#875A7B; text-align: left;">Contáctenos</h2>
+            <p class="oe_mt32 text-justify">
+                Envíenos un mensaje a <a href="mailto:info@pragmatic.com.co">info@pragmatic.com.co</a>
+                y con gusto atenderemos sus dudas e inquietudes.
+            </p>
+        </div>
+    </div>
+</section>
+
+<section class="oe_container oe_dark">
+    <div class="oe_row oe_spaced">
+        <div class="oe_span6">
+            <h2 class="oe_slogan" style="color:#875A7B; text-align: left;">Documentación en español</h2>
+            <p class="oe_mt32 text-justify">
+                Aquí podrá encontrar información sobre la configuración inicial
+                del módulo y su uso general. Haga click en el logo para ir a nuestro
+                sitio oficial.
+            </p>
+        </div>
+        <div class="oe_span6">
+            <a href="https://www.pragmatic.com.co/productos">
+                <img class="img-responsive" src="pragmatic_logo.png"/>
+            </a>
+            </div>
+    </div>
+</section>
+
+<section class="oe_container oe_separator">
+</section>

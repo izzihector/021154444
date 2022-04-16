@@ -1,0 +1,60 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+    <!--
+    <record model="ir.ui.view" id="reportes_xetechs.list">
+      <field name="name">reportes_xetechs list</field>
+      <field name="model">reportes_xetechs.reportes_xetechs</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="value"/>
+          <field name="value2"/>
+        </tree>
+      </field>
+    </record>
+    -->
+
+    <!-- actions opening views on models -->
+    <!--
+    <record model="ir.actions.act_window" id="reportes_xetechs.action_window">
+      <field name="name">reportes_xetechs window</field>
+      <field name="res_model">reportes_xetechs.reportes_xetechs</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+    -->
+
+    <!-- server action to the one above -->
+    <!--
+    <record model="ir.actions.server" id="reportes_xetechs.action_server">
+      <field name="name">reportes_xetechs server</field>
+      <field name="model_id" ref="model_reportes_xetechs_reportes_xetechs"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": self._name,
+        }
+      </field>
+    </record>
+    -->
+
+    <!-- Top menu item -->
+    <!--
+    <menuitem name="reportes_xetechs" id="reportes_xetechs.menu_root"/>
+    -->
+    <!-- menu categories -->
+    <!--
+    <menuitem name="Menu 1" id="reportes_xetechs.menu_1" parent="reportes_xetechs.menu_root"/>
+    <menuitem name="Menu 2" id="reportes_xetechs.menu_2" parent="reportes_xetechs.menu_root"/>
+    -->
+    <!-- actions -->
+    <!--
+    <menuitem name="List" id="reportes_xetechs.menu_1_list" parent="reportes_xetechs.menu_1"
+              action="reportes_xetechs.action_window"/>
+    <menuitem name="Server to list" id="reportes_xetechs" parent="reportes_xetechs.menu_2"
+              action="reportes_xetechs.action_server"/>
+    -->
+  </data>
+</odoo>

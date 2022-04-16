@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    #warehouse_view_location
+    <record id="view_warehouse_inherited" model="ir.ui.view">
+        <field name="name">stock.warehouse.inherited</field>
+        <field name="model">stock.warehouse</field>
+        <field name="inherit_id" ref="stock.view_warehouse"/>
+        <field name="arch" type="xml">
+            <!--          change field name -->
+            <xpath expr="//field[@name='view_location_id']" position="attributes">
+                <attribute name="string">Outlets view location</attribute>
+            </xpath>
+            <!--          change placeholder -->
+            <xpath expr="//field[@name='name']" position="attributes">
+                <attribute name="placeholder">e.g. Central Outlets</attribute>
+            </xpath>
+            <!--          change page name-->
+            <xpath expr="//page[@name='warehouse_config']" position="attributes">
+                <attribute name="string">Outlet Configuration</attribute>
+            </xpath>
+
+        </field>
+    </record>
+
+    <!--    menu_action-->
+    <record id="stock.action_warehouse_form" model="ir.actions.act_window">
+        <field name="name">Outlets</field>
+    </record>
+
+    <!--    menu-->
+    <record id="stock.menu_action_warehouse_form" model="ir.ui.menu">
+        <field name="name">Outlets</field>
+    </record>
+
+
+</odoo>

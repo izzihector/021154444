@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+    <record id="queue_print_form" model="ir.ui.view">
+      <field name="name">queue.print.form</field>
+      <field name="model">queue.print</field>
+      <field name="arch" type="xml">
+        <form string="" create="false" edit="false" delete="false">
+          <header>
+              <field name="state" widget="statusbar" status_visible="new,printed"/>
+            </header>
+          <sheet string="">
+            <group>
+              <field name="connector_id"/>
+              <field name="printer_name"/>
+              <field name="printer_ip"/>
+              <field name="printer_port"/>
+              <field name="token"/>
+            </group>
+            <notebook>
+              <page string="Receipt">
+                <field name="receipt" nolabel="1" widget="ace" options="{'mode': 'xml'}" modifiers="{}"/>
+              </page>
+            </notebook>
+
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <record id="queue_print_tree" model="ir.ui.view">
+      <field name="name">queue.print.tree</field>
+      <field name="model">queue.print</field>
+      <field name="arch" type="xml">
+        <tree string="" create="false" edit="false" delete="false">
+          <field name="connector_id"/>
+          <field name="printer_name"/>
+          <field name="printer_ip"/>
+          <field name="printer_port"/>
+          <field name="state"/>
+        </tree>
+      </field>
+    </record>
+
+    <record id="queue_print_action" model="ir.actions.act_window">
+      <field name="name">Queue print</field>
+      <field name="res_model">queue.print</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem
+            parent="point_of_sale.menu_point_config_product"
+            action="queue_print_action"
+            id="menu_queue"
+            sequence="50"
+            groups="point_of_sale.group_pos_manager"
+            name="Queue print"/>
+
+  </data>
+</odoo>

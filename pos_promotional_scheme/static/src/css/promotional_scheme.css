@@ -1,0 +1,107 @@
+
+.check_scheme_button {
+	font-size: 13px;
+	font-color: red;
+}
+
+
+#scheme button {
+	border-top: 1px solid #EFEFEF;
+	color: #555555;
+	font-size: 14px;
+	font-weight: bold;
+	height: 50px;
+	margin: 0 0px -4px 7px;
+	vertical-align: middle;
+	width: 422px;
+}
+
+.point-of-sale #scheme #check-scheme-button button:hover {
+	border: none;
+	color: white;
+	background: #7f82ac;
+	background: -webkit-gradient(linear, left top, left bottom, from(#9d9fc5),
+		to(#7f82ac));
+	background: -moz-linear-gradient(#9d9fc5, #7f82ac);
+	background: -ms-linear-gradient(#9d9fc5, #7f82ac);
+	background: linear-gradient(#9d9fc5, #7f82ac);
+	text-shadow: 0px 0px 5px rgba(255, 255, 255, 0.21);
+	-webkit-box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.3) inset, 0px 1px 2px
+		rgba(0, 0, 0, 0.1);
+	-moz-box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.3) inset, 0px 1px 2px
+		rgba(0, 0, 0, 0.1);
+	-ms-box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.3) inset, 0px 1px 2px
+		rgba(0, 0, 0, 0.1);
+	-o-box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.3) inset, 0px 1px 2px
+		rgba(0, 0, 0, 0.1);
+	box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.3) inset, 0px 1px 2px
+		rgba(0, 0, 0, 0.1);
+}
+
+.point-of-sale .paypad.touch-scrollable button:hover, .point-of-sale .numpad button:hover,
+	.point-of-sale .popup button:hover, .point-of-sale #scheme .paypad-button button:hover
+	{
+	border: none;
+	color: white;
+	background: #7f82ac;
+	background: -webkit-gradient(linear, left top, left bottom, from(#9d9fc5),
+		to(#7f82ac));
+	background: -moz-linear-gradient(#9d9fc5, #7f82ac);
+	background: -ms-linear-gradient(#9d9fc5, #7f82ac);
+	background: linear-gradient(#9d9fc5, #7f82ac);
+	text-shadow: 0px 0px 5px rgba(255, 255, 255, 0.21);
+	-webkit-box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.3) inset, 0px 1px 2px
+		rgba(0, 0, 0, 0.1);
+	-moz-box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.3) inset, 0px 1px 2px
+		rgba(0, 0, 0, 0.1);
+	-ms-box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.3) inset, 0px 1px 2px
+		rgba(0, 0, 0, 0.1);
+	-o-box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.3) inset, 0px 1px 2px
+		rgba(0, 0, 0, 0.1);
+	box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.3) inset, 0px 1px 2px
+		rgba(0, 0, 0, 0.1);
+}
+
+.point-of-sale .pos-right-align {
+	text-align: right;
+	width: 60%;
+}
+
+.point-of-sale .pos-right-align input {
+	text-align: right;
+	border: 1px solid #cecbcb;
+	border-radius: 4px;
+}
+
+.point-of-sale .pos-disc-font {
+	font-size: 10px;
+	font-style: italic;
+	color: #808080;
+}
+
+.pos-sale-ticket .ticket-thead-table {
+	margin-bottom: 10px !important;
+}
+
+.pos-sale-ticket .recipt-sperator {
+	font-size: 10pt;
+	font-weight: bold;
+	border-bottom: 1px solid #000;
+	word-spacing: 2pt;
+}
+
+#scheme {
+	font-weight: 900;
+	background: #c7c3c3;
+	color: rgb(75, 75, 75);
+	height: 50px;
+	width: 100%;
+	line-height: 48px;
+	border-bottom: solid 1px rgb(196, 196, 196);
+	box-shadow: none;
+	padding-left: 5px;
+	padding-right: 5px;
+	margin: 3px;
+	border-radius: 5px;
+	
+}

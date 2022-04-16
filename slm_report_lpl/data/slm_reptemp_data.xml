@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data noupdate="1">
+        <record id="slm_financial_reports_define_lpl" model="slm.financial.reports.define">
+            <field name="name">Layout Profit and Loss</field>
+            <field name="description">Layout Profit and Loss</field>
+            <field name="type">pyl</field>
+        </record>
+         <record id="slm_financial_reports_define_line_E001" model="slm.financial.reports.define.lines">
+            <field name="report_id" ref="slm_financial_reports_define_lpl" />
+            <field name="name">Opbrengsten</field>
+            <field name="code">E001</field>
+            <field name="type">detail</field>
+        </record>
+         <record id="slm_financial_reports_define_line_E002" model="slm.financial.reports.define.lines">
+            <field name="report_id" ref="slm_financial_reports_define_lpl" />
+            <field name="name">Vloot- en operationele kosten</field>
+            <field name="code">E002</field>
+            <field name="type">detail</field>
+        </record>
+         <record id="slm_financial_reports_define_line_R001" model="slm.financial.reports.define.lines">
+            <field name="report_id" ref="slm_financial_reports_define_lpl" />
+            <field name="name">Brutowinst</field>
+            <field name="code">R001</field>
+            <field name="formula">result=E001-E002</field>
+            <field name="type">tittle</field>
+        </record>        
+         <record id="slm_financial_reports_define_line_F001" model="slm.financial.reports.define.lines">
+            <field name="report_id" ref="slm_financial_reports_define_lpl" />
+            <field name="name">Personeelskosten</field>
+            <field name="code">F001</field>
+            <field name="type">detail</field>
+        </record>
+         <record id="slm_financial_reports_define_line_F002" model="slm.financial.reports.define.lines">
+            <field name="report_id" ref="slm_financial_reports_define_lpl" />
+            <field name="name">Afschrijvingen</field>
+            <field name="code">F002</field>
+            <field name="type">detail</field>
+        </record>                
+         <record id="slm_financial_reports_define_line_F003" model="slm.financial.reports.define.lines">
+            <field name="report_id" ref="slm_financial_reports_define_lpl" />
+            <field name="name">Overige bedrijfskosten</field>
+            <field name="code">F003</field>
+            <field name="type">detail</field>
+        </record>        
+         <record id="slm_financial_reports_define_line_R002" model="slm.financial.reports.define.lines">
+            <field name="report_id" ref="slm_financial_reports_define_lpl" />
+            <field name="name">Som der bedrijfskosten</field>
+            <field name="code">R002</field>
+            <field name="formula">result=F001+F002+F003</field>
+            <field name="type">tittle</field>
+        </record>
+         <record id="slm_financial_reports_define_line_R003" model="slm.financial.reports.define.lines">
+            <field name="report_id" ref="slm_financial_reports_define_lpl" />
+            <field name="name">Bedrijfsresultaat</field>
+            <field name="code">R003</field>
+            <field name="formula">result=R001-R002</field>
+            <field name="type">tittle</field>
+        </record>                 
+         <record id="slm_financial_reports_define_line_G001" model="slm.financial.reports.define.lines">
+            <field name="report_id" ref="slm_financial_reports_define_lpl" />
+            <field name="name">Financiële baten en lasten</field>
+            <field name="code">G001</field>
+            <field name="formula">result = G001-G002</field>
+            <field name="type">detail</field>
+        </record>            
+         <record id="slm_financial_reports_define_line_R005" model="slm.financial.reports.define.lines">
+            <field name="report_id" ref="slm_financial_reports_define_lpl" />
+            <field name="name">Groepsresultaat uit bedrijfs-uitoefening vóór belastingen</field>
+            <field name="code">R005</field>
+            <field name="formula">result = R003+G001</field>
+            <field name="type">tittle</field>
+        </record>
+         <record id="slm_financial_reports_define_line_H001" model="slm.financial.reports.define.lines">
+            <field name="report_id" ref="slm_financial_reports_define_lpl" />
+            <field name="name">Belastingen</field>
+            <field name="code">H001</field>
+            <field name="type">detail</field>
+        </record>
+         <record id="slm_financial_reports_define_line_R006" model="slm.financial.reports.define.lines">
+            <field name="report_id" ref="slm_financial_reports_define_lpl" />
+            <field name="name">Groepsresultaat uit bedrijfs-uitoefening na belastingen</field>
+            <field name="code">R006</field>
+            <field name="formula">result = R005-H001</field>
+            <field name="type">tittle</field>
+        </record>
+         <record id="slm_financial_reports_define_line_I001" model="slm.financial.reports.define.lines">
+            <field name="report_id" ref="slm_financial_reports_define_lpl" />
+            <field name="name">Resultaat aandeel derden</field>
+            <field name="code">I001</field>
+            <field name="type">detail</field>
+        </record>   
+         <record id="slm_financial_reports_define_line_R007" model="slm.financial.reports.define.lines">
+            <field name="report_id" ref="slm_financial_reports_define_lpl" />
+            <field name="name">Netto groepsresultaat na belastingen</field>
+            <field name="code">R007</field>
+            <field name="formula">result = R006+I001</field>
+            <field name="type">tittle</field>
+        </record>
+
+        <record id="slm_financial_reports_define_lbs" model="slm.financial.reports.define">
+            <field name="name">Layout Balance Sheet</field>
+            <field name="description">Layout Balance Sheet</field>
+            <field name="type">bls</field>
+        </record>
+        
+         <record id="slm_financial_reports_define_lbs_T001" model="slm.financial.reports.define.lines">
+            <field name="report_id" ref="slm_financial_reports_define_lbs" />
+            <field name="name">MATERIËLE VASTE ACTIVA</field>
+            <field name="code">T001</field>
+            <field name="type">tittle</field>
+        </record>
+        
+         <record id="slm_financial_reports_define_lbs_D001" model="slm.financial.reports.define.lines">
+            <field name="report_id" ref="slm_financial_reports_define_lbs" />
+            <field name="name">Bedrijfsgebouwen en terreinen</field>
+            <field name="code">D001</field>
+            <field name="type">detail</field>
+        </record>
+        
+         <record id="slm_financial_reports_define_lbs_D002" model="slm.financial.reports.define.lines">
+            <field name="report_id" ref="slm_financial_reports_define_lbs" />
+            <field name="name">Inventarissen en overige bedrijfsmiddelen</field>
+            <field name="code">D002</field>
+            <field name="type">detail</field>
+        </record>        
+                      
+         <record id="slm_financial_reports_define_lbs_D003" model="slm.financial.reports.define.lines">
+            <field name="report_id" ref="slm_financial_reports_define_lbs" />
+            <field name="name">Onderhanden investeringen</field>
+            <field name="code">D003</field>
+            <field name="type">detail</field>
+        </record>
+        
+         <record id="slm_financial_reports_define_lbs_D004" model="slm.financial.reports.define.lines">
+            <field name="report_id" ref="slm_financial_reports_define_lbs" />
+            <field name="name">Niet aan de bedrijfsuitoefening dienstbaar</field>
+            <field name="code">D004</field>
+            <field name="type">detail</field>
+        </record>  
+        
+         <record id="slm_financial_reports_define_lbs_T002" model="slm.financial.reports.define.lines">
+            <field name="report_id" ref="slm_financial_reports_define_lbs" />
+            <field name="name">Totaal materiële vaste activa</field>
+            <field name="code">T002</field>
+            <field name="type">tittle</field>
+            <field name="formula">result = D001+D002+D003+D004</field>
+        </record>
+        
+         <record id="slm_financial_reports_define_lbss_T003" model="slm.financial.reports.define.lines">
+            <field name="report_id" ref="slm_financial_reports_define_lbs" />
+            <field name="name">IMMATERIËLE VASTE ACTIVA</field>
+            <field name="code">T003</field>
+            <field name="type">tittle</field>
+        </record>        
+        
+         <record id="slm_financial_reports_define_lbs_D005" model="slm.financial.reports.define.lines">
+            <field name="report_id" ref="slm_financial_reports_define_lbs" />
+            <field name="name">Immateriële vaste activa</field>
+            <field name="code">D005</field>
+            <field name="type">detail</field>
+        </record> 
+        
+         <record id="slm_financial_reports_define_lbs_T004" model="slm.financial.reports.define.lines">
+            <field name="report_id" ref="slm_financial_reports_define_lbs" />
+            <field name="name">Totaal immateriële vaste activa</field>
+            <field name="code">T004</field>
+            <field name="type">tittle</field>
+            <field name="formula">result = D005</field>
+        </record>
+        
+         <record id="slm_financial_reports_define_lbs_T005" model="slm.financial.reports.define.lines">
+            <field name="report_id" ref="slm_financial_reports_define_lbs" />
+            <field name="name">FINANCIËLE VASTE ACTIVA</field>
+            <field name="code">T005</field>
+            <field name="type">tittle</field>
+        </record>       
+        
+         <record id="slm_financial_reports_define_lbs_D006" model="slm.financial.reports.define.lines">
+            <field name="report_id" ref="slm_financial_reports_define_lbs" />
+            <field name="name">Financiële vaste activa</field>
+            <field name="code">D006</field>
+            <field name="type">detail</field>
+        </record>      
+        
+         <record id="slm_financial_reports_define_lbs_T006" model="slm.financial.reports.define.lines">
+            <field name="report_id" ref="slm_financial_reports_define_lbs" />
+            <field name="name">Totaal financiële vaste activa</field>
+            <field name="code">T006</field>
+            <field name="type">tittle</field>
+            <field name="formula">result = D006</field>
+        </record>
+        
+         <record id="slm_financial_reports_define_lbs_T007" model="slm.financial.reports.define.lines">
+            <field name="report_id" ref="slm_financial_reports_define_lbs" />
+            <field name="name">VLOTTENDE ACTIVA</field>
+            <field name="code">T007</field>
+            <field name="type">tittle</field>
+        </record>
+        
+         <record id="slm_financial_reports_define_lbs_T008" model="slm.financial.reports.define.lines">
+            <field name="report_id" ref="slm_financial_reports_define_lbs" />
+            <field name="name">Voorraden</field>
+            <field name="code">T008</field>
+            <field name="type">tittle</field>
+        </record>      
+        
+         <record id="slm_financial_reports_define_lbs_D007" model="slm.financial.reports.define.lines">
+            <field name="report_id" ref="slm_financial_reports_define_lbs" />
+            <field name="name">Voorraden</field>
+            <field name="code">D007</field>
+            <field name="type">detail</field>
+        </record>             
+                
+         <record id="slm_financial_reports_define_lbs_T009" model="slm.financial.reports.define.lines">
+            <field name="report_id" ref="slm_financial_reports_define_lbs" />
+            <field name="name">Totaal financiële vaste activa</field>
+            <field name="code">T009</field>
+            <field name="type">tittle</field>
+            <field name="formula">result = D007</field>
+        </record>
+        
+         <record id="slm_financial_reports_define_lbs_T010" model="slm.financial.reports.define.lines">
+            <field name="report_id" ref="slm_financial_reports_define_lbs" />
+            <field name="name">Vorderingen</field>
+            <field name="code">T010</field>
+            <field name="type">tittle</field>
+        </record>      
+        
+         <record id="slm_financial_reports_define_lbs_D008" model="slm.financial.reports.define.lines">
+            <field name="report_id" ref="slm_financial_reports_define_lbs" />
+            <field name="name">Debiteuren</field>
+            <field name="code">D008</field>
+            <field name="type">detail</field>
+        </record>
+        
+         <record id="slm_financial_reports_define_lbs_D009" model="slm.financial.reports.define.lines">
+            <field name="report_id" ref="slm_financial_reports_define_lbs" />
+            <field name="name" eval="'Overige vorderingen &amp; overlopende activa'"/>
+            <field name="code">D009</field>
+            <field name="type">detail</field>
+        </record>
+        
+         <record id="slm_financial_reports_define_lbs_D010" model="slm.financial.reports.define.lines">
+            <field name="report_id" ref="slm_financial_reports_define_lbs" />
+            <field name="name">Waarborgsommen</field>
+            <field name="code">D010</field>
+            <field name="type">detail</field>
+        </record>
+        
+         <record id="slm_financial_reports_define_lbs_T011" model="slm.financial.reports.define.lines">
+            <field name="report_id" ref="slm_financial_reports_define_lbs" />
+            <field name="name">Totaal vorderingen</field>
+            <field name="code">T011</field>
+            <field name="type">tittle</field>
+            <field name="formula">result = D008+D009+D010</field>
+        </record>        
+             
+         <record id="slm_financial_reports_define_lbs_T012" model="slm.financial.reports.define.lines">
+            <field name="report_id" ref="slm_financial_reports_define_lbs" />
+            <field name="name">Liquide middelen</field>
+            <field name="code">T012</field>
+            <field name="type">tittle</field>
+        </record>
+        
+         <record id="slm_financial_reports_define_lbs_D011" model="slm.financial.reports.define.lines">
+            <field name="report_id" ref="slm_financial_reports_define_lbs" />
+            <field name="name">Liquide middelen</field>
+            <field name="code">D011</field>
+            <field name="type">detail</field>
+        </record>   
+        
+         <record id="slm_financial_reports_define_lbs_T013" model="slm.financial.reports.define.lines">
+            <field name="report_id" ref="slm_financial_reports_define_lbs" />
+            <field name="name">Totaal liquide middelen</field>
+            <field name="code">T013</field>
+            <field name="type">tittle</field>
+            <field name="formula">result = D011</field>
+        </record>       
+        
+         <record id="slm_financial_reports_define_lbs_T014" model="slm.financial.reports.define.lines">
+            <field name="report_id" ref="slm_financial_reports_define_lbs" />
+            <field name="name">TOTAAL ACTIVA</field>
+            <field name="code">T014</field>
+            <field name="type">tittle</field>
+            <field name="formula">result = T002+T004+T006+T009+T011+T013</field>
+        </record>   
+        
+    </data>
+
+</odoo>

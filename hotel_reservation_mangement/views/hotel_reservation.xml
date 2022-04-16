@@ -1,0 +1,219 @@
+<odoo>
+    <data>
+        <record id="seq_hotel_reservation_id" model="ir.sequence">
+            <field name="name">reservation</field>
+            <field name="code">hotel.reservation.management</field>
+            <field name="prefix">HR</field>
+            <field name="padding">6</field>
+        </record>
+
+        <record id="hotel_reservation_action_tree" model="ir.actions.act_window">
+            <field name="name">Reservation</field>
+            <field name="res_model">hotel.reservation.management</field>
+<!--            <field name="view_type">form</field>-->
+            <field name="view_mode">tree,form,calendar,pivot</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+        </record>
+
+        <record id="view_reservation_history_report_pivot" model="ir.ui.view">
+            <field name="name">hotel.reservation.management.pivot</field>
+            <field name="model">hotel.reservation.management</field>
+            <field name="arch" type="xml">
+                 <pivot string="Reservation History Analysis">
+                   <field name="hotel_id" type="row"/>
+                    <field name="room_type" type="col"/>
+                    <field name="guest_name" type="row"/>
+                    <field name="order_from" type="row"/>
+                    <field name="nights_quantity"/>
+                    <field name="total_price" type="measure"/>
+                     <field name="nights_quantity"/>
+                    <field name="adults" type="col" />
+                    <field name="children" type="col"/>
+<!--                    <field name="arrival_date:day" type="row"/>-->
+                    <field name="name" type="col"/>
+                 </pivot>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_hotel_reservation_event_calendar">
+            <field name="name">Reservation</field>
+            <field name="model">hotel.reservation.management</field>
+            <field name="arch" type="xml">
+                <calendar string="Reservation" date_start="arrival_date" date_stop="departure_date" date_delay="nights_quantity"
+                          color="state" quick_add="False" mode="month">
+                    <field name="name"/>
+                    <field name="order_from"/>
+<!--                    <field name="room_type" write_model="hotel.room.type" write_field="room_type" avatar_field="image_small"/>-->
+                    <field name="room_type"/>
+                </calendar>
+            </field>
+        </record>
+
+
+        <record model="ir.ui.view" id="hotel_reservation_management_tree">
+            <field name="name">Reservation</field>
+            <field name="model">hotel.reservation.management</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Reservation">
+                    <field name="name"/>
+                    <field name="hotel_id" />
+                    <field name="room_type"/>
+                    <field name="guest_name"/>
+                    <field name="order_from"/>
+                    <field name="arrival_date"/>
+                    <field name="nights_quantity"/>
+                    <field name="departure_date"/>
+                    <field name="room_quantity"/>
+                    <field name="adults"/>
+                    <field name="children"/>
+                    <field name="total"/>
+                    <field name="reservation_date" invisible="1"/>
+                    <field name="total_price"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="hotel_reservation_management_form">
+            <field name="name">hotel.reservation.management.form</field>
+            <field name="model">hotel.reservation.management</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button  name="confirm_reservation"  string="Confirm" states="Draft" type="object" class="oe_highlight"/>
+                        <button  name="draft_reservation"  string="Set to Draft" states="Confirmed" type="object" class="oe_highlight"/>
+                        <button confirm="are you sure that you want create Invoice"  name="invoice_reservation"  string="Send to Invoice" states="Confirmed" type="object" class="oe_highlight"/>
+                        <button name="update_invoice" string="Update Invoice" class="oe_highlight" type="object" states="To Invoice" />
+                        <button name="check_invoice_state" string="Check Invoice" class="oe_highlight" type="object" states="To Invoice" />
+                        <button confirm="Cancel" name="cancel_reservation"  string="Cancel" states="Draft,Confirmed,To Invoice,Invoiced" type="object" class="btn-default" />
+                        <field name="state" widget="statusbar" statusbar_visible="Draft,Confirmed,To Invoice,Invoiced,Canceled" />
+                    </header>
+                    <sheet>
+                        <group colsapn="12">
+                            <group cols="2">
+                                <field name="name" />
+                                <field name="guest_name" attrs="{'readonly': [('state','in',['Confirmed','To Invoice','Invoiced','Canceled'])]}"/>
+                                <field name="arrival_date" attrs="{'readonly': [('state','in',['Confirmed','To Invoice','Invoiced','Canceled'])]}"/>
+                                <field name="nights_quantity" attrs="{'readonly': [('state','in',['Confirmed','To Invoice','Invoiced','Canceled'])]}"/>
+                                <field name="departure_date" attrs="{'readonly': [('state','in',['Confirmed','To Invoice','Invoiced','Canceled'])]}"/>
+                            </group>
+                            <group col="2">
+                                <field name="hotel_id" attrs="{'readonly': [('state','in',['Confirmed','To Invoice','Invoiced','Canceled'])]}"/>
+                                <field name="room_type" attrs="{'readonly': [('state','in',['Confirmed','To Invoice','Invoiced','Canceled'])]}"/>
+                                <field name="meal_plan" attrs="{'readonly': [('state','in',['Confirmed','To Invoice','Invoiced','Canceled'])]}"/>
+                                <field name="order_from" attrs="{'readonly': [('state','in',['Confirmed','To Invoice','Invoiced','Canceled'])]}"/>
+                                <field name="reservation_date" />
+                            </group>
+                            <group cols="2" string="Occupancy Details">
+                                <field name="room_quantity" attrs="{'readonly': [('state','in',['Confirmed','To Invoice','Invoiced','Canceled'])]}"/>
+                                <field name="adults" attrs="{'readonly': [('state','in',['Confirmed','To Invoice','Invoiced','Canceled'])]}"/>
+                                <field name="children" attrs="{'readonly': [('state','in',['Confirmed','To Invoice','Invoiced','Canceled'])]}"/>
+                                <field name="total" attrs="{'readonly': [('state','in',['Confirmed','To Invoice','Invoiced','Canceled'])]}"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Room List">
+                                <field name="split_room_ids" attrs="{'readonly': [('state','in',['Confirmed','To Invoice','Invoiced','Canceled'])]}" context="{'default_hotel_id':hotel_id,'default_meal_plan':meal_plan,'default_room_type':room_type,'default_arrival_date':arrival_date,'default_departure_date':departure_date}">
+                                    <tree string="Room" editable="bottom" >
+                                        <field name="room_name"/>
+                                        <field name="name"/>
+                                        <field name="person_per_room"/>
+                                        <field name="children"/>
+                                        <field name="hotel_id" invisible="1"/>
+                                        <field name="room_type" />
+                                        <field name="meal_plan" invisible="1"/>
+                                        <field name="arrival_date"  />
+                                        <field name="nights_quantity"/>
+                                        <field name="departure_date" />
+                                        <field name="room_quantity"/>
+                                        <field name="avr_price"/>
+                                        <field name="nights_price"/>
+                                    </tree>
+                                </field>
+                                <field name="children_room_ids" attrs="{'readonly': [('state','in',['Confirmed','To Invoice','Invoiced','Canceled'])]}" context="{'default_hotel_id':hotel_id,'default_meal_plan':meal_plan,'default_room_type':room_type,'default_arrival_date':arrival_date,'default_departure_date':departure_date}">
+                                    <tree string="Room" editable="bottom" >
+                                        <field name="child_sequence"/>
+                                        <field name="room_name"/>
+                                        <field name="name"/>
+                                        <field name="hotel_id" invisible="1"/>
+                                        <field name="room_type" />
+                                        <field name="meal_plan" invisible="1"/>
+                                        <field name="arrival_date"  />
+                                        <field name="nights_quantity"/>
+                                        <field name="departure_date" />
+                                        <field name="room_quantity"/>
+                                        <field name="avr_price"/>
+                                        <field name="nights_price"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="Analytics">
+                                <group colsapn="12">
+                                    <group col="2" string="Marketing">
+                                        <field name="campaign_id" attrs="{'readonly': [('state','in',['Confirmed','To Invoice','Invoiced','Canceled'])]}"/>
+                                        <field name="source_id" attrs="{'readonly': [('state','in',['Confirmed','To Invoice','Invoiced','Canceled'])]}"/>
+                                        <field name="medium_id" attrs="{'readonly': [('state','in',['Confirmed','To Invoice','Invoiced','Canceled'])]}"/>
+                                    </group>
+                                    <group col="2" string="Accounting">
+                                        <field name="analytic_tag_ids"  widget="many2many_tags" groups="analytic.group_analytic_accounting" options="{'color_field': 'color'}"/>
+                                        <field name="account_id" attrs="{'readonly': [('state','in',['Confirmed','To Invoice','Invoiced','Canceled'])]}"/>
+                                        <field name="account_analytic_id" attrs="{'readonly': [('state','in',['Confirmed','To Invoice','Invoiced','Canceled'])]}"/>
+                                    </group>
+                                    <group>
+                                        <field name="user_id" attrs="{'readonly': [('state','in',['Confirmed','To Invoice','Invoiced','Canceled'])]}"/>
+                                        <field name="invoice_id"/>
+                                        <field name="opportunity_id"/>
+                                    </group>
+                                </group>
+                            </page>
+                            <page string="Note">
+                                <group>
+                                    <field name="note" attrs="{'readonly': [('state','in',['Confirmed','To Invoice','Invoiced','Canceled'])]}"/>
+                                </group>
+                            </page>
+                        </notebook>
+                        <group string="Reservation Statics">
+                            <field name="total_price"/>
+                            <field name="reserved_room_quantity"/>
+                            <field name="room_nights"/>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_hotel_reservation_management_search" model="ir.ui.view">
+            <field name="name">hotel.reservation.management.search</field>
+            <field name="model">hotel.reservation.management</field>
+            <field name="arch" type="xml">
+                <search string="Reservation Name">
+                    <field name="guest_name"/>
+                    <field name="name" string="Code"/>
+                    <field name="hotel_id"/>
+                    <field name="room_type"/>
+                    <field name="order_from"/>
+
+                    <group expand="0" string="Group By">
+                        <filter name="order_from" string="Order By" domain="" context="{'group_by':'order_from'}"/>
+                        <filter name="hotel_id" string="Hotel" domain="[]" context="{'group_by':'hotel_id'}"/>
+                        <filter name="room_type" string="Room Type" domain="[]" context="{'group_by':'room_type'}"/>
+                        <filter name="state" string="Room Type" domain="[]" context="{'group_by':'state'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <menuitem id="hotel_reservation_menu_id" name="Reservation" parent="hotel_managemanet_all_menu" sequence="1" groups="group_hotel_manager"/>
+        <menuitem action="hotel_reservation_action_tree" name="Reservation" parent="hotel_reservation_menu_id"  id="hotel_reservation_menu" sequence="1" groups="group_hotel_manager"/>
+
+
+    </data>
+</odoo>

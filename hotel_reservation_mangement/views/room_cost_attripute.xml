@@ -1,0 +1,161 @@
+<odoo>
+    <data>
+
+        <record id="hotel_room_cost_attribute_action_tree" model="ir.actions.act_window">
+            <field name="name">Cost Attributes</field>
+            <field name="res_model">room.cost.attribute</field>
+<!--            <field name="view_type">form</field>-->
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+        </record>
+
+<!--        <record model="ir.ui.view" id="view_hotel_reservation_event_calendar">-->
+<!--            <field name="name">Reservation</field>-->
+<!--            <field name="model">Cost Attributes</field>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <calendar string="Reservation" date_start="arrival_date" date_stop="departure_date" date_delay="nights_quantity"-->
+<!--                          color="state" quick_add="False" mode="month">-->
+<!--                    <field name="order_from"/>-->
+<!--                    <field name="hotel"/>-->
+<!--                </calendar>-->
+<!--            </field>-->
+<!--        </record>-->
+
+        <record model="ir.ui.view" id="room_cost_attribute_tree">
+            <field name="name">Cost Attributes</field>
+            <field name="model">room.cost.attribute</field>
+            <field name="type">tree</field>
+                <field name="arch" type="xml">
+                    <tree string="Cost Attributes">
+                        <field name="hotel_id"/>
+                        <field name="room_type_id"/>
+                        <field name="meal_plan"/>
+                        <field name="period_lead_id" invisible="1"/>
+                        <field name="date_from"/>
+                        <field name="date_to"/>
+                    </tree>
+                </field>
+        </record>
+
+        <record model="ir.ui.view" id="room_cost_attribute_form">
+            <field name="name">Cost Attributes</field>
+            <field name="model">room.cost.attribute</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Cost Attributes">
+                    <sheet>
+                        <group colspan="12">
+                            <group col="2">
+                                <field name="hotel_id"/>
+                                <field name="room_type_id"/>
+                                <field name="meal_plan"/>
+                            </group>
+                            <group col="2">
+                                <field name="period_lead_id" invisible="1"/>
+                                <field name="date_from"/>
+                                <newline/>
+                                <field name="date_to"/>
+                            </group>
+                            <group col="2">
+                                <field name="ordered_by"/>
+                                <field name="rate_supplier"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Pricing">
+                                <field name="price_ids">
+                                    <tree string="Cost Per Person" editable="bottom">
+                                        <field name="person_per_room"/>
+                                        <field name="hotel_cost"/>
+                                        <field name="guest_price"/>
+                                        <field name="hotel_profit" widget="monetary"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="Children">
+                                <field name="children_price_ids">
+                                    <tree string="Children" editable="bottom">
+                                        <field name="child_sequence"/>
+                                        <field name="age"/>
+                                        <field name="hotel_cost"/>
+                                        <field name="guest_price"/>
+                                        <field name="hotel_profit" widget="monetary"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="Note">
+                                <group>
+                                    <field name="note"/>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="o_attachment_preview"/>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" groups="base.group_user"/>
+                        <field name="activity_ids"/>
+                        <field name="message_ids"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+        <menuitem name="Rate Plan" action="hotel_room_cost_attribute_action_tree" id="cost_attribute_menu_id" parent="hotel_reservation_rooms_menu_id" sequence="50" groups="group_hotel_manager"/>
+<!--        <menuitem name="Cost Attribute" id="period_lead_submenu_id" parent="period_lead_menu_id" action="hotel_period_lead_action_tree" />-->
+
+<!--price per persson-->
+        <record id="hotel_room_cost_per_person_action_tree" model="ir.actions.act_window">
+            <field name="name">Cost Per Person</field>
+            <field name="res_model">cost.per.person</field>
+<!--            <field name="view_type">form</field>-->
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+        </record>
+
+        <record id="hotel_room_cost_per_children_action_tree" model="ir.actions.act_window">
+            <field name="name">Cost Per Person</field>
+            <field name="res_model">cost.per.children</field>
+<!--            <field name="view_type">form</field>-->
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+        </record>
+
+        <record model="ir.ui.view" id="room_cost_per_person_tree">
+            <field name="name">Cost Per Person</field>
+            <field name="model">cost.per.person</field>
+            <field name="type">tree</field>
+                <field name="arch" type="xml">
+                    <tree string="Cost Per Person">
+                        <field name="person_per_room"/>
+                        <field name="hotel_cost"/>
+                        <field name="guest_price"/>
+                        <field name="hotel_profit"/>
+                    </tree>
+                </field>
+        </record>
+
+        <record model="ir.ui.view" id="room_cost_per_person_form">
+            <field name="name">Cost Per Person</field>
+            <field name="model">cost.per.person</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Cost Per Person">
+                    <sheet>
+                        <group colspan="12">
+                            <group col="2">
+                                <field name="person_per_room"/>
+                                <field name="hotel_cost"/>
+                                <field name="guest_price"/>
+                                <field name="hotel_profit"/>
+                                <field name="room_type_id"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+    </data>
+</odoo>

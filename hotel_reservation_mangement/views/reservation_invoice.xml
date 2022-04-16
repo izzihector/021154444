@@ -1,0 +1,44 @@
+<odoo>
+
+    <data>
+
+        <record id="view_res_reserve_invoice_form" model="ir.ui.view">
+            <field name="name">account.move.reservation</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//notebook" position="before">
+                    <group colspan="12">
+                        <group col="2">
+                            <field name="hotel_id" />
+                            <field name="room_type"/>
+                            <field name="meal_plan"/>
+                        </group>
+                        <group col="2">
+                            <field name="arrival_date"/>
+                            <field name="nights_quantity"/>
+                            <field name="departure_date"/>
+<!--                            <field name="reservation_id"/>-->
+                        </group>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+
+
+<!--        <record id="view_res_reserve_search_invoice_form" model="ir.ui.view">-->
+<!--            <field name="name">account.move.reservation.search</field>-->
+<!--            <field name="model">account.move</field>-->
+<!--            <field name="inherit_id" ref="account.view_account_invoice_filter"/>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <xpath expr="//field[@name='partner_id']" position="after">-->
+<!--                    <field name="reservation_id"/>-->
+<!--                    <field name="room_type"/>-->
+<!--&lt;!&ndash;                    <field name="origin"/>&ndash;&gt;-->
+<!--                </xpath>-->
+<!--            </field>-->
+<!--        </record>-->
+
+    </data>
+
+</odoo>

@@ -1,0 +1,78 @@
+<odoo>
+    <data>
+
+         <record id="average_item_price_view" model="ir.ui.view">
+                <field name="name">items.average.price.wizard</field>
+                <field name="model">items.average.price.wizard</field>
+                <field name="arch" type="xml">
+                    <form string="Average Price">
+                        <group col="2" colspan="1">
+                            <group>
+                            <div>
+                                <label for="report_for"/>
+                                <field name="report_for" widget="radio"/>
+                            </div>
+                                </group>
+                            <group>
+                                <div>
+                                    <label for="date_from" string="Date"/>
+                                    <field name="date_from"/>
+                                    <field name="date_to"/>
+                                </div>
+                            </group>
+                            <group>
+                                <div>
+                                    <label for="product_ids" attrs="{'invisible':[('report_for','=','all')]}"/>
+                                    <field name="product_ids" attrs="{'invisible':[('report_for','=','all')]}" widget="many2many_tags"/>
+                                </div>
+                            </group>
+                        </group>
+                    <footer>
+                        <button name="make_report" string="Print" type="object" class="oe_highlight"/>
+                        or
+                        <button string="Cancel" class="oe_link" special="cancel"/>
+                    </footer>
+                </form>
+                </field>
+            </record>
+
+        <!--<record id="action_add_iot_box" model="ir.actions.act_window">-->
+        <!--<field name="name">Connect an IoT Box</field>-->
+        <!--<field name="type">ir.actions.act_window</field>-->
+        <!--<field name="res_model">add.iot.box</field>-->
+        <!--<field name="view_type">form</field>-->
+        <!--<field name="view_mode">form</field>-->
+        <!--<field name="view_id" ref="view_add_iot_box"/>-->
+        <!--<field name="target">new</field>-->
+
+    <!--</record>-->
+
+            <record id="product_average_action" model="ir.actions.act_window">
+                <field name="name">product AVG Report</field>
+                <field name="res_model">items.average.price.wizard</field>
+                <field name="type">ir.actions.act_window</field>
+<!--                <field name="view_type">form</field>-->
+                <field name="view_mode">form</field>
+                <field name="view_id" ref="average_item_price_view"/>
+                <field name="target">new</field>
+            </record>
+
+        <!--<act_window id="product_average_action"-->
+                    <!--name="product AVG"-->
+                    <!--res_model="items.average.price.wizard"-->
+                    <!--view_mode="form"-->
+                    <!--target="new"-->
+                    <!--key2="client_action_multi"/>-->
+
+
+
+
+        <menuitem id="product_average_tree" name="Product AVR"  action="product_average_action" parent="account.account_reports_management_menu" sequence="2"/>
+
+        <!--<menuitem id="menu_employee_payslips_report"-->
+                               <!--name="Employee Payslips"-->
+                               <!--action="action_employee_payslips_action"-->
+                               <!--parent="menu_payslip_employees_tree"/>-->
+    </data>
+
+</odoo>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+        <record id="view_todo_checklist_tags_tree" model="ir.ui.view">
+            <field name="name">todo.checklist.tags.tree</field>
+            <field name="model">todo.checklist.tags</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Checklist Tags">
+                    <field name="name"/>
+                </tree>  
+            </field>
+        </record>
+
+        <record id="view_todo_checklist_tags_from" model="ir.ui.view">
+            <field name="name">todo.checklist.tags.form</field>
+            <field name="model">todo.checklist.tags</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Checklist Tags">
+                    <sheet>
+                        <field name="name" required="1"/>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_todo_checklist_tags" model="ir.actions.act_window">
+            <field name="name">Checklist Tags</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">todo.checklist.tags</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="view_id" ref="view_todo_checklist_tags_tree"/>
+        </record>
+
+        <menuitem id="menu_todo_checklist_tags" name="Checklist Tags" parent="project.menu_project_config" action="action_todo_checklist_tags" sequence="11"/>
+
+</odoo>

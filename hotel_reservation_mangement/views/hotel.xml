@@ -1,0 +1,103 @@
+<odoo>
+    <data>
+
+        <record id="hotel_management_action_tree" model="ir.actions.act_window">
+            <field name="name">Hotel</field>
+            <field name="res_model">hotel.management</field>
+<!--            <field name="view_type">form</field>-->
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+        </record>
+
+        <record model="ir.ui.view" id="hotel_management_tree">
+            <field name="name">Hotel</field>
+            <field name="model">hotel.management</field>
+            <field name="type">tree</field>
+                <field name="arch" type="xml">
+                    <tree string="Hotel">
+                        <field name="name"/>
+                        <field name="official_rate"/>
+                        <field name="total_rooms"/>
+                    </tree>
+                </field>
+        </record>
+
+        <record model="ir.ui.view" id="hotel_management_form">
+            <field name="name">Hotel</field>
+            <field name="model">hotel.management</field>
+            <field name="type">form</field>
+                <field name="arch" type="xml">
+                    <form>
+                        <sheet>
+                            <div class="oe_title">
+                                <field name="type" options="{'horizontal': true}" class="oe_edit_only"  widget="radio"/>
+                                <h1><field name="name" default_focus="1" required="True" string="Name" placeholder="Hotel Name"/></h1>
+                                <field name="hotel_parent"
+                                       placeholder="Company"
+                                       attrs="{'invisible':[('type','!=','company')]}"/>
+                            </div>
+                            <group colspan="12">
+                                <group col="2">
+                                    <field name="official_rate"/>
+                                    <field name="type_of_hotel"/>
+                                    <field name="location_url"/>
+                                    <field name="total_rooms"/>
+                                </group>
+                                <group col="2">
+                                    <field name="time_available"/>
+                                    <field name="check_in_time" widget="float_time"/>
+                                    <field name="check_out_time" widget="float_time"/>
+                                </group>
+                            </group>
+                            <notebook>
+                                <page string="General Contact">
+                                    <group colspan="12" >
+                                        <group col="2">
+                                            <field name="email"/>
+                                            <field name="phone"/>
+                                            <field name="mobile"/>
+                                        </group>
+                                        <label for="street" string="Address"/>
+                                        <div class="o_address_format">
+                                            <field name="street" placeholder="Street..." class="o_address_street"/>
+                                            <field name="street2" placeholder="Street 2..." class="o_address_street"/>
+                                            <field name="city" placeholder="City" class="o_address_city"/>
+                                            <field name="state_id" class="o_address_state" placeholder="State" options='{"no_open": True}'/>
+                                            <field name="zip" placeholder="ZIP" class="o_address_zip"/>
+                                            <field name="country_id" placeholder="Country" class="o_address_country" options='{"no_open": True}'/>
+                                        </div>
+                                        <group>
+
+                                        </group>
+                                    </group>
+                                </page>
+                                <page string="Notes">
+                                    <group>
+                                        <field name="note"/>
+                                    </group>
+                                </page>
+                            </notebook>
+                        </sheet>
+                    </form>
+                </field>
+        </record>
+
+        <menuitem
+             id="hotel_management_menu_id"
+             name="Hotel"
+             parent="hotel_managemanet_all_menu"
+             sequence="2"
+        />
+        <menuitem
+             id="hotel_management_submenu_id"
+             name="Hotel"
+             parent="hotel_management_menu_id"
+             sequence="2"
+             action="hotel_management_action_tree"
+        />
+
+
+
+    </data>
+</odoo>

@@ -1,0 +1,66 @@
+<odoo>
+    <data>
+
+        <record id="hotel_period_lead_action_tree" model="ir.actions.act_window">
+            <field name="name">Period ans Lead</field>
+            <field name="res_model">hotel.period.lead</field>
+<!--            <field name="view_type">form</field>-->
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+        </record>
+
+        <record model="ir.ui.view" id="hotel_period_lead_tree">
+            <field name="name">Period ans Lead</field>
+            <field name="model">hotel.period.lead</field>
+            <field name="type">tree</field>
+                <field name="arch" type="xml">
+                    <tree string="Peroid and Lead">
+                        <field name="name"></field>
+                        <field name="date_from"/>
+                        <field name="date_to"/>
+                         <field name="main_period"/>
+                    </tree>
+                </field>
+        </record>
+
+        <record model="ir.ui.view" id="hotel_period_lead_form">
+            <field name="name">Period ans Lead</field>
+            <field name="model">hotel.period.lead</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Period ans Lead">
+                    <sheet>
+                        <div class="oe_title">
+                            <label for="is_parent" />
+                            <field name="is_parent" string="Is Main Period" options="{'horizontal': true}" widget="radio"/>
+                            <h1><field name="name" default_focus="1" string="Name" placeholder="Period Name"/></h1>
+                            <field name="main_period"  placeholder="Periods" attrs="{'invisible':[('is_parent','=','Yes')]}"/>
+                        </div>
+                        <group col="4" colspan="6">
+                                <field name="date_from"/>
+                                <newline/>
+                                <field name="date_to"/>
+                            <field name="lead_days"/>
+                        </group>
+                        <notebook>
+                            <page string="Note">
+                                <group>
+                                    <field name="note"/>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+<!--        <menuitem name="Period and lead" id="period_lead_menu_id" parent="hotel_managemanet_all_menu" sequence="50" groups="group_hotel_manager"/>-->
+<!--        <menuitem name="Period and lead" id="period_lead_submenu_id" parent="period_lead_menu_id" action="hotel_period_lead_action_tree" groups="group_hotel_manager"/>-->
+
+        <menuitem id="menu_date_range" name="Date ranges" parent="hotel_managemanet_all_menu" sequence="90" groups="group_hotel_manager"/>
+        <menuitem action="date_range.date_range_action" id="menu_date_range_action" parent="menu_date_range"/>
+        <menuitem action="date_range.date_range_type_action"  id="menu_date_range_type_action" parent="menu_date_range" groups="group_hotel_manager"/>
+        <menuitem action="date_range.date_range_generator_action" id="menu_date_range_generator_action" parent="menu_date_range" groups="group_hotel_manager"/>
+
+    </data>
+</odoo>

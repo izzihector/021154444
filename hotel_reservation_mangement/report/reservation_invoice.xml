@@ -1,0 +1,44 @@
+<odoo>
+
+
+3
+<!-- Inherit quotation report (from module sale) -->
+<template id="reservation_invoice_report" inherit_id="account.report_invoice_document">
+
+
+    <xpath expr="//table[@class='table table-sm o_main_table']//thead//tr" position="before">
+        <div id="reservation" class="row mt32 mb32">
+            <div class="col-auto mw-100 mb-2" t-if="o.hotel_id" name="hotel_id">
+                <strong>Hotel:</strong>
+                <p class="m-0" t-field="o.hotel_id"/>
+            </div>
+            <div class="col-auto mw-100 mb-2" t-if="o.room_type" name="room_type">
+                <strong>Room Type:</strong>
+                <p class="m-0" t-field="o.room_type"/>
+            </div>
+            <div class="col-auto mw-100 mb-2" t-if="o.meal_plan" name="meal_plan">
+                <strong>Due Date:</strong>
+                <p class="m-0" t-field="o.meal_plan"/>
+            </div>
+        </div>
+        <div id="Dates" class="row mt32 mb32">
+            <div class="col-auto mw-100 mb-2" t-if="o.arrival_date" name="arrival_date">
+                <strong>Check In:</strong>
+                <p class="m-0" t-field="o.arrival_date"/>
+            </div>
+            <div class="col-auto mw-100 mb-2" t-if="o.nights_quantity" name="nights_quantity">
+                <strong>Nights:</strong>
+                <p class="m-0" t-field="o.nights_quantity"/>
+            </div>
+            <div name="departure_date" class="col-auto mw-100 mb-2" t-if="o.departure_date">
+                <strong>Check Out:</strong>
+                <p class="m-0" t-field="o.departure_date"/>
+            </div>
+        </div>
+    </xpath>
+
+
+</template>
+
+
+</odoo>

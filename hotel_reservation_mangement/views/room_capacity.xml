@@ -1,0 +1,86 @@
+<odoo>
+
+    <record id="hotel_room_capacity_action_tree" model="ir.actions.act_window">
+            <field name="name">Room Availability</field>
+            <field name="res_model">hotel.room.capacity</field>
+<!--            <field name="view_type">form</field>-->
+            <field name="view_mode">tree,form,calendar</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+        </record>
+
+    <record id="view_hotel_rooms_capacity_search" model="ir.ui.view">
+            <field name="name">hotel.room.capacity.search</field>
+            <field name="model">hotel.room.capacity</field>
+            <field name="arch" type="xml">
+                <search string="Reservation Name">
+                    <field name="name" string="Code"/>
+                    <field name="hotel_id"/>
+                    <field name="room_type_id"/>
+                    <group expand="0" string="Group By">
+                        <filter name="hotel_id" string="Hotel" domain="[]" context="{'group_by':'hotel_id'}"/>
+                        <filter name="room_type_id" string="Room Type" domain="[]" context="{'group_by':'room_type_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_hotel_room_capacity_event_calendar">
+            <field name="name">Room Availability</field>
+            <field name="model">hotel.room.capacity</field>
+            <field name="arch" type="xml">
+                <calendar string="Room Rating" date_start="date_day" color="room_type_id" quick_add="False" mode="month">
+                    <field name="room_type_id"/>
+                    <field name="total_rooms"/>
+                    <field name="reserved_room"/>
+                    <field name="available_room"/>
+                </calendar>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="hotel_room_capacity_tree">
+            <field name="name">Room Availability</field>
+            <field name="model">hotel.room.capacity</field>
+            <field name="type">tree</field>
+                <field name="arch" type="xml">
+                    <tree string="Facilities">
+                        <field name="name"/>
+                        <field name="date_day"/>
+                        <field name="hotel_id"/>
+                        <field name="room_type_id"/>
+                        <field name="total_rooms"/>
+                        <field name="reserved_room"/>
+                        <field name="available_room"/>
+                    </tree>
+                </field>
+        </record>
+
+        <record model="ir.ui.view" id="hotel_room_capacity_form">
+            <field name="name">Room Availability</field>
+            <field name="model">hotel.room.capacity</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                    <form>
+                        <sheet>
+                            <div>
+                                <field name="name"></field>
+                            </div>
+                            <group>
+                                <group>
+                                    <field name="date_day"/>
+                                    <field name="hotel_id"/>
+                                    <field name="room_type_id"/>
+                                </group>
+                                <group>
+                                     <field name="total_rooms"/>
+                                    <field name="reserved_room"/>
+                                    <field name="available_room"/>
+                                </group>
+                            </group>
+                        </sheet>
+                    </form>
+                </field>
+        </record>
+    <menuitem id="hotel_room_capacity_menu" action="hotel_room_capacity_action_tree" name="Rooms Availability" parent="hotel_reservation_rooms_menu_id" groups="group_hotel_manager"/>
+
+</odoo>

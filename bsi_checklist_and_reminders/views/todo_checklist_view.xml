@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+        <record id="view_todo_checklist_lines_tree" model="ir.ui.view">
+            <field name="name">todo.checklist.line.tree</field>
+            <field name="model">todo.checklist.line</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Todo Checklist Lines">
+                    <field name="description"/>
+                    <field name="expected_time"/>
+                    <field name="actual_time"/>
+                    <field name="is_done"/>
+                </tree>  
+            </field>
+        </record>
+
+        <record id="view_todo_checklist_lines_form" model="ir.ui.view">
+            <field name="name">todo.checklist.line.form</field>
+            <field name="model">todo.checklist.line</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Todo Checklist Lines">
+                    <sheet>
+                        <group style="width:50%">
+                            <field name="description"/>
+                            <field name="expected_time"/>
+                        </group>
+                        <group style="width:50%">
+                            <field name="is_done"/>
+                            <field name="actual_time"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_todo_checklist_tree" model="ir.ui.view">
+            <field name="name">todo.checklist.tree</field>
+            <field name="model">todo.checklist</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Todo Checklist">
+                    <field name="name"/>
+                    <field name="datetime"/>
+                    <field name="user_id"/>
+                    <field name="created_by"/>
+                    <field name="todo_type"/>
+                    <field name="description"/>
+                    <field name="status"/>
+                </tree>  
+            </field>
+        </record>
+
+        <record id="view_todo_checklist_form" model="ir.ui.view">
+            <field name="name">todo.checklist.form</field>
+            <field name="model">todo.checklist</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Todo Checklist">
+                    <header>
+                        <field name="status" widget="statusbar" options="{'clickable': '1'}"/>
+                    </header>
+                    <sheet>
+                        <group style="width:50%">
+                            <field name="name" required="1"/>
+                            <field name="datetime" readonly="1"/>
+                            <field name="created_by" readonly="1"/>
+                            <field name="user_id"/>
+                        </group>
+                        <group style="width:50%">
+                            <field name="todo_type"/>
+                            <field name="project_id" attrs="{'invisible':[('todo_type','!=','project')]}"/>
+                            <field name="task_id" attrs="{'invisible':[('todo_type','!=','task')]}"/>
+                            <field name="subtask_id" attrs="{'invisible':[('todo_type','!=','subtask')]}"/>
+                            <field name="tag_ids" widget="many2many_tags"/>
+                        </group>
+                        <group style="width:100%" string="ToDo List">
+                            <field name="todo_checklist_line_ids" nolabel="1">
+                                <tree editable="bottom" default_order='expected_time asc' decoration-success="is_done == True">
+                                    <field name="description"/>
+                                    <field name="expected_time"/>
+                                    <field name="actual_time" readonly="1" force_save="1"/>
+                                    <field name="is_done"/>
+                                </tree>
+                            </field>
+                        </group>
+                        <group style="width:100%" string="Notes">
+                            <field name="description" nolabel="1"/>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_todo_checklist" model="ir.actions.act_window">
+            <field name="name">Todo Checklist</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">todo.checklist</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="view_id" ref="view_todo_checklist_tree"/>
+        </record>
+
+        <menuitem id="menu_todo_checklist" name="Todo Checklist" parent="project.menu_main_pm" action="action_todo_checklist" sequence="2"/>
+
+</odoo>

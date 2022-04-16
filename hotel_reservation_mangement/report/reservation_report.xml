@@ -1,0 +1,101 @@
+<odoo>
+
+        <report
+                id="action_reservation_hotel_report"
+                model="hotel.reservation.management"
+                string="Hotel List"
+                report_type="qweb-pdf"
+                name="hotel_reservation_mangement.hotel_reservation_report"
+                file="hotel_reservation_mangement.hotel_reservation_report"
+    />
+
+        <template id="hotel_reservation_report">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="hotel_reservation_mangement.hotel_reservation_report_document" t-lang="o.order_from.lang"/>
+                </t>
+            </t>
+        </template>
+
+    <template id="hotel_reservation_report_document">
+            <t t-call="web.external_layout">
+                <t t-set="o" t-value="o.with_context({'lang':o.order_from.lang})"/>
+            <div class="page">
+                <div class="oe_structure"/>
+                    <h1 class="text-center" style="margin-top:60px;">
+                        <span t-esc="o.name"/>
+                    </h1>
+                    <div id="informations" class="row mt32 mb32">
+                        <div class="col-auto mw-100 mb-2" >
+                            <strong>Hotel: </strong>
+                            <p class="m-0" t-field="o.hotel_id.name"/>
+                        </div>
+                        <div class="col-auto mw-100 mb-2" >
+                            <strong>Room Type:</strong>
+                            <p class="m-0" t-field="o.room_type.name"/>
+                        </div>
+
+                        <div class="col-auto mw-100 mb-2" >
+                            <strong>Meal Plan: </strong>
+                            <p class="m-0" t-field="o.meal_plan"/>
+                        </div>
+
+                        <div class="col-auto mw-100 mb-2" >
+                            <strong>Check In : </strong>
+                            <p class="m-0" t-field="o.arrival_date"/>
+                        </div>
+                        <div class="col-auto mw-100 mb-2" >
+                            <strong>Nights:</strong>
+                            <p class="m-0" t-field="o.nights_quantity"/>
+                        </div>
+                        <div class="col-auto mw-100 mb-2" >
+                            <strong>Check Out :</strong>
+                            <p class="m-0" t-field="o.departure_date"/>
+                        </div>
+                        <div class="col-auto mw-100 mb-2" >
+                            <strong>Order By:</strong>
+                            <p class="m-0" t-field="o.order_from"/>
+                        </div>
+                    </div>
+                    <div style="font-size:24px;margin-top:50px;">Room Lis</div>
+                    <table class="table table-bordered" border="3" style="margin-bottom:700px;font-size:12px;">
+                        <thead>
+                            <tr>
+                                <th>Guest Name</th>
+                                <th >Check In</th>
+                                <th>Check Out</th>
+                                <th >Nights</th>
+                                <th>Adults</th>
+                                <th>Children</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr t-foreach="o.split_room_ids" t-as="l">
+                                <td>
+                                    <span t-esc="l.name"/>
+                                </td>
+                                <td width="100px">
+                                    <span t-field="l.arrival_date"
+                                          t-field-options="{&quot;format&quot;: &quot;dd MMMM, YYYY&quot;}"/>
+                                </td>
+                                <td width="100px">
+                                    <span t-field="l.departure_date"
+                                          t-field-options="{&quot;format&quot;: &quot;dd MMMM, YYYY&quot;}"/>
+                                </td>
+                                <td width="110px">
+                                    <span t-esc="l.nights_quantity"/>
+                                </td>
+                                <td>
+                                    <span t-esc="l.person_per_room"/>
+                                </td>
+                                <td>
+                                    <span t-esc="l.children"/>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </t>
+    </template>
+
+</odoo>

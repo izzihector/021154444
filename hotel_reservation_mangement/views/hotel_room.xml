@@ -1,0 +1,135 @@
+<odoo>
+    <data>
+
+        <record id="hotel_room_facilities_action_tree" model="ir.actions.act_window">
+            <field name="name">Room Facilities</field>
+            <field name="res_model">hotel.room.facilities</field>
+<!--            <field name="view_type">form</field>-->
+            <field name="view_mode">tree,form</field>
+<!--            <field name="domain">[]</field>-->
+<!--            <field name="context">{}</field>-->
+        </record>
+
+<!--        <record id="open_budget_post_form" model="ir.actions.act_window">-->
+<!--        <field name="name">Budgetary Positions</field>-->
+<!--        <field name="res_model">account.budget.post</field>-->
+<!--        <field name="view_mode">tree,kanban,form</field>-->
+<!--        <field name="view_id" ref="view_budget_post_tree"/>-->
+<!--        <field name="search_view_id" ref="view_budget_post_search"/>-->
+<!--    </record>-->
+
+        <record model="ir.ui.view" id="hotel_room_facilities_tree">
+            <field name="name">Room facilities</field>
+            <field name="model">hotel.room.facilities</field>
+            <field name="type">tree</field>
+                <field name="arch" type="xml">
+                    <tree string="Facilities">
+                        <field name="name"></field>
+                    </tree>
+                </field>
+        </record>
+
+        <record model="ir.ui.view" id="hotel_room_facilities_form">
+            <field name="name">Room facilities</field>
+            <field name="model">hotel.room.facilities</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                    <form>
+                        <sheet>
+                            <group>
+                                <field name="name"></field>
+                            </group>
+                        </sheet>
+                    </form>
+                </field>
+        </record>
+
+
+        <record id="hotel_room_type_action_tree" model="ir.actions.act_window">
+            <field name="name">Room Type</field>
+            <field name="res_model">hotel.room.type</field>
+<!--            <field name="view_type">form</field>-->
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+        </record>
+
+        <record model="ir.ui.view" id="hotel_room_type_tree">
+            <field name="name">Room Type</field>
+            <field name="model">hotel.room.type</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Room Type">
+                    <field name="name"></field>
+                    <field name="view_type"/>
+                    <field name="room_aperture"/>
+                    <field name="total_rooms"/>
+                    <field name="hotel_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="hotel_room_type_form">
+            <field name="name">Room Type</field>
+            <field name="model">hotel.room.type</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <div class="oe_title">
+                            <h1><field name="name" default_focus="1" string="Name" placeholder="Room Type"/></h1>
+                        </div>
+                        <group colsapn="12">
+                            <group col="2">
+                                <field name="hotel_id"/>
+                                <field name="bedding_type"/>
+                            </group>
+                            <group col="2">
+                                <field name="view_type"/>
+                                <field name="room_aperture"/>
+                            </group>
+                            <group col="2">
+                                <field name="total_rooms"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Occupancy">
+                                <group colsapn="12">
+                                    <group col="2">
+                                        <field name="maximum_adults"/>
+                                        <field name="minimum_adults"/>
+                                    </group>
+                                    <group col="2">
+                                        <field name="maximum_children"/>
+                                        <field name="minimum_children"/>
+                                    </group>
+                                    <group col="2">
+                                        <field name="maximum_persons"/>
+                                    </group>
+                                </group>
+                            </page>
+                            <page string="faicilities and aminites" invisible="1">
+                                <group >
+                                    <field name="facilities_ids" widget="many2many_checkboxes"/>
+                                </group>
+                            </page>
+                            <page string="Note">
+                                <group >
+                                    <field name="note"/>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <menuitem id="hotel_managemanet_all_menu"  name = "Hotel Reservation"  sequence="2" groups="group_hotel_manager"/>
+        <menuitem id="hotel_reservation_rooms_menu_id" name="Rooms" parent="hotel_managemanet_all_menu" sequence="40" groups="group_hotel_manager"/>
+<!--        <menuitem action="hotel_room_category_action_tree" name="Room Category" parent="hotel_reservation_rooms_menu_id"  id="hotel_room_category_menu" sequence="1"/>-->
+        <menuitem action="hotel_room_type_action_tree" name="Room Type" parent="hotel_reservation_rooms_menu_id"  id="hotel_room_type_menu" sequence="1" groups="group_hotel_manager"/>
+        <menuitem name="Facilities and Amenities" id="facilities_room_menue" sequence="10" parent="hotel_reservation_rooms_menu_id" action="hotel_room_facilities_action_tree" groups="group_hotel_manager"/>
+
+    </data>
+</odoo>

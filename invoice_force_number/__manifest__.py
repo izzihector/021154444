@@ -21,7 +21,7 @@
 ##############################################################################
 {
     'name': 'Force Invoice Number',
-    'version': '11.0.1.0.0',
+    'version': '15.0.0.0.0',
     'category': 'Accounting & Finance',
     'summary': 'Allows to force invoice number on specific invoices',
     'author': 'Laxicon Solution',

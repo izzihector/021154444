@@ -6,7 +6,7 @@
     "summary": """RESTful API to integrate Odoo with whatever system you need""",
     "category": "",
     "images": [],
-    "version": "13.0.1.2.4",
+    "version": "15.0.0.2.4",
     "application": False,
     "author": "iBOS Limited",
     "support": "apps@itpp.dev",

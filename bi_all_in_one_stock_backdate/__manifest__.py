@@ -3,7 +3,7 @@
 
 {
 	'name':"All in One Stock Transfer Backdate and Remarks in Odoo",
-	'version':'14.0.0.3',
+	'version':'15.0.0.3',
 	'category':'Warehouse',
 	'summary':'inventory adjustment backdate all stock transfer backdate transfer backdating stock backdate remarks inventory adjustment backdating remarks stock operation backdate receipt backdate all stock back-date shipment backdate receipt internal transfer backdate',
 	'description':"""

@@ -1,6 +1,6 @@
 {
     'name': 'Customer order history',
-    'version': '13.0.0.0',
+    'version': '15.0.0.0',
     'author': 'iBOS Limited',
     'summary': 'Customer order history',
     'description': """Customer order history""",

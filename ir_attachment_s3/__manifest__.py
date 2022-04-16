@@ -3,7 +3,7 @@
     "summary": """Upload attachments on Amazon S3""",
     "category": "Tools",
     "images": [],
-    "version": "14.0.3.0.1",
+    "version": "15.0.0.0.1",
     "application": False,
     "author": "IT-Projects LLC, Ildar Nasyrov",
     "website": "https://twitter.com/OdooFree",

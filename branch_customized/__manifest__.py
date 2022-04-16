@@ -3,7 +3,7 @@
     "summary": """ Inventory Management """,
     "category": "HR Employees",
     "images": [],
-    "version": "13.0.1.0.0",
+    "version": "15.0.0.0.0",
     "application": False,
     "author": "iBOS Limited, Kamrul Hasan",
     "support": "info@ibos.io",

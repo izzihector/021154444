@@ -1,0 +1,4 @@
+[submodule "akretion/intrastat-extrastat1"]
+	path = akretion/intrastat-extrastat1
+	url = git@github.com:akretion/intrastat-extrastat.git
+	branch = 15-mig-intrastat_base
